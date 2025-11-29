@@ -1,0 +1,1342 @@
+commit,file,added_code,deleted_code,hash_clean,cve_id,hash,repo_url,rel_type,score,extraction_status,text_norm,cluster_kmeans,cluster_hac
+cilium_33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,install/kubernetes/cilium/Chart.yaml,"version: 1.9.16
+appVersion: 1.9.16
+icon: https://cdn.jsdelivr.net/gh/cilium/cilium@v1.9.16/Documentation/images/logo-solo.svg","version: 1.9.15
+appVersion: 1.9.15
+icon: https://cdn.jsdelivr.net/gh/cilium/cilium@v1.9.15/Documentation/images/logo-solo.svg",33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,CVE-2022-29178,33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,84,COMPLETED,VAR: 1.9.16 VAR: 1.9.16 VAR: VAR: VAR: 1.9.15 VAR: 1.9.15 VAR: VAR:,1,10
+cilium_33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,install/kubernetes/cilium/Chart.yaml,"version: 1.9.16
+appVersion: 1.9.16
+icon: https://cdn.jsdelivr.net/gh/cilium/cilium@v1.9.16/Documentation/images/logo-solo.svg","version: 1.9.15
+appVersion: 1.9.15
+icon: https://cdn.jsdelivr.net/gh/cilium/cilium@v1.9.15/Documentation/images/logo-solo.svg",33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,CVE-2022-29179,33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED,VAR: 1.9.16 VAR: 1.9.16 VAR: VAR: VAR: 1.9.15 VAR: 1.9.15 VAR: VAR:,1,10
+cilium_33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,install/kubernetes/cilium/README.md,"![Version: 1.9.16](https://img.shields.io/badge/Version-1.9.16-informational?style=flat-square) ![AppVersion: 1.9.16](https://img.shields.io/badge/AppVersion-1.9.16-informational?style=flat-square)
+| clustermesh.apiserver.image | object | `{""digest"":"""",""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.9.16"",""useDigest"":false}` | Clustermesh API server image. |
+| hubble.relay.image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.9.16"",""useDigest"":false}` | Hubble-relay container image. |
+| image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.9.16"",""useDigest"":false}` | Agent container image. |
+| operator.image | object | `{""awsDigest"":"""",""azureDigest"":"""",""genericDigest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.9.16"",""useDigest"":false}` | cilium-operator image. |
+| preflight.image | object | `{""digest"":"""",""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.9.16"",""useDigest"":false}` | Cilium pre-flight image. |","![Version: 1.9.15](https://img.shields.io/badge/Version-1.9.15-informational?style=flat-square) ![AppVersion: 1.9.15](https://img.shields.io/badge/AppVersion-1.9.15-informational?style=flat-square)
+| clustermesh.apiserver.image | object | `{""digest"":""sha256:59cabe18234077448b3410a1d9f0ffe9c78a41783e83cc3d80310ddd92b81822"",""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.9.15"",""useDigest"":false}` | Clustermesh API server image. |
+| hubble.relay.image | object | `{""digest"":""sha256:748813e49877d66614d947495972f32b7f9675e9c327578c0ea81ca4f7adf322"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.9.15"",""useDigest"":false}` | Hubble-relay container image. |
+| image | object | `{""digest"":""sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.9.15"",""useDigest"":false}` | Agent container image. |
+| operator.image | object | `{""awsDigest"":""sha256:5ab748219bec4ac0a0e971e53e1b1ba6a569114eb6dea78951c2edb8ae460265"",""azureDigest"":""sha256:b1f236b2c9e99d1ed22ea99e7fcb6bd2f86707825b7c3d271715e6cbc29147d4"",""genericDigest"":""sha256:5f38912e638b96377f905369035e0afc89b45f24f7f27565b520f3573c4411f1"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.9.15"",""useDigest"":false}` | cilium-operator image. |
+| preflight.image | object | `{""digest"":""sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"",""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.9.15"",""useDigest"":false}` | Cilium pre-flight image. |",33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,CVE-2022-29178,33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,84,COMPLETED,"![VAR: 1.9.16](VAR: | VAR.VAR.VAR | VAR | `{""VAR"":"""",""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.9.16"",""VAR"":VAR}` | VAR VAR VAR VAR. | | VAR.VAR.VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.9.16"",""VAR"":VAR}` | VAR-VAR VAR VAR. | | VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.9.16"",""VAR"":VAR}` | VAR VAR VAR. | | VAR.VAR | VAR | `{""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.9.16"",""VAR"":VAR}` | VAR-VAR VAR. | | VAR.VAR | VAR | `{""VAR"":"""",""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.9.16"",""VAR"":VAR}` | VAR VAR-VAR VAR. | ![VAR: 1.9.15](VAR: | VAR.VAR.VAR | VAR | `{""VAR"":""VAR:59cabe18234077448b3410a1d9f0ffe9c78a41783e83cc3d80310ddd92b81822"",""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.9.15"",""VAR"":VAR}` | VAR VAR VAR VAR. | | VAR.VAR.VAR | VAR | `{""VAR"":""VAR:748813e49877d66614d947495972f32b7f9675e9c327578c0ea81ca4f7adf322"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.9.15"",""VAR"":VAR}` | VAR-VAR VAR VAR. | | VAR | VAR | `{""VAR"":""VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.9.15"",""VAR"":VAR}` | VAR VAR VAR. | | VAR.VAR | VAR | `{""VAR"":""VAR:5ab748219bec4ac0a0e971e53e1b1ba6a569114eb6dea78951c2edb8ae460265"",""VAR"":""VAR:VAR"",""VAR"":""VAR:5f38912e638b96377f905369035e0afc89b45f24f7f27565b520f3573c4411f1"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.9.15"",""VAR"":VAR}` | VAR-VAR VAR. | | VAR.VAR | VAR | `{""VAR"":""VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"",""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.9.15"",""VAR"":VAR}` | VAR VAR-VAR VAR. |",1,10
+cilium_33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,install/kubernetes/cilium/README.md,"![Version: 1.9.16](https://img.shields.io/badge/Version-1.9.16-informational?style=flat-square) ![AppVersion: 1.9.16](https://img.shields.io/badge/AppVersion-1.9.16-informational?style=flat-square)
+| clustermesh.apiserver.image | object | `{""digest"":"""",""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.9.16"",""useDigest"":false}` | Clustermesh API server image. |
+| hubble.relay.image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.9.16"",""useDigest"":false}` | Hubble-relay container image. |
+| image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.9.16"",""useDigest"":false}` | Agent container image. |
+| operator.image | object | `{""awsDigest"":"""",""azureDigest"":"""",""genericDigest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.9.16"",""useDigest"":false}` | cilium-operator image. |
+| preflight.image | object | `{""digest"":"""",""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.9.16"",""useDigest"":false}` | Cilium pre-flight image. |","![Version: 1.9.15](https://img.shields.io/badge/Version-1.9.15-informational?style=flat-square) ![AppVersion: 1.9.15](https://img.shields.io/badge/AppVersion-1.9.15-informational?style=flat-square)
+| clustermesh.apiserver.image | object | `{""digest"":""sha256:59cabe18234077448b3410a1d9f0ffe9c78a41783e83cc3d80310ddd92b81822"",""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.9.15"",""useDigest"":false}` | Clustermesh API server image. |
+| hubble.relay.image | object | `{""digest"":""sha256:748813e49877d66614d947495972f32b7f9675e9c327578c0ea81ca4f7adf322"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.9.15"",""useDigest"":false}` | Hubble-relay container image. |
+| image | object | `{""digest"":""sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.9.15"",""useDigest"":false}` | Agent container image. |
+| operator.image | object | `{""awsDigest"":""sha256:5ab748219bec4ac0a0e971e53e1b1ba6a569114eb6dea78951c2edb8ae460265"",""azureDigest"":""sha256:b1f236b2c9e99d1ed22ea99e7fcb6bd2f86707825b7c3d271715e6cbc29147d4"",""genericDigest"":""sha256:5f38912e638b96377f905369035e0afc89b45f24f7f27565b520f3573c4411f1"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.9.15"",""useDigest"":false}` | cilium-operator image. |
+| preflight.image | object | `{""digest"":""sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"",""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.9.15"",""useDigest"":false}` | Cilium pre-flight image. |",33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,CVE-2022-29179,33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED,"![VAR: 1.9.16](VAR: | VAR.VAR.VAR | VAR | `{""VAR"":"""",""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.9.16"",""VAR"":VAR}` | VAR VAR VAR VAR. | | VAR.VAR.VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.9.16"",""VAR"":VAR}` | VAR-VAR VAR VAR. | | VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.9.16"",""VAR"":VAR}` | VAR VAR VAR. | | VAR.VAR | VAR | `{""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.9.16"",""VAR"":VAR}` | VAR-VAR VAR. | | VAR.VAR | VAR | `{""VAR"":"""",""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.9.16"",""VAR"":VAR}` | VAR VAR-VAR VAR. | ![VAR: 1.9.15](VAR: | VAR.VAR.VAR | VAR | `{""VAR"":""VAR:59cabe18234077448b3410a1d9f0ffe9c78a41783e83cc3d80310ddd92b81822"",""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.9.15"",""VAR"":VAR}` | VAR VAR VAR VAR. | | VAR.VAR.VAR | VAR | `{""VAR"":""VAR:748813e49877d66614d947495972f32b7f9675e9c327578c0ea81ca4f7adf322"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.9.15"",""VAR"":VAR}` | VAR-VAR VAR VAR. | | VAR | VAR | `{""VAR"":""VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.9.15"",""VAR"":VAR}` | VAR VAR VAR. | | VAR.VAR | VAR | `{""VAR"":""VAR:5ab748219bec4ac0a0e971e53e1b1ba6a569114eb6dea78951c2edb8ae460265"",""VAR"":""VAR:VAR"",""VAR"":""VAR:5f38912e638b96377f905369035e0afc89b45f24f7f27565b520f3573c4411f1"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.9.15"",""VAR"":VAR}` | VAR-VAR VAR. | | VAR.VAR | VAR | `{""VAR"":""VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"",""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.9.15"",""VAR"":VAR}` | VAR VAR-VAR VAR. |",1,10
+cilium_33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,install/kubernetes/cilium/values.yaml,"  tag: v1.9.16
+  digest: """"
+      tag: v1.9.16
+      digest: """"
+    tag: v1.9.16
+    genericDigest: """"
+    azureDigest: """"
+    awsDigest: """"
+    tag: v1.9.16
+    digest: """"
+      tag: v1.9.16
+      digest: """"","  tag: v1.9.15
+  digest: ""sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce""
+      tag: v1.9.15
+      digest: ""sha256:748813e49877d66614d947495972f32b7f9675e9c327578c0ea81ca4f7adf322""
+    tag: v1.9.15
+    genericDigest: ""sha256:5f38912e638b96377f905369035e0afc89b45f24f7f27565b520f3573c4411f1""
+    azureDigest: ""sha256:b1f236b2c9e99d1ed22ea99e7fcb6bd2f86707825b7c3d271715e6cbc29147d4""
+    awsDigest: ""sha256:5ab748219bec4ac0a0e971e53e1b1ba6a569114eb6dea78951c2edb8ae460265""
+    tag: v1.9.15
+    digest: ""sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce""
+      tag: v1.9.15
+      digest: ""sha256:59cabe18234077448b3410a1d9f0ffe9c78a41783e83cc3d80310ddd92b81822""",33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,CVE-2022-29178,33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,84,COMPLETED,"VAR: VAR.9.16 VAR: """" VAR: VAR.9.16 VAR: """" VAR: VAR.9.16 VAR: """" VAR: """" VAR: """" VAR: VAR.9.16 VAR: """" VAR: VAR.9.16 VAR: """" VAR: VAR.9.15 VAR: ""VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"" VAR: VAR.9.15 VAR: ""VAR:748813e49877d66614d947495972f32b7f9675e9c327578c0ea81ca4f7adf322"" VAR: VAR.9.15 VAR: ""VAR:5f38912e638b96377f905369035e0afc89b45f24f7f27565b520f3573c4411f1"" VAR: ""VAR:VAR"" VAR: ""VAR:5ab748219bec4ac0a0e971e53e1b1ba6a569114eb6dea78951c2edb8ae460265"" VAR: VAR.9.15 VAR: ""VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"" VAR: VAR.9.15 VAR: ""VAR:59cabe18234077448b3410a1d9f0ffe9c78a41783e83cc3d80310ddd92b81822""",1,10
+cilium_33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,install/kubernetes/cilium/values.yaml,"  tag: v1.9.16
+  digest: """"
+      tag: v1.9.16
+      digest: """"
+    tag: v1.9.16
+    genericDigest: """"
+    azureDigest: """"
+    awsDigest: """"
+    tag: v1.9.16
+    digest: """"
+      tag: v1.9.16
+      digest: """"","  tag: v1.9.15
+  digest: ""sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce""
+      tag: v1.9.15
+      digest: ""sha256:748813e49877d66614d947495972f32b7f9675e9c327578c0ea81ca4f7adf322""
+    tag: v1.9.15
+    genericDigest: ""sha256:5f38912e638b96377f905369035e0afc89b45f24f7f27565b520f3573c4411f1""
+    azureDigest: ""sha256:b1f236b2c9e99d1ed22ea99e7fcb6bd2f86707825b7c3d271715e6cbc29147d4""
+    awsDigest: ""sha256:5ab748219bec4ac0a0e971e53e1b1ba6a569114eb6dea78951c2edb8ae460265""
+    tag: v1.9.15
+    digest: ""sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce""
+      tag: v1.9.15
+      digest: ""sha256:59cabe18234077448b3410a1d9f0ffe9c78a41783e83cc3d80310ddd92b81822""",33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,CVE-2022-29179,33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED,"VAR: VAR.9.16 VAR: """" VAR: VAR.9.16 VAR: """" VAR: VAR.9.16 VAR: """" VAR: """" VAR: """" VAR: VAR.9.16 VAR: """" VAR: VAR.9.16 VAR: """" VAR: VAR.9.15 VAR: ""VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"" VAR: VAR.9.15 VAR: ""VAR:748813e49877d66614d947495972f32b7f9675e9c327578c0ea81ca4f7adf322"" VAR: VAR.9.15 VAR: ""VAR:5f38912e638b96377f905369035e0afc89b45f24f7f27565b520f3573c4411f1"" VAR: ""VAR:VAR"" VAR: ""VAR:5ab748219bec4ac0a0e971e53e1b1ba6a569114eb6dea78951c2edb8ae460265"" VAR: VAR.9.15 VAR: ""VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"" VAR: VAR.9.15 VAR: ""VAR:59cabe18234077448b3410a1d9f0ffe9c78a41783e83cc3d80310ddd92b81822""",1,10
+cilium_33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,install/kubernetes/experimental-install.yaml,"        image: ""quay.io/cilium/cilium:v1.9.16""
+        image: ""quay.io/cilium/cilium:v1.9.16""
+        image: ""quay.io/cilium/cilium:v1.9.16""
+        image: ""quay.io/cilium/operator-generic:v1.9.16""
+          image: ""quay.io/cilium/hubble-relay:v1.9.16""","        image: ""quay.io/cilium/cilium:v1.9.15@sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce""
+        image: ""quay.io/cilium/cilium:v1.9.15@sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce""
+        image: ""quay.io/cilium/cilium:v1.9.15@sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce""
+        image: ""quay.io/cilium/operator-generic:v1.9.15@sha256:5f38912e638b96377f905369035e0afc89b45f24f7f27565b520f3573c4411f1""
+          image: ""quay.io/cilium/hubble-relay:v1.9.15@sha256:748813e49877d66614d947495972f32b7f9675e9c327578c0ea81ca4f7adf322""",33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,CVE-2022-29178,33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,84,COMPLETED,"VAR: ""VAR.VAR/VAR/VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR-VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR-VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.15@VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.15@VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.15@VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"" VAR: ""VAR.VAR/VAR/VAR-VAR:VAR.9.15@VAR:5f38912e638b96377f905369035e0afc89b45f24f7f27565b520f3573c4411f1"" VAR: ""VAR.VAR/VAR/VAR-VAR:VAR.9.15@VAR:748813e49877d66614d947495972f32b7f9675e9c327578c0ea81ca4f7adf322""",1,10
+cilium_33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,install/kubernetes/experimental-install.yaml,"        image: ""quay.io/cilium/cilium:v1.9.16""
+        image: ""quay.io/cilium/cilium:v1.9.16""
+        image: ""quay.io/cilium/cilium:v1.9.16""
+        image: ""quay.io/cilium/operator-generic:v1.9.16""
+          image: ""quay.io/cilium/hubble-relay:v1.9.16""","        image: ""quay.io/cilium/cilium:v1.9.15@sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce""
+        image: ""quay.io/cilium/cilium:v1.9.15@sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce""
+        image: ""quay.io/cilium/cilium:v1.9.15@sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce""
+        image: ""quay.io/cilium/operator-generic:v1.9.15@sha256:5f38912e638b96377f905369035e0afc89b45f24f7f27565b520f3573c4411f1""
+          image: ""quay.io/cilium/hubble-relay:v1.9.15@sha256:748813e49877d66614d947495972f32b7f9675e9c327578c0ea81ca4f7adf322""",33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,CVE-2022-29179,33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED,"VAR: ""VAR.VAR/VAR/VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR-VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR-VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.15@VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.15@VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.15@VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"" VAR: ""VAR.VAR/VAR/VAR-VAR:VAR.9.15@VAR:5f38912e638b96377f905369035e0afc89b45f24f7f27565b520f3573c4411f1"" VAR: ""VAR.VAR/VAR/VAR-VAR:VAR.9.15@VAR:748813e49877d66614d947495972f32b7f9675e9c327578c0ea81ca4f7adf322""",1,10
+cilium_33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,install/kubernetes/quick-hubble-install.yaml,"          image: ""quay.io/cilium/hubble-relay:v1.9.16""","          image: ""quay.io/cilium/hubble-relay:v1.9.15@sha256:748813e49877d66614d947495972f32b7f9675e9c327578c0ea81ca4f7adf322""",33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,CVE-2022-29178,33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,84,COMPLETED,"VAR: ""VAR.VAR/VAR/VAR-VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR-VAR:VAR.9.15@VAR:748813e49877d66614d947495972f32b7f9675e9c327578c0ea81ca4f7adf322""",1,10
+cilium_33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,install/kubernetes/quick-hubble-install.yaml,"          image: ""quay.io/cilium/hubble-relay:v1.9.16""","          image: ""quay.io/cilium/hubble-relay:v1.9.15@sha256:748813e49877d66614d947495972f32b7f9675e9c327578c0ea81ca4f7adf322""",33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,CVE-2022-29179,33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED,"VAR: ""VAR.VAR/VAR/VAR-VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR-VAR:VAR.9.15@VAR:748813e49877d66614d947495972f32b7f9675e9c327578c0ea81ca4f7adf322""",1,10
+cilium_33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,install/kubernetes/quick-install.yaml,"        image: ""quay.io/cilium/cilium:v1.9.16""
+        image: ""quay.io/cilium/cilium:v1.9.16""
+        image: ""quay.io/cilium/cilium:v1.9.16""
+        image: ""quay.io/cilium/operator-generic:v1.9.16""","        image: ""quay.io/cilium/cilium:v1.9.15@sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce""
+        image: ""quay.io/cilium/cilium:v1.9.15@sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce""
+        image: ""quay.io/cilium/cilium:v1.9.15@sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce""
+        image: ""quay.io/cilium/operator-generic:v1.9.15@sha256:5f38912e638b96377f905369035e0afc89b45f24f7f27565b520f3573c4411f1""",33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,CVE-2022-29178,33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,84,COMPLETED,"VAR: ""VAR.VAR/VAR/VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR-VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.15@VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.15@VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.15@VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"" VAR: ""VAR.VAR/VAR/VAR-VAR:VAR.9.15@VAR:5f38912e638b96377f905369035e0afc89b45f24f7f27565b520f3573c4411f1""",1,10
+cilium_33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,install/kubernetes/quick-install.yaml,"        image: ""quay.io/cilium/cilium:v1.9.16""
+        image: ""quay.io/cilium/cilium:v1.9.16""
+        image: ""quay.io/cilium/cilium:v1.9.16""
+        image: ""quay.io/cilium/operator-generic:v1.9.16""","        image: ""quay.io/cilium/cilium:v1.9.15@sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce""
+        image: ""quay.io/cilium/cilium:v1.9.15@sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce""
+        image: ""quay.io/cilium/cilium:v1.9.15@sha256:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce""
+        image: ""quay.io/cilium/operator-generic:v1.9.15@sha256:5f38912e638b96377f905369035e0afc89b45f24f7f27565b520f3573c4411f1""",33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,CVE-2022-29179,33d1941c97201b4d7f4b4f6efc2d1c071f5c2cfe,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED,"VAR: ""VAR.VAR/VAR/VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR-VAR:VAR.9.16"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.15@VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.15@VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"" VAR: ""VAR.VAR/VAR/VAR:VAR.9.15@VAR:20c0f6cedc09a880d76695e7ac70755a662c4bddf6d5197cf609ffe499ab72ce"" VAR: ""VAR.VAR/VAR/VAR-VAR:VAR.9.15@VAR:5f38912e638b96377f905369035e0afc89b45f24f7f27565b520f3573c4411f1""",1,10
+cpython_cec1e9dfd769bd3a16142d0fdd1a36f19c77ed15,Python/sysmodule.c,"#include ""pycore_long.h""          // _PY_LONG_MAX_STR_DIGITS_THRESHOLD
+
+/*[clinic input]
+sys.get_int_max_str_digits
+
+Set the maximum string digits limit for non-binary int<->str conversions.
+[clinic start generated code]*/
+
+static PyObject *
+sys_get_int_max_str_digits_impl(PyObject *module)
+/*[clinic end generated code: output=0042f5e8ae0e8631 input=8dab13e2023e60d5]*/
+{
+    PyInterpreterState *interp = _PyInterpreterState_GET();
+    return PyLong_FromSsize_t(interp->int_max_str_digits);
+}
+
+/*[clinic input]
+sys.set_int_max_str_digits
+
+    maxdigits: int
+
+Set the maximum string digits limit for non-binary int<->str conversions.
+[clinic start generated code]*/
+
+static PyObject *
+sys_set_int_max_str_digits_impl(PyObject *module, int maxdigits)
+/*[clinic end generated code: output=734d4c2511f2a56d input=d7e3f325db6910c5]*/
+{
+    PyThreadState *tstate = _PyThreadState_GET();
+    if ((!maxdigits) || (maxdigits >= _PY_LONG_MAX_STR_DIGITS_THRESHOLD)) {
+        tstate->interp->int_max_str_digits = maxdigits;
+        Py_RETURN_NONE;
+    } else {
+        PyErr_Format(
+            PyExc_ValueError, ""maxdigits must be 0 or larger than %d"",
+            _PY_LONG_MAX_STR_DIGITS_THRESHOLD);
+        return NULL;
+    }
+}
+
+    SYS_GET_INT_MAX_STR_DIGITS_METHODDEF
+    SYS_SET_INT_MAX_STR_DIGITS_METHODDEF
+    {""int_max_str_digits"",      ""-X int_max_str_digits""},
+    16
+    SetFlag(_Py_global_config_int_max_str_digits);",    15,cec1e9dfd769bd3a16142d0fdd1a36f19c77ed15,CVE-2020-10735,cec1e9dfd769bd3a16142d0fdd1a36f19c77ed15,https://github.com/python/cpython,NVD_GIT_REPOBASED,186,COMPLETED," /*[VAR VAR] VAR.VAR VAR VAR VAR VAR VAR VAR VAR VAR-VAR VAR<->VAR VAR. [VAR VAR VAR VAR]*/ VAR VAR * VAR(VAR *VAR)  { VAR *VAR = VAR(); VAR VAR(VAR->VAR); } /*[VAR VAR] VAR.VAR VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR-VAR VAR<->VAR VAR. [VAR VAR VAR VAR]*/ VAR VAR * VAR(VAR *VAR, VAR VAR)  { VAR *VAR = VAR(); VAR ((!VAR) || (VAR >= VAR)) { VAR->VAR->VAR = VAR; VAR; } VAR { VAR( VAR, ""VAR VAR VAR 0 VAR VAR VAR %VAR"", VAR); VAR VAR; } } VAR VAR {""VAR"", ""-VAR VAR""}, 16 VAR(VAR); 15",1,10
+django_8d7271578d7b153435b40fe40236ebec43cbf1b9,docs/releases/2.2.16.txt,"Django 2.2.16 fixes a security issue and two data loss bugs in 2.2.15.
+
+CVE-2020-24583: Incorrect permissions on intermediate-level directories on Python 3.7+
+======================================================================================
+
+On Python 3.7+, :setting:`FILE_UPLOAD_DIRECTORY_PERMISSIONS` mode was not
+applied to intermediate-level directories created in the process of uploading
+files and to intermediate-level collected static directories when using the
+:djadmin:`collectstatic` management command.
+
+You should review and manually fix permissions on existing intermediate-level
+directories.",Django 2.2.16 fixes two data loss bugs in 2.2.15.,8d7271578d7b153435b40fe40236ebec43cbf1b9,CVE-2020-24583,8d7271578d7b153435b40fe40236ebec43cbf1b9,https://github.com/django/django,GHSD_DIRECT_COMMIT,1337,COMPLETED,"VAR 2.2.16 VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR 2.2.15. VAR-2020-24583: VAR VAR VAR VAR-VAR VAR VAR VAR 3.7+ ====================================================================================== VAR VAR 3.7+, :VAR:`VAR` VAR VAR VAR VAR VAR VAR-VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR-VAR VAR VAR VAR VAR VAR VAR :VAR:`VAR` VAR VAR. VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR-VAR VAR. VAR 2.2.16 VAR VAR VAR VAR VAR VAR 2.2.15.",1,10
+envoy_2c60632d41555ec8b3d9ef5246242be637a2db0f,docs/root/version_history/version_history.rst,  v1.15.1,,2c60632d41555ec8b3d9ef5246242be637a2db0f,CVE-2020-25017,2c60632d41555ec8b3d9ef5246242be637a2db0f,https://github.com/envoyproxy/envoy,NVD_GIT_REPOBASED,102,COMPLETED,VAR.15.1 ,12,10
+envoy_bb95af848c939cfe5b5ee33c5b1770558077e64e,api/envoy/extensions/transport_sockets/tls/v3/common.proto,"import ""envoy/annotations/deprecation.proto"";
+// Matcher for subject alternative names, to match both type and value of the SAN.
+message SubjectAltNameMatcher {
+  // Indicates the choice of GeneralName as defined in section 4.2.1.5 of RFC 5280 to match
+  // against.
+  enum SanType {
+    SAN_TYPE_UNSPECIFIED = 0;
+    EMAIL = 1;
+    DNS = 2;
+    URI = 3;
+    IP_ADDRESS = 4;
+  }
+
+  // Specification of type of SAN. Note that the default enum value is an invalid choice.
+  SanType san_type = 1 [(validate.rules).enum = {defined_only: true not_in: 0}];
+
+  // Matcher for SAN value.
+  type.matcher.v3.StringMatcher matcher = 2 [(validate.rules).message = {required: true}];
+}
+
+// [#next-free-field: 16]
+  // :ref:`match_typed_subject_alt_names
+  // <envoy_v3_api_field_extensions.transport_sockets.tls.v3.CertificateValidationContext.match_typed_subject_alt_names>`) is also
+  // The matching uses ""any"" semantics, that is to say, the SAN is verified if at least one matcher is
+  // matched.
+  //  match_typed_subject_alt_names:
+  //  - san_type: DNS
+  //    matcher:
+  //      exact: ""api.example.com""
+  repeated SubjectAltNameMatcher match_typed_subject_alt_names = 15;
+
+  // This field is deprecated in favor of ref:`match_typed_subject_alt_names
+  // <envoy_v3_api_field_extensions.transport_sockets.tls.v3.CertificateValidationContext.match_typed_subject_alt_names>`
+  repeated type.matcher.v3.StringMatcher match_subject_alt_names = 9
+      [deprecated = true, (envoy.annotations.deprecated_at_minor_version) = ""3.0""];","// [#next-free-field: 15]
+  // :ref:`match_subject_alt_names
+  // <envoy_v3_api_field_extensions.transport_sockets.tls.v3.CertificateValidationContext.match_subject_alt_names>`) is also
+  //  match_subject_alt_names:
+  //    exact: ""api.example.com""
+  repeated type.matcher.v3.StringMatcher match_subject_alt_names = 9;",bb95af848c939cfe5b5ee33c5b1770558077e64e,CVE-2022-21656,bb95af848c939cfe5b5ee33c5b1770558077e64e,https://github.com/envoyproxy/envoy,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR ""VAR/VAR/VAR.VAR"";  VAR VAR {   VAR VAR { VAR = 0; VAR = 1; VAR = 2; VAR = 3; VAR = 4; }  VAR VAR = 1 [(VAR.VAR).VAR = {VAR: VAR VAR: 0}];  VAR.VAR.VAR.VAR VAR = 2 [(VAR.VAR).VAR = {VAR: VAR}]; }          VAR VAR VAR = 15;   VAR VAR.VAR.VAR.VAR VAR = 9 [VAR = VAR, (VAR.VAR.VAR) = ""3.0""];      VAR VAR.VAR.VAR.VAR VAR = 9;",12,10
+FFmpeg_759001c534287a96dc96d1e274665feb7059145d,libavcodec/4xm.c,"#include ""libavutil/frame.h""
+    AVFrame *last_picture;
+static void init_mv(FourXContext *f, int linesize)
+            f->mv[i] = mv[i][0] + mv[i][1] * linesize / 2;
+            f->mv[i] = (i & 15) - 8 + ((i >> 4) - 8) * linesize / 2;
+static int decode_p_frame(FourXContext *f, AVFrame *frame,
+                          const uint8_t *buf, int length)
+    uint16_t *dst    = (uint16_t *)frame->data[0];
+    const int stride =             frame->linesize[0] >> 1;
+    init_mv(f, frame->linesize[0]);
+static inline void idct_put(FourXContext *f, AVFrame *frame, int x, int y)
+    int stride           = frame->linesize[0] >> 1;
+    uint16_t *dst = ((uint16_t*)frame->data[0]) + y * stride + x;
+static int decode_i2_frame(FourXContext *f, AVFrame *frame, const uint8_t *buf, int length)
+    uint16_t *dst    = (uint16_t*)frame->data[0];
+    const int stride =            frame->linesize[0]>>1;
+static int decode_i_frame(FourXContext *f, AVFrame *frame, const uint8_t *buf, int length)
+            idct_put(f, frame, x, y);
+    if ((ret = ff_get_buffer(avctx, picture, AV_GET_BUFFER_FLAG_REF)) < 0) {
+        picture->pict_type = AV_PICTURE_TYPE_I;
+        if ((ret = decode_i2_frame(f, picture, buf - 4, frame_size + 4)) < 0)
+        picture->pict_type = AV_PICTURE_TYPE_I;
+        if ((ret = decode_i_frame(f, picture, buf, frame_size)) < 0)
+            if ((ret = ff_get_buffer(avctx, f->last_picture,
+                                     AV_GET_BUFFER_FLAG_REF)) < 0) {
+        picture->pict_type = AV_PICTURE_TYPE_P;
+        if ((ret = decode_p_frame(f, picture, buf, frame_size)) < 0)
+    picture->key_frame = picture->pict_type == AV_PICTURE_TYPE_I;
+    av_frame_unref(f->last_picture);
+    if ((ret = av_frame_ref(f->last_picture, picture)) < 0)
+        return ret;
+    f->last_picture = av_frame_alloc();
+    if (!f->last_picture)
+    av_frame_free(&f->last_picture);","    AVFrame *current_picture, *last_picture;
+static void init_mv(FourXContext *f)
+            f->mv[i] = mv[i][0] + mv[i][1] * f->current_picture->linesize[0] / 2;
+            f->mv[i] = (i & 15) - 8 + ((i >> 4) - 8) * f->current_picture->linesize[0] / 2;
+static int decode_p_frame(FourXContext *f, const uint8_t *buf, int length)
+    uint16_t *dst    = (uint16_t *)f->current_picture->data[0];
+    const int stride =             f->current_picture->linesize[0] >> 1;
+    init_mv(f);
+static inline void idct_put(FourXContext *f, int x, int y)
+    int stride           = f->current_picture->linesize[0] >> 1;
+    uint16_t *dst = ((uint16_t*)f->current_picture->data[0]) + y * stride + x;
+static int decode_i2_frame(FourXContext *f, const uint8_t *buf, int length)
+    uint16_t *dst    = (uint16_t*)f->current_picture->data[0];
+    const int stride =            f->current_picture->linesize[0]>>1;
+static int decode_i_frame(FourXContext *f, const uint8_t *buf, int length)
+            idct_put(f, x, y);
+    AVFrame *p;
+    FFSWAP(AVFrame*, f->current_picture, f->last_picture);
+
+    p                  = f->current_picture;
+    avctx->coded_frame = p;
+
+    if (p->data[0])
+        avctx->release_buffer(avctx, p);
+
+    p->reference = 1;
+    if ((ret = ff_get_buffer(avctx, p)) < 0) {
+        p->pict_type = AV_PICTURE_TYPE_I;
+        if ((ret = decode_i2_frame(f, buf - 4, frame_size + 4)) < 0)
+        p->pict_type = AV_PICTURE_TYPE_I;
+        if ((ret = decode_i_frame(f, buf, frame_size)) < 0)
+            f->last_picture->reference = 1;
+            if ((ret = ff_get_buffer(avctx, f->last_picture)) < 0) {
+        p->pict_type = AV_PICTURE_TYPE_P;
+        if ((ret = decode_p_frame(f, buf, frame_size)) < 0)
+    p->key_frame = p->pict_type == AV_PICTURE_TYPE_I;
+    *picture   = *p;
+    f->current_picture = avcodec_alloc_frame();
+    f->last_picture    = avcodec_alloc_frame();
+    if (!f->current_picture || !f->last_picture) {
+        avcodec_free_frame(&f->current_picture);
+        avcodec_free_frame(&f->last_picture);
+    }
+    if (f->current_picture->data[0])
+        avctx->release_buffer(avctx, f->current_picture);
+    if (f->last_picture->data[0])
+        avctx->release_buffer(avctx, f->last_picture);
+    avcodec_free_frame(&f->current_picture);
+    avcodec_free_frame(&f->last_picture);",759001c534287a96dc96d1e274665feb7059145d,CVE-2011-3934,759001c534287a96dc96d1e274665feb7059145d,https://github.com/FFmpeg/FFmpeg,CPE_GIT_REPOBASED,76,COMPLETED," VAR *VAR; VAR VAR VAR(VAR *VAR, VAR VAR) VAR->VAR[VAR] = VAR[VAR][0] + VAR[VAR][1] * VAR / 2; VAR->VAR[VAR] = (VAR & 15) - 8 + ((VAR >> 4) - 8) * VAR / 2; VAR VAR VAR(VAR *VAR, VAR *VAR, VAR VAR *VAR, VAR VAR) VAR *VAR = (VAR *)VAR->VAR[0]; VAR VAR VAR = VAR->VAR[0] >> 1; VAR(VAR, VAR->VAR[0]); VAR VAR VAR VAR(VAR *VAR, VAR *VAR, VAR VAR, VAR VAR) VAR VAR = VAR->VAR[0] >> 1; VAR *VAR = ((VAR*)VAR->VAR[0]) + VAR * VAR + VAR; VAR VAR VAR(VAR *VAR, VAR *VAR, VAR VAR *VAR, VAR VAR) VAR *VAR = (VAR*)VAR->VAR[0]; VAR VAR VAR = VAR->VAR[0]>>1; VAR VAR VAR(VAR *VAR, VAR *VAR, VAR VAR *VAR, VAR VAR) VAR(VAR, VAR, VAR, VAR); VAR ((VAR = VAR(VAR, VAR, VAR)) < 0) { VAR->VAR = VAR; VAR ((VAR = VAR(VAR, VAR, VAR - 4, VAR + 4)) < 0) VAR->VAR = VAR; VAR ((VAR = VAR(VAR, VAR, VAR, VAR)) < 0) VAR ((VAR = VAR(VAR, VAR->VAR, VAR)) < 0) { VAR->VAR = VAR; VAR ((VAR = VAR(VAR, VAR, VAR, VAR)) < 0) VAR->VAR = VAR->VAR == VAR; VAR(VAR->VAR); VAR ((VAR = VAR(VAR->VAR, VAR)) < 0) VAR VAR; VAR->VAR = VAR(); VAR (!VAR->VAR) VAR(&VAR->VAR); VAR *VAR, *VAR; VAR VAR VAR(VAR *VAR) VAR->VAR[VAR] = VAR[VAR][0] + VAR[VAR][1] * VAR->VAR->VAR[0] / 2; VAR->VAR[VAR] = (VAR & 15) - 8 + ((VAR >> 4) - 8) * VAR->VAR->VAR[0] / 2; VAR VAR VAR(VAR *VAR, VAR VAR *VAR, VAR VAR) VAR *VAR = (VAR *)VAR->VAR->VAR[0]; VAR VAR VAR = VAR->VAR->VAR[0] >> 1; VAR(VAR); VAR VAR VAR VAR(VAR *VAR, VAR VAR, VAR VAR) VAR VAR = VAR->VAR->VAR[0] >> 1; VAR *VAR = ((VAR*)VAR->VAR->VAR[0]) + VAR * VAR + VAR; VAR VAR VAR(VAR *VAR, VAR VAR *VAR, VAR VAR) VAR *VAR = (VAR*)VAR->VAR->VAR[0]; VAR VAR VAR = VAR->VAR->VAR[0]>>1; VAR VAR VAR(VAR *VAR, VAR VAR *VAR, VAR VAR) VAR(VAR, VAR, VAR); VAR *VAR; VAR(VAR*, VAR->VAR, VAR->VAR); VAR = VAR->VAR; VAR->VAR = VAR; VAR (VAR->VAR[0]) VAR->VAR(VAR, VAR); VAR->VAR = 1; VAR ((VAR = VAR(VAR, VAR)) < 0) { VAR->VAR = VAR; VAR ((VAR = VAR(VAR, VAR - 4, VAR + 4)) < 0) VAR->VAR = VAR; VAR ((VAR = VAR(VAR, VAR, VAR)) < 0) VAR->VAR->VAR = 1; VAR ((VAR = VAR(VAR, VAR->VAR)) < 0) { VAR->VAR = VAR; VAR ((VAR = VAR(VAR, VAR, VAR)) < 0) VAR->VAR = VAR->VAR == VAR; *VAR = *VAR; VAR->VAR = VAR(); VAR->VAR = VAR(); VAR (!VAR->VAR || !VAR->VAR) { VAR(&VAR->VAR); VAR(&VAR->VAR); } VAR (VAR->VAR->VAR[0]) VAR->VAR(VAR, VAR->VAR); VAR (VAR->VAR->VAR[0]) VAR->VAR(VAR, VAR->VAR); VAR(&VAR->VAR); VAR(&VAR->VAR);",12,10
+FFmpeg_759001c534287a96dc96d1e274665feb7059145d,libavcodec/dnxhddec.c,"static int dnxhd_decode_header(DNXHDContext *ctx, AVFrame *frame,
+                               const uint8_t *buf, int buf_size, int first_field)
+        frame->interlaced_frame = 1;
+        frame->top_field_first  = first_field ^ ctx->cur_field;
+    if ((ctx->height+15)>>4 == ctx->mb_height && frame->interlaced_frame)
+        (ctx->mb_height << frame->interlaced_frame) > (ctx->height+15)>>4) {
+static int dnxhd_decode_macroblock(DNXHDContext *ctx, AVFrame *frame, int x, int y)
+    int dct_linesize_luma   = frame->linesize[0];
+    int dct_linesize_chroma = frame->linesize[1];
+    if (frame->interlaced_frame) {
+    dest_y = frame->data[0] + ((y * dct_linesize_luma)   << 4) + (x << (4 + shift1));
+    dest_u = frame->data[1] + ((y * dct_linesize_chroma) << 4) + (x << (3 + shift1));
+    dest_v = frame->data[2] + ((y * dct_linesize_chroma) << 4) + (x << (3 + shift1));
+        dest_y += frame->linesize[0];
+        dest_u += frame->linesize[1];
+        dest_v += frame->linesize[2];
+static int dnxhd_decode_macroblocks(DNXHDContext *ctx, AVFrame *frame,
+                                    const uint8_t *buf, int buf_size)
+            dnxhd_decode_macroblock(ctx, frame, x, y);
+    int ret;
+    if (dnxhd_decode_header(ctx, picture, buf, buf_size, first_field) < 0)
+        if ((ret = ff_get_buffer(avctx, picture, 0)) < 0) {
+            return ret;
+        picture->pict_type = AV_PICTURE_TYPE_I;
+        picture->key_frame = 1;
+    dnxhd_decode_macroblocks(ctx, picture, buf + 0x280, buf_size - 0x280);
+    if (first_field && picture->interlaced_frame) {","    AVFrame picture;
+    avctx->coded_frame = &ctx->picture;
+    ctx->picture.type = AV_PICTURE_TYPE_I;
+    ctx->picture.key_frame = 1;
+static int dnxhd_decode_header(DNXHDContext *ctx, const uint8_t *buf, int buf_size, int first_field)
+        ctx->picture.interlaced_frame = 1;
+        ctx->picture.top_field_first = first_field ^ ctx->cur_field;
+    if ((ctx->height+15)>>4 == ctx->mb_height && ctx->picture.interlaced_frame)
+        (ctx->mb_height<<ctx->picture.interlaced_frame) > (ctx->height+15)>>4) {
+static int dnxhd_decode_macroblock(DNXHDContext *ctx, int x, int y)
+    int dct_linesize_luma   = ctx->picture.linesize[0];
+    int dct_linesize_chroma = ctx->picture.linesize[1];
+    if (ctx->picture.interlaced_frame) {
+    dest_y = ctx->picture.data[0] + ((y * dct_linesize_luma)   << 4) + (x << (4 + shift1));
+    dest_u = ctx->picture.data[1] + ((y * dct_linesize_chroma) << 4) + (x << (3 + shift1));
+    dest_v = ctx->picture.data[2] + ((y * dct_linesize_chroma) << 4) + (x << (3 + shift1));
+        dest_y += ctx->picture.linesize[0];
+        dest_u += ctx->picture.linesize[1];
+        dest_v += ctx->picture.linesize[2];
+static int dnxhd_decode_macroblocks(DNXHDContext *ctx, const uint8_t *buf, int buf_size)
+            dnxhd_decode_macroblock(ctx, x, y);
+    if (dnxhd_decode_header(ctx, buf, buf_size, first_field) < 0)
+        if (ctx->picture.data[0])
+            avctx->release_buffer(avctx, &ctx->picture);
+        if (ff_get_buffer(avctx, &ctx->picture) < 0) {
+            return -1;
+    dnxhd_decode_macroblocks(ctx, buf + 0x280, buf_size - 0x280);
+    if (first_field && ctx->picture.interlaced_frame) {
+    *picture = ctx->picture;
+    if (ctx->picture.data[0])
+        avctx->release_buffer(avctx, &ctx->picture);",759001c534287a96dc96d1e274665feb7059145d,CVE-2011-3934,759001c534287a96dc96d1e274665feb7059145d,https://github.com/FFmpeg/FFmpeg,CPE_GIT_REPOBASED,76,COMPLETED,"VAR VAR VAR(VAR *VAR, VAR *VAR, VAR VAR *VAR, VAR VAR, VAR VAR) VAR->VAR = 1; VAR->VAR = VAR ^ VAR->VAR; VAR ((VAR->VAR+15)>>4 == VAR->VAR && VAR->VAR) (VAR->VAR << VAR->VAR) > (VAR->VAR+15)>>4) { VAR VAR VAR(VAR *VAR, VAR *VAR, VAR VAR, VAR VAR) VAR VAR = VAR->VAR[0]; VAR VAR = VAR->VAR[1]; VAR (VAR->VAR) { VAR = VAR->VAR[0] + ((VAR * VAR) << 4) + (VAR << (4 + VAR)); VAR = VAR->VAR[1] + ((VAR * VAR) << 4) + (VAR << (3 + VAR)); VAR = VAR->VAR[2] + ((VAR * VAR) << 4) + (VAR << (3 + VAR)); VAR += VAR->VAR[0]; VAR += VAR->VAR[1]; VAR += VAR->VAR[2]; VAR VAR VAR(VAR *VAR, VAR *VAR, VAR VAR *VAR, VAR VAR) VAR(VAR, VAR, VAR, VAR); VAR VAR; VAR (VAR(VAR, VAR, VAR, VAR, VAR) < 0) VAR ((VAR = VAR(VAR, VAR, 0)) < 0) { VAR VAR; VAR->VAR = VAR; VAR->VAR = 1; VAR(VAR, VAR, VAR + 0x280, VAR - 0x280); VAR (VAR && VAR->VAR) { VAR VAR; VAR->VAR = &VAR->VAR; VAR->VAR.VAR = VAR; VAR->VAR.VAR = 1; VAR VAR VAR(VAR *VAR, VAR VAR *VAR, VAR VAR, VAR VAR) VAR->VAR.VAR = 1; VAR->VAR.VAR = VAR ^ VAR->VAR; VAR ((VAR->VAR+15)>>4 == VAR->VAR && VAR->VAR.VAR) (VAR->VAR<<VAR->VAR.VAR) > (VAR->VAR+15)>>4) { VAR VAR VAR(VAR *VAR, VAR VAR, VAR VAR) VAR VAR = VAR->VAR.VAR[0]; VAR VAR = VAR->VAR.VAR[1]; VAR (VAR->VAR.VAR) { VAR = VAR->VAR.VAR[0] + ((VAR * VAR) << 4) + (VAR << (4 + VAR)); VAR = VAR->VAR.VAR[1] + ((VAR * VAR) << 4) + (VAR << (3 + VAR)); VAR = VAR->VAR.VAR[2] + ((VAR * VAR) << 4) + (VAR << (3 + VAR)); VAR += VAR->VAR.VAR[0]; VAR += VAR->VAR.VAR[1]; VAR += VAR->VAR.VAR[2]; VAR VAR VAR(VAR *VAR, VAR VAR *VAR, VAR VAR) VAR(VAR, VAR, VAR); VAR (VAR(VAR, VAR, VAR, VAR) < 0) VAR (VAR->VAR.VAR[0]) VAR->VAR(VAR, &VAR->VAR); VAR (VAR(VAR, &VAR->VAR) < 0) { VAR -1; VAR(VAR, VAR + 0x280, VAR - 0x280); VAR (VAR && VAR->VAR.VAR) { *VAR = VAR->VAR; VAR (VAR->VAR.VAR[0]) VAR->VAR(VAR, &VAR->VAR);",12,10
+FFmpeg_e07ac727c1cc9eed39e7f9117c97006f719864bd,libavcodec/g2meet.c,"        c->framebuf_stride = FFALIGN(c->width + 15, 16) * 3;
+        aligned_height     = c->height + 15;","        c->framebuf_stride = FFALIGN(c->width * 3, 16);
+        aligned_height     = FFALIGN(c->height,    16);",e07ac727c1cc9eed39e7f9117c97006f719864bd,CVE-2013-7022,e07ac727c1cc9eed39e7f9117c97006f719864bd,https://github.com/FFmpeg/FFmpeg,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR->VAR = VAR(VAR->VAR + 15, 16) * 3; VAR = VAR->VAR + 15; VAR->VAR = VAR(VAR->VAR * 3, 16); VAR = VAR(VAR->VAR, 16);",1,10
+FFmpeg_e1219cdaf9fb4bc8cea410e1caf802373c1bfe51,libavcodec/tiff.c,"    uint64_t component_len;
+    component_len = 15LL + strlen(sep);
+    if (count >= (INT_MAX - 1)/component_len)
+        return NULL;
+    ap = av_malloc(component_len * count + 1);
+    uint64_t component_len;
+    component_len = 7LL + strlen(sep);
+    if (count >= (INT_MAX - 1)/component_len)
+        return NULL;
+    ap = av_malloc(component_len * count + 1);
+        unsigned l = snprintf(ap, component_len, ""%d%s"", sp[i], sep);
+        if (l >= component_len) {
+            av_free(ap0);
+            return NULL;
+        }","    int component_len;
+    component_len = 15 + strlen(sep);
+    ap = av_malloc(component_len * count);
+    ap = av_malloc((5 + strlen(sep)) * count);
+        int l = snprintf(ap, 5 + strlen(sep), ""%d%s"", sp[i], sep);",e1219cdaf9fb4bc8cea410e1caf802373c1bfe51,CVE-2013-0874,e1219cdaf9fb4bc8cea410e1caf802373c1bfe51,https://github.com/FFmpeg/FFmpeg,CPE_GIT_REPOBASED,82,COMPLETED,"VAR VAR; VAR = 15LL + VAR(VAR); VAR (VAR >= (VAR - 1)/VAR) VAR VAR; VAR = VAR(VAR * VAR + 1); VAR VAR; VAR = 7LL + VAR(VAR); VAR (VAR >= (VAR - 1)/VAR) VAR VAR; VAR = VAR(VAR * VAR + 1); VAR VAR = VAR(VAR, VAR, ""%VAR%VAR"", VAR[VAR], VAR); VAR (VAR >= VAR) { VAR(VAR); VAR VAR; } VAR VAR; VAR = 15 + VAR(VAR); VAR = VAR(VAR * VAR); VAR = VAR((5 + VAR(VAR)) * VAR); VAR VAR = VAR(VAR, 5 + VAR(VAR), ""%VAR%VAR"", VAR[VAR], VAR);",12,10
+FFmpeg_f31fc4755f69ab26bf6e8be47875b7dcede8e29e,libavcodec/dnxhddec.c,"        if (ctx->mb_height > 68) {
+    if ((ctx->mb_height << frame->interlaced_frame) > (ctx->height + 15) >> 4) {
+        av_log(ctx->avctx, AV_LOG_ERROR,
+                ""mb height too big: %d\n"", ctx->mb_height);
+        return AVERROR_INVALIDDATA;
+    }","        if (ctx->mb_height > 68 ||
+            (ctx->mb_height << frame->interlaced_frame) > (ctx->height + 15) >> 4) {",f31fc4755f69ab26bf6e8be47875b7dcede8e29e,CVE-2017-11719,f31fc4755f69ab26bf6e8be47875b7dcede8e29e,https://github.com/FFmpeg/FFmpeg,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR (VAR->VAR > 68) { VAR ((VAR->VAR << VAR->VAR) > (VAR->VAR + 15) >> 4) { VAR(VAR->VAR, VAR, ""VAR VAR VAR VAR: %VAR\VAR"", VAR->VAR); VAR VAR; } VAR (VAR->VAR > 68 || (VAR->VAR << VAR->VAR) > (VAR->VAR + 15) >> 4) {",12,10
+go_7e5b2e0ec144d5f5b2923a7d5db0b9143f79a35a,src/crypto/x509/root_darwin.go,"import (
+	""bytes""
+	""encoding/pem""
+	""fmt""
+	""io/ioutil""
+	""os""
+	""os/exec""
+	""strconv""
+	""sync""
+	""syscall""
+)
+// This code is only used when compiling without cgo.
+// It is here, instead of root_nocgo_darwin.go, so that tests can check it
+// even if the tests are run with cgo enabled.
+// The linker will not include these unused functions in binaries built with cgo enabled.
+
+	var (
+		mu    sync.Mutex
+		roots = NewCertPool()
+	)
+	add := func(cert *Certificate) {
+		mu.Lock()
+		defer mu.Unlock()
+		roots.AddCert(cert)
+	}
+	blockCh := make(chan *pem.Block)
+	var wg sync.WaitGroup
+	for i := 0; i < 4; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for block := range blockCh {
+				verifyCertWithSystem(block, add)
+			}
+		}()
+	}
+	for len(data) > 0 {
+		var block *pem.Block
+		block, data = pem.Decode(data)
+		if block == nil {
+			break
+		}
+		if block.Type != ""CERTIFICATE"" || len(block.Headers) != 0 {
+			continue
+		}
+		blockCh <- block
+	}
+	close(blockCh)
+	wg.Wait()
+
+func verifyCertWithSystem(block *pem.Block, add func(*Certificate)) {
+	data := pem.EncodeToMemory(block)
+	var cmd *exec.Cmd
+	if needsTmpFiles() {
+		f, err := ioutil.TempFile("""", ""cert"")
+		if err != nil {
+			fmt.Fprintf(os.Stderr, ""can't create temporary file for cert: %v"", err)
+			return
+		}
+		defer os.Remove(f.Name())
+		if _, err := f.Write(data); err != nil {
+			fmt.Fprintf(os.Stderr, ""can't write temporary file for cert: %v"", err)
+			return
+		}
+		if err := f.Close(); err != nil {
+			fmt.Fprintf(os.Stderr, ""can't write temporary file for cert: %v"", err)
+			return
+		}
+		cmd = exec.Command(""/usr/bin/security"", ""verify-cert"", ""-c"", f.Name(), ""-l"")
+	} else {
+		cmd = exec.Command(""/usr/bin/security"", ""verify-cert"", ""-c"", ""/dev/stdin"", ""-l"")
+		cmd.Stdin = bytes.NewReader(data)
+	}
+	if cmd.Run() == nil {
+		// Non-zero exit means untrusted
+		cert, err := ParseCertificate(block.Bytes)
+		if err != nil {
+			return
+		}
+
+		add(cert)
+	}
+}
+
+var versionCache struct {
+	sync.Once
+	major int
+}
+
+// needsTmpFiles reports whether the OS is <= 10.11 (which requires real
+// files as arguments to the security command).
+func needsTmpFiles() bool {
+	versionCache.Do(func() {
+		release, err := syscall.Sysctl(""kern.osrelease"")
+		if err != nil {
+			return
+		}
+		for i, c := range release {
+			if c == '.' {
+				release = release[:i]
+				break
+			}
+		}
+		major, err := strconv.Atoi(release)
+		if err != nil {
+			return
+		}
+		versionCache.major = major
+	})
+	return versionCache.major <= 15
+}","import ""os/exec""
+	roots := NewCertPool()
+	roots.AppendCertsFromPEM(data)",7e5b2e0ec144d5f5b2923a7d5db0b9143f79a35a,CVE-2017-1000097,7e5b2e0ec144d5f5b2923a7d5db0b9143f79a35a,https://github.com/golang/go,NVD_GIT_REPOBASED,106,COMPLETED,"VAR ( ""VAR"" ""VAR/VAR"" ""VAR"" ""VAR/VAR"" ""VAR"" ""VAR/VAR"" ""VAR"" ""VAR"" ""VAR"" )     VAR ( VAR VAR.VAR VAR = VAR() ) VAR := VAR(VAR *VAR) { VAR.VAR() VAR VAR.VAR() VAR.VAR(VAR) } VAR := VAR(VAR *VAR.VAR) VAR VAR VAR.VAR VAR VAR := 0; VAR < 4; VAR++ { VAR.VAR(1) VAR VAR() { VAR VAR.VAR() VAR VAR := VAR VAR { VAR(VAR, VAR) } }() } VAR VAR(VAR) > 0 { VAR VAR *VAR.VAR VAR, VAR = VAR.VAR(VAR) VAR VAR == VAR { VAR } VAR VAR.VAR != ""VAR"" || VAR(VAR.VAR) != 0 { VAR } VAR <- VAR } VAR(VAR) VAR.VAR() VAR VAR(VAR *VAR.VAR, VAR VAR(*VAR)) { VAR := VAR.VAR(VAR) VAR VAR *VAR.VAR VAR VAR() { VAR, VAR := VAR.VAR("""", ""VAR"") VAR VAR != VAR { VAR.VAR(VAR.VAR, ""VAR'VAR VAR VAR VAR VAR VAR: %VAR"", VAR) VAR } VAR VAR.VAR(VAR.VAR()) VAR VAR, VAR := VAR.VAR(VAR); VAR != VAR { VAR.VAR(VAR.VAR, ""VAR'VAR VAR VAR VAR VAR VAR: %VAR"", VAR) VAR } VAR VAR := VAR.VAR(); VAR != VAR { VAR.VAR(VAR.VAR, ""VAR'VAR VAR VAR VAR VAR VAR: %VAR"", VAR) VAR } VAR = VAR.VAR(""/VAR/VAR/VAR"", ""VAR-VAR"", ""-VAR"", VAR.VAR(), ""-VAR"") } VAR { VAR = VAR.VAR(""/VAR/VAR/VAR"", ""VAR-VAR"", ""-VAR"", ""/VAR/VAR"", ""-VAR"") VAR.VAR = VAR.VAR(VAR) } VAR VAR.VAR() == VAR {  VAR, VAR := VAR(VAR.VAR) VAR VAR != VAR { VAR } VAR(VAR) } } VAR VAR VAR { VAR.VAR VAR VAR }   VAR VAR() VAR { VAR.VAR(VAR() { VAR, VAR := VAR.VAR(""VAR.VAR"") VAR VAR != VAR { VAR } VAR VAR, VAR := VAR VAR { VAR VAR == '.' { VAR = VAR[:VAR] VAR } } VAR, VAR := VAR.VAR(VAR) VAR VAR != VAR { VAR } VAR.VAR = VAR }) VAR VAR.VAR <= 15 } VAR ""VAR/VAR"" VAR := VAR() VAR.VAR(VAR)",12,10
+gpac_f3698bb1bce62402805c3fda96551a23101a32f9,src/utils/os_divers.c,"			if (i > 15) {
+				// force error check below
+				i++;
+				break;
+			}
+",,f3698bb1bce62402805c3fda96551a23101a32f9,CVE-2019-11222,f3698bb1bce62402805c3fda96551a23101a32f9,https://github.com/gpac/gpac,NVD_DIRECT_COMMIT,1337,COMPLETED,VAR (VAR > 15) {  VAR++; VAR; } ,12,10
+linux_133672efbc1085f9af990bdc145e1822ea93bcf3,fs/cifs/transport.c,"	if (long_op == CIFS_ASYNC_OP) {
+				if (long_op != CIFS_BLOCKING_OP)
+
+/*
+ *
+ * Send an SMB Request.  No response info (other than return code)
+ * needs to be parsed.
+ *
+ * flags indicate the type of request buffer and how long to wait
+ * and whether to log NT STATUS code (error) before mapping it to POSIX error
+ *
+ */
+int
+SendReceiveNoRsp(const unsigned int xid, struct cifsSesInfo *ses,
+		struct smb_hdr *in_buf, int flags)
+{
+	int rc;
+	struct kvec iov[1];
+	int resp_buf_type;
+
+	iov[0].iov_base = (char *)in_buf;
+	iov[0].iov_len = in_buf->smb_buf_length + 4;
+	flags |= CIFS_NO_RESP;
+	rc = SendReceive2(xid, ses, iov, 1, &resp_buf_type, flags);
+#ifdef CONFIG_CIFS_DEBUG2
+	cFYI(1, (""SendRcvNoR flags %d rc %d"", flags, rc));
+#endif
+	return rc;
+}
+
+	     const int flags)
+	int long_op;
+	long_op = flags & CIFS_TIMEOUT_MASK;
+
+	if (long_op == CIFS_STD_OP)
+		timeout = 15 * HZ;
+	else if (long_op == CIFS_VLONG_OP) /* e.g. slow writes past EOF */
+	else if (long_op == CIFS_LONG_OP)
+	else if (long_op == CIFS_ASYNC_OP)
+		goto out;
+	else if (long_op == CIFS_BLOCKING_OP)
+		timeout = 0x7FFFFFFF; /*  large, but not so large as to wrap */
+	else {
+		cERROR(1, (""unknown timeout flag %d"", long_op));
+		rc = -EIO;
+		goto out;
+	}
+			rc = map_smb_to_linux_error(midQ->resp_buf,
+						flags & CIFS_LOG_ERROR);
+			if ((flags & CIFS_NO_RESP) == 0)
+				midQ->resp_buf = NULL;  /* mark it so buf will
+							   not be freed by
+							   DeleteMidQEntry */
+	if (long_op == CIFS_STD_OP)
+		timeout = 15 * HZ;
+	/* wait for 15 seconds or until woken up due to response arriving or
+	   due to last connection to this server being unmounted */
+	else if (long_op == CIFS_ASYNC_OP)
+	else if (long_op == CIFS_VLONG_OP) /* writes past EOF can be slow */
+	else if (long_op == CIFS_LONG_OP)
+	else if (long_op == CIFS_BLOCKING_OP)
+		timeout = 0x7FFFFFFF; /* large but no so large as to wrap */
+	else {
+		cERROR(1, (""unknown timeout flag %d"", long_op));
+		rc = -EIO;
+		goto out;
+	}
+
+			&bytes_returned, CIFS_STD_OP);
+	rc = wait_for_free_request(ses, CIFS_BLOCKING_OP);","	if (long_op == -1) {
+				if (long_op < 3)
+	     const int long_op, const int logError)
+	if (long_op == -1)
+		goto out;
+	else if (long_op == 2) /* writes past end of file can take loong time */
+	else if (long_op == 1)
+	else
+		timeout = 15 * HZ;
+			rc = map_smb_to_linux_error(midQ->resp_buf, logError);
+			midQ->resp_buf = NULL;  /* mark it so will not be freed
+						by DeleteMidQEntry */
+	if (long_op == -1)
+	else if (long_op == 2) /* writes past end of file can take loong time */
+	else if (long_op == 1)
+	else
+		timeout = 15 * HZ;
+	/* wait for 15 seconds or until woken up due to response arriving or
+	   due to last connection to this server being unmounted */
+			&bytes_returned, 0);
+	rc = wait_for_free_request(ses, 3);",133672efbc1085f9af990bdc145e1822ea93bcf3,CVE-2007-5904,133672efbc1085f9af990bdc145e1822ea93bcf3,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,88,COMPLETED,"VAR (VAR == VAR) { VAR (VAR != VAR) /* * * VAR VAR VAR VAR. VAR VAR VAR (VAR VAR VAR VAR) * VAR VAR VAR VAR. * * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR VAR (VAR) VAR VAR VAR VAR VAR VAR * */ VAR VAR(VAR VAR VAR VAR, VAR VAR *VAR, VAR VAR *VAR, VAR VAR) { VAR VAR; VAR VAR VAR[1]; VAR VAR; VAR[0].VAR = (VAR *)VAR; VAR[0].VAR = VAR->VAR + 4; VAR |= VAR; VAR = VAR(VAR, VAR, VAR, 1, &VAR, VAR);  VAR(1, (""VAR VAR %VAR VAR %VAR"", VAR, VAR));  VAR VAR; } VAR VAR VAR) VAR VAR; VAR = VAR & VAR; VAR (VAR == VAR) VAR = 15 * VAR; VAR VAR (VAR == VAR)  VAR VAR (VAR == VAR) VAR VAR (VAR == VAR) VAR VAR; VAR VAR (VAR == VAR) VAR = 0x7FFFFFFF;  VAR { VAR(1, (""VAR VAR VAR %VAR"", VAR)); VAR = -VAR; VAR VAR; } VAR = VAR(VAR->VAR, VAR & VAR); VAR ((VAR & VAR) == 0) VAR->VAR = VAR; /* VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR */ VAR (VAR == VAR) VAR = 15 * VAR; /* VAR VAR 15 VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR */ VAR VAR (VAR == VAR) VAR VAR (VAR == VAR)  VAR VAR (VAR == VAR) VAR VAR (VAR == VAR) VAR = 0x7FFFFFFF;  VAR { VAR(1, (""VAR VAR VAR %VAR"", VAR)); VAR = -VAR; VAR VAR; } &VAR, VAR); VAR = VAR(VAR, VAR); VAR (VAR == -1) { VAR (VAR < 3) VAR VAR VAR, VAR VAR VAR) VAR (VAR == -1) VAR VAR; VAR VAR (VAR == 2)  VAR VAR (VAR == 1) VAR VAR = 15 * VAR; VAR = VAR(VAR->VAR, VAR); VAR->VAR = VAR; /* VAR VAR VAR VAR VAR VAR VAR VAR VAR */ VAR (VAR == -1) VAR VAR (VAR == 2)  VAR VAR (VAR == 1) VAR VAR = 15 * VAR; /* VAR VAR 15 VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR */ &VAR, 0); VAR = VAR(VAR, 3);",12,10
+linux_206a81c18401c0cde6e579164f752c4b147324ce,lilzo/lzo1x_decompress_safe.c,"#define HAVE_IP(t, x)					\
+	(((size_t)(ip_end - ip) >= (size_t)(t + x)) &&	\
+	 (((t + x) >= t) && ((t + x) >= x)))
+
+#define HAVE_OP(t, x)					\
+	(((size_t)(op_end - op) >= (size_t)(t + x)) &&	\
+	 (((t + x) >= t) && ((t + x) >= x)))
+
+#define NEED_IP(t, x)					\
+	do {						\
+		if (!HAVE_IP(t, x))			\
+			goto input_overrun;		\
+	} while (0)
+
+#define NEED_OP(t, x)					\
+	do {						\
+		if (!HAVE_OP(t, x))			\
+			goto output_overrun;		\
+	} while (0)
+
+#define TEST_LB(m_pos)					\
+	do {						\
+		if ((m_pos) < out)			\
+			goto lookbehind_overrun;	\
+	} while (0)
+						NEED_IP(1, 0);
+				if (likely(HAVE_IP(t, 15) && HAVE_OP(t, 15))) {
+					NEED_OP(t, 0);
+					NEED_IP(t, 3);
+				NEED_OP(2, 0);
+					NEED_IP(1, 0);
+				NEED_IP(2, 0);
+					NEED_IP(1, 0);
+				NEED_IP(2, 0);
+			if (likely(HAVE_OP(t, 15))) {
+				if (HAVE_IP(6, 0)) {
+				NEED_OP(t, 0);
+			NEED_OP(t, 0);
+		if (likely(HAVE_IP(6, 0) && HAVE_OP(4, 0))) {
+			NEED_IP(t, 3);
+			NEED_OP(t, 0);","#define HAVE_IP(x)      ((size_t)(ip_end - ip) >= (size_t)(x))
+#define HAVE_OP(x)      ((size_t)(op_end - op) >= (size_t)(x))
+#define NEED_IP(x)      if (!HAVE_IP(x)) goto input_overrun
+#define NEED_OP(x)      if (!HAVE_OP(x)) goto output_overrun
+#define TEST_LB(m_pos)  if ((m_pos) < out) goto lookbehind_overrun
+						NEED_IP(1);
+				if (likely(HAVE_IP(t + 15) && HAVE_OP(t + 15))) {
+					NEED_OP(t);
+					NEED_IP(t + 3);
+				NEED_OP(2);
+					NEED_IP(1);
+				NEED_IP(2);
+					NEED_IP(1);
+				NEED_IP(2);
+			if (likely(HAVE_OP(t + 15))) {
+				if (HAVE_IP(6)) {
+				NEED_OP(t);
+			NEED_OP(t);
+		if (likely(HAVE_IP(6) && HAVE_OP(4))) {
+			NEED_IP(t + 3);
+			NEED_OP(t);",206a81c18401c0cde6e579164f752c4b147324ce,CVE-2014-4608,206a81c18401c0cde6e579164f752c4b147324ce,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED," (((VAR)(VAR - VAR) >= (VAR)(VAR + VAR)) && \ (((VAR + VAR) >= VAR) && ((VAR + VAR) >= VAR)))  (((VAR)(VAR - VAR) >= (VAR)(VAR + VAR)) && \ (((VAR + VAR) >= VAR) && ((VAR + VAR) >= VAR)))  VAR { \ VAR (!VAR(VAR, VAR)) \ VAR VAR; \ } VAR (0)  VAR { \ VAR (!VAR(VAR, VAR)) \ VAR VAR; \ } VAR (0)  VAR { \ VAR ((VAR) < VAR) \ VAR VAR; \ } VAR (0) VAR(1, 0); VAR (VAR(VAR(VAR, 15) && VAR(VAR, 15))) { VAR(VAR, 0); VAR(VAR, 3); VAR(2, 0); VAR(1, 0); VAR(2, 0); VAR(1, 0); VAR(2, 0); VAR (VAR(VAR(VAR, 15))) { VAR (VAR(6, 0)) { VAR(VAR, 0); VAR(VAR, 0); VAR (VAR(VAR(6, 0) && VAR(4, 0))) { VAR(VAR, 3); VAR(VAR, 0);      VAR(1); VAR (VAR(VAR(VAR + 15) && VAR(VAR + 15))) { VAR(VAR); VAR(VAR + 3); VAR(2); VAR(1); VAR(2); VAR(1); VAR(2); VAR (VAR(VAR(VAR + 15))) { VAR (VAR(6)) { VAR(VAR); VAR(VAR); VAR (VAR(VAR(6) && VAR(4))) { VAR(VAR + 3); VAR(VAR);",12,10
+linux_2638fd0f92d4397884fd991d8f4925cb3f081901,net/netfilter/xt_TCPMSS.c,"	if (len < tcp_hdrlen || tcp_hdrlen < sizeof(struct tcphdr))
+	/* tcph->doff has 4 bits, do not wrap it to 0 */
+	if (tcp_hdrlen >= 15 * 4)
+		return 0;
+",	if (len < tcp_hdrlen),2638fd0f92d4397884fd991d8f4925cb3f081901,CVE-2017-18017,2638fd0f92d4397884fd991d8f4925cb3f081901,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED,VAR (VAR < VAR || VAR < VAR(VAR VAR))  VAR (VAR >= 15 * 4) VAR 0; VAR (VAR < VAR),12,10
+linux_4d00135a680727f6c3be78f8befaac009030e4df,sound/oss/opl3.c,"
+	if (voice < 0 || voice >= devc->nr_voice)
+		return;
+
+	struct channel_info *info;
+
+	if (voice < 0 || voice >= devc->nr_voice)
+		return;
+
+	if (chn < 0 || chn > 15)
+		return;
+
+	info = &synth_devs[dev]->chn_info[chn];","	struct channel_info *info =
+	&synth_devs[dev]->chn_info[chn];",4d00135a680727f6c3be78f8befaac009030e4df,CVE-2011-1477,4d00135a680727f6c3be78f8befaac009030e4df,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED,VAR (VAR < 0 || VAR >= VAR->VAR) VAR; VAR VAR *VAR; VAR (VAR < 0 || VAR >= VAR->VAR) VAR; VAR (VAR < 0 || VAR > 15) VAR; VAR = &VAR[VAR]->VAR[VAR]; VAR VAR *VAR = &VAR[VAR]->VAR[VAR];,12,10
+linux_6e5714eaf77d79ae1c8b47e3e040ff5411b717ec,net/core/secure_seq.c,"#include <linux/kernel.h>
+#include <linux/init.h>
+#include <linux/cryptohash.h>
+#include <linux/module.h>
+#include <linux/cache.h>
+#include <linux/random.h>
+#include <linux/hrtimer.h>
+#include <linux/ktime.h>
+#include <linux/string.h>
+
+#include <net/secure_seq.h>
+
+static u32 net_secret[MD5_MESSAGE_BYTES / 4] ____cacheline_aligned;
+
+static int __init net_secret_init(void)
+{
+	get_random_bytes(net_secret, sizeof(net_secret));
+	return 0;
+}
+late_initcall(net_secret_init);
+
+static u32 seq_scale(u32 seq)
+{
+	/*
+	 *	As close as possible to RFC 793, which
+	 *	suggests using a 250 kHz clock.
+	 *	Further reading shows this assumes 2 Mb/s networks.
+	 *	For 10 Mb/s Ethernet, a 1 MHz clock is appropriate.
+	 *	For 10 Gb/s Ethernet, a 1 GHz clock should be ok, but
+	 *	we also need to limit the resolution so that the u32 seq
+	 *	overlaps less than one time per MSL (2 minutes).
+	 *	Choosing a clock of 64 ns period is OK. (period of 274 s)
+	 */
+	return seq + (ktime_to_ns(ktime_get_real()) >> 6);
+}
+
+#if defined(CONFIG_IPV6) || defined(CONFIG_IPV6_MODULE)
+__u32 secure_tcpv6_sequence_number(__be32 *saddr, __be32 *daddr,
+				   __be16 sport, __be16 dport)
+{
+	u32 secret[MD5_MESSAGE_BYTES / 4];
+	u32 hash[MD5_DIGEST_WORDS];
+	u32 i;
+
+	memcpy(hash, saddr, 16);
+	for (i = 0; i < 4; i++)
+		secret[i] = net_secret[i] + daddr[i];
+	secret[4] = net_secret[4] +
+		(((__force u16)sport << 16) + (__force u16)dport);
+	for (i = 5; i < MD5_MESSAGE_BYTES / 4; i++)
+		secret[i] = net_secret[i];
+
+	md5_transform(hash, secret);
+
+	return seq_scale(hash[0]);
+}
+EXPORT_SYMBOL(secure_tcpv6_sequence_number);
+
+u32 secure_ipv6_port_ephemeral(const __be32 *saddr, const __be32 *daddr,
+			       __be16 dport)
+{
+	u32 secret[MD5_MESSAGE_BYTES / 4];
+	u32 hash[MD5_DIGEST_WORDS];
+	u32 i;
+
+	memcpy(hash, saddr, 16);
+	for (i = 0; i < 4; i++)
+		secret[i] = net_secret[i] + (__force u32) daddr[i];
+	secret[4] = net_secret[4] + (__force u32)dport;
+	for (i = 5; i < MD5_MESSAGE_BYTES / 4; i++)
+		secret[i] = net_secret[i];
+
+	md5_transform(hash, secret);
+
+	return hash[0];
+}
+#endif
+
+#ifdef CONFIG_INET
+__u32 secure_ip_id(__be32 daddr)
+{
+	u32 hash[MD5_DIGEST_WORDS];
+
+	hash[0] = (__force __u32) daddr;
+	hash[1] = net_secret[13];
+	hash[2] = net_secret[14];
+	hash[3] = net_secret[15];
+
+	md5_transform(hash, net_secret);
+
+	return hash[0];
+}
+
+__u32 secure_ipv6_id(const __be32 daddr[4])
+{
+	__u32 hash[4];
+
+	memcpy(hash, daddr, 16);
+	md5_transform(hash, net_secret);
+
+	return hash[0];
+}
+
+__u32 secure_tcp_sequence_number(__be32 saddr, __be32 daddr,
+				 __be16 sport, __be16 dport)
+{
+	u32 hash[MD5_DIGEST_WORDS];
+
+	hash[0] = (__force u32)saddr;
+	hash[1] = (__force u32)daddr;
+	hash[2] = ((__force u16)sport << 16) + (__force u16)dport;
+	hash[3] = net_secret[15];
+
+	md5_transform(hash, net_secret);
+
+	return seq_scale(hash[0]);
+}
+
+u32 secure_ipv4_port_ephemeral(__be32 saddr, __be32 daddr, __be16 dport)
+{
+	u32 hash[MD5_DIGEST_WORDS];
+
+	hash[0] = (__force u32)saddr;
+	hash[1] = (__force u32)daddr;
+	hash[2] = (__force u32)dport ^ net_secret[14];
+	hash[3] = net_secret[15];
+
+	md5_transform(hash, net_secret);
+
+	return hash[0];
+}
+EXPORT_SYMBOL_GPL(secure_ipv4_port_ephemeral);
+#endif
+
+#if defined(CONFIG_IP_DCCP) || defined(CONFIG_IP_DCCP_MODULE)
+u64 secure_dccp_sequence_number(__be32 saddr, __be32 daddr,
+				__be16 sport, __be16 dport)
+{
+	u32 hash[MD5_DIGEST_WORDS];
+	u64 seq;
+
+	hash[0] = (__force u32)saddr;
+	hash[1] = (__force u32)daddr;
+	hash[2] = ((__force u16)sport << 16) + (__force u16)dport;
+	hash[3] = net_secret[15];
+
+	md5_transform(hash, net_secret);
+
+	seq = hash[0] | (((u64)hash[1]) << 32);
+	seq += ktime_to_ns(ktime_get_real());
+	seq &= (1ull << 48) - 1;
+
+	return seq;
+}
+EXPORT_SYMBOL(secure_dccp_sequence_number);
+
+#if defined(CONFIG_IPV6) || defined(CONFIG_IPV6_MODULE)
+u64 secure_dccpv6_sequence_number(__be32 *saddr, __be32 *daddr,
+				  __be16 sport, __be16 dport)
+{
+	u32 secret[MD5_MESSAGE_BYTES / 4];
+	u32 hash[MD5_DIGEST_WORDS];
+	u64 seq;
+	u32 i;
+
+	memcpy(hash, saddr, 16);
+	for (i = 0; i < 4; i++)
+		secret[i] = net_secret[i] + daddr[i];
+	secret[4] = net_secret[4] +
+		(((__force u16)sport << 16) + (__force u16)dport);
+	for (i = 5; i < MD5_MESSAGE_BYTES / 4; i++)
+		secret[i] = net_secret[i];
+
+	md5_transform(hash, secret);
+
+	seq = hash[0] | (((u64)hash[1]) << 32);
+	seq += ktime_to_ns(ktime_get_real());
+	seq &= (1ull << 48) - 1;
+
+	return seq;
+}
+EXPORT_SYMBOL(secure_dccpv6_sequence_number);
+#endif
+#endif",,6e5714eaf77d79ae1c8b47e3e040ff5411b717ec,CVE-2011-3188,6e5714eaf77d79ae1c8b47e3e040ff5411b717ec,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED,"          VAR VAR VAR[VAR / 4] VAR; VAR VAR VAR VAR(VAR) { VAR(VAR, VAR(VAR)); VAR 0; } VAR(VAR); VAR VAR VAR(VAR VAR) { /* * VAR VAR VAR VAR VAR VAR 793, VAR * VAR VAR VAR 250 VAR VAR. * VAR VAR VAR VAR VAR 2 VAR/VAR VAR. * VAR 10 VAR/VAR VAR, VAR 1 VAR VAR VAR VAR. * VAR 10 VAR/VAR VAR, VAR 1 VAR VAR VAR VAR VAR, VAR * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR VAR (2 VAR). * VAR VAR VAR VAR 64 VAR VAR VAR VAR. (VAR VAR 274 VAR) */ VAR VAR + (VAR(VAR()) >> 6); }  VAR VAR(VAR *VAR, VAR *VAR, VAR VAR, VAR VAR) { VAR VAR[VAR / 4]; VAR VAR[VAR]; VAR VAR; VAR(VAR, VAR, 16); VAR (VAR = 0; VAR < 4; VAR++) VAR[VAR] = VAR[VAR] + VAR[VAR]; VAR[4] = VAR[4] + (((VAR VAR)VAR << 16) + (VAR VAR)VAR); VAR (VAR = 5; VAR < VAR / 4; VAR++) VAR[VAR] = VAR[VAR]; VAR(VAR, VAR); VAR VAR(VAR[0]); } VAR(VAR); VAR VAR(VAR VAR *VAR, VAR VAR *VAR, VAR VAR) { VAR VAR[VAR / 4]; VAR VAR[VAR]; VAR VAR; VAR(VAR, VAR, 16); VAR (VAR = 0; VAR < 4; VAR++) VAR[VAR] = VAR[VAR] + (VAR VAR) VAR[VAR]; VAR[4] = VAR[4] + (VAR VAR)VAR; VAR (VAR = 5; VAR < VAR / 4; VAR++) VAR[VAR] = VAR[VAR]; VAR(VAR, VAR); VAR VAR[0]; }   VAR VAR(VAR VAR) { VAR VAR[VAR]; VAR[0] = (VAR VAR) VAR; VAR[1] = VAR[13]; VAR[2] = VAR[14]; VAR[3] = VAR[15]; VAR(VAR, VAR); VAR VAR[0]; } VAR VAR(VAR VAR VAR[4]) { VAR VAR[4]; VAR(VAR, VAR, 16); VAR(VAR, VAR); VAR VAR[0]; } VAR VAR(VAR VAR, VAR VAR, VAR VAR, VAR VAR) { VAR VAR[VAR]; VAR[0] = (VAR VAR)VAR; VAR[1] = (VAR VAR)VAR; VAR[2] = ((VAR VAR)VAR << 16) + (VAR VAR)VAR; VAR[3] = VAR[15]; VAR(VAR, VAR); VAR VAR(VAR[0]); } VAR VAR(VAR VAR, VAR VAR, VAR VAR) { VAR VAR[VAR]; VAR[0] = (VAR VAR)VAR; VAR[1] = (VAR VAR)VAR; VAR[2] = (VAR VAR)VAR ^ VAR[14]; VAR[3] = VAR[15]; VAR(VAR, VAR); VAR VAR[0]; } VAR(VAR);   VAR VAR(VAR VAR, VAR VAR, VAR VAR, VAR VAR) { VAR VAR[VAR]; VAR VAR; VAR[0] = (VAR VAR)VAR; VAR[1] = (VAR VAR)VAR; VAR[2] = ((VAR VAR)VAR << 16) + (VAR VAR)VAR; VAR[3] = VAR[15]; VAR(VAR, VAR); VAR = VAR[0] | (((VAR)VAR[1]) << 32); VAR += VAR(VAR()); VAR &= (1ull << 48) - 1; VAR VAR; } VAR(VAR);  VAR VAR(VAR *VAR, VAR *VAR, VAR VAR, VAR VAR) { VAR VAR[VAR / 4]; VAR VAR[VAR]; VAR VAR; VAR VAR; VAR(VAR, VAR, 16); VAR (VAR = 0; VAR < 4; VAR++) VAR[VAR] = VAR[VAR] + VAR[VAR]; VAR[4] = VAR[4] + (((VAR VAR)VAR << 16) + (VAR VAR)VAR); VAR (VAR = 5; VAR < VAR / 4; VAR++) VAR[VAR] = VAR[VAR]; VAR(VAR, VAR); VAR = VAR[0] | (((VAR)VAR[1]) << 32); VAR += VAR(VAR()); VAR &= (1ull << 48) - 1; VAR VAR; } VAR(VAR);   ",1,10
+linux_711f8c3fb3db61897080468586b970c87c61d9e4,net/bluetooth/l2cap_core.c,"	/* BLUETOOTH CORE SPECIFICATION Version 5.3 | Vol 3, Part A
+	 * page 1059:
+	 *
+	 * Valid range: 0x0001-0x00ff
+	 *
+	 * Table 4.15: L2CAP_LE_CREDIT_BASED_CONNECTION_REQ SPSM ranges
+	 */
+	if (!psm || __le16_to_cpu(psm) > L2CAP_PSM_LE_DYN_END) {
+		result = L2CAP_CR_LE_BAD_PSM;
+		chan = NULL;
+		goto response;
+	}
+
+	/* BLUETOOTH CORE SPECIFICATION Version 5.3 | Vol 3, Part A
+	 * page 1059:
+	 *
+	 * Valid range: 0x0001-0x00ff
+	 *
+	 * Table 4.15: L2CAP_LE_CREDIT_BASED_CONNECTION_REQ SPSM ranges
+	 */
+	if (!psm || __le16_to_cpu(psm) > L2CAP_PSM_LE_DYN_END) {
+		result = L2CAP_CR_LE_BAD_PSM;
+		goto response;
+	}
+",,711f8c3fb3db61897080468586b970c87c61d9e4,CVE-2022-42896,711f8c3fb3db61897080468586b970c87c61d9e4,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED,"/* VAR VAR VAR VAR 5.3 | VAR 3, VAR VAR * VAR 1059: * * VAR VAR: 0x0001-0x00ff * * VAR 4.15: VAR VAR VAR */ VAR (!VAR || VAR(VAR) > VAR) { VAR = VAR; VAR = VAR; VAR VAR; } /* VAR VAR VAR VAR 5.3 | VAR 3, VAR VAR * VAR 1059: * * VAR VAR: 0x0001-0x00ff * * VAR 4.15: VAR VAR VAR */ VAR (!VAR || VAR(VAR) > VAR) { VAR = VAR; VAR VAR; } ",12,10
+linux_a27e13d370415add3487949c60810e36069a23a6,net/econet/af_econet.c,"#include <linux/vmalloc.h>
+	struct iovec iov[2];
+	char *userbuf;
+		if (len + 15 > dev->mtu) {
+			mutex_unlock(&econet_mutex);
+			return -EMSGSIZE;
+		}
+
+	if (len > 32768) {
+		err = -E2BIG;
+		goto error;
+	}
+
+
+	userbuf = vmalloc(len);
+	if (userbuf == NULL) {
+		err = -ENOMEM;
+		goto error;
+	iov[1].iov_base = userbuf;
+	iov[1].iov_len = len;
+	err = memcpy_fromiovec(userbuf, msg->msg_iov, len);
+	if (err)
+		goto error_free_buf;
+
+				       &err)) == NULL)
+		goto error_free_buf;
+	udpmsg.msg_iovlen = 2;
+
+error_free_buf:
+	vfree(userbuf);
+	error:","	struct iovec iov[msg->msg_iovlen+1];
+	int i;
+	if (len + 15 > dev->mtu) {
+		mutex_unlock(&econet_mutex);
+		return -EMSGSIZE;
+	}
+
+	/*
+	 * XXX: that is b0rken.  We can't mix userland and kernel pointers
+	 * in iovec, since on a lot of platforms copy_from_user() will
+	 * *not* work with the kernel and userland ones at the same time,
+	 * regardless of what we do with set_fs().  And we are talking about
+	 * econet-over-ethernet here, so ""it's only ARM anyway"" doesn't
+	 * apply.  Any suggestions on fixing that code?		-- AV
+	 */
+	for (i = 0; i < msg->msg_iovlen; i++) {
+		void __user *base = msg->msg_iov[i].iov_base;
+		size_t iov_len = msg->msg_iov[i].iov_len;
+		/* Check it now since we switch to KERNEL_DS later. */
+		if (!access_ok(VERIFY_READ, base, iov_len)) {
+			mutex_unlock(&econet_mutex);
+			return -EFAULT;
+		}
+		iov[i+1].iov_base = base;
+		iov[i+1].iov_len = iov_len;
+		size += iov_len;
+				       &err)) == NULL) {
+		mutex_unlock(&econet_mutex);
+		return err;
+	}
+	udpmsg.msg_iovlen = msg->msg_iovlen + 1;",a27e13d370415add3487949c60810e36069a23a6,CVE-2010-3848,a27e13d370415add3487949c60810e36069a23a6,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,152,COMPLETED," VAR VAR VAR[2]; VAR *VAR; VAR (VAR + 15 > VAR->VAR) { VAR(&VAR); VAR -VAR; } VAR (VAR > 32768) { VAR = -VAR; VAR VAR; } VAR = VAR(VAR); VAR (VAR == VAR) { VAR = -VAR; VAR VAR; VAR[1].VAR = VAR; VAR[1].VAR = VAR; VAR = VAR(VAR, VAR->VAR, VAR); VAR (VAR) VAR VAR; &VAR)) == VAR) VAR VAR; VAR.VAR = 2; VAR: VAR(VAR); VAR: VAR VAR VAR[VAR->VAR+1]; VAR VAR; VAR (VAR + 15 > VAR->VAR) { VAR(&VAR); VAR -VAR; } /* * VAR: VAR VAR VAR. VAR VAR'VAR VAR VAR VAR VAR VAR * VAR VAR, VAR VAR VAR VAR VAR VAR VAR() VAR * *VAR* VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR, * VAR VAR VAR VAR VAR VAR VAR(). VAR VAR VAR VAR VAR * VAR-VAR-VAR VAR, VAR ""VAR'VAR VAR VAR VAR"" VAR'VAR * VAR. VAR VAR VAR VAR VAR VAR? -- VAR */ VAR (VAR = 0; VAR < VAR->VAR; VAR++) { VAR VAR *VAR = VAR->VAR[VAR].VAR; VAR VAR = VAR->VAR[VAR].VAR;  VAR (!VAR(VAR, VAR, VAR)) { VAR(&VAR); VAR -VAR; } VAR[VAR+1].VAR = VAR; VAR[VAR+1].VAR = VAR; VAR += VAR; &VAR)) == VAR) { VAR(&VAR); VAR VAR; } VAR.VAR = VAR->VAR + 1;",12,10
+linux_a27e13d370415add3487949c60810e36069a23a6,net/econet/af_econet.c,"#include <linux/vmalloc.h>
+	struct iovec iov[2];
+	char *userbuf;
+		if (len + 15 > dev->mtu) {
+			mutex_unlock(&econet_mutex);
+			return -EMSGSIZE;
+		}
+
+	if (len > 32768) {
+		err = -E2BIG;
+		goto error;
+	}
+
+
+	userbuf = vmalloc(len);
+	if (userbuf == NULL) {
+		err = -ENOMEM;
+		goto error;
+	iov[1].iov_base = userbuf;
+	iov[1].iov_len = len;
+	err = memcpy_fromiovec(userbuf, msg->msg_iov, len);
+	if (err)
+		goto error_free_buf;
+
+				       &err)) == NULL)
+		goto error_free_buf;
+	udpmsg.msg_iovlen = 2;
+
+error_free_buf:
+	vfree(userbuf);
+	error:","	struct iovec iov[msg->msg_iovlen+1];
+	int i;
+	if (len + 15 > dev->mtu) {
+		mutex_unlock(&econet_mutex);
+		return -EMSGSIZE;
+	}
+
+	/*
+	 * XXX: that is b0rken.  We can't mix userland and kernel pointers
+	 * in iovec, since on a lot of platforms copy_from_user() will
+	 * *not* work with the kernel and userland ones at the same time,
+	 * regardless of what we do with set_fs().  And we are talking about
+	 * econet-over-ethernet here, so ""it's only ARM anyway"" doesn't
+	 * apply.  Any suggestions on fixing that code?		-- AV
+	 */
+	for (i = 0; i < msg->msg_iovlen; i++) {
+		void __user *base = msg->msg_iov[i].iov_base;
+		size_t iov_len = msg->msg_iov[i].iov_len;
+		/* Check it now since we switch to KERNEL_DS later. */
+		if (!access_ok(VERIFY_READ, base, iov_len)) {
+			mutex_unlock(&econet_mutex);
+			return -EFAULT;
+		}
+		iov[i+1].iov_base = base;
+		iov[i+1].iov_len = iov_len;
+		size += iov_len;
+				       &err)) == NULL) {
+		mutex_unlock(&econet_mutex);
+		return err;
+	}
+	udpmsg.msg_iovlen = msg->msg_iovlen + 1;",a27e13d370415add3487949c60810e36069a23a6,CVE-2010-3850,a27e13d370415add3487949c60810e36069a23a6,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,80,COMPLETED," VAR VAR VAR[2]; VAR *VAR; VAR (VAR + 15 > VAR->VAR) { VAR(&VAR); VAR -VAR; } VAR (VAR > 32768) { VAR = -VAR; VAR VAR; } VAR = VAR(VAR); VAR (VAR == VAR) { VAR = -VAR; VAR VAR; VAR[1].VAR = VAR; VAR[1].VAR = VAR; VAR = VAR(VAR, VAR->VAR, VAR); VAR (VAR) VAR VAR; &VAR)) == VAR) VAR VAR; VAR.VAR = 2; VAR: VAR(VAR); VAR: VAR VAR VAR[VAR->VAR+1]; VAR VAR; VAR (VAR + 15 > VAR->VAR) { VAR(&VAR); VAR -VAR; } /* * VAR: VAR VAR VAR. VAR VAR'VAR VAR VAR VAR VAR VAR * VAR VAR, VAR VAR VAR VAR VAR VAR VAR() VAR * *VAR* VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR, * VAR VAR VAR VAR VAR VAR VAR(). VAR VAR VAR VAR VAR * VAR-VAR-VAR VAR, VAR ""VAR'VAR VAR VAR VAR"" VAR'VAR * VAR. VAR VAR VAR VAR VAR VAR? -- VAR */ VAR (VAR = 0; VAR < VAR->VAR; VAR++) { VAR VAR *VAR = VAR->VAR[VAR].VAR; VAR VAR = VAR->VAR[VAR].VAR;  VAR (!VAR(VAR, VAR, VAR)) { VAR(&VAR); VAR -VAR; } VAR[VAR+1].VAR = VAR; VAR[VAR+1].VAR = VAR; VAR += VAR; &VAR)) == VAR) { VAR(&VAR); VAR VAR; } VAR.VAR = VAR->VAR + 1;",12,10
+linux_a27e13d370415add3487949c60810e36069a23a6,net/econet/af_econet.c,"#include <linux/vmalloc.h>
+	struct iovec iov[2];
+	char *userbuf;
+		if (len + 15 > dev->mtu) {
+			mutex_unlock(&econet_mutex);
+			return -EMSGSIZE;
+		}
+
+	if (len > 32768) {
+		err = -E2BIG;
+		goto error;
+	}
+
+
+	userbuf = vmalloc(len);
+	if (userbuf == NULL) {
+		err = -ENOMEM;
+		goto error;
+	iov[1].iov_base = userbuf;
+	iov[1].iov_len = len;
+	err = memcpy_fromiovec(userbuf, msg->msg_iov, len);
+	if (err)
+		goto error_free_buf;
+
+				       &err)) == NULL)
+		goto error_free_buf;
+	udpmsg.msg_iovlen = 2;
+
+error_free_buf:
+	vfree(userbuf);
+	error:","	struct iovec iov[msg->msg_iovlen+1];
+	int i;
+	if (len + 15 > dev->mtu) {
+		mutex_unlock(&econet_mutex);
+		return -EMSGSIZE;
+	}
+
+	/*
+	 * XXX: that is b0rken.  We can't mix userland and kernel pointers
+	 * in iovec, since on a lot of platforms copy_from_user() will
+	 * *not* work with the kernel and userland ones at the same time,
+	 * regardless of what we do with set_fs().  And we are talking about
+	 * econet-over-ethernet here, so ""it's only ARM anyway"" doesn't
+	 * apply.  Any suggestions on fixing that code?		-- AV
+	 */
+	for (i = 0; i < msg->msg_iovlen; i++) {
+		void __user *base = msg->msg_iov[i].iov_base;
+		size_t iov_len = msg->msg_iov[i].iov_len;
+		/* Check it now since we switch to KERNEL_DS later. */
+		if (!access_ok(VERIFY_READ, base, iov_len)) {
+			mutex_unlock(&econet_mutex);
+			return -EFAULT;
+		}
+		iov[i+1].iov_base = base;
+		iov[i+1].iov_len = iov_len;
+		size += iov_len;
+				       &err)) == NULL) {
+		mutex_unlock(&econet_mutex);
+		return err;
+	}
+	udpmsg.msg_iovlen = msg->msg_iovlen + 1;",a27e13d370415add3487949c60810e36069a23a6,CVE-2010-3849,a27e13d370415add3487949c60810e36069a23a6,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,88,COMPLETED," VAR VAR VAR[2]; VAR *VAR; VAR (VAR + 15 > VAR->VAR) { VAR(&VAR); VAR -VAR; } VAR (VAR > 32768) { VAR = -VAR; VAR VAR; } VAR = VAR(VAR); VAR (VAR == VAR) { VAR = -VAR; VAR VAR; VAR[1].VAR = VAR; VAR[1].VAR = VAR; VAR = VAR(VAR, VAR->VAR, VAR); VAR (VAR) VAR VAR; &VAR)) == VAR) VAR VAR; VAR.VAR = 2; VAR: VAR(VAR); VAR: VAR VAR VAR[VAR->VAR+1]; VAR VAR; VAR (VAR + 15 > VAR->VAR) { VAR(&VAR); VAR -VAR; } /* * VAR: VAR VAR VAR. VAR VAR'VAR VAR VAR VAR VAR VAR * VAR VAR, VAR VAR VAR VAR VAR VAR VAR() VAR * *VAR* VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR, * VAR VAR VAR VAR VAR VAR VAR(). VAR VAR VAR VAR VAR * VAR-VAR-VAR VAR, VAR ""VAR'VAR VAR VAR VAR"" VAR'VAR * VAR. VAR VAR VAR VAR VAR VAR? -- VAR */ VAR (VAR = 0; VAR < VAR->VAR; VAR++) { VAR VAR *VAR = VAR->VAR[VAR].VAR; VAR VAR = VAR->VAR[VAR].VAR;  VAR (!VAR(VAR, VAR, VAR)) { VAR(&VAR); VAR -VAR; } VAR[VAR+1].VAR = VAR; VAR[VAR+1].VAR = VAR; VAR += VAR; &VAR)) == VAR) { VAR(&VAR); VAR VAR; } VAR.VAR = VAR->VAR + 1;",12,10
+linux_a54988113985ca22e414e132054f234fc8a92604,sound/soc/codecs/wcd9335.c,"	widget_name = kmemdup_nul(w->name, 15, GFP_KERNEL);","	widget_name = kstrndup(w->name, 15, GFP_KERNEL);",a54988113985ca22e414e132054f234fc8a92604,CVE-2019-12454,a54988113985ca22e414e132054f234fc8a92604,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,88,COMPLETED,"VAR = VAR(VAR->VAR, 15, VAR); VAR = VAR(VAR->VAR, 15, VAR);",12,10
+linux_c54def7bd64d7c0b6993336abcffb8444795bf38,drivers/hid/hid-magicmouse.c,"		if (npoints > 15) {
+			hid_warn(hdev, ""invalid size value (%d) for TRACKPAD_REPORT_ID\n"",
+					size);
+			return 0;
+		}
+		if (npoints > 15) {
+			hid_warn(hdev, ""invalid size value (%d) for MOUSE_REPORT_ID\n"",
+					size);
+			return 0;
+		}",,c54def7bd64d7c0b6993336abcffb8444795bf38,CVE-2014-3181,c54def7bd64d7c0b6993336abcffb8444795bf38,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR (VAR > 15) { VAR(VAR, ""VAR VAR VAR (%VAR) VAR VAR\VAR"", VAR); VAR 0; } VAR (VAR > 15) { VAR(VAR, ""VAR VAR VAR (%VAR) VAR VAR\VAR"", VAR); VAR 0; } ",12,10
+linux_eb3c79e64a70fb8f7473e30fa07e89c1ecc2c9bb,arch/x86/kvm/emulate.c,"	/* x86 instructions are limited to 15 bytes. */
+	if (eip + size - ctxt->decode.eip_orig > 15)
+		return X86EMUL_UNHANDLEABLE;
+	c->eip = c->eip_orig = kvm_rip_read(ctxt->vcpu);",	c->eip = kvm_rip_read(ctxt->vcpu);,eb3c79e64a70fb8f7473e30fa07e89c1ecc2c9bb,CVE-2009-4031,eb3c79e64a70fb8f7473e30fa07e89c1ecc2c9bb,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,84,COMPLETED, VAR (VAR + VAR - VAR->VAR.VAR > 15) VAR VAR; VAR->VAR = VAR->VAR = VAR(VAR->VAR); VAR->VAR = VAR(VAR->VAR);,12,10
+moodle_aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,login/index_form.html,"              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" <?php if (!empty($CFG->loginpasswordautocomplete)) {echo 'autocomplete=""off""';} ?> />","              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" />",aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,CVE-2012-0799,aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,https://github.com/moodle/moodle,CPE_GIT_REPOBASED,74,COMPLETED,"<VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" <?VAR VAR (!VAR($VAR->VAR)) {VAR 'VAR=""VAR""';} ?> /> <VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" />",12,10
+moodle_aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,login/index_form.html,"              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" <?php if (!empty($CFG->loginpasswordautocomplete)) {echo 'autocomplete=""off""';} ?> />","              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" />",aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,CVE-2012-0792,aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,https://github.com/moodle/moodle,CPE_GIT_REPOBASED,82,COMPLETED,"<VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" <?VAR VAR (!VAR($VAR->VAR)) {VAR 'VAR=""VAR""';} ?> /> <VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" />",12,10
+moodle_aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,login/index_form.html,"              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" <?php if (!empty($CFG->loginpasswordautocomplete)) {echo 'autocomplete=""off""';} ?> />","              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" />",aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,CVE-2012-0801,aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,https://github.com/moodle/moodle,CPE_GIT_REPOBASED,74,COMPLETED,"<VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" <?VAR VAR (!VAR($VAR->VAR)) {VAR 'VAR=""VAR""';} ?> /> <VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" />",12,10
+moodle_aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,login/index_form.html,"              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" <?php if (!empty($CFG->loginpasswordautocomplete)) {echo 'autocomplete=""off""';} ?> />","              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" />",aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,CVE-2012-0794,aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,https://github.com/moodle/moodle,CPE_GIT_REPOBASED,74,COMPLETED,"<VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" <?VAR VAR (!VAR($VAR->VAR)) {VAR 'VAR=""VAR""';} ?> /> <VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" />",12,10
+moodle_aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,login/index_form.html,"              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" <?php if (!empty($CFG->loginpasswordautocomplete)) {echo 'autocomplete=""off""';} ?> />","              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" />",aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,CVE-2012-0793,aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,https://github.com/moodle/moodle,CPE_GIT_REPOBASED,74,COMPLETED,"<VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" <?VAR VAR (!VAR($VAR->VAR)) {VAR 'VAR=""VAR""';} ?> /> <VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" />",12,10
+moodle_aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,login/index_form.html,"              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" <?php if (!empty($CFG->loginpasswordautocomplete)) {echo 'autocomplete=""off""';} ?> />","              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" />",aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,CVE-2012-0797,aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,https://github.com/moodle/moodle,CPE_GIT_REPOBASED,74,COMPLETED,"<VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" <?VAR VAR (!VAR($VAR->VAR)) {VAR 'VAR=""VAR""';} ?> /> <VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" />",12,10
+moodle_aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,login/index_form.html,"              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" <?php if (!empty($CFG->loginpasswordautocomplete)) {echo 'autocomplete=""off""';} ?> />","              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" />",aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,CVE-2012-0795,aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,https://github.com/moodle/moodle,CPE_GIT_REPOBASED,78,COMPLETED,"<VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" <?VAR VAR (!VAR($VAR->VAR)) {VAR 'VAR=""VAR""';} ?> /> <VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" />",12,10
+moodle_aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,login/index_form.html,"              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" <?php if (!empty($CFG->loginpasswordautocomplete)) {echo 'autocomplete=""off""';} ?> />","              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" />",aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,CVE-2012-0798,aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,https://github.com/moodle/moodle,CPE_GIT_REPOBASED,74,COMPLETED,"<VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" <?VAR VAR (!VAR($VAR->VAR)) {VAR 'VAR=""VAR""';} ?> /> <VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" />",12,10
+moodle_aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,login/index_form.html,"              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" <?php if (!empty($CFG->loginpasswordautocomplete)) {echo 'autocomplete=""off""';} ?> />","              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" />",aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,CVE-2012-0800,aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,https://github.com/moodle/moodle,CPE_GIT_REPOBASED,78,COMPLETED,"<VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" <?VAR VAR (!VAR($VAR->VAR)) {VAR 'VAR=""VAR""';} ?> /> <VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" />",12,10
+moodle_aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,login/index_form.html,"              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" <?php if (!empty($CFG->loginpasswordautocomplete)) {echo 'autocomplete=""off""';} ?> />","              <input type=""password"" name=""password"" id=""password"" size=""15"" value="""" />",aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,CVE-2012-0796,aa30d3e8ce0dd41d3d0f7dae856beb180fed1f83,https://github.com/moodle/moodle,CPE_GIT_REPOBASED,74,COMPLETED,"<VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" <?VAR VAR (!VAR($VAR->VAR)) {VAR 'VAR=""VAR""';} ?> /> <VAR VAR=""VAR"" VAR=""VAR"" VAR=""VAR"" VAR=""15"" VAR="""" />",12,10
+nautobot_64312a4297b5ca49b6cdedf477e41e8e4fd61cce,poetry.lock,"# This file is automatically @generated by Poetry 1.7.1 and should not be changed by hand.
+    {file = ""lxml-5.1.0-cp310-cp310-macosx_10_9_universal2.whl"", hash = ""sha256:704f5572ff473a5f897745abebc6df40f22d4133c1e0a1f124e4f2bd3330ff7e""},
+    {file = ""lxml-5.1.0-cp311-cp311-macosx_10_9_universal2.whl"", hash = ""sha256:14deca1460b4b0f6b01f1ddc9557704e8b365f55c63070463f6c18619ebf964f""},
+    {file = ""lxml-5.1.0-cp312-cp312-macosx_10_9_universal2.whl"", hash = ""sha256:9aa543980ab1fbf1720969af1d99095a548ea42e00361e727c58a40832439114""},
+    {file = ""lxml-5.1.0-cp38-cp38-macosx_10_9_universal2.whl"", hash = ""sha256:ae15347a88cf8af0949a9872b57a320d2605ae069bcdf047677318bc0bba45b1""},
+    {file = ""lxml-5.1.0-cp39-cp39-macosx_10_9_universal2.whl"", hash = ""sha256:52427a7eadc98f9e62cb1368a5079ae826f94f05755d2d567d93ee1bc3ceb354""},
+[[package]]
+name = ""nh3""
+version = ""0.2.15""
+description = ""Python bindings to the ammonia HTML sanitization library.""
+optional = false
+python-versions = ""*""
+files = [
+    {file = ""nh3-0.2.15-cp37-abi3-macosx_10_12_x86_64.macosx_11_0_arm64.macosx_10_12_universal2.whl"", hash = ""sha256:9c0d415f6b7f2338f93035bba5c0d8c1b464e538bfbb1d598acd47d7969284f0""},
+    {file = ""nh3-0.2.15-cp37-abi3-macosx_10_12_x86_64.whl"", hash = ""sha256:6f42f99f0cf6312e470b6c09e04da31f9abaadcd3eb591d7d1a88ea931dca7f3""},
+    {file = ""nh3-0.2.15-cp37-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl"", hash = ""sha256:ac19c0d68cd42ecd7ead91a3a032fdfff23d29302dbb1311e641a130dfefba97""},
+    {file = ""nh3-0.2.15-cp37-abi3-manylinux_2_17_armv7l.manylinux2014_armv7l.whl"", hash = ""sha256:5f0d77272ce6d34db6c87b4f894f037d55183d9518f948bba236fe81e2bb4e28""},
+    {file = ""nh3-0.2.15-cp37-abi3-manylinux_2_17_ppc64.manylinux2014_ppc64.whl"", hash = ""sha256:8d595df02413aa38586c24811237e95937ef18304e108b7e92c890a06793e3bf""},
+    {file = ""nh3-0.2.15-cp37-abi3-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl"", hash = ""sha256:86e447a63ca0b16318deb62498db4f76fc60699ce0a1231262880b38b6cff911""},
+    {file = ""nh3-0.2.15-cp37-abi3-manylinux_2_17_s390x.manylinux2014_s390x.whl"", hash = ""sha256:3277481293b868b2715907310c7be0f1b9d10491d5adf9fce11756a97e97eddf""},
+    {file = ""nh3-0.2.15-cp37-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"", hash = ""sha256:60684857cfa8fdbb74daa867e5cad3f0c9789415aba660614fe16cd66cbb9ec7""},
+    {file = ""nh3-0.2.15-cp37-abi3-manylinux_2_5_i686.manylinux1_i686.whl"", hash = ""sha256:3b803a5875e7234907f7d64777dfde2b93db992376f3d6d7af7f3bc347deb305""},
+    {file = ""nh3-0.2.15-cp37-abi3-musllinux_1_2_aarch64.whl"", hash = ""sha256:0d02d0ff79dfd8208ed25a39c12cbda092388fff7f1662466e27d97ad011b770""},
+    {file = ""nh3-0.2.15-cp37-abi3-musllinux_1_2_armv7l.whl"", hash = ""sha256:f3b53ba93bb7725acab1e030bc2ecd012a817040fd7851b332f86e2f9bb98dc6""},
+    {file = ""nh3-0.2.15-cp37-abi3-musllinux_1_2_i686.whl"", hash = ""sha256:b1e97221cedaf15a54f5243f2c5894bb12ca951ae4ddfd02a9d4ea9df9e1a29d""},
+    {file = ""nh3-0.2.15-cp37-abi3-musllinux_1_2_x86_64.whl"", hash = ""sha256:a5167a6403d19c515217b6bcaaa9be420974a6ac30e0da9e84d4fc67a5d474c5""},
+    {file = ""nh3-0.2.15-cp37-abi3-win32.whl"", hash = ""sha256:427fecbb1031db085eaac9931362adf4a796428ef0163070c484b5a768e71601""},
+    {file = ""nh3-0.2.15-cp37-abi3-win_amd64.whl"", hash = ""sha256:bc2d086fb540d0fa52ce35afaded4ea526b8fc4d3339f783db55c95de40ef02e""},
+    {file = ""nh3-0.2.15.tar.gz"", hash = ""sha256:d1e30ff2d8d58fb2a14961f7aac1bbb1c51f9bdd7da727be35c63826060b0bf3""},
+]
+
+content-hash = ""0fa3435f9f81f688448e42195d13706a98a3cf1e4c0b1a15bfdb8db1d633c591""","# This file is automatically @generated by Poetry 1.5.1 and should not be changed by hand.
+    {file = ""lxml-5.1.0-cp38-cp38-macosx_11_0_arm64.whl"", hash = ""sha256:cfbac9f6149174f76df7e08c2e28b19d74aed90cad60383ad8671d3af7d0502f""},
+    {file = ""psycopg2_binary-2.9.9-cp312-cp312-macosx_11_0_arm64.whl"", hash = ""sha256:b0605eaed3eb239e87df0d5e3c6489daae3f7388d455d0c0b4df899519c6a38d""},
+    {file = ""psycopg2_binary-2.9.9-cp312-cp312-win32.whl"", hash = ""sha256:64cf30263844fa208851ebb13b0732ce674d8ec6a0c86a4e160495d299ba3c93""},
+    {file = ""psycopg2_binary-2.9.9-cp312-cp312-win_amd64.whl"", hash = ""sha256:81ff62668af011f9a48787564ab7eded4e9fb17a4a6a74af5ffa6a457400d2ab""},
+content-hash = ""8877c8b218c8101a76025265d0e7eee41c60a8365a6baa8ea93e311190179d72""",64312a4297b5ca49b6cdedf477e41e8e4fd61cce,CVE-2024-23345,64312a4297b5ca49b6cdedf477e41e8e4fd61cce,https://github.com/nautobot/nautobot,NVD_DIRECT_COMMIT,1337,COMPLETED," {VAR = ""VAR-5.1.0-VAR-VAR-VAR.VAR"", VAR = ""VAR:704f5572ff473a5f897745abebc6df40f22d4133c1e0a1f124e4f2bd3330ff7e""}, {VAR = ""VAR-5.1.0-VAR-VAR-VAR.VAR"", VAR = ""VAR:14deca1460b4b0f6b01f1ddc9557704e8b365f55c63070463f6c18619ebf964f""}, {VAR = ""VAR-5.1.0-VAR-VAR-VAR.VAR"", VAR = ""VAR:9aa543980ab1fbf1720969af1d99095a548ea42e00361e727c58a40832439114""}, {VAR = ""VAR-5.1.0-VAR-VAR-VAR.VAR"", VAR = ""VAR:VAR""}, {VAR = ""VAR-5.1.0-VAR-VAR-VAR.VAR"", VAR = ""VAR:52427a7eadc98f9e62cb1368a5079ae826f94f05755d2d567d93ee1bc3ceb354""}, [[VAR]] VAR = ""VAR"" VAR = ""0.2.15"" VAR = ""VAR VAR VAR VAR VAR VAR VAR VAR."" VAR = VAR VAR-VAR = ""*"" VAR = [ {VAR = ""VAR-0.2.15-VAR-VAR-VAR.VAR.VAR.VAR"", VAR = ""VAR:9c0d415f6b7f2338f93035bba5c0d8c1b464e538bfbb1d598acd47d7969284f0""}, {VAR = ""VAR-0.2.15-VAR-VAR-VAR.VAR"", VAR = ""VAR:6f42f99f0cf6312e470b6c09e04da31f9abaadcd3eb591d7d1a88ea931dca7f3""}, {VAR = ""VAR-0.2.15-VAR-VAR-VAR.VAR.VAR"", VAR = ""VAR:VAR""}, {VAR = ""VAR-0.2.15-VAR-VAR-VAR.VAR.VAR"", VAR = ""VAR:5f0d77272ce6d34db6c87b4f894f037d55183d9518f948bba236fe81e2bb4e28""}, {VAR = ""VAR-0.2.15-VAR-VAR-VAR.VAR.VAR"", VAR = ""VAR:8d595df02413aa38586c24811237e95937ef18304e108b7e92c890a06793e3bf""}, {VAR = ""VAR-0.2.15-VAR-VAR-VAR.VAR.VAR"", VAR = ""VAR:86e447a63ca0b16318deb62498db4f76fc60699ce0a1231262880b38b6cff911""}, {VAR = ""VAR-0.2.15-VAR-VAR-VAR.VAR.VAR"", VAR = ""VAR:3277481293b868b2715907310c7be0f1b9d10491d5adf9fce11756a97e97eddf""}, {VAR = ""VAR-0.2.15-VAR-VAR-VAR.VAR.VAR"", VAR = ""VAR:60684857cfa8fdbb74daa867e5cad3f0c9789415aba660614fe16cd66cbb9ec7""}, {VAR = ""VAR-0.2.15-VAR-VAR-VAR.VAR.VAR"", VAR = ""VAR:3b803a5875e7234907f7d64777dfde2b93db992376f3d6d7af7f3bc347deb305""}, {VAR = ""VAR-0.2.15-VAR-VAR-VAR.VAR"", VAR = ""VAR:0d02d0ff79dfd8208ed25a39c12cbda092388fff7f1662466e27d97ad011b770""}, {VAR = ""VAR-0.2.15-VAR-VAR-VAR.VAR"", VAR = ""VAR:VAR""}, {VAR = ""VAR-0.2.15-VAR-VAR-VAR.VAR"", VAR = ""VAR:VAR""}, {VAR = ""VAR-0.2.15-VAR-VAR-VAR.VAR"", VAR = ""VAR:VAR""}, {VAR = ""VAR-0.2.15-VAR-VAR-VAR.VAR"", VAR = ""VAR:427fecbb1031db085eaac9931362adf4a796428ef0163070c484b5a768e71601""}, {VAR = ""VAR-0.2.15-VAR-VAR-VAR.VAR"", VAR = ""VAR:VAR""}, {VAR = ""VAR-0.2.15.VAR.VAR"", VAR = ""VAR:VAR""}, ] VAR-VAR = ""0fa3435f9f81f688448e42195d13706a98a3cf1e4c0b1a15bfdb8db1d633c591""  {VAR = ""VAR-5.1.0-VAR-VAR-VAR.VAR"", VAR = ""VAR:VAR""}, {VAR = ""VAR-2.9.9-VAR-VAR-VAR.VAR"", VAR = ""VAR:VAR""}, {VAR = ""VAR-2.9.9-VAR-VAR-VAR.VAR"", VAR = ""VAR:64cf30263844fa208851ebb13b0732ce674d8ec6a0c86a4e160495d299ba3c93""}, {VAR = ""VAR-2.9.9-VAR-VAR-VAR.VAR"", VAR = ""VAR:81ff62668af011f9a48787564ab7eded4e9fb17a4a6a74af5ffa6a457400d2ab""}, VAR-VAR = ""8877c8b218c8101a76025265d0e7eee41c60a8365a6baa8ea93e311190179d72""",12,10
+nautobot_64312a4297b5ca49b6cdedf477e41e8e4fd61cce,pyproject.toml,"# HTML sanitization
+nh3 = ""~0.2.15""",,64312a4297b5ca49b6cdedf477e41e8e4fd61cce,CVE-2024-23345,64312a4297b5ca49b6cdedf477e41e8e4fd61cce,https://github.com/nautobot/nautobot,NVD_DIRECT_COMMIT,1337,COMPLETED," VAR = ""~0.2.15"" ",12,10
+urllib3_0aa3e24fcd75f1bb59ab159e9f8adb44055b2271,_travis/install.sh,"#!/bin/bash
+
+set -e
+set -x
+
+if [[ ""$(uname -s)"" == 'Darwin' ]]; then
+    case ""${TOXENV}"" in
+        py27) MACPYTHON=2.7.15 ;;
+        py34) MACPYTHON=3.4.4 ;;
+        py35) MACPYTHON=3.5.4 ;;
+        py36) MACPYTHON=3.6.7 ;;
+        py37) MACPYTHON=3.7.1 ;;
+    esac
+
+    MINOR=$(echo $MACPYTHON | cut -d. -f1,2)
+
+    curl -Lo macpython.pkg https://www.python.org/ftp/python/${MACPYTHON}/python-${MACPYTHON}-macosx10.6.pkg
+    sudo installer -pkg macpython.pkg -target /
+    ls /Library/Frameworks/Python.framework/Versions/$MINOR/bin/
+    PYTHON_EXE=/Library/Frameworks/Python.framework/Versions/$MINOR/bin/python$MINOR
+    # The pip in older MacPython releases doesn't support a new enough TLS
+    curl https://bootstrap.pypa.io/get-pip.py | sudo $PYTHON_EXE
+    $PYTHON_EXE -m pip install virtualenv
+else
+    pip install virtualenv
+fi
+
+pip install tox
+
+if [[ ""${TOXENV}"" == ""gae"" ]]; then
+    pip install gcp-devrel-py-tools
+    gcp-devrel-py-tools download-appengine-sdk ""$(dirname ${GAE_SDK_PATH})""
+fi",,0aa3e24fcd75f1bb59ab159e9f8adb44055b2271,CVE-2019-11236,0aa3e24fcd75f1bb59ab159e9f8adb44055b2271,https://github.com/urllib3/urllib3,NVD_GIT_REPOBASED,98,COMPLETED," VAR -VAR VAR -VAR VAR [[ ""$(VAR -VAR)"" == 'VAR' ]]; VAR VAR ""${VAR}"" VAR VAR) VAR=2.7.15 ;; VAR) VAR=3.4.4 ;; VAR) VAR=3.5.4 ;; VAR) VAR=3.6.7 ;; VAR) VAR=3.7.1 ;; VAR VAR=$(VAR $VAR | VAR -VAR. -VAR,2) VAR -VAR VAR.VAR VAR: VAR VAR -VAR VAR.VAR -VAR / VAR /VAR/VAR/VAR.VAR/VAR/$VAR/VAR/ VAR=/VAR/VAR/VAR.VAR/VAR/$VAR/VAR/VAR$VAR  VAR VAR: $VAR -VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR [[ ""${VAR}"" == ""VAR"" ]]; VAR VAR VAR VAR-VAR-VAR-VAR VAR-VAR-VAR-VAR VAR-VAR-VAR ""$(VAR ${VAR})"" VAR ",12,10
+urllib3_2d4a3fee6de2fa45eb82169361918f759269b4ec,ci/upload_coverage.sh,"#!/bin/bash
+
+set -exo pipefail
+
+# Cribbed from Trio's ci.sh
+function curl-harder() {
+    for BACKOFF in 0 1 2 4 8 15 15 15 15; do
+        sleep $BACKOFF
+        if curl -fL --connect-timeout 5 ""$@""; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+if [ ""$JOB_NAME"" = """" ]; then
+    JOB_NAME=""${TRAVIS_OS_NAME}-${TRAVIS_PYTHON_VERSION:-unknown}""
+fi
+
+curl-harder -o codecov.sh https://codecov.io/bash
+bash codecov.sh -f coverage.xml -n $JOB_NAME",,2d4a3fee6de2fa45eb82169361918f759269b4ec,CVE-2021-33503,2d4a3fee6de2fa45eb82169361918f759269b4ec,https://github.com/urllib3/urllib3,NVD_DIRECT_COMMIT,1337,COMPLETED," VAR -VAR VAR  VAR VAR-VAR() { VAR VAR VAR 0 1 2 4 8 15 15 15 15; VAR VAR $VAR VAR VAR -VAR --VAR-VAR 5 ""$@""; VAR VAR 0 VAR VAR VAR 1 } VAR [ ""$VAR"" = """" ]; VAR VAR=""${VAR}-${VAR:-VAR}"" VAR VAR-VAR -VAR VAR.VAR VAR: VAR VAR.VAR -VAR VAR.VAR -VAR $VAR ",12,10
+urllib3_4e50fbc5db74e32cabd5ccc1ab81fc103adfe0b3,src/urllib3/_collections.py,"    from typing_extensions import Protocol, Self
+    def _prepare_for_method_change(self) -> Self:
+        """"""
+        Remove content-specific header fields before changing the request
+        method to GET or HEAD according to RFC 9110, Section 15.4.
+        """"""
+        content_specific_headers = [
+            ""Content-Encoding"",
+            ""Content-Language"",
+            ""Content-Location"",
+            ""Content-Type"",
+            ""Content-Length"",
+            ""Digest"",
+            ""Last-Modified"",
+        ]
+        for header in content_specific_headers:
+            self.discard(header)
+        return self
+",    from typing_extensions import Protocol,4e50fbc5db74e32cabd5ccc1ab81fc103adfe0b3,CVE-2023-45803,4e50fbc5db74e32cabd5ccc1ab81fc103adfe0b3,https://github.com/urllib3/urllib3,GHSD_DIRECT_COMMIT,1337,COMPLETED,"VAR VAR VAR VAR, VAR VAR VAR(VAR) -> VAR: """""" VAR VAR-VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR 9110, VAR 15.4. """""" VAR = [ ""VAR-VAR"", ""VAR-VAR"", ""VAR-VAR"", ""VAR-VAR"", ""VAR-VAR"", ""VAR"", ""VAR-VAR"", ] VAR VAR VAR VAR: VAR.VAR(VAR) VAR VAR VAR VAR VAR VAR",12,10
+urllib3_9b76785331243689a9d52cef3db05ef7462cb02d,_travis/install.sh,"#!/bin/bash
+
+set -exo pipefail
+
+
+install_mac_python() {
+    local FULL=$1
+    local MINOR=$(echo $FULL | cut -d. -f1,2)
+    local PYTHON_EXE=/Library/Frameworks/Python.framework/Versions/${MINOR}/bin/python${MINOR}
+
+    # Already installed.
+    if [[ -f ""${PYTHON_EXE}"" ]]; then
+        return 0;
+    fi
+
+    curl -Lo macpython.pkg https://www.python.org/ftp/python/${FULL}/python-${FULL}-macosx10.6.pkg
+    sudo installer -pkg macpython.pkg -target /
+
+    # The pip in older MacPython releases doesn't support a new enough TLS
+    curl https://bootstrap.pypa.io/get-pip.py | sudo $PYTHON_EXE
+    $PYTHON_EXE -m pip install virtualenv
+}
+
+
+if [[ ""$(uname -s)"" == 'Darwin' ]]; then
+    # Mac OS setup.
+    case ""${NOX_SESSION}"" in
+        test-2.7) MACPYTHON=2.7.15 ;;
+        test-3.4) MACPYTHON=3.4.4 ;;
+        test-3.5) MACPYTHON=3.5.4 ;;
+        test-3.6) MACPYTHON=3.6.7 ;;
+        test-3.7) MACPYTHON=3.7.1 ;;
+    esac
+
+    # Install additional versions as needed.
+    install_mac_python $MACPYTHON
+
+    # Always install 3.6 for Nox
+    install_mac_python ""3.6.7""
+
+    # Enable TLS 1.3 on macOS
+    sudo defaults write /Library/Preferences/com.apple.networkd tcp_connect_enable_tls13 1
+
+    # Install Nox
+    python3.6 -m pip install nox
+
+else
+    # Linux Setup
+    # Even when testing on Python 2, we need Python 3 for Nox. This detects if
+    # we're in one of the Travis Python 2 sessions and sets up the Python 3 install
+    # for Nox.
+    if ! python3 -m pip --version; then
+        curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+        sudo python3 get-pip.py
+        sudo python3 -m pip install nox
+    else
+        # We're not in ""dual Python"" mode, so we can just install Nox normally.
+        python3 -m pip install nox
+    fi
+fi
+
+if [[ ""${NOX_SESSION}"" == ""app_engine"" ]]; then
+    python -m pip install gcp-devrel-py-tools
+    gcp-devrel-py-tools download-appengine-sdk ""$(dirname ${GAE_SDK_PATH})""
+fi",,9b76785331243689a9d52cef3db05ef7462cb02d,CVE-2019-11236,9b76785331243689a9d52cef3db05ef7462cb02d,https://github.com/urllib3/urllib3,NVD_GIT_REPOBASED,70,COMPLETED," VAR -VAR VAR VAR() { VAR VAR=$1 VAR VAR=$(VAR $VAR | VAR -VAR. -VAR,2) VAR VAR=/VAR/VAR/VAR.VAR/VAR/${VAR}/VAR/VAR${VAR}  VAR [[ -VAR ""${VAR}"" ]]; VAR VAR 0; VAR VAR -VAR VAR.VAR VAR: VAR VAR -VAR VAR.VAR -VAR /  VAR VAR: $VAR -VAR VAR VAR VAR } VAR [[ ""$(VAR -VAR)"" == 'VAR' ]]; VAR  VAR ""${VAR}"" VAR VAR-2.7) VAR=2.7.15 ;; VAR-3.4) VAR=3.4.4 ;; VAR-3.5) VAR=3.5.4 ;; VAR-3.6) VAR=3.6.7 ;; VAR-3.7) VAR=3.7.1 ;; VAR  VAR $VAR  VAR ""3.6.7""  VAR VAR VAR /VAR/VAR/VAR.VAR.VAR VAR 1  VAR.6 -VAR VAR VAR VAR VAR     VAR ! VAR -VAR VAR --VAR; VAR VAR VAR: VAR VAR VAR-VAR.VAR VAR VAR -VAR VAR VAR VAR VAR  VAR -VAR VAR VAR VAR VAR VAR VAR [[ ""${VAR}"" == ""VAR"" ]]; VAR VAR -VAR VAR VAR VAR-VAR-VAR-VAR VAR-VAR-VAR-VAR VAR-VAR-VAR ""$(VAR ${VAR})"" VAR ",12,10
+urllib3_a74c9cfbaed9f811e7563cfc3dce894928e0221a,_travis/install.sh,"#!/bin/bash
+
+set -exo pipefail
+
+
+install_mac_python() {
+    local FULL=$1
+    local MINOR=$(echo $FULL | cut -d. -f1,2)
+    local PYTHON_EXE=/Library/Frameworks/Python.framework/Versions/${MINOR}/bin/python${MINOR}
+
+    # Already installed.
+    if [[ -f ""${PYTHON_EXE}"" ]]; then
+        return 0;
+    fi
+
+    curl -Lo macpython.pkg https://www.python.org/ftp/python/${FULL}/python-${FULL}-macosx10.6.pkg
+    sudo installer -pkg macpython.pkg -target /
+
+    # The pip in older MacPython releases doesn't support a new enough TLS
+    curl https://bootstrap.pypa.io/get-pip.py | sudo $PYTHON_EXE
+    $PYTHON_EXE -m pip install virtualenv
+}
+
+
+if [[ ""$(uname -s)"" == 'Darwin' ]]; then
+    # Mac OS setup.
+    case ""${NOX_SESSION}"" in
+        test-2.7) MACPYTHON=2.7.15 ;;
+        test-3.4) MACPYTHON=3.4.4 ;;
+        test-3.5) MACPYTHON=3.5.4 ;;
+        test-3.6) MACPYTHON=3.6.7 ;;
+        test-3.7) MACPYTHON=3.7.1 ;;
+    esac
+
+    # Install additional versions as needed.
+    install_mac_python $MACPYTHON
+
+    # Always install 3.6 for Nox
+    install_mac_python ""3.6.7""
+
+    # Enable TLS 1.3 on macOS
+    sudo defaults write /Library/Preferences/com.apple.networkd tcp_connect_enable_tls13 1
+
+    # Install Nox
+    python3.6 -m pip install nox
+
+else
+    # Linux Setup
+    # Even when testing on Python 2, we need Python 3 for Nox. This detects if
+    # we're in one of the Travis Python 2 sessions and sets up the Python 3 install
+    # for Nox.
+    if ! python3 -m pip --version; then
+        curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+        sudo python3 get-pip.py
+        sudo python3 -m pip install nox
+    else
+        # We're not in ""dual Python"" mode, so we can just install Nox normally.
+        python3 -m pip install nox
+    fi
+fi
+
+if [[ ""${NOX_SESSION}"" == ""app_engine"" ]]; then
+    python -m pip install gcp-devrel-py-tools
+    gcp-devrel-py-tools download-appengine-sdk ""$(dirname ${GAE_SDK_PATH})""
+fi",,a74c9cfbaed9f811e7563cfc3dce894928e0221a,CVE-2020-7212,a74c9cfbaed9f811e7563cfc3dce894928e0221a,https://github.com/urllib3/urllib3,NVD_DIRECT_COMMIT,1337,COMPLETED," VAR -VAR VAR VAR() { VAR VAR=$1 VAR VAR=$(VAR $VAR | VAR -VAR. -VAR,2) VAR VAR=/VAR/VAR/VAR.VAR/VAR/${VAR}/VAR/VAR${VAR}  VAR [[ -VAR ""${VAR}"" ]]; VAR VAR 0; VAR VAR -VAR VAR.VAR VAR: VAR VAR -VAR VAR.VAR -VAR /  VAR VAR: $VAR -VAR VAR VAR VAR } VAR [[ ""$(VAR -VAR)"" == 'VAR' ]]; VAR  VAR ""${VAR}"" VAR VAR-2.7) VAR=2.7.15 ;; VAR-3.4) VAR=3.4.4 ;; VAR-3.5) VAR=3.5.4 ;; VAR-3.6) VAR=3.6.7 ;; VAR-3.7) VAR=3.7.1 ;; VAR  VAR $VAR  VAR ""3.6.7""  VAR VAR VAR /VAR/VAR/VAR.VAR.VAR VAR 1  VAR.6 -VAR VAR VAR VAR VAR     VAR ! VAR -VAR VAR --VAR; VAR VAR VAR: VAR VAR VAR-VAR.VAR VAR VAR -VAR VAR VAR VAR VAR  VAR -VAR VAR VAR VAR VAR VAR VAR [[ ""${VAR}"" == ""VAR"" ]]; VAR VAR -VAR VAR VAR VAR-VAR-VAR-VAR VAR-VAR-VAR-VAR VAR-VAR-VAR ""$(VAR ${VAR})"" VAR ",12,10
+xwiki-platform_bff0203e739b6e3eb90af5736f04278c73c2a8bb,xwiki-platform-core/xwiki-platform-security/xwiki-platform-security-authentication/xwiki-platform-security-authentication-api/src/main/java/org/xwiki/security/authentication/AuthenticationConfiguration.java,"import java.util.List;
+
+import org.xwiki.stability.Unstable;
+
+    /**
+     * @return the list of cookie domains to use for the authentication cookies. Domains are prefix with a dot.
+     * @since 14.10.15
+     * @since 15.5.1
+     * @since 15.6
+     */
+    @Unstable
+    default List<String> getCookieDomains()
+    {
+        return List.of();
+    }",,bff0203e739b6e3eb90af5736f04278c73c2a8bb,CVE-2023-48240,bff0203e739b6e3eb90af5736f04278c73c2a8bb,https://github.com/xwiki/xwiki-platform,NVD_DIRECT_COMMIT,1337,COMPLETED,VAR VAR.VAR.VAR; VAR VAR.VAR.VAR.VAR; /** * @VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR. * @VAR 14.10.15 * @VAR 15.5.1 * @VAR 15.6 */ @VAR VAR VAR<VAR> VAR() { VAR VAR.VAR(); } ,12,10

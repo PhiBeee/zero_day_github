@@ -1,0 +1,97 @@
+commit,file,added_code,deleted_code,hash_clean,cve_id,hash,repo_url,rel_type,score,extraction_status,text_norm,cluster_kmeans
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,channels/rdpsnd/server/rdpsnd_main.c,	length = 1ull * context->priv->out_pending_frames * context->priv->src_bytes_per_frame;,	length = context->priv->out_pending_frames * context->priv->src_bytes_per_frame * 1ULL;,d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,VAR = 1ull * VAR->VAR->VAR * VAR->VAR->VAR; VAR = VAR->VAR->VAR * VAR->VAR->VAR * 1ULL;,15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,client/X11/xf_gdi.c,			size = 1ull * cmd->bmp.width * cmd->bmp.height * GetBytesPerPixel(format);,			size = cmd->bmp.width * cmd->bmp.height * GetBytesPerPixel(format) * 1ULL;,d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,VAR = 1ull * VAR->VAR.VAR * VAR->VAR.VAR * VAR(VAR); VAR = VAR->VAR.VAR * VAR->VAR.VAR * VAR(VAR) * 1ULL;,15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,client/X11/xf_gfx.c,"	size = 1ull * surface->gdi.scanline * surface->gdi.height;
+		size = 1ull * surface->stageScanline * surface->gdi.height;","	size = surface->gdi.scanline * surface->gdi.height * 1ULL;
+		size = surface->stageScanline * surface->gdi.height * 1ULL;",d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,VAR = 1ull * VAR->VAR.VAR * VAR->VAR.VAR; VAR = 1ull * VAR->VAR * VAR->VAR.VAR; VAR = VAR->VAR.VAR * VAR->VAR.VAR * 1ULL; VAR = VAR->VAR * VAR->VAR.VAR * 1ULL;,15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,client/X11/xf_graphics.c,"		size = 1ull * ci.height * ci.width * GetBytesPerPixel(CursorFormat);
+	size = 1ull * pointer->height * pointer->width * GetBytesPerPixel(CursorFormat);","		size = ci.height * ci.width * GetBytesPerPixel(CursorFormat) * 1ULL;
+	size = pointer->height * pointer->width * GetBytesPerPixel(CursorFormat) * 1ULL;",d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,VAR = 1ull * VAR.VAR * VAR.VAR * VAR(VAR); VAR = 1ull * VAR->VAR * VAR->VAR * VAR(VAR); VAR = VAR.VAR * VAR.VAR * VAR(VAR) * 1ULL; VAR = VAR->VAR * VAR->VAR * VAR(VAR) * 1ULL;,15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,client/X11/xf_rail.c,"	cache->entries = calloc(1ull * cache->numCaches * cache->numCacheEntries, sizeof(xfRailIcon));
+	argbPixels = calloc(1ull * iconInfo->width * iconInfo->height, 4);","	cache->entries = calloc(cache->numCaches * cache->numCacheEntries * 1ULL, sizeof(xfRailIcon));
+	argbPixels = calloc(iconInfo->width * iconInfo->height * 1ULL, 4);",d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,"VAR->VAR = VAR(1ull * VAR->VAR * VAR->VAR, VAR(VAR)); VAR = VAR(1ull * VAR->VAR * VAR->VAR, 4); VAR->VAR = VAR(VAR->VAR * VAR->VAR * 1ULL, VAR(VAR)); VAR = VAR(VAR->VAR * VAR->VAR * 1ULL, 4);",15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,libfreerdp/codec/clear.c,"		tmp = (BYTE*)realloc(vBarEntry->pixels, 1ull * vBarEntry->count * bpp);
+			tmp = realloc(glyphEntry->pixels, 1ull * glyphEntry->count * bpp);","		tmp = (BYTE*)realloc(vBarEntry->pixels, vBarEntry->count * bpp * 1ULL);
+			tmp = realloc(glyphEntry->pixels, glyphEntry->count * bpp * 1ULL);",d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,"VAR = (VAR*)VAR(VAR->VAR, 1ull * VAR->VAR * VAR); VAR = VAR(VAR->VAR, 1ull * VAR->VAR * VAR); VAR = (VAR*)VAR(VAR->VAR, VAR->VAR * VAR * 1ULL); VAR = VAR(VAR->VAR, VAR->VAR * VAR * 1ULL);",15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,libfreerdp/codec/color.c,"	dstData = (BYTE*)_aligned_malloc(1ull * width * height, 16);
+		memset(pDstLine, 0, 1ull * dstBytesPerPixel * (nWidth - nXDst));
+		memcpy(pDstLine, pFirstDstLineXOffset, 1ull * nWidth * bpp);","	dstData = (BYTE*)_aligned_malloc(width * height * 1ULL, 16);
+		memset(pDstLine, 0, dstBytesPerPixel * (nWidth - nXDst) * 1ULL);
+		memcpy(pDstLine, pFirstDstLineXOffset, nWidth * bpp * 1ULL);",d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,"VAR = (VAR*)VAR(1ull * VAR * VAR, 16); VAR(VAR, 0, 1ull * VAR * (VAR - VAR)); VAR(VAR, VAR, 1ull * VAR * VAR); VAR = (VAR*)VAR(VAR * VAR * 1ULL, 16); VAR(VAR, 0, VAR * (VAR - VAR) * 1ULL); VAR(VAR, VAR, VAR * VAR * 1ULL);",15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,libfreerdp/codec/h264.c,"		h264->pYUVData[0] = _aligned_malloc(1ull * h264->iStride[0] * height, 16);
+		h264->pYUVData[1] = _aligned_malloc(1ull * h264->iStride[1] * height, 16);
+		h264->pYUVData[2] = _aligned_malloc(1ull * h264->iStride[2] * height, 16);","		h264->pYUVData[0] = _aligned_malloc(h264->iStride[0] * height * 1ULL, 16);
+		h264->pYUVData[1] = _aligned_malloc(h264->iStride[1] * height * 1ULL, 16);
+		h264->pYUVData[2] = _aligned_malloc(h264->iStride[2] * height * 1ULL, 16);",d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,"VAR->VAR[0] = VAR(1ull * VAR->VAR[0] * VAR, 16); VAR->VAR[1] = VAR(1ull * VAR->VAR[1] * VAR, 16); VAR->VAR[2] = VAR(1ull * VAR->VAR[2] * VAR, 16); VAR->VAR[0] = VAR(VAR->VAR[0] * VAR * 1ULL, 16); VAR->VAR[1] = VAR(VAR->VAR[1] * VAR * 1ULL, 16); VAR->VAR[2] = VAR(VAR->VAR[2] * VAR * 1ULL, 16);",15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,libfreerdp/codec/progressive.c,		size_t dataLen = 1ull * tile->stride * tile->height;,		size_t dataLen = tile->stride * tile->height * 1ULL;,d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,VAR VAR = 1ull * VAR->VAR * VAR->VAR; VAR VAR = VAR->VAR * VAR->VAR * 1ULL;,15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,libfreerdp/gdi/bitmap.c,"	    _aligned_malloc(1ull * nWidth * nHeight * GetBytesPerPixel(hBitmap->format), 16);","	    _aligned_malloc(nWidth * nHeight * GetBytesPerPixel(hBitmap->format) * 1ULL, 16);",d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,"VAR(1ull * VAR * VAR * VAR(VAR->VAR), 16); VAR(VAR * VAR * VAR(VAR->VAR) * 1ULL, 16);",15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,libfreerdp/gdi/gdi.c,			size = 1ull * cmd->bmp.width * cmd->bmp.height * GetBytesPerPixel(format);,			size = cmd->bmp.width * cmd->bmp.height * GetBytesPerPixel(format) * 1ULL;,d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,VAR = 1ull * VAR->VAR.VAR * VAR->VAR.VAR * VAR(VAR); VAR = VAR->VAR.VAR * VAR->VAR.VAR * VAR(VAR) * 1ULL;,15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,libfreerdp/gdi/gfx.c,"		if (Stream_GetRemainingLength(&s) < 1ull * cmd->height * cmd->width)
+	surface->data = (BYTE*)_aligned_malloc(1ull * surface->scanline * surface->height, 16);","		if (Stream_GetRemainingLength(&s) < cmd->height * cmd->width * 1ULL)
+	surface->data = (BYTE*)_aligned_malloc(surface->scanline * surface->height * 1ULL, 16);",d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,"VAR (VAR(&VAR) < 1ull * VAR->VAR * VAR->VAR) VAR->VAR = (VAR*)VAR(1ull * VAR->VAR * VAR->VAR, 16); VAR (VAR(&VAR) < VAR->VAR * VAR->VAR * 1ULL) VAR->VAR = (VAR*)VAR(VAR->VAR * VAR->VAR * 1ULL, 16);",15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,libfreerdp/gdi/graphics.c,"	pDstData = _aligned_malloc(1ull * nHeight * nDstStep, 16);","	pDstData = _aligned_malloc(nHeight * nDstStep * 1ULL, 16);",d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,"VAR = VAR(1ull * VAR * VAR, 16); VAR = VAR(VAR * VAR * 1ULL, 16);",15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,libfreerdp/gdi/shape.c,"				memcpy(dstp, srcp, 1ull * nWidth * formatSize);","				memcpy(dstp, srcp, nWidth * formatSize * 1ULL);",d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,"VAR(VAR, VAR, 1ull * VAR * VAR); VAR(VAR, VAR, VAR * VAR * 1ULL);",15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,libfreerdp/gdi/video.c,"	ret->image = _aligned_malloc(1ull * ret->scanline * height, 16);","	ret->image = _aligned_malloc(ret->scanline * height * 1ULL, 16);",d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,"VAR->VAR = VAR(1ull * VAR->VAR * VAR, 16); VAR->VAR = VAR(VAR->VAR * VAR * 1ULL, 16);",15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,libfreerdp/primitives/prim_copy.c,"		ULONG_PTR p1mEnd = p1m + 1ull * (height - 1) * p1Step + 1ull * width * p1Size;
+		ULONG_PTR p2mEnd = p2m + 1ull * (height - 1) * p2Step + 1ull * width * p2Size;","		ULONG_PTR p1mEnd = p1m + (height - 1) * p1Step * 1ULL + width * p1Size * 1ULL;
+		ULONG_PTR p2mEnd = p2m + (height - 1) * p2Step * 1ULL + width * p2Size * 1ULL;",d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,VAR VAR = VAR + 1ull * (VAR - 1) * VAR + 1ull * VAR * VAR; VAR VAR = VAR + 1ull * (VAR - 1) * VAR + 1ull * VAR * VAR; VAR VAR = VAR + (VAR - 1) * VAR * 1ULL + VAR * VAR * 1ULL; VAR VAR = VAR + (VAR - 1) * VAR * 1ULL + VAR * VAR * 1ULL;,15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,libfreerdp/primitives/primitives.c,"		winpr_RAND(buf, 1ull * roi->width * roi->height);","		winpr_RAND(buf, roi->width * roi->height * 1ULL);",d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,"VAR(VAR, 1ull * VAR->VAR * VAR->VAR); VAR(VAR, VAR->VAR * VAR->VAR * 1ULL);",15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,uwac/libuwac/uwac-window.c,"	fd = uwac_create_anonymous_file(1ull * allocSize * nbuffers);
+	data = mmap(NULL, 1ull * allocSize * nbuffers, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+		munmap(data, 1ull * allocSize * nbuffers);
+		       1ull * window->stride * window->height);","	fd = uwac_create_anonymous_file(allocSize * nbuffers * 1ULL);
+	data = mmap(NULL, allocSize * nbuffers * 1ULL, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+		munmap(data, allocSize * nbuffers * 1ULL);
+		       window->stride * window->height * 1ULL);",d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,"VAR = VAR(1ull * VAR * VAR); VAR = VAR(VAR, 1ull * VAR * VAR, VAR | VAR, VAR, VAR, 0); VAR(VAR, 1ull * VAR * VAR); 1ull * VAR->VAR * VAR->VAR); VAR = VAR(VAR * VAR * 1ULL); VAR = VAR(VAR, VAR * VAR * 1ULL, VAR | VAR, VAR, VAR, 0); VAR(VAR, VAR * VAR * 1ULL); VAR->VAR * VAR->VAR * 1ULL);",15
+FreeRDP_d8a1ac342ae375644c70579c33b5cf38fb43b083,winpr/libwinpr/utils/lodepng/lodepng.c,"	size_t numpixels = 1ull * w * h;
+	size_t numpixels = 1ull * w * h;
+			removePaddingBits(out, in, 1ull * w * bpp, ((w * bpp + 7ULL) / 8ULL) * 8ULL, h);
+				                  1ull * passw[i] * bpp, ((passw[i] * bpp + 7ULL) / 8ULL) * 8ULL,
+					addPaddingBits(padded, in, ((w * bpp + 7ULL) / 8ULL) * 8ULL, 1ull * w * bpp, h);
+					               ((passw[i] * bpp + 7ULL) / 8ULL) * 8ULL, 1ull * passw[i] * bpp,
+					               1ull * passh[i]);","	size_t numpixels = w * h * 1ULL;
+	size_t numpixels = w * h * 1ULL;
+			removePaddingBits(out, in, w * bpp * 1ULL, ((w * bpp + 7ULL) / 8ULL) * 8ULL, h);
+				                  passw[i] * bpp * 1ULL, ((passw[i] * bpp + 7ULL) / 8ULL) * 8ULL,
+					addPaddingBits(padded, in, ((w * bpp + 7ULL) / 8ULL) * 8ULL, w * bpp * 1ULL, h);
+					               ((passw[i] * bpp + 7ULL) / 8ULL) * 8ULL, passw[i] * bpp * 1ULL,
+					               passh[i] * 1ULL);",d8a1ac342ae375644c70579c33b5cf38fb43b083,CVE-2023-40186,d8a1ac342ae375644c70579c33b5cf38fb43b083,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,"VAR VAR = 1ull * VAR * VAR; VAR VAR = 1ull * VAR * VAR; VAR(VAR, VAR, 1ull * VAR * VAR, ((VAR * VAR + 7ULL) / 8ULL) * 8ULL, VAR); 1ull * VAR[VAR] * VAR, ((VAR[VAR] * VAR + 7ULL) / 8ULL) * 8ULL, VAR(VAR, VAR, ((VAR * VAR + 7ULL) / 8ULL) * 8ULL, 1ull * VAR * VAR, VAR); ((VAR[VAR] * VAR + 7ULL) / 8ULL) * 8ULL, 1ull * VAR[VAR] * VAR, 1ull * VAR[VAR]); VAR VAR = VAR * VAR * 1ULL; VAR VAR = VAR * VAR * 1ULL; VAR(VAR, VAR, VAR * VAR * 1ULL, ((VAR * VAR + 7ULL) / 8ULL) * 8ULL, VAR); VAR[VAR] * VAR * 1ULL, ((VAR[VAR] * VAR + 7ULL) / 8ULL) * 8ULL, VAR(VAR, VAR, ((VAR * VAR + 7ULL) / 8ULL) * 8ULL, VAR * VAR * 1ULL, VAR); ((VAR[VAR] * VAR + 7ULL) / 8ULL) * 8ULL, VAR[VAR] * VAR * 1ULL, VAR[VAR] * 1ULL);",15
+linux_c11f83e0626bdc2b6c550fc8b9b6eeefbd8cefaa,arch/x86/kvm/vmx/vmx.c,"	MSR_IA32_TSX_CTRL,
+	index = __find_msr_index(vmx, MSR_IA32_TSX_CTRL);
+	if (index >= 0)
+		move_msr_up(vmx, index, save_nmsrs++);
+	case MSR_IA32_TSX_CTRL:
+		if (!msr_info->host_initiated &&
+		    !(vcpu->arch.arch_capabilities & ARCH_CAP_TSX_CTRL_MSR))
+			return 1;
+		goto find_shared_msr;
+		goto find_shared_msr;
+	find_shared_msr:
+	case MSR_IA32_TSX_CTRL:
+		if (!msr_info->host_initiated &&
+		    !(vcpu->arch.arch_capabilities & ARCH_CAP_TSX_CTRL_MSR))
+			return 1;
+		if (data & ~(TSX_CTRL_RTM_DISABLE | TSX_CTRL_CPUID_CLEAR))
+			return 1;
+		goto find_shared_msr;
+		goto find_shared_msr;
+
+	find_shared_msr:
+
+		switch (index) {
+		case MSR_IA32_TSX_CTRL:
+			/*
+			 * No need to pass TSX_CTRL_CPUID_CLEAR through, so
+			 * let's avoid changing CPUID bits under the host
+			 * kernel's feet.
+			 */
+			vmx->guest_msrs[j].mask = ~(u64)TSX_CTRL_CPUID_CLEAR;
+			break;
+		default:
+			vmx->guest_msrs[j].mask = -1ull;
+			break;
+		}","		/* Else, falls through */
+		/* Else, falls through */
+		vmx->guest_msrs[j].mask = -1ull;",c11f83e0626bdc2b6c550fc8b9b6eeefbd8cefaa,CVE-2019-19338,c11f83e0626bdc2b6c550fc8b9b6eeefbd8cefaa,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,84,COMPLETED,"VAR, VAR = VAR(VAR, VAR); VAR (VAR >= 0) VAR(VAR, VAR, VAR++); VAR VAR: VAR (!VAR->VAR && !(VAR->VAR.VAR & VAR)) VAR 1; VAR VAR; VAR VAR; VAR: VAR VAR: VAR (!VAR->VAR && !(VAR->VAR.VAR & VAR)) VAR 1; VAR (VAR & ~(VAR | VAR)) VAR 1; VAR VAR; VAR VAR; VAR: VAR (VAR) { VAR VAR: /* * VAR VAR VAR VAR VAR VAR, VAR * VAR'VAR VAR VAR VAR VAR VAR VAR VAR * VAR'VAR VAR. */ VAR->VAR[VAR].VAR = ~(VAR)VAR; VAR; VAR: VAR->VAR[VAR].VAR = -1ull; VAR; }   VAR->VAR[VAR].VAR = -1ull;",15
+linux_c2dd5146e9fe1f22c77c1b011adf84eea0245806,arch/x86/kvm/vmx.c,"			vmx->nested.pi_desc = NULL;
+			vmcs_write64(POSTED_INTR_DESC_ADDR, -1ull);",,c2dd5146e9fe1f22c77c1b011adf84eea0245806,CVE-2018-16882,c2dd5146e9fe1f22c77c1b011adf84eea0245806,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,88,COMPLETED,"VAR->VAR.VAR = VAR; VAR(VAR, -1ull); ",15

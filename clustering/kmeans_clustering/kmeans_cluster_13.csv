@@ -1,0 +1,1200 @@
+commit,file,added_code,deleted_code,hash_clean,cve_id,hash,repo_url,rel_type,score,extraction_status,text_norm,cluster_kmeans
+airflow_f819dfcb24c597058b7b671f6317e4c84976975e,airflow/www/package.json,"    ""url-search-params-polyfill"": ""^8.1.0"",
+    ""validator"": ""^13.9.0""","    ""url-search-params-polyfill"": ""^8.1.0""",f819dfcb24c597058b7b671f6317e4c84976975e,CVE-2023-29247,f819dfcb24c597058b7b671f6317e4c84976975e,https://github.com/apache/airflow,NVD_GIT_REPOBASED,102,COMPLETED,"""VAR-VAR-VAR-VAR"": ""^8.1.0"", ""VAR"": ""^13.9.0"" ""VAR-VAR-VAR-VAR"": ""^8.1.0""",13
+airflow_f819dfcb24c597058b7b671f6317e4c84976975e,airflow/www/yarn.lock,"validator@^13.9.0:
+  version ""13.9.0""
+  resolved ""https://registry.yarnpkg.com/validator/-/validator-13.9.0.tgz#33e7b85b604f3bbce9bb1a05d5c3e22e1c2ff855""
+  integrity sha512-B+dGG8U3fdtM0/aNK4/X8CXq/EcxU2WPrPEkJGslb47qyHsxmbggTWK0yEA4qnYVNF+nxNlN88o14hIcPmSIEA==
+",,f819dfcb24c597058b7b671f6317e4c84976975e,CVE-2023-29247,f819dfcb24c597058b7b671f6317e4c84976975e,https://github.com/apache/airflow,NVD_GIT_REPOBASED,102,COMPLETED,"VAR@^13.9.0: VAR ""13.9.0"" VAR ""VAR: VAR VAR-VAR+VAR/VAR/VAR/VAR+VAR== ",13
+anything-llm_3c88aec034934bcbad30c5ef1cab62cbbdb98e64,.nvmrc,v18.13.0,,3c88aec034934bcbad30c5ef1cab62cbbdb98e64,CVE-2023-4897,3c88aec034934bcbad30c5ef1cab62cbbdb98e64,https://github.com/mintplex-labs/anything-llm,NVD_DIRECT_COMMIT,1337,COMPLETED,VAR.13.0 ,13
+anything-llm_3c88aec034934bcbad30c5ef1cab62cbbdb98e64,frontend/.nvmrc,v18.13.0,,3c88aec034934bcbad30c5ef1cab62cbbdb98e64,CVE-2023-4897,3c88aec034934bcbad30c5ef1cab62cbbdb98e64,https://github.com/mintplex-labs/anything-llm,NVD_DIRECT_COMMIT,1337,COMPLETED,VAR.13.0 ,13
+anything-llm_3c88aec034934bcbad30c5ef1cab62cbbdb98e64,server/.nvmrc,v18.13.0,,3c88aec034934bcbad30c5ef1cab62cbbdb98e64,CVE-2023-4897,3c88aec034934bcbad30c5ef1cab62cbbdb98e64,https://github.com/mintplex-labs/anything-llm,NVD_DIRECT_COMMIT,1337,COMPLETED,VAR.13.0 ,13
+anything-llm_dc3dfbf31495fe316b21ee184b9317b38101d30e,.nvmrc,v18.13.0,,dc3dfbf31495fe316b21ee184b9317b38101d30e,CVE-2023-4899,dc3dfbf31495fe316b21ee184b9317b38101d30e,https://github.com/mintplex-labs/anything-llm,NVD_DIRECT_COMMIT,1337,COMPLETED,VAR.13.0 ,13
+anything-llm_dc3dfbf31495fe316b21ee184b9317b38101d30e,.nvmrc,v18.13.0,,dc3dfbf31495fe316b21ee184b9317b38101d30e,CVE-2023-4898,dc3dfbf31495fe316b21ee184b9317b38101d30e,https://github.com/mintplex-labs/anything-llm,NVD_DIRECT_COMMIT,1337,COMPLETED,VAR.13.0 ,13
+anything-llm_dc3dfbf31495fe316b21ee184b9317b38101d30e,frontend/.nvmrc,v18.13.0,,dc3dfbf31495fe316b21ee184b9317b38101d30e,CVE-2023-4899,dc3dfbf31495fe316b21ee184b9317b38101d30e,https://github.com/mintplex-labs/anything-llm,NVD_DIRECT_COMMIT,1337,COMPLETED,VAR.13.0 ,13
+anything-llm_dc3dfbf31495fe316b21ee184b9317b38101d30e,frontend/.nvmrc,v18.13.0,,dc3dfbf31495fe316b21ee184b9317b38101d30e,CVE-2023-4898,dc3dfbf31495fe316b21ee184b9317b38101d30e,https://github.com/mintplex-labs/anything-llm,NVD_DIRECT_COMMIT,1337,COMPLETED,VAR.13.0 ,13
+anything-llm_dc3dfbf31495fe316b21ee184b9317b38101d30e,server/.nvmrc,v18.13.0,,dc3dfbf31495fe316b21ee184b9317b38101d30e,CVE-2023-4899,dc3dfbf31495fe316b21ee184b9317b38101d30e,https://github.com/mintplex-labs/anything-llm,NVD_DIRECT_COMMIT,1337,COMPLETED,VAR.13.0 ,13
+anything-llm_dc3dfbf31495fe316b21ee184b9317b38101d30e,server/.nvmrc,v18.13.0,,dc3dfbf31495fe316b21ee184b9317b38101d30e,CVE-2023-4898,dc3dfbf31495fe316b21ee184b9317b38101d30e,https://github.com/mintplex-labs/anything-llm,NVD_DIRECT_COMMIT,1337,COMPLETED,VAR.13.0 ,13
+cilium_4061cdfc83370200e3f9a0c5a782ca17a288ae71,CHANGELOG.md,"## v1.13.4
+
+Summary of Changes
+------------------
+
+**Minor Changes:**
+* Add agent flag `enable-ipsec-key-watcher` to allow users to disable the IPsec key watcher and thus require an agent restart for the key rotation to take effect. (Backport PR #25977, Upstream PR #25893, @pchaigno)
+* Updating documentation helm values now works also on arm64. (Backport PR #25731, Upstream PR #25422, @jrajahalme)
+
+**Bugfixes:**
+* Add drop notifications for various error paths in the datapath. (Backport PR #25503, Upstream PR #25183, @julianwiedmann)
+* bpf,datapath: read jiffies from /proc/schedstat (Backport PR #25855, Upstream PR #25795, @ti-mo)
+* Compare annotations before discarding CiliumNode updates. (Backport PR #25588, Upstream PR #25465, @LynneD)
+* CPU overhead regression introduced in v1.13 is fixed. (#25548, @jrajahalme)
+* Fix a bug due to which we would leak Linux XFRM policies, potentially leading to increased CPU consumption, when IPsec is enabled with Azure or ENI IPAM. (Backport PR #25897, Upstream PR #25784, @pchaigno)
+* Fix a bug that would cause connectivity drops of type XfrmInNoStates on upgrade when IPsec is enabled with ENI or Azure IPAM mode. (Backport PR #25897, Upstream PR #25724, @pchaigno)
+* Fix a bug that would cause connectivity drops of type XfrmOutPolBlock on upgrade when IPsec is enabled. (Backport PR #25897, Upstream PR #25735, @pchaigno)
+* Fix a possible deadlock when using WireGuard transparent encryption. (Backport PR #25923, Upstream PR #25419, @bimmlerd)
+* Fix bug affecting EKS installations with IPsec encryption enabled, where Cilium wouldn't attach its IPsec BPF program to new ENI interfaces, resulting in connectivity loss between pods on remote nodes. (Backport PR #25897, Upstream PR #25744, @joamaki)
+* Fix downgrade path from 1.14 to 1.13 due to stale IPAM-allocated IPv6 on cilium_host (#25962, @jschwinger233)
+* Fix false error log message when IPsec is enabled with IPAM modes ENI or Azure and a remote node is deleted. (Backport PR #26160, Upstream PR #26093, @pchaigno)
+* Fix incorrect hubble flow data when HTTP requests contain an `x-forwarded-for` header by adding an explicit `use_remote_address: true` config to Envoy HTTP configuration to always use the actual remote address of the incoming connection rather than the value of `x-forwarded-for` header, which may originate from an untrusted source. This change has no effect on Cilium policy enforcement where the source security identity is always resolved before HTTP headers are parsed. Previous Cilium behavior of not adding `x-forwarded-for` headers is retained via an explicit `skip_xff_append: true` config setting, except for Cilium Ingress where the source IP address is now appended to `x-forwarded-for` header. (Backport PR #25731, Upstream PR #25674, @jrajahalme)
+* Fix leak of IPsec XFRM FWD policies in IPAM modes `cluster-pool`, `kubernetes`, and `crd` when nodes are deleted. Fix incorrect catch-all default-drop XFRM OUT policy for IPsec IPv6 traffic that could lead to leaking plain-text IPv6 traffic if combined with some other bug. (Backport PR #26079, Upstream PR #25953, @pchaigno)
+* Fix missing drop notifications on conntrack lookup failures when IPv4 and IPv6 are both enabled or socket-level load balancing is disabled. (Backport PR #25588, Upstream PR #25426, @bleggett)
+* Fix RevSNAT for ICMPv6 packets. (Backport PR #25503, Upstream PR #25306, @julianwiedmann)
+* Fix three issues in the bug fix to attach IPsec BPF programs to ENI interfaces: do not fatal if loading unexpectedly fails (which may happen if the device is suddenly deleted), ignore veth device changes in order not to reinitialize when new endpoints appear and wait 1 second for further device state changes between reinitializations. (Backport PR #25977, Upstream PR #25936, @joamaki)
+* Fixed Cilium agent crash when policy refers to a non-existing Envoy listener. (Backport PR #26079, Upstream PR #25969, @jrajahalme)
+* gateway-api: Race condition between routes and Gateway (Backport PR #25731, Upstream PR #25573, @sayboras)
+* gateway-api: Skip reconciliation for non-matching controller routes (Backport PR #25731, Upstream PR #25549, @sayboras)
+* helm: Correct typo in Ingress validation (Backport PR #25731, Upstream PR #25570, @sayboras)
+* Reject incorrect configuration enable-host-legacy-routing=false kube-proxy-replacement=partial. (Backport PR #25855, Upstream PR #25803, @pchaigno)
+
+**CI Changes:**
+* [v1.13 backport] test: Switch target FQDN (#25584, @nbusseneau)
+* Add github workflow to push development helm charts to quay.io (Backport PR #26087, Upstream PR #25205, @chancez)
+* hostfw tests flake workaround (Backport PR #25588, Upstream PR #25323, @tommyp1ckles)
+* Pick up the latest startup-script image (Backport PR #25855, Upstream PR #25774, @michi-covalent)
+* test/k8s: add host firewall workaround for svc host policy test. (Backport PR #25588, Upstream PR #25461, @tommyp1ckles)
+* test/k8s: for services test, wait for all applied manifests to delete (Backport PR #25503, Upstream PR #25341, @tommyp1ckles)
+* test/k8s: quarantine K8sDatapathServicesTest (Backport PR #25731, Upstream PR #25670, @aanm)
+* test/k8s: update host policies for firewall tests. (Backport PR #25503, Upstream PR #25374, @tommyp1ckles)
+* test: delete ginkgo test ""NodePort with L7 Policy from outside"" (Backport PR #25731, Upstream PR #25702, @jschwinger233)
+* test: prevent panic on k8s services host fw test on some runs. (Backport PR #25855, Upstream PR #25747, @tommyp1ckles)
+
+**Misc Changes:**
+* backport (v1.13): docs: Promote Deny Policies out of Beta (#26147, @nathanjsweet)
+* bpf: dsr: fix typo in tail_nodeport_dsr_ingress_ipv4() (Backport PR #25855, Upstream PR #25742, @julianwiedmann)
+* chore(deps): update all github action dependencies (v1.13) (patch) (#25704, @renovate[bot])
+* chore(deps): update cilium/actions-app-token action to v0.21.1 (v1.13) (#25865, @renovate[bot])
+* chore(deps): update dependency cilium/hubble to v0.11.6 (v1.13) (#26042, @renovate[bot])
+* chore(deps): update docker.io/library/alpine docker tag to v3.17.3 (v1.13) (#25852, @renovate[bot])
+* chore(deps): update docker.io/library/alpine docker tag to v3.17.3 (v1.13) (#25853, @renovate[bot])
+* chore(deps): update docker.io/library/golang docker tag to v1.19.10 (v1.13) (#25857, @renovate[bot])
+* chore(deps): update docker.io/library/ubuntu:22.04 docker digest to ac58ff7 (v1.13) (#25547, @renovate[bot])
+* chore(deps): update quay.io/cilium/hubble docker tag to v0.11.6 (v1.13) (#25997, @renovate[bot])
+* ctmap: right-shift kernel jiffies by BPF_MONO_SCALER (Backport PR #26200, Upstream PR #26197, @ti-mo)
+* docs: Add Bottlerocket OS to validated distros (Backport PR #25503, Upstream PR #25390, @nebril)
+* docs: document missing entity 'ingress' (Backport PR #25731, Upstream PR #25665, @mhofstetter)
+* docs: Fix broken link to backends leak issue (Backport PR #25503, Upstream PR #25278, @akhilles)
+* docs: Improve BGP Control Plane page (Backport PR #25731, Upstream PR #23939, @krouma)
+* gateway-api: Remove unused function check (#26058, @ferozsalam)
+* install: Fail helm if kube-proxy-replacement is not valid (Backport PR #25977, Upstream PR #25907, @jrajahalme)
+* ipsec: Fix cleanup of XFRM states and policies (Backport PR #26079, Upstream PR #26072, @pchaigno)
+* Slim down Node handler interface (Backport PR #25923, Upstream PR #25450, @bimmlerd)
+* test/provision/compile.sh: Make usable from dev VM (Backport PR #25503, Upstream PR #25352, @jrajahalme)
+* Update network attacker sections of the threat model (Backport PR #25977, Upstream PR #25640, @ferozsalam)
+
+**Other Changes:**
+* envoy: Bump envoy version to v1.23.10 (#25884, @mhofstetter)
+* install: Update image digests for v1.13.3 (#25726, @thorn3r)
+* wireguard: Always unset fwMark (#25858, @brb)
+",,4061cdfc83370200e3f9a0c5a782ca17a288ae71,CVE-2023-34242,4061cdfc83370200e3f9a0c5a782ca17a288ae71,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,80,COMPLETED," VAR VAR VAR ------------------ **VAR VAR:** * VAR VAR VAR `VAR-VAR-VAR-VAR` VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  **VAR:** * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR,VAR: VAR VAR VAR /VAR/VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR.13 VAR VAR. ( * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR, VAR VAR VAR'VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR 1.14 VAR 1.13 VAR VAR VAR VAR-VAR VAR VAR VAR ( * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR `VAR-VAR-VAR` VAR VAR VAR VAR VAR `VAR: VAR` VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR `VAR-VAR-VAR` VAR, VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR `VAR-VAR-VAR` VAR VAR VAR VAR VAR VAR `VAR: VAR` VAR VAR, VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR `VAR-VAR-VAR` VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR `VAR-VAR`, `VAR`, VAR `VAR` VAR VAR VAR VAR. VAR VAR VAR-VAR VAR-VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR-VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR-VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR: VAR VAR VAR VAR VAR VAR VAR (VAR VAR VAR VAR VAR VAR VAR VAR VAR), VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR 1 VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR-VAR VAR VAR. (VAR VAR  * VAR-VAR: VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR-VAR: VAR VAR VAR VAR-VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR-VAR-VAR-VAR=VAR VAR-VAR-VAR=VAR. (VAR VAR  **VAR VAR:** * [VAR.13 VAR] VAR: VAR VAR VAR ( * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR.VAR (VAR VAR  * VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR-VAR VAR (VAR VAR  * VAR/VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR/VAR: VAR VAR VAR, VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR/VAR: VAR VAR (VAR VAR  * VAR/VAR: VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR: VAR VAR VAR ""VAR VAR VAR VAR VAR VAR"" (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  **VAR VAR:** * VAR (VAR.13): VAR: VAR VAR VAR VAR VAR VAR ( * VAR: VAR: VAR VAR VAR VAR() (VAR VAR  * VAR(VAR): VAR VAR VAR VAR VAR (VAR.13) (VAR) ( * VAR(VAR): VAR VAR/VAR-VAR-VAR VAR VAR VAR.21.1 (VAR.13) ( * VAR(VAR): VAR VAR VAR/VAR VAR VAR.11.6 (VAR.13) ( * VAR(VAR): VAR VAR.VAR/VAR/VAR VAR VAR VAR VAR.17.3 (VAR.13) ( * VAR(VAR): VAR VAR.VAR/VAR/VAR VAR VAR VAR VAR.17.3 (VAR.13) ( * VAR(VAR): VAR VAR.VAR/VAR/VAR VAR VAR VAR VAR.19.10 (VAR.13) ( * VAR(VAR): VAR VAR.VAR/VAR/VAR:22.04 VAR VAR VAR VAR (VAR.13) ( * VAR(VAR): VAR VAR.VAR/VAR/VAR VAR VAR VAR VAR.11.6 (VAR.13) ( * VAR: VAR-VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR 'VAR' (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR (VAR VAR  * VAR-VAR: VAR VAR VAR VAR ( * VAR: VAR VAR VAR VAR-VAR-VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR (VAR VAR  * VAR/VAR/VAR.VAR: VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  **VAR VAR:** * VAR: VAR VAR VAR VAR VAR.23.10 ( * VAR: VAR VAR VAR VAR VAR.13.3 ( * VAR: VAR VAR VAR ( ",13
+cilium_4061cdfc83370200e3f9a0c5a782ca17a288ae71,Documentation/helm-values.rst,"     - ``{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.13.4"",""useDigest"":false}``
+     - ``{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.13.4"",""useDigest"":false}``
+     - ``{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.13.4"",""useDigest"":false}``
+     - ``{""alibabacloudDigest"":"""",""awsDigest"":"""",""azureDigest"":"""",""genericDigest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.13.4"",""useDigest"":false}``
+     - ``{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.13.4"",""useDigest"":false}``","     - ``{""digest"":""sha256:5ad8e9dc17f5677d1d75b53a4e80ec2e5c4fcf4973ced8b30f8ad53933c6969a"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.13.3"",""useDigest"":true}``
+     - ``{""digest"":""sha256:19e4aae5ff72cd9fbcb7d2d16a1570533320a478acc015fc91a4d41a177cadf6"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.13.3"",""useDigest"":true}``
+     - ``{""digest"":""sha256:77176464a1e11ea7e89e984ac7db365e7af39851507e94f137dcf56c87746314"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.13.3"",""useDigest"":true}``
+     - ``{""alibabacloudDigest"":""sha256:8dba4795cb38200746a2236623f5b84742ee2c56a8afda724c85f5027ea854eb"",""awsDigest"":""sha256:394c40d156235d3c2004f77bb73402457092351cc6debdbc5727ba36fbd863ae"",""azureDigest"":""sha256:7749b732d510954d9fb74f7e675b31b49100fd773e588c6fbbf42529acfb1be8"",""genericDigest"":""sha256:fa7003cbfdf8358cb71786afebc711b26e5e44a2ed99bd4944930bba915b8910"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.13.3"",""useDigest"":true}``
+     - ``{""digest"":""sha256:77176464a1e11ea7e89e984ac7db365e7af39851507e94f137dcf56c87746314"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.13.3"",""useDigest"":true}``",4061cdfc83370200e3f9a0c5a782ca17a288ae71,CVE-2023-34242,4061cdfc83370200e3f9a0c5a782ca17a288ae71,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,80,COMPLETED,"- ``{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.13.4"",""VAR"":VAR}`` - ``{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.13.4"",""VAR"":VAR}`` - ``{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.13.4"",""VAR"":VAR}`` - ``{""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.13.4"",""VAR"":VAR}`` - ``{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.13.4"",""VAR"":VAR}`` - ``{""VAR"":""VAR:5ad8e9dc17f5677d1d75b53a4e80ec2e5c4fcf4973ced8b30f8ad53933c6969a"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.13.3"",""VAR"":VAR}`` - ``{""VAR"":""VAR:19e4aae5ff72cd9fbcb7d2d16a1570533320a478acc015fc91a4d41a177cadf6"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.13.3"",""VAR"":VAR}`` - ``{""VAR"":""VAR:77176464a1e11ea7e89e984ac7db365e7af39851507e94f137dcf56c87746314"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.13.3"",""VAR"":VAR}`` - ``{""VAR"":""VAR:8dba4795cb38200746a2236623f5b84742ee2c56a8afda724c85f5027ea854eb"",""VAR"":""VAR:394c40d156235d3c2004f77bb73402457092351cc6debdbc5727ba36fbd863ae"",""VAR"":""VAR:7749b732d510954d9fb74f7e675b31b49100fd773e588c6fbbf42529acfb1be8"",""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.13.3"",""VAR"":VAR}`` - ``{""VAR"":""VAR:77176464a1e11ea7e89e984ac7db365e7af39851507e94f137dcf56c87746314"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.13.3"",""VAR"":VAR}``",13
+cilium_4061cdfc83370200e3f9a0c5a782ca17a288ae71,VERSION,1.13.4,1.13.3,4061cdfc83370200e3f9a0c5a782ca17a288ae71,CVE-2023-34242,4061cdfc83370200e3f9a0c5a782ca17a288ae71,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,80,COMPLETED,1.13.4 1.13.3,13
+cilium_4061cdfc83370200e3f9a0c5a782ca17a288ae71,install/kubernetes/cilium/Chart.yaml,"version: 1.13.4
+appVersion: 1.13.4","version: 1.13.3
+appVersion: 1.13.3",4061cdfc83370200e3f9a0c5a782ca17a288ae71,CVE-2023-34242,4061cdfc83370200e3f9a0c5a782ca17a288ae71,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,80,COMPLETED,VAR: 1.13.4 VAR: 1.13.4 VAR: 1.13.3 VAR: 1.13.3,13
+cilium_4061cdfc83370200e3f9a0c5a782ca17a288ae71,install/kubernetes/cilium/README.md,"![Version: 1.13.4](https://img.shields.io/badge/Version-1.13.4-informational?style=flat-square) ![AppVersion: 1.13.4](https://img.shields.io/badge/AppVersion-1.13.4-informational?style=flat-square)
+| clustermesh.apiserver.image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.13.4"",""useDigest"":false}` | Clustermesh API server image. |
+| hubble.relay.image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.13.4"",""useDigest"":false}` | Hubble-relay container image. |
+| image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.13.4"",""useDigest"":false}` | Agent container image. |
+| operator.image | object | `{""alibabacloudDigest"":"""",""awsDigest"":"""",""azureDigest"":"""",""genericDigest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.13.4"",""useDigest"":false}` | cilium-operator image. |
+| preflight.image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.13.4"",""useDigest"":false}` | Cilium pre-flight image. |","![Version: 1.13.3](https://img.shields.io/badge/Version-1.13.3-informational?style=flat-square) ![AppVersion: 1.13.3](https://img.shields.io/badge/AppVersion-1.13.3-informational?style=flat-square)
+| clustermesh.apiserver.image | object | `{""digest"":""sha256:5ad8e9dc17f5677d1d75b53a4e80ec2e5c4fcf4973ced8b30f8ad53933c6969a"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.13.3"",""useDigest"":true}` | Clustermesh API server image. |
+| hubble.relay.image | object | `{""digest"":""sha256:19e4aae5ff72cd9fbcb7d2d16a1570533320a478acc015fc91a4d41a177cadf6"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.13.3"",""useDigest"":true}` | Hubble-relay container image. |
+| image | object | `{""digest"":""sha256:77176464a1e11ea7e89e984ac7db365e7af39851507e94f137dcf56c87746314"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.13.3"",""useDigest"":true}` | Agent container image. |
+| operator.image | object | `{""alibabacloudDigest"":""sha256:8dba4795cb38200746a2236623f5b84742ee2c56a8afda724c85f5027ea854eb"",""awsDigest"":""sha256:394c40d156235d3c2004f77bb73402457092351cc6debdbc5727ba36fbd863ae"",""azureDigest"":""sha256:7749b732d510954d9fb74f7e675b31b49100fd773e588c6fbbf42529acfb1be8"",""genericDigest"":""sha256:fa7003cbfdf8358cb71786afebc711b26e5e44a2ed99bd4944930bba915b8910"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.13.3"",""useDigest"":true}` | cilium-operator image. |
+| preflight.image | object | `{""digest"":""sha256:77176464a1e11ea7e89e984ac7db365e7af39851507e94f137dcf56c87746314"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.13.3"",""useDigest"":true}` | Cilium pre-flight image. |",4061cdfc83370200e3f9a0c5a782ca17a288ae71,CVE-2023-34242,4061cdfc83370200e3f9a0c5a782ca17a288ae71,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,80,COMPLETED,"![VAR: 1.13.4](VAR: | VAR.VAR.VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.13.4"",""VAR"":VAR}` | VAR VAR VAR VAR. | | VAR.VAR.VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.13.4"",""VAR"":VAR}` | VAR-VAR VAR VAR. | | VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.13.4"",""VAR"":VAR}` | VAR VAR VAR. | | VAR.VAR | VAR | `{""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.13.4"",""VAR"":VAR}` | VAR-VAR VAR. | | VAR.VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.13.4"",""VAR"":VAR}` | VAR VAR-VAR VAR. | ![VAR: 1.13.3](VAR: | VAR.VAR.VAR | VAR | `{""VAR"":""VAR:5ad8e9dc17f5677d1d75b53a4e80ec2e5c4fcf4973ced8b30f8ad53933c6969a"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.13.3"",""VAR"":VAR}` | VAR VAR VAR VAR. | | VAR.VAR.VAR | VAR | `{""VAR"":""VAR:19e4aae5ff72cd9fbcb7d2d16a1570533320a478acc015fc91a4d41a177cadf6"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.13.3"",""VAR"":VAR}` | VAR-VAR VAR VAR. | | VAR | VAR | `{""VAR"":""VAR:77176464a1e11ea7e89e984ac7db365e7af39851507e94f137dcf56c87746314"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.13.3"",""VAR"":VAR}` | VAR VAR VAR. | | VAR.VAR | VAR | `{""VAR"":""VAR:8dba4795cb38200746a2236623f5b84742ee2c56a8afda724c85f5027ea854eb"",""VAR"":""VAR:394c40d156235d3c2004f77bb73402457092351cc6debdbc5727ba36fbd863ae"",""VAR"":""VAR:7749b732d510954d9fb74f7e675b31b49100fd773e588c6fbbf42529acfb1be8"",""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.13.3"",""VAR"":VAR}` | VAR-VAR VAR. | | VAR.VAR | VAR | `{""VAR"":""VAR:77176464a1e11ea7e89e984ac7db365e7af39851507e94f137dcf56c87746314"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.13.3"",""VAR"":VAR}` | VAR VAR-VAR VAR. |",13
+cilium_4061cdfc83370200e3f9a0c5a782ca17a288ae71,install/kubernetes/cilium/values.yaml,"  tag: ""v1.13.4""
+  digest: """"
+  useDigest: false
+      tag: ""v1.13.4""
+      digest: """"
+      useDigest: false
+    tag: ""v1.13.4""
+    genericDigest: """"
+    azureDigest: """"
+    awsDigest: """"
+    alibabacloudDigest: """"
+    useDigest: false
+    tag: ""v1.13.4""
+    digest: """"
+    useDigest: false
+      tag: ""v1.13.4""
+      digest: """"
+      useDigest: false","  tag: ""v1.13.3""
+  digest: ""sha256:77176464a1e11ea7e89e984ac7db365e7af39851507e94f137dcf56c87746314""
+  useDigest: true
+      tag: ""v1.13.3""
+      digest: ""sha256:19e4aae5ff72cd9fbcb7d2d16a1570533320a478acc015fc91a4d41a177cadf6""
+      useDigest: true
+    tag: ""v1.13.3""
+    genericDigest: ""sha256:fa7003cbfdf8358cb71786afebc711b26e5e44a2ed99bd4944930bba915b8910""
+    azureDigest: ""sha256:7749b732d510954d9fb74f7e675b31b49100fd773e588c6fbbf42529acfb1be8""
+    awsDigest: ""sha256:394c40d156235d3c2004f77bb73402457092351cc6debdbc5727ba36fbd863ae""
+    alibabacloudDigest: ""sha256:8dba4795cb38200746a2236623f5b84742ee2c56a8afda724c85f5027ea854eb""
+    useDigest: true
+    tag: ""v1.13.3""
+    digest: ""sha256:77176464a1e11ea7e89e984ac7db365e7af39851507e94f137dcf56c87746314""
+    useDigest: true
+      tag: ""v1.13.3""
+      digest: ""sha256:5ad8e9dc17f5677d1d75b53a4e80ec2e5c4fcf4973ced8b30f8ad53933c6969a""
+      useDigest: true",4061cdfc83370200e3f9a0c5a782ca17a288ae71,CVE-2023-34242,4061cdfc83370200e3f9a0c5a782ca17a288ae71,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,80,COMPLETED,"VAR: ""VAR.13.4"" VAR: """" VAR: VAR VAR: ""VAR.13.4"" VAR: """" VAR: VAR VAR: ""VAR.13.4"" VAR: """" VAR: """" VAR: """" VAR: """" VAR: VAR VAR: ""VAR.13.4"" VAR: """" VAR: VAR VAR: ""VAR.13.4"" VAR: """" VAR: VAR VAR: ""VAR.13.3"" VAR: ""VAR:77176464a1e11ea7e89e984ac7db365e7af39851507e94f137dcf56c87746314"" VAR: VAR VAR: ""VAR.13.3"" VAR: ""VAR:19e4aae5ff72cd9fbcb7d2d16a1570533320a478acc015fc91a4d41a177cadf6"" VAR: VAR VAR: ""VAR.13.3"" VAR: ""VAR:VAR"" VAR: ""VAR:7749b732d510954d9fb74f7e675b31b49100fd773e588c6fbbf42529acfb1be8"" VAR: ""VAR:394c40d156235d3c2004f77bb73402457092351cc6debdbc5727ba36fbd863ae"" VAR: ""VAR:8dba4795cb38200746a2236623f5b84742ee2c56a8afda724c85f5027ea854eb"" VAR: VAR VAR: ""VAR.13.3"" VAR: ""VAR:77176464a1e11ea7e89e984ac7db365e7af39851507e94f137dcf56c87746314"" VAR: VAR VAR: ""VAR.13.3"" VAR: ""VAR:5ad8e9dc17f5677d1d75b53a4e80ec2e5c4fcf4973ced8b30f8ad53933c6969a"" VAR: VAR",13
+cilium_a6be57eb805dd60c6516c2fe22cddbe1e09c3812,CHANGELOG.md,"## v1.13.1
+
+Summary of Changes
+------------------
+
+**Minor Changes:**
+* Add CLI command to dump cgroups metadata (Backport PR #23834, Upstream PR #23641, @alexkats)
+* Add pod-name hubble metrics context for pod name label without namespace (Backport PR #24058, Upstream PR #23199, @chancez)
+* envoy: Bump envoy to 1.23.4 (Backport PR #23956, Upstream PR #23800, @sayboras)
+* helm: Add pod and container security context (Backport PR #24086, Upstream PR #23443, @sayboras)
+* helm: Add SA automount configuration (Backport PR #24086, Upstream PR #23441, @sayboras)
+* helm: Add support of annotations in hubble ui service (Backport PR #23834, Upstream PR #23709, @brnck)
+* Hide `--install-iptables-rules` agent flag and remove `installIptablesRules` Helm flag (Backport PR #24200, Upstream PR #24081, @pchaigno)
+
+**Bugfixes:**
+* [EKS] Fix deadlock causing network connectivity outages when kube-apiservers scale down (Backport PR #23956, Upstream PR #23836, @christarazi)
+* Add the option to preserve CNI configuration file on agent shutdown. This can help prevent issues where pods can no longer be deleted. This may cause some transient error messages to be displayed if a pod is scheduled while Cilium is being upgraded. (Backport PR #24200, Upstream PR #24009, @squeed)
+* agent: fix incorrect deletion of veth host interfaces on bootstrap (Backport PR #23956, Upstream PR #23787, @giorio94)
+* Avoid k8s CiliumNode initialization problems when Cilium connects to the KVStore (Backport PR #24200, Upstream PR #24156, @aanm)
+* bpf: Fix broken remote-node identity classification (Backport PR #23956, Upstream PR #23091, @ysksuzuki)
+* clustermesh: fix cluster synchronization wait group increment (Backport PR #24058, Upstream PR #23741, @giorio94)
+* clustermesh: fix services cache bloat due to incorrect deletion (Backport PR #24058, Upstream PR #23947, @giorio94)
+* daemon: fix panic when running with etcd with endpoint crd disabled (Backport PR #24387, Upstream PR #24085, @tommyp1ckles)
+* envoy: Avoid empty typeURL for all resources (Backport PR #23860, Upstream PR #23763, @sayboras)
+* Fix bug that would prevent IPsec from working with GENEVE encapsulation. (Backport PR #24200, Upstream PR #24116, @borkmann)
+* Fix bug that would prevent SRv6 decapsulation when BPF Host Routing was disabled. (Backport PR #23834, Upstream PR #23825, @ldelossa)
+* Fix connectivity issue upon agent restart in case of ipv6 + direct routing + KPR replacement (Backport PR #23956, Upstream PR #23857, @giorio94)
+* Fix deadlock in cilium-operator when using CiliumEndpointSlices (Backport PR #24370, Upstream PR #24343, @alan-kut)
+* Fix enable-stale-cilium-endpoint-cleanup flag not actually disabling the cleanup init set when set to false. This provides a workaround for an existing panic that can occur when running using etcd kvstore. (Backport PR #24311, Upstream PR #23874, @sjdot)
+* Fix FIB lookup for traffic to a L7 service backend, when BPF host-routing is enabled and multiple external devices are configured. (Backport PR #24195, Upstream PR #24182, @julianwiedmann)
+* Fix incorrectly dropping in-cluster traffic for L7 ingress resources (Backport PR #24200, Upstream PR #23984, @sayboras)
+* Fix IPv6 policy enforcement for SNATed traffic from the Host (Backport PR #24370, Upstream PR #24132, @ysksuzuki)
+* Fix memory leak caused on clustermesh reconnect. (Backport PR #24086, Upstream PR #23785, @oblazek)
+* Fix operator crash race condition for CES identity map concurrent read/write (Backport PR #24086, Upstream PR #23605, @dlapcevic)
+* Fix Pod connectivity interruption during agent restart (Backport PR #24370, Upstream PR #24336, @ti-mo)
+* Fix restoreServicesLocked() potential nil pointer panic (Backport PR #23834, Upstream PR #23446, @dlapcevic)
+* fix(helm): add missing updateStrategy to hubble-ui deployment (Backport PR #24058, Upstream PR #23975, @mhulscher)
+* Fixes a bug where the Helm value `cni.configMap` no longer worked. (Backport PR #23834, Upstream PR #23743, @squeed)
+* Fixes a memory leak and (possible) source of stale data for Clustermesh whenever the connection to the remote cluster is disrupted or restarted. (Backport PR #23834, Upstream PR #23532, @squeed)
+* gateway-api: Combine metrics registry with operator (Backport PR #23834, Upstream PR #23501, @sayboras)
+* helm: Fix duplicate `enable-envoy-config` flag when enabling L7LB, Ingress Controller, or GatewayAPI simultaneously (Backport PR #23956, Upstream PR #23866, @DWSR)
+* Hubble Relay: fix reported uptime (Backport PR #24058, Upstream PR #23966, @rolinh)
+* init.sh: fix cgroup program detachment and detach multiple progs with retry (Backport PR #24184, Upstream PR #24118, @ti-mo)
+* install: don't render role / rolebinding when agent disabled (Backport PR #24200, Upstream PR #23877, @squeed)
+* ipam/crd: Fix panic due to concurrent map read and map write (Backport PR #23834, Upstream PR #23713, @gandro)
+* k8s: Handle EndpointSlice AddressType field properly (Backport PR #23956, Upstream PR #23803, @YutaroHayakawa)
+* kvstore: prevent deletion delay for node-unrelated events (Backport PR #24086, Upstream PR #23745, @giorio94)
+* node: require ipv4 address when wireguard is enabled (#23552, @giorio94)
+* watchers: endpointsync can manage already owned CiliumEndpoints. (Backport PR #24086, Upstream PR #23499, @tommyp1ckles)
+
+**CI Changes:**
+* bpf/Makefile: Cover VTEP in compile tests (Backport PR #24200, Upstream PR #24106, @pchaigno)
+* CI: switch to registry.k8s.io (Backport PR #24058, Upstream PR #23821, @ameukam)
+* egressgw: test: switch to WaitForEgressPolicyEntries (Backport PR #24179, Upstream PR #24097, @jibi)
+* test: Get rid of 4.9 pipeline (Backport PR #23834, Upstream PR #23343, @brb)
+* test: Skip K8sPolicyTestExtended on the 4.19 (Backport PR #23956, Upstream PR #23934, @brb)
+* test: Update policy for hairpin flow validation (Backport PR #23834, Upstream PR #23480, @aditighag)
+
+**Misc Changes:**
+* Add leader requirement to watch from Etcd. (Backport PR #24058, Upstream PR #23590, @marseel)
+* agent: dump stack on stale probes (Backport PR #24086, Upstream PR #23915, @squeed)
+* bpf,test: Define BPF_TEST macro for map-in-map/prog-map initialization (Backport PR #24200, Upstream PR #24127, @YutaroHayakawa)
+* bpf: Fix usage of tunnel map structs (Backport PR #24086, Upstream PR #23469, @pchaigno)
+* bugtool: Add ingress/egress tc filter dump (Backport PR #24200, Upstream PR #24057, @joestringer)
+* chore(deps): update actions/checkout action to v3.3.0 (v1.13) (#23992, @renovate[bot])
+* chore(deps): update all github action dependencies (v1.13) (patch) (#23991, @renovate[bot])
+* chore(deps): update base-images (v1.13) (#24104, @renovate[bot])
+* chore(deps): update dependency cilium/hubble to v0.11.2 (v1.13) (#23851, @renovate[bot])
+* chore(deps): update docker.io/library/golang:1.19.6 docker digest to 1a86aa6 (v1.13) (#24105, @renovate[bot])
+* chore(deps): update docker.io/library/golang:1.19.6 docker digest to 7ce31d1 (v1.13) (#23775, @renovate[bot])
+* chore(deps): update docker.io/library/golang:1.19.6 docker digest to 7ce31d1 (v1.13) (#23776, @renovate[bot])
+* chore(deps): update quay.io/cilium/hubble docker tag to v0.11.2 (v1.13) (#23908, @renovate[bot])
+* docs: Clarify basic kernel requirement (Backport PR #24058, Upstream PR #23951, @pchaigno)
+* docs: Document CONFIG_PERF_EVENTS requirement (Backport PR #24200, Upstream PR #24055, @joestringer)
+* docs: Document kernel requirement for L3 devices support (Backport PR #24200, Upstream PR #24101, @pchaigno)
+* docs: Document upgrade behaviour for 1.13.x (#24364, @joestringer)
+* docs: Fix missing disclaimer content to Ingress and Gateway API pages (Backport PR #23956, Upstream PR #23756, @kayceeDev)
+* docs: Fix the dead link to Mellanox performance tuning guide (Backport PR #24086, Upstream PR #24012, @gentoo-root)
+* docs: replace usage of api.twitter.com (Backport PR #23834, Upstream PR #23669, @kaworu)
+* Document exemplars option for hubble httpV2 metrics (Backport PR #23834, Upstream PR #23620, @chancez)
+* fix(deps): update module golang.org/x/net to v0.7.0 [security] (master) (Backport PR #23956, Upstream PR #23904, @renovate[bot])
+* Fixed broken/deprecated links (Backport PR #24058, Upstream PR #23920, @PhilipSchmid)
+* Fixed link to broken anchor in RKE doc (Backport PR #23834, Upstream PR #23706, @raphink)
+* Fixes a flake in the kubectl wait part of the CI (Backport PR #23834, Upstream PR #23733, @meyskens)
+* init.sh: clean up cgroup bpf_links created by newer versions of Cilium (Backport PR #24184, Upstream PR #23537, @ti-mo)
+* IPsec: Remove `IP_POOLS` logic (Backport PR #24086, Upstream PR #24030, @pchaigno)
+* kvstore: add clusterName suffix to session controllers (Backport PR #24086, Upstream PR #23928, @oblazek)
+* Remove / in RKE doc link as it causes redirect bug (Backport PR #23834, Upstream PR #23728, @raphink)
+* test/runtime: Set NO_COLOR for privileged tests (Backport PR #24058, Upstream PR #23151, @joestringer)
+* Update CNI to 1.2.0 (#23319, @michi-covalent)
+* Update signature verification docs for Sigstore 2.0 (Backport PR #24086, Upstream PR #24029, @jedsalazar)
+* workflow: fixes LLVM, Clang cache and install path (Backport PR #23834, Upstream PR #23740, @brlbil)
+
+**Other Changes:**
+* .github: remove workflows that are not branch specific (#23842, @aanm)
+* gha: Bump timeout to 90 minutes for build commit. (#23959, @sayboras)
+* install: Update image digests for v1.13.0 (#23783, @aanm)
+* update images 1.13 (#24331, @nebril)
+* v1.13 - Backport initContainer change (#24333, @ferozsalam)
+",,a6be57eb805dd60c6516c2fe22cddbe1e09c3812,CVE-2023-27594,a6be57eb805dd60c6516c2fe22cddbe1e09c3812,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED," VAR VAR VAR ------------------ **VAR VAR:** * VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR-VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR 1.23.4 (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR `--VAR-VAR-VAR` VAR VAR VAR VAR `VAR` VAR VAR (VAR VAR  **VAR:** * [VAR] VAR VAR VAR VAR VAR VAR VAR VAR-VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR-VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR + VAR VAR + VAR VAR (VAR VAR  * VAR VAR VAR VAR-VAR VAR VAR VAR (VAR VAR  * VAR VAR-VAR-VAR-VAR-VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR, VAR VAR VAR-VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR-VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR/VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR() VAR VAR VAR VAR (VAR VAR  * VAR(VAR): VAR VAR VAR VAR VAR-VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR `VAR.VAR` VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR (VAR) VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR-VAR: VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR `VAR-VAR-VAR` VAR VAR VAR VAR, VAR VAR, VAR VAR VAR (VAR VAR  * VAR VAR: VAR VAR VAR (VAR VAR  * VAR.VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR'VAR VAR VAR / VAR VAR VAR VAR (VAR VAR  * VAR/VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR-VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR ( * VAR: VAR VAR VAR VAR VAR VAR. (VAR VAR  **VAR VAR:** * VAR/VAR: VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR.VAR.VAR (VAR VAR  * VAR: VAR: VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR 4.9 VAR (VAR VAR  * VAR: VAR VAR VAR VAR 4.19 (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR (VAR VAR  **VAR VAR:** * VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR: VAR VAR VAR VAR VAR (VAR VAR  * VAR,VAR: VAR VAR VAR VAR VAR-VAR-VAR/VAR-VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR/VAR VAR VAR VAR (VAR VAR  * VAR(VAR): VAR VAR/VAR VAR VAR VAR.3.0 (VAR.13) ( * VAR(VAR): VAR VAR VAR VAR VAR (VAR.13) (VAR) ( * VAR(VAR): VAR VAR-VAR (VAR.13) ( * VAR(VAR): VAR VAR VAR/VAR VAR VAR.11.2 (VAR.13) ( * VAR(VAR): VAR VAR.VAR/VAR/VAR:1.19.6 VAR VAR VAR 1a86aa6 (VAR.13) ( * VAR(VAR): VAR VAR.VAR/VAR/VAR:1.19.6 VAR VAR VAR 7ce31d1 (VAR.13) ( * VAR(VAR): VAR VAR.VAR/VAR/VAR:1.19.6 VAR VAR VAR 7ce31d1 (VAR.13) ( * VAR(VAR): VAR VAR.VAR/VAR/VAR VAR VAR VAR VAR.11.2 (VAR.13) ( * VAR: VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR 1.13.VAR ( * VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR.VAR.VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR(VAR): VAR VAR VAR.VAR/VAR/VAR VAR VAR.7.0 [VAR] (VAR) (VAR VAR  * VAR VAR/VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR.VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR `VAR` VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR / VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR/VAR: VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR 1.2.0 ( * VAR VAR VAR VAR VAR VAR 2.0 (VAR VAR  * VAR: VAR VAR, VAR VAR VAR VAR VAR (VAR VAR  **VAR VAR:** * .VAR: VAR VAR VAR VAR VAR VAR VAR ( * VAR: VAR VAR VAR 90 VAR VAR VAR VAR. ( * VAR: VAR VAR VAR VAR VAR.13.0 ( * VAR VAR 1.13 ( * VAR.13 - VAR VAR VAR ( ",13
+cilium_a6be57eb805dd60c6516c2fe22cddbe1e09c3812,Documentation/helm-values.rst,"     - ``{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.13.1"",""useDigest"":false}``
+     - ``{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.13.1"",""useDigest"":false}``
+     - ``{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.13.1"",""useDigest"":false}``
+     - ``{""alibabacloudDigest"":"""",""awsDigest"":"""",""azureDigest"":"""",""genericDigest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.13.1"",""useDigest"":false}``
+     - ``{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.13.1"",""useDigest"":false}``","     - ``{""digest"":""sha256:f7273ddb4c223e54827d1185d0c8f3b87966b05229358a224cdc3fe11a25fc72"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.13.0"",""useDigest"":true}``
+     - ``{""digest"":""sha256:bc00f086285d2d287dd662a319d3dbe90e57179515ce8649425916aecaa9ac3c"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.13.0"",""useDigest"":true}``
+     - ``{""digest"":""sha256:6544a3441b086a2e09005d3e21d1a4afb216fae19c5a60b35793c8a9438f8f68"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.13.0"",""useDigest"":true}``
+     - ``{""alibabacloudDigest"":""sha256:0332376a4a6f92ff7936d3b52614f8219a10d6fd46aa14fead8426d0e140f79a"",""awsDigest"":""sha256:3cc9ff5bcc57f536427e7059abc916831b368654dfddcbad8a412731984a95e4"",""azureDigest"":""sha256:ec1246bbbf7125998e2f547fc518ae56ae364dbd3f46812fa325c068cc406bd7"",""genericDigest"":""sha256:4b58d5b33e53378355f6e8ceb525ccf938b7b6f5384b35373f1f46787467ebf5"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.13.0"",""useDigest"":true}``
+     - ``{""digest"":""sha256:6544a3441b086a2e09005d3e21d1a4afb216fae19c5a60b35793c8a9438f8f68"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.13.0"",""useDigest"":true}``",a6be57eb805dd60c6516c2fe22cddbe1e09c3812,CVE-2023-27594,a6be57eb805dd60c6516c2fe22cddbe1e09c3812,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED,"- ``{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.13.1"",""VAR"":VAR}`` - ``{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.13.1"",""VAR"":VAR}`` - ``{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.13.1"",""VAR"":VAR}`` - ``{""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.13.1"",""VAR"":VAR}`` - ``{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.13.1"",""VAR"":VAR}`` - ``{""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.13.0"",""VAR"":VAR}`` - ``{""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.13.0"",""VAR"":VAR}`` - ``{""VAR"":""VAR:6544a3441b086a2e09005d3e21d1a4afb216fae19c5a60b35793c8a9438f8f68"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.13.0"",""VAR"":VAR}`` - ``{""VAR"":""VAR:0332376a4a6f92ff7936d3b52614f8219a10d6fd46aa14fead8426d0e140f79a"",""VAR"":""VAR:3cc9ff5bcc57f536427e7059abc916831b368654dfddcbad8a412731984a95e4"",""VAR"":""VAR:VAR"",""VAR"":""VAR:4b58d5b33e53378355f6e8ceb525ccf938b7b6f5384b35373f1f46787467ebf5"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.13.0"",""VAR"":VAR}`` - ``{""VAR"":""VAR:6544a3441b086a2e09005d3e21d1a4afb216fae19c5a60b35793c8a9438f8f68"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.13.0"",""VAR"":VAR}``",13
+cilium_a6be57eb805dd60c6516c2fe22cddbe1e09c3812,VERSION,1.13.1,1.13.0,a6be57eb805dd60c6516c2fe22cddbe1e09c3812,CVE-2023-27594,a6be57eb805dd60c6516c2fe22cddbe1e09c3812,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED,1.13.1 1.13.0,13
+cilium_a6be57eb805dd60c6516c2fe22cddbe1e09c3812,install/kubernetes/cilium/Chart.yaml,"version: 1.13.1
+appVersion: 1.13.1","version: 1.13.0
+appVersion: 1.13.0",a6be57eb805dd60c6516c2fe22cddbe1e09c3812,CVE-2023-27594,a6be57eb805dd60c6516c2fe22cddbe1e09c3812,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED,VAR: 1.13.1 VAR: 1.13.1 VAR: 1.13.0 VAR: 1.13.0,13
+cilium_a6be57eb805dd60c6516c2fe22cddbe1e09c3812,install/kubernetes/cilium/README.md,"![Version: 1.13.1](https://img.shields.io/badge/Version-1.13.1-informational?style=flat-square) ![AppVersion: 1.13.1](https://img.shields.io/badge/AppVersion-1.13.1-informational?style=flat-square)
+| clustermesh.apiserver.image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.13.1"",""useDigest"":false}` | Clustermesh API server image. |
+| hubble.relay.image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.13.1"",""useDigest"":false}` | Hubble-relay container image. |
+| image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.13.1"",""useDigest"":false}` | Agent container image. |
+| operator.image | object | `{""alibabacloudDigest"":"""",""awsDigest"":"""",""azureDigest"":"""",""genericDigest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.13.1"",""useDigest"":false}` | cilium-operator image. |
+| preflight.image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.13.1"",""useDigest"":false}` | Cilium pre-flight image. |","![Version: 1.13.0](https://img.shields.io/badge/Version-1.13.0-informational?style=flat-square) ![AppVersion: 1.13.0](https://img.shields.io/badge/AppVersion-1.13.0-informational?style=flat-square)
+| clustermesh.apiserver.image | object | `{""digest"":""sha256:f7273ddb4c223e54827d1185d0c8f3b87966b05229358a224cdc3fe11a25fc72"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.13.0"",""useDigest"":true}` | Clustermesh API server image. |
+| hubble.relay.image | object | `{""digest"":""sha256:bc00f086285d2d287dd662a319d3dbe90e57179515ce8649425916aecaa9ac3c"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.13.0"",""useDigest"":true}` | Hubble-relay container image. |
+| image | object | `{""digest"":""sha256:6544a3441b086a2e09005d3e21d1a4afb216fae19c5a60b35793c8a9438f8f68"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.13.0"",""useDigest"":true}` | Agent container image. |
+| operator.image | object | `{""alibabacloudDigest"":""sha256:0332376a4a6f92ff7936d3b52614f8219a10d6fd46aa14fead8426d0e140f79a"",""awsDigest"":""sha256:3cc9ff5bcc57f536427e7059abc916831b368654dfddcbad8a412731984a95e4"",""azureDigest"":""sha256:ec1246bbbf7125998e2f547fc518ae56ae364dbd3f46812fa325c068cc406bd7"",""genericDigest"":""sha256:4b58d5b33e53378355f6e8ceb525ccf938b7b6f5384b35373f1f46787467ebf5"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.13.0"",""useDigest"":true}` | cilium-operator image. |
+| preflight.image | object | `{""digest"":""sha256:6544a3441b086a2e09005d3e21d1a4afb216fae19c5a60b35793c8a9438f8f68"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.13.0"",""useDigest"":true}` | Cilium pre-flight image. |",a6be57eb805dd60c6516c2fe22cddbe1e09c3812,CVE-2023-27594,a6be57eb805dd60c6516c2fe22cddbe1e09c3812,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED,"![VAR: 1.13.1](VAR: | VAR.VAR.VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.13.1"",""VAR"":VAR}` | VAR VAR VAR VAR. | | VAR.VAR.VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.13.1"",""VAR"":VAR}` | VAR-VAR VAR VAR. | | VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.13.1"",""VAR"":VAR}` | VAR VAR VAR. | | VAR.VAR | VAR | `{""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.13.1"",""VAR"":VAR}` | VAR-VAR VAR. | | VAR.VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.13.1"",""VAR"":VAR}` | VAR VAR-VAR VAR. | ![VAR: 1.13.0](VAR: | VAR.VAR.VAR | VAR | `{""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.13.0"",""VAR"":VAR}` | VAR VAR VAR VAR. | | VAR.VAR.VAR | VAR | `{""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.13.0"",""VAR"":VAR}` | VAR-VAR VAR VAR. | | VAR | VAR | `{""VAR"":""VAR:6544a3441b086a2e09005d3e21d1a4afb216fae19c5a60b35793c8a9438f8f68"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.13.0"",""VAR"":VAR}` | VAR VAR VAR. | | VAR.VAR | VAR | `{""VAR"":""VAR:0332376a4a6f92ff7936d3b52614f8219a10d6fd46aa14fead8426d0e140f79a"",""VAR"":""VAR:3cc9ff5bcc57f536427e7059abc916831b368654dfddcbad8a412731984a95e4"",""VAR"":""VAR:VAR"",""VAR"":""VAR:4b58d5b33e53378355f6e8ceb525ccf938b7b6f5384b35373f1f46787467ebf5"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.13.0"",""VAR"":VAR}` | VAR-VAR VAR. | | VAR.VAR | VAR | `{""VAR"":""VAR:6544a3441b086a2e09005d3e21d1a4afb216fae19c5a60b35793c8a9438f8f68"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.13.0"",""VAR"":VAR}` | VAR VAR-VAR VAR. |",13
+cilium_a6be57eb805dd60c6516c2fe22cddbe1e09c3812,install/kubernetes/cilium/values.yaml,"  tag: ""v1.13.1""
+  digest: """"
+  useDigest: false
+      tag: ""v1.13.1""
+      digest: """"
+      useDigest: false
+    tag: ""v1.13.1""
+    genericDigest: """"
+    azureDigest: """"
+    awsDigest: """"
+    alibabacloudDigest: """"
+    useDigest: false
+    tag: ""v1.13.1""
+    digest: """"
+    useDigest: false
+      tag: ""v1.13.1""
+      digest: """"
+      useDigest: false","  tag: ""v1.13.0""
+  digest: ""sha256:6544a3441b086a2e09005d3e21d1a4afb216fae19c5a60b35793c8a9438f8f68""
+  useDigest: true
+      tag: ""v1.13.0""
+      digest: ""sha256:bc00f086285d2d287dd662a319d3dbe90e57179515ce8649425916aecaa9ac3c""
+      useDigest: true
+    tag: ""v1.13.0""
+    genericDigest: ""sha256:4b58d5b33e53378355f6e8ceb525ccf938b7b6f5384b35373f1f46787467ebf5""
+    azureDigest: ""sha256:ec1246bbbf7125998e2f547fc518ae56ae364dbd3f46812fa325c068cc406bd7""
+    awsDigest: ""sha256:3cc9ff5bcc57f536427e7059abc916831b368654dfddcbad8a412731984a95e4""
+    alibabacloudDigest: ""sha256:0332376a4a6f92ff7936d3b52614f8219a10d6fd46aa14fead8426d0e140f79a""
+    useDigest: true
+    tag: ""v1.13.0""
+    digest: ""sha256:6544a3441b086a2e09005d3e21d1a4afb216fae19c5a60b35793c8a9438f8f68""
+    useDigest: true
+      tag: ""v1.13.0""
+      digest: ""sha256:f7273ddb4c223e54827d1185d0c8f3b87966b05229358a224cdc3fe11a25fc72""
+      useDigest: true",a6be57eb805dd60c6516c2fe22cddbe1e09c3812,CVE-2023-27594,a6be57eb805dd60c6516c2fe22cddbe1e09c3812,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED,"VAR: ""VAR.13.1"" VAR: """" VAR: VAR VAR: ""VAR.13.1"" VAR: """" VAR: VAR VAR: ""VAR.13.1"" VAR: """" VAR: """" VAR: """" VAR: """" VAR: VAR VAR: ""VAR.13.1"" VAR: """" VAR: VAR VAR: ""VAR.13.1"" VAR: """" VAR: VAR VAR: ""VAR.13.0"" VAR: ""VAR:6544a3441b086a2e09005d3e21d1a4afb216fae19c5a60b35793c8a9438f8f68"" VAR: VAR VAR: ""VAR.13.0"" VAR: ""VAR:VAR"" VAR: VAR VAR: ""VAR.13.0"" VAR: ""VAR:4b58d5b33e53378355f6e8ceb525ccf938b7b6f5384b35373f1f46787467ebf5"" VAR: ""VAR:VAR"" VAR: ""VAR:3cc9ff5bcc57f536427e7059abc916831b368654dfddcbad8a412731984a95e4"" VAR: ""VAR:0332376a4a6f92ff7936d3b52614f8219a10d6fd46aa14fead8426d0e140f79a"" VAR: VAR VAR: ""VAR.13.0"" VAR: ""VAR:6544a3441b086a2e09005d3e21d1a4afb216fae19c5a60b35793c8a9438f8f68"" VAR: VAR VAR: ""VAR.13.0"" VAR: ""VAR:VAR"" VAR: VAR",13
+cpython_c9f07813ab8e664d8c34413c4fc2d4f86c061a92,Doc/whatsnew/3.6.rst,"
+Notable changes in Python 3.6.13
+================================
+
+Earlier Python versions allowed using both ``;`` and ``&`` as
+query parameter separators in :func:`urllib.parse.parse_qs` and
+:func:`urllib.parse.parse_qsl`.  Due to security concerns, and to conform with
+newer W3C recommendations, this has been changed to allow only a single
+separator key, with ``&`` as the default.  This change also affects
+:func:`cgi.parse` and :func:`cgi.parse_multipart` as they use the affected
+functions internally. For more details, please see their respective
+documentation.
+(Contributed by Adam Goldschmidt, Senthil Kumaran and Ken Jin in :issue:`42967`.)",,c9f07813ab8e664d8c34413c4fc2d4f86c061a92,CVE-2021-23336,c9f07813ab8e664d8c34413c4fc2d4f86c061a92,https://github.com/python/cpython,NVD_GIT_REPOBASED,120,COMPLETED,"VAR VAR VAR VAR 3.6.13 ================================ VAR VAR VAR VAR VAR VAR ``;`` VAR ``&`` VAR VAR VAR VAR VAR :VAR:`VAR.VAR.VAR` VAR :VAR:`VAR.VAR.VAR`. VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR, VAR ``&`` VAR VAR VAR. VAR VAR VAR VAR :VAR:`VAR.VAR` VAR :VAR:`VAR.VAR` VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR, VAR VAR VAR VAR VAR. (VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR :VAR:`42967`.) ",13
+cpython_fcbe0cb04d35189401c0c880ebfb4311e952d776,Doc/whatsnew/3.6.rst,"
+Notable changes in Python 3.6.13
+================================
+
+Earlier Python versions allowed using both "";"" and ""&"" as
+query parameter separators in :func:`urllib.parse.parse_qs` and
+:func:`urllib.parse.parse_qsl`.  Due to security concerns, and to conform with
+newer W3C recommendations, this has been changed to allow only a single
+separator key, with ""&"" as the default.  This change also affects
+:func:`cgi.parse` and :func:`cgi.parse_multipart` as they use the affected
+functions internally. For more details, please see their respective
+documentation.
+(Contributed by Adam Goldschmidt, Senthil Kumaran and Ken Jin in :issue:`42967`.)",,fcbe0cb04d35189401c0c880ebfb4311e952d776,CVE-2021-23336,fcbe0cb04d35189401c0c880ebfb4311e952d776,https://github.com/python/cpython,NVD_GIT_REPOBASED,152,COMPLETED,"VAR VAR VAR VAR 3.6.13 ================================ VAR VAR VAR VAR VAR VAR "";"" VAR ""&"" VAR VAR VAR VAR VAR :VAR:`VAR.VAR.VAR` VAR :VAR:`VAR.VAR.VAR`. VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR, VAR ""&"" VAR VAR VAR. VAR VAR VAR VAR :VAR:`VAR.VAR` VAR :VAR:`VAR.VAR` VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR, VAR VAR VAR VAR VAR. (VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR :VAR:`42967`.) ",13
+discourse_f31f0b70f82c43d93220ce6fc0d4f57440452f37,app/assets/javascripts/discourse/tests/unit/models/tag-test.js,"import { module, test } from ""qunit"";
+import { getOwner } from ""discourse-common/lib/get-owner"";
+import { setupTest } from ""ember-qunit"";
+
+module(""Unit | Model | tag"", function (hooks) {
+  setupTest(hooks);
+
+  hooks.beforeEach(function () {
+    this.store = getOwner(this).lookup(""service:store"");
+  });
+
+  test(""totalCount when pm_count is not present"", function (assert) {
+    const tag = this.store.createRecord(""tag"", { count: 5 });
+    assert.strictEqual(tag.totalCount, 5);
+  });
+
+  test(""totalCount when pm_count is present"", function (assert) {
+    const tag = this.store.createRecord(""tag"", { count: 5, pm_count: 8 });
+    assert.strictEqual(tag.totalCount, 13);
+  });
+
+  test(""pmOnly"", function (assert) {
+    const tag = this.store.createRecord(""tag"", { pm_only: false });
+
+    assert.notOk(tag.pmOnly);
+
+    tag.set(""pm_only"", true);
+
+    assert.ok(tag.pmOnly);
+  });
+});",,f31f0b70f82c43d93220ce6fc0d4f57440452f37,CVE-2023-23935,f31f0b70f82c43d93220ce6fc0d4f57440452f37,https://github.com/discourse/discourse,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR { VAR, VAR } VAR ""VAR""; VAR { VAR } VAR ""VAR-VAR/VAR/VAR-VAR""; VAR { VAR } VAR ""VAR-VAR""; VAR(""VAR | VAR | VAR"", VAR (VAR) { VAR(VAR); VAR.VAR(VAR () { VAR.VAR = VAR(VAR).VAR(""VAR:VAR""); }); VAR(""VAR VAR VAR VAR VAR VAR"", VAR (VAR) { VAR VAR = VAR.VAR.VAR(""VAR"", { VAR: 5 }); VAR.VAR(VAR.VAR, 5); }); VAR(""VAR VAR VAR VAR VAR"", VAR (VAR) { VAR VAR = VAR.VAR.VAR(""VAR"", { VAR: 5, VAR: 8 }); VAR.VAR(VAR.VAR, 13); }); VAR(""VAR"", VAR (VAR) { VAR VAR = VAR.VAR.VAR(""VAR"", { VAR: VAR }); VAR.VAR(VAR.VAR); VAR.VAR(""VAR"", VAR); VAR.VAR(VAR.VAR); }); }); ",13
+django_d03bf6fe4e9bf5b07de62c1a271c4b41a7d3d158,docs/releases/1.8.14.txt,"*July 18, 2016*
+Django 1.8.14 fixes a security issue and a bug in 1.8.13.
+
+XSS in admin's add/change related popup
+=======================================
+
+Unsafe usage of JavaScript's ``Element.innerHTML`` could result in XSS in the
+admin's add/change related popup. ``Element.textContent`` is now used to
+prevent execution of the data.
+
+The debug view also used ``innerHTML``. Although a security issue wasn't
+identified there, out of an abundance of caution it's also updated to use
+``textContent``.","*Under development*
+Django 1.8.14 fixes several bugs in 1.8.13.",d03bf6fe4e9bf5b07de62c1a271c4b41a7d3d158,CVE-2016-6186,d03bf6fe4e9bf5b07de62c1a271c4b41a7d3d158,https://github.com/django/django,NVD_DIRECT_COMMIT,1337,COMPLETED,"*VAR 18, 2016* VAR 1.8.14 VAR VAR VAR VAR VAR VAR VAR VAR 1.8.13. VAR VAR VAR'VAR VAR/VAR VAR VAR ======================================= VAR VAR VAR VAR'VAR ``VAR.VAR`` VAR VAR VAR VAR VAR VAR VAR'VAR VAR/VAR VAR VAR. ``VAR.VAR`` VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR ``VAR``. VAR VAR VAR VAR VAR'VAR VAR VAR, VAR VAR VAR VAR VAR VAR VAR'VAR VAR VAR VAR VAR ``VAR``. *VAR VAR* VAR 1.8.14 VAR VAR VAR VAR 1.8.13.",13
+django_f68e5a99164867ab0e071a936470958ed867479d,docs/releases/1.8.14.txt,"*July 18, 2016*
+Django 1.8.14 fixes a security issue and a bug in 1.8.13.
+
+XSS in admin's add/change related popup
+=======================================
+
+Unsafe usage of JavaScript's ``Element.innerHTML`` could result in XSS in the
+admin's add/change related popup. ``Element.textContent`` is now used to
+prevent execution of the data.
+
+The debug view also used ``innerHTML``. Although a security issue wasn't
+identified there, out of an abundance of caution it's also updated to use
+``textContent``.","*Under development*
+Django 1.8.14 fixes several bugs in 1.8.13.",f68e5a99164867ab0e071a936470958ed867479d,CVE-2016-6186,f68e5a99164867ab0e071a936470958ed867479d,https://github.com/django/django,NVD_DIRECT_COMMIT,1337,COMPLETED,"*VAR 18, 2016* VAR 1.8.14 VAR VAR VAR VAR VAR VAR VAR VAR 1.8.13. VAR VAR VAR'VAR VAR/VAR VAR VAR ======================================= VAR VAR VAR VAR'VAR ``VAR.VAR`` VAR VAR VAR VAR VAR VAR VAR'VAR VAR/VAR VAR VAR. ``VAR.VAR`` VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR ``VAR``. VAR VAR VAR VAR VAR'VAR VAR VAR, VAR VAR VAR VAR VAR VAR VAR'VAR VAR VAR VAR VAR ``VAR``. *VAR VAR* VAR 1.8.14 VAR VAR VAR VAR 1.8.13.",13
+dolibarr_796b2d201acb9938b903fb2afa297db289ecc93e,test/phpunit/SecurityTest.php,"		$_GET[""param7""]='""c:\this is a path~1\aaa&#110; &#x&#x31;&#x31;&#x30;;"" abc<bad>def</bad>';
+		print __METHOD__."" result param7 = "".$result.""\n"";
+		$this->assertEquals('""c:\this is a path~1\aaan &#x;;;;"" abcdef', $result);
+		$this->assertEquals('n n &gt; &lt; &quot; <a href=\""alert(document.domain)\"">XSS</a>', $result, 'Test 13 that HTML entities are decoded with restricthtml, but only for common alpha chars');
+		$this->assertEquals('n n &gt; &lt; &quot; <a href=\""alert(document.domain)\"">XSS</a>', $result, 'Test 13b that HTML entities are decoded with restricthtml, but only for common alpha chars');","		$_GET[""param7""]='""c:\this is a path~1\aaa&#110;"" abc<bad>def</bad>';
+		print __METHOD__."" result="".$result.""\n"";
+		$this->assertEquals('""c:\this is a path~1\aaan"" abcdef', $result);
+		$this->assertEquals('n n &gt; &lt; &quot; <a href=\""alert(document.domain)\"">XSS</a>', $result, 'Test that HTML entities are decoded with restricthtml, but only for common alpha chars');
+		$this->assertEquals('n n &gt; &lt; &quot; <a href=\""jvascript:alert(document.domain)\"">XSS</a>', $result, 'Test that HTML entities are decoded with restricthtml, but only for common alpha chars');",796b2d201acb9938b903fb2afa297db289ecc93e,CVE-2021-25955,796b2d201acb9938b903fb2afa297db289ecc93e,https://github.com/Dolibarr/dolibarr,NVD_DIRECT_COMMIT,1337,COMPLETED,"$VAR[""VAR""]='""VAR:\VAR VAR VAR VAR~1\VAR& VAR VAR."" VAR VAR = "".$VAR.""\VAR""; $VAR->VAR('""VAR:\VAR VAR VAR VAR~1\VAR & $VAR->VAR('VAR VAR &VAR; &VAR; &VAR; <VAR VAR=\""VAR(VAR.VAR)\"">VAR</VAR>', $VAR, 'VAR 13 VAR VAR VAR VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR'); $VAR->VAR('VAR VAR &VAR; &VAR; &VAR; <VAR VAR=\""VAR(VAR.VAR)\"">VAR</VAR>', $VAR, 'VAR 13b VAR VAR VAR VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR'); $VAR[""VAR""]='""VAR:\VAR VAR VAR VAR~1\VAR& VAR VAR."" VAR="".$VAR.""\VAR""; $VAR->VAR('""VAR:\VAR VAR VAR VAR~1\VAR"" VAR', $VAR); $VAR->VAR('VAR VAR &VAR; &VAR; &VAR; <VAR VAR=\""VAR(VAR.VAR)\"">VAR</VAR>', $VAR, 'VAR VAR VAR VAR VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR'); $VAR->VAR('VAR VAR &VAR; &VAR; &VAR; <VAR VAR=\""VAR:VAR(VAR.VAR)\"">VAR</VAR>', $VAR, 'VAR VAR VAR VAR VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR');",13
+envoy_5333b928d8bcffa26ab19bf018369a835f697585,docs/root/configuration/best_practices/edge.rst,"If Envoy is configured with RBAC filter or makes route selection based on URL path it is recommended to enable the following path normalization options to minimize probability of path confusion vulnerabilities. Path confusion vulnerabilities occur when parties participating in request use different path representations.
+
+* Enable :ref:`normalize_path setting <envoy_v3_api_field_extensions.filters.network.http_connection_manager.v3.HttpConnectionManager.normalize_path>`.
+* Enable :ref:`merge_slashes setting <envoy_v3_api_field_extensions.filters.network.http_connection_manager.v3.HttpConnectionManager.merge_slashes>`.
+
+Additionally the :ref:`path_with_escaped_slashes_action setting <envoy_v3_api_field_extensions.filters.network.http_connection_manager.v3.HttpConnectionManager.path_with_escaped_slashes_action>` should be set according to following recommendations:
+
+* REJECT_REQUEST if dowstream clients are expected to use rfc3986 compliant normalized paths (i.e. gRPC clients).
+* UNESCAPE_AND_REDIRECT if downstream client supports HTTP redirect (i.e. a browser). This option minimizes possibility of path confusion by forcing request to be re-issued with the same path across all parties: downstream client, Envoy and upstream server. Note that gRPC requests will still be rejected with the INTERNAL (13) error code, as gRPC clients do not support redirect.
+* KEEP_UNCHANGED for servers that are not rfc3986 compliant and require encoded slashes.
+* UNESCAPE_AND_FORWARD for servers that are known to treat escaped and unescaped slashes equivalently. Choosing this option may increase probablity of path confusion vulnerabilities if intermediaries perform path based access control.
+",,5333b928d8bcffa26ab19bf018369a835f697585,CVE-2021-29492,5333b928d8bcffa26ab19bf018369a835f697585,https://github.com/envoyproxy/envoy,NVD_GIT_REPOBASED,162,COMPLETED,"VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. * VAR :VAR:`VAR VAR <VAR.VAR.VAR.VAR.VAR.VAR.VAR>`. * VAR :VAR:`VAR VAR <VAR.VAR.VAR.VAR.VAR.VAR.VAR>`. VAR VAR :VAR:`VAR VAR <VAR.VAR.VAR.VAR.VAR.VAR.VAR>` VAR VAR VAR VAR VAR VAR VAR: * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR.VAR. VAR VAR). * VAR VAR VAR VAR VAR VAR VAR (VAR.VAR. VAR VAR). VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR-VAR VAR VAR VAR VAR VAR VAR VAR: VAR VAR, VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (13) VAR VAR, VAR VAR VAR VAR VAR VAR VAR. * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. ",13
+envoy_542f84c66e9f6479bc31c6f53157c60472b25240,test/common/network/listener_impl_test.cc,"#include ""test/test_common/test_runtime.h""
+TEST_P(ListenerImplTest, GlobalConnectionLimitEnforcement) {
+  // Required to manipulate runtime values when there is no test server.
+  TestScopedRuntime scoped_runtime;
+
+  Runtime::LoaderSingleton::getExisting()->mergeValues(
+      {{""overload.global_downstream_max_connections"", ""2""}});
+  auto socket = std::make_shared<Network::TcpListenSocket>(
+      Network::Test::getCanonicalLoopbackAddress(version_), nullptr, true);
+  Network::MockListenerCallbacks listener_callbacks;
+  Network::MockConnectionHandler connection_handler;
+  Network::ListenerPtr listener = dispatcher_->createListener(socket, listener_callbacks, true);
+
+  std::vector<Network::ClientConnectionPtr> client_connections;
+  std::vector<Network::ConnectionPtr> server_connections;
+  StreamInfo::StreamInfoImpl stream_info(dispatcher_->timeSource());
+  EXPECT_CALL(listener_callbacks, onAccept_(_))
+      .WillRepeatedly(Invoke([&](Network::ConnectionSocketPtr& accepted_socket) -> void {
+        server_connections.emplace_back(dispatcher_->createServerConnection(
+            std::move(accepted_socket), Network::Test::createRawBufferSocket(), stream_info));
+        dispatcher_->exit();
+      }));
+
+  auto initiate_connections = [&](const int count) {
+    for (int i = 0; i < count; ++i) {
+      client_connections.emplace_back(dispatcher_->createClientConnection(
+          socket->localAddress(), Network::Address::InstanceConstSharedPtr(),
+          Network::Test::createRawBufferSocket(), nullptr));
+      client_connections.back()->connect();
+    }
+  };
+
+  initiate_connections(5);
+  EXPECT_CALL(listener_callbacks, onReject()).Times(3);
+  dispatcher_->run(Event::Dispatcher::RunType::Block);
+
+  // We expect any server-side connections that get created to populate 'server_connections'.
+  EXPECT_EQ(2, server_connections.size());
+
+  // Let's increase the allowed connections and try sending more connections.
+  Runtime::LoaderSingleton::getExisting()->mergeValues(
+      {{""overload.global_downstream_max_connections"", ""3""}});
+  initiate_connections(5);
+  EXPECT_CALL(listener_callbacks, onReject()).Times(4);
+  dispatcher_->run(Event::Dispatcher::RunType::Block);
+
+  EXPECT_EQ(3, server_connections.size());
+
+  // Clear the limit and verify there's no longer a limit.
+  Runtime::LoaderSingleton::getExisting()->mergeValues(
+      {{""overload.global_downstream_max_connections"", """"}});
+  initiate_connections(10);
+  dispatcher_->run(Event::Dispatcher::RunType::Block);
+
+  EXPECT_EQ(13, server_connections.size());
+
+  for (const auto& conn : client_connections) {
+    conn->close(ConnectionCloseType::NoFlush);
+  }
+  for (const auto& conn : server_connections) {
+    conn->close(ConnectionCloseType::NoFlush);
+  }
+
+  Runtime::LoaderSingleton::getExisting()->mergeValues(
+      {{""overload.global_downstream_max_connections"", """"}});
+}
+",,542f84c66e9f6479bc31c6f53157c60472b25240,CVE-2020-8663,542f84c66e9f6479bc31c6f53157c60472b25240,https://github.com/envoyproxy/envoy,NVD_GIT_REPOBASED,76,COMPLETED," VAR(VAR, VAR) {  VAR VAR; VAR::VAR::VAR()->VAR( {{""VAR.VAR"", ""2""}}); VAR VAR = VAR::VAR<VAR::VAR>( VAR::VAR::VAR(VAR), VAR, VAR); VAR::VAR VAR; VAR::VAR VAR; VAR::VAR VAR = VAR->VAR(VAR, VAR, VAR); VAR::VAR<VAR::VAR> VAR; VAR::VAR<VAR::VAR> VAR; VAR::VAR VAR(VAR->VAR()); VAR(VAR, VAR(VAR)) .VAR(VAR([&](VAR::VAR& VAR) -> VAR { VAR.VAR(VAR->VAR( VAR::VAR(VAR), VAR::VAR::VAR(), VAR)); VAR->VAR(); })); VAR VAR = [&](VAR VAR VAR) { VAR (VAR VAR = 0; VAR < VAR; ++VAR) { VAR.VAR(VAR->VAR( VAR->VAR(), VAR::VAR::VAR(), VAR::VAR::VAR(), VAR)); VAR.VAR()->VAR(); } }; VAR(5); VAR(VAR, VAR()).VAR(3); VAR->VAR(VAR::VAR::VAR::VAR);  VAR(2, VAR.VAR());  VAR::VAR::VAR()->VAR( {{""VAR.VAR"", ""3""}}); VAR(5); VAR(VAR, VAR()).VAR(4); VAR->VAR(VAR::VAR::VAR::VAR); VAR(3, VAR.VAR());  VAR::VAR::VAR()->VAR( {{""VAR.VAR"", """"}}); VAR(10); VAR->VAR(VAR::VAR::VAR::VAR); VAR(13, VAR.VAR()); VAR (VAR VAR& VAR : VAR) { VAR->VAR(VAR::VAR); } VAR (VAR VAR& VAR : VAR) { VAR->VAR(VAR::VAR); } VAR::VAR::VAR()->VAR( {{""VAR.VAR"", """"}}); } ",13
+FreeRDP_23db2f4e6ba71f1c10c543f24de595d7340adb46,libfreerdp/core/orders.c,"	UINT32 numRectangles = multi_dstblt->numRectangles;
+	    !read_order_field_byte(orderInfo, s, 6, &numRectangles, TRUE))
+		multi_dstblt->numRectangles = numRectangles;
+	if (numRectangles > multi_dstblt->numRectangles)
+	{
+		const char* orderName = __func__;
+		WLog_ERR(TAG, ""%s numRectangles %"" PRIu32 "" > %"" PRIu32, orderName, numRectangles,
+		         multi_dstblt->numRectangles);
+		return FALSE;
+	}
+	multi_dstblt->numRectangles = numRectangles;
+	return TRUE;
+
+	UINT32 numRectangles = multi_patblt->numRectangles;
+	if (!read_order_field_byte(orderInfo, s, 13, &numRectangles, TRUE))
+		multi_patblt->numRectangles = numRectangles;
+
+	if (numRectangles > multi_patblt->numRectangles)
+	{
+		const char* orderName = __func__;
+		WLog_ERR(TAG, ""%s numRectangles %"" PRIu32 "" > %"" PRIu32, orderName, numRectangles,
+		         multi_patblt->numRectangles);
+	}
+	multi_patblt->numRectangles = numRectangles;
+	UINT32 numRectangles = multi_scrblt->numRectangles;
+	    !read_order_field_byte(orderInfo, s, 8, &numRectangles, TRUE))
+		multi_scrblt->numRectangles = numRectangles;
+	if (numRectangles > multi_scrblt->numRectangles)
+	{
+		const char* orderName = __func__;
+		WLog_ERR(TAG, ""%s numRectangles %"" PRIu32 "" > %"" PRIu32, orderName, numRectangles,
+		         multi_scrblt->numRectangles);
+		return FALSE;
+	}
+	multi_scrblt->numRectangles = numRectangles;
+
+	return TRUE;
+	UINT32 numRectangles = multi_opaque_rect->numRectangles;
+	if (!read_order_field_byte(orderInfo, s, 8, &numRectangles, TRUE))
+		multi_opaque_rect->numRectangles = numRectangles;
+	if (numRectangles > multi_opaque_rect->numRectangles)
+	{
+		const char* orderName = __func__;
+		WLog_ERR(TAG, ""%s numRectangles %"" PRIu32 "" > %"" PRIu32, orderName, numRectangles,
+		         multi_opaque_rect->numRectangles);
+		return FALSE;
+	}
+	multi_opaque_rect->numRectangles = numRectangles;
+	return TRUE;
+	UINT32 nDeltaEntries = multi_draw_nine_grid->nDeltaEntries;
+	    !read_order_field_byte(orderInfo, s, 6, &nDeltaEntries, TRUE))
+		multi_draw_nine_grid->nDeltaEntries = nDeltaEntries;
+	if (nDeltaEntries > multi_draw_nine_grid->nDeltaEntries)
+	{
+		const char* orderName = __func__;
+		WLog_ERR(TAG, ""%s nDeltaEntries %"" PRIu32 "" > %"" PRIu32, orderName, nDeltaEntries,
+		         multi_draw_nine_grid->nDeltaEntries);
+		return FALSE;
+	}
+	multi_draw_nine_grid->nDeltaEntries = nDeltaEntries;
+
+	return TRUE;
+	if (new_num > polyline->numDeltaEntries)
+	{
+		const char* orderName = __func__;
+		WLog_ERR(TAG, ""%s numDeltaEntries %"" PRIu32 "" > %"" PRIu32, orderName, new_num,
+		         polyline->numDeltaEntries);
+		return FALSE;
+	}
+	polyline->numDeltaEntries = new_num;
+	if (num > polygon_sc->numPoints)
+	{
+		const char* orderName = __func__;
+		WLog_ERR(TAG, ""%s numPoints %"" PRIu32 "" > %"" PRIu32, orderName, num, polygon_sc->numPoints);
+		return FALSE;
+	}
+	polygon_sc->numPoints = num;
+	if (num > polygon_cb->numPoints)
+	{
+		const char* orderName = __func__;
+		WLog_ERR(TAG, ""%s numPoints %"" PRIu32 "" > %"" PRIu32, orderName, num, polygon_cb->numPoints);
+		return FALSE;
+	}
+	polygon_cb->numPoints = num;
+","	    !read_order_field_byte(orderInfo, s, 6, &multi_dstblt->numRectangles, TRUE))
+
+	return multi_dstblt->numRectangles == 0;
+	if (!read_order_field_byte(orderInfo, s, 13, &multi_patblt->numRectangles, TRUE))
+	else if (multi_patblt->numRectangles != 0)
+	multi_scrblt->numRectangles = 0;
+	    !read_order_field_byte(orderInfo, s, 8, &multi_scrblt->numRectangles, TRUE))
+	return multi_scrblt->numRectangles == 0;
+	if (!read_order_field_byte(orderInfo, s, 8, &multi_opaque_rect->numRectangles, TRUE))
+	return multi_opaque_rect->numRectangles == 0;
+	    !read_order_field_byte(orderInfo, s, 6, &multi_draw_nine_grid->nDeltaEntries, TRUE))
+	return multi_draw_nine_grid->nDeltaEntries == 0;",23db2f4e6ba71f1c10c543f24de595d7340adb46,CVE-2023-39356,23db2f4e6ba71f1c10c543f24de595d7340adb46,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,90,COMPLETED,"VAR VAR = VAR->VAR; !VAR(VAR, VAR, 6, &VAR, VAR)) VAR->VAR = VAR; VAR (VAR > VAR->VAR) { VAR VAR* VAR = VAR; VAR(VAR, ""%VAR VAR %"" VAR "" > %"" VAR, VAR, VAR, VAR->VAR); VAR VAR; } VAR->VAR = VAR; VAR VAR; VAR VAR = VAR->VAR; VAR (!VAR(VAR, VAR, 13, &VAR, VAR)) VAR->VAR = VAR; VAR (VAR > VAR->VAR) { VAR VAR* VAR = VAR; VAR(VAR, ""%VAR VAR %"" VAR "" > %"" VAR, VAR, VAR, VAR->VAR); } VAR->VAR = VAR; VAR VAR = VAR->VAR; !VAR(VAR, VAR, 8, &VAR, VAR)) VAR->VAR = VAR; VAR (VAR > VAR->VAR) { VAR VAR* VAR = VAR; VAR(VAR, ""%VAR VAR %"" VAR "" > %"" VAR, VAR, VAR, VAR->VAR); VAR VAR; } VAR->VAR = VAR; VAR VAR; VAR VAR = VAR->VAR; VAR (!VAR(VAR, VAR, 8, &VAR, VAR)) VAR->VAR = VAR; VAR (VAR > VAR->VAR) { VAR VAR* VAR = VAR; VAR(VAR, ""%VAR VAR %"" VAR "" > %"" VAR, VAR, VAR, VAR->VAR); VAR VAR; } VAR->VAR = VAR; VAR VAR; VAR VAR = VAR->VAR; !VAR(VAR, VAR, 6, &VAR, VAR)) VAR->VAR = VAR; VAR (VAR > VAR->VAR) { VAR VAR* VAR = VAR; VAR(VAR, ""%VAR VAR %"" VAR "" > %"" VAR, VAR, VAR, VAR->VAR); VAR VAR; } VAR->VAR = VAR; VAR VAR; VAR (VAR > VAR->VAR) { VAR VAR* VAR = VAR; VAR(VAR, ""%VAR VAR %"" VAR "" > %"" VAR, VAR, VAR, VAR->VAR); VAR VAR; } VAR->VAR = VAR; VAR (VAR > VAR->VAR) { VAR VAR* VAR = VAR; VAR(VAR, ""%VAR VAR %"" VAR "" > %"" VAR, VAR, VAR, VAR->VAR); VAR VAR; } VAR->VAR = VAR; VAR (VAR > VAR->VAR) { VAR VAR* VAR = VAR; VAR(VAR, ""%VAR VAR %"" VAR "" > %"" VAR, VAR, VAR, VAR->VAR); VAR VAR; } VAR->VAR = VAR; !VAR(VAR, VAR, 6, &VAR->VAR, VAR)) VAR VAR->VAR == 0; VAR (!VAR(VAR, VAR, 13, &VAR->VAR, VAR)) VAR VAR (VAR->VAR != 0) VAR->VAR = 0; !VAR(VAR, VAR, 8, &VAR->VAR, VAR)) VAR VAR->VAR == 0; VAR (!VAR(VAR, VAR, 8, &VAR->VAR, VAR)) VAR VAR->VAR == 0; !VAR(VAR, VAR, 6, &VAR->VAR, VAR)) VAR VAR->VAR == 0;",13
+FreeRDP_3a06ce058f690b7fc1edad2f352c453376c2ebfe,libfreerdp/codec/rfx.c,"		wStream sub;
+		Stream_StaticInit(&sub, Stream_Pointer(s), Stream_GetRemainingLength(s));
+		Stream_Read_UINT16(&sub,
+		                   blockType); /* blockType (2 bytes), must be set to CBT_TILE (0xCAC3) */
+		Stream_Read_UINT32(&sub, blockLen); /* blockLen (4 bytes) */
+		if (!Stream_SafeSeek(s, blockLen))
+		{
+			rc = FALSE;
+			break;
+		}
+		if ((blockLen < 6 + 13) || (Stream_GetRemainingLength(&sub) < blockLen - 6))
+		Stream_Read_UINT8(&sub, tile->quantIdxY);  /* quantIdxY (1 byte) */
+		Stream_Read_UINT8(&sub, tile->quantIdxCb); /* quantIdxCb (1 byte) */
+		Stream_Read_UINT8(&sub, tile->quantIdxCr); /* quantIdxCr (1 byte) */
+		Stream_Read_UINT16(&sub, tile->xIdx);      /* xIdx (2 bytes) */
+		Stream_Read_UINT16(&sub, tile->yIdx);      /* yIdx (2 bytes) */
+		Stream_Read_UINT16(&sub, tile->YLen);      /* YLen (2 bytes) */
+		Stream_Read_UINT16(&sub, tile->CbLen);     /* CbLen (2 bytes) */
+		Stream_Read_UINT16(&sub, tile->CrLen);     /* CrLen (2 bytes) */
+		Stream_GetPointer(&sub, tile->YData);
+		if (!Stream_SafeSeek(&sub, tile->YLen))
+		{
+			rc = FALSE;
+			break;
+		}
+		Stream_GetPointer(&sub, tile->CbData);
+		if (!Stream_SafeSeek(&sub, tile->CbLen))
+		{
+			rc = FALSE;
+			break;
+		}
+		Stream_GetPointer(&sub, tile->CrData);
+		if (!Stream_SafeSeek(&sub, tile->CrLen))
+		{
+			rc = FALSE;
+			break;
+		}","	size_t pos;
+		Stream_Read_UINT16(s,
+		                   blockType);   /* blockType (2 bytes), must be set to CBT_TILE (0xCAC3) */
+		Stream_Read_UINT32(s, blockLen); /* blockLen (4 bytes) */
+		if (Stream_GetRemainingLength(s) < blockLen - 6)
+		pos = Stream_GetPosition(s) - 6 + blockLen;
+
+		Stream_Read_UINT8(s, tile->quantIdxY);  /* quantIdxY (1 byte) */
+		Stream_Read_UINT8(s, tile->quantIdxCb); /* quantIdxCb (1 byte) */
+		Stream_Read_UINT8(s, tile->quantIdxCr); /* quantIdxCr (1 byte) */
+		Stream_Read_UINT16(s, tile->xIdx);      /* xIdx (2 bytes) */
+		Stream_Read_UINT16(s, tile->yIdx);      /* yIdx (2 bytes) */
+		Stream_Read_UINT16(s, tile->YLen);      /* YLen (2 bytes) */
+		Stream_Read_UINT16(s, tile->CbLen);     /* CbLen (2 bytes) */
+		Stream_Read_UINT16(s, tile->CrLen);     /* CrLen (2 bytes) */
+		Stream_GetPointer(s, tile->YData);
+		Stream_Seek(s, tile->YLen);
+		Stream_GetPointer(s, tile->CbData);
+		Stream_Seek(s, tile->CbLen);
+		Stream_GetPointer(s, tile->CrData);
+		Stream_Seek(s, tile->CrLen);
+
+		Stream_SetPosition(s, pos);",3a06ce058f690b7fc1edad2f352c453376c2ebfe,CVE-2020-11043,3a06ce058f690b7fc1edad2f352c453376c2ebfe,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,162,COMPLETED,"VAR VAR; VAR(&VAR, VAR(VAR), VAR(VAR)); VAR(&VAR, VAR);  VAR(&VAR, VAR);  VAR (!VAR(VAR, VAR)) { VAR = VAR; VAR; } VAR ((VAR < 6 + 13) || (VAR(&VAR) < VAR - 6)) VAR(&VAR, VAR->VAR);  VAR(&VAR, VAR->VAR);  VAR(&VAR, VAR->VAR);  VAR(&VAR, VAR->VAR);  VAR(&VAR, VAR->VAR);  VAR(&VAR, VAR->VAR);  VAR(&VAR, VAR->VAR);  VAR(&VAR, VAR->VAR);  VAR(&VAR, VAR->VAR); VAR (!VAR(&VAR, VAR->VAR)) { VAR = VAR; VAR; } VAR(&VAR, VAR->VAR); VAR (!VAR(&VAR, VAR->VAR)) { VAR = VAR; VAR; } VAR(&VAR, VAR->VAR); VAR (!VAR(&VAR, VAR->VAR)) { VAR = VAR; VAR; } VAR VAR; VAR(VAR, VAR);  VAR(VAR, VAR);  VAR (VAR(VAR) < VAR - 6) VAR = VAR(VAR) - 6 + VAR; VAR(VAR, VAR->VAR);  VAR(VAR, VAR->VAR);  VAR(VAR, VAR->VAR);  VAR(VAR, VAR->VAR);  VAR(VAR, VAR->VAR);  VAR(VAR, VAR->VAR);  VAR(VAR, VAR->VAR);  VAR(VAR, VAR->VAR);  VAR(VAR, VAR->VAR); VAR(VAR, VAR->VAR); VAR(VAR, VAR->VAR); VAR(VAR, VAR->VAR); VAR(VAR, VAR->VAR); VAR(VAR, VAR->VAR); VAR(VAR, VAR);",13
+glpi_f1ae6c8481e5c19a6f1801a5548cada45702e01a,composer.json,"        ""paragonie/sodium_compat"": ""^1.13"",
+        ""paragonie/random_compat"": ""*"",
+        ""ext-ldap"": ""Used to provide LDAP authentication and synchronization"",
+        ""ext-sodium"": ""Used to provide strong encryption for sensitive data in database""","        ""ext-ldap"": ""Used to provide LDAP authentication and synchronization""",f1ae6c8481e5c19a6f1801a5548cada45702e01a,CVE-2020-11031,f1ae6c8481e5c19a6f1801a5548cada45702e01a,https://github.com/glpi-project/glpi,NVD_DIRECT_COMMIT,1337,COMPLETED,"""VAR/VAR"": ""^1.13"", ""VAR/VAR"": ""*"", ""VAR-VAR"": ""VAR VAR VAR VAR VAR VAR VAR"", ""VAR-VAR"": ""VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR"" ""VAR-VAR"": ""VAR VAR VAR VAR VAR VAR VAR""",13
+glpi_f1ae6c8481e5c19a6f1801a5548cada45702e01a,composer.lock,"    ""content-hash"": ""889748826910604c38cf291aab5b831e"",
+            ""funding"": [
+                {
+                    ""url"": ""https://github.com/blueimp"",
+                    ""type"": ""github""
+                }
+            ],
+            ""funding"": [
+                {
+                    ""url"": ""https://funding.communitybridge.org/projects/laminas-project"",
+                    ""type"": ""community_bridge""
+                }
+            ],
+            ""funding"": [
+                {
+                    ""url"": ""https://funding.communitybridge.org/projects/laminas-project"",
+                    ""type"": ""community_bridge""
+                }
+            ],
+        {
+            ""name"": ""paragonie/sodium_compat"",
+            ""version"": ""v1.13.0"",
+            ""source"": {
+                ""type"": ""git"",
+                ""url"": ""https://github.com/paragonie/sodium_compat.git"",
+                ""reference"": ""bbade402cbe84c69b718120911506a3aa2bae653""
+            },
+            ""dist"": {
+                ""type"": ""zip"",
+                ""url"": ""https://api.github.com/repos/paragonie/sodium_compat/zipball/bbade402cbe84c69b718120911506a3aa2bae653"",
+                ""reference"": ""bbade402cbe84c69b718120911506a3aa2bae653"",
+                ""shasum"": """"
+            },
+            ""require"": {
+                ""paragonie/random_compat"": "">=1"",
+                ""php"": ""^5.2.4|^5.3|^5.4|^5.5|^5.6|^7|^8""
+            },
+            ""require-dev"": {
+                ""phpunit/phpunit"": ""^3|^4|^5|^6|^7""
+            },
+            ""suggest"": {
+                ""ext-libsodium"": ""PHP < 7.0: Better performance, password hashing (Argon2i), secure memory management (memzero), and better security."",
+                ""ext-sodium"": ""PHP >= 7.0: Better performance, password hashing (Argon2i), secure memory management (memzero), and better security.""
+            },
+            ""type"": ""library"",
+            ""autoload"": {
+                ""files"": [
+                    ""autoload.php""
+                ]
+            },
+            ""notification-url"": ""https://packagist.org/downloads/"",
+            ""license"": [
+                ""ISC""
+            ],
+            ""authors"": [
+                {
+                    ""name"": ""Paragon Initiative Enterprises"",
+                    ""email"": ""security@paragonie.com""
+                },
+                {
+                    ""name"": ""Frank Denis"",
+                    ""email"": ""jedisct1@pureftpd.org""
+                }
+            ],
+            ""description"": ""Pure PHP implementation of libsodium; uses the PHP extension if it exists"",
+            ""keywords"": [
+                ""Authentication"",
+                ""BLAKE2b"",
+                ""ChaCha20"",
+                ""ChaCha20-Poly1305"",
+                ""Chapoly"",
+                ""Curve25519"",
+                ""Ed25519"",
+                ""EdDSA"",
+                ""Edwards-curve Digital Signature Algorithm"",
+                ""Elliptic Curve Diffie-Hellman"",
+                ""Poly1305"",
+                ""Pure-PHP cryptography"",
+                ""RFC 7748"",
+                ""RFC 8032"",
+                ""Salpoly"",
+                ""Salsa20"",
+                ""X25519"",
+                ""XChaCha20-Poly1305"",
+                ""XSalsa20-Poly1305"",
+                ""Xchacha20"",
+                ""Xsalsa20"",
+                ""aead"",
+                ""cryptography"",
+                ""ecdh"",
+                ""elliptic curve"",
+                ""elliptic curve cryptography"",
+                ""encryption"",
+                ""libsodium"",
+                ""php"",
+                ""public-key cryptography"",
+                ""secret-key cryptography"",
+                ""side-channel resistant""
+            ],
+            ""time"": ""2020-03-20T21:48:09+00:00""
+        },
+            ""funding"": [
+                {
+                    ""url"": ""https://marcus.bointon.com/donations/"",
+                    ""type"": ""custom""
+                },
+                {
+                    ""url"": ""https://github.com/Synchro"",
+                    ""type"": ""github""
+                },
+                {
+                    ""url"": ""https://www.patreon.com/marcusbointon"",
+                    ""type"": ""patreon""
+                }
+            ],
+            ""funding"": [
+                {
+                    ""url"": ""https://github.com/ramsey"",
+                    ""type"": ""github""
+                }
+            ],
+            ""funding"": [
+                {
+                    ""url"": ""https://symfony.com/sponsor"",
+                    ""type"": ""custom""
+                },
+                {
+                    ""url"": ""https://github.com/fabpot"",
+                    ""type"": ""github""
+                },
+                {
+                    ""url"": ""https://tidelift.com/funding/github/packagist/symfony/symfony"",
+                    ""type"": ""tidelift""
+                }
+            ],
+            ""funding"": [
+                {
+                    ""url"": ""https://symfony.com/sponsor"",
+                    ""type"": ""custom""
+                },
+                {
+                    ""url"": ""https://github.com/fabpot"",
+                    ""type"": ""github""
+                },
+                {
+                    ""url"": ""https://tidelift.com/funding/github/packagist/symfony/symfony"",
+                    ""type"": ""tidelift""
+                }
+            ],
+            ""funding"": [
+                {
+                    ""url"": ""https://symfony.com/sponsor"",
+                    ""type"": ""custom""
+                },
+                {
+                    ""url"": ""https://github.com/fabpot"",
+                    ""type"": ""github""
+                },
+                {
+                    ""url"": ""https://tidelift.com/funding/github/packagist/symfony/symfony"",
+                    ""type"": ""tidelift""
+                }
+            ],
+            ""funding"": [
+                {
+                    ""url"": ""https://symfony.com/sponsor"",
+                    ""type"": ""custom""
+                },
+                {
+                    ""url"": ""https://github.com/fabpot"",
+                    ""type"": ""github""
+                },
+                {
+                    ""url"": ""https://tidelift.com/funding/github/packagist/symfony/symfony"",
+                    ""type"": ""tidelift""
+                }
+            ],
+            ""funding"": [
+                {
+                    ""url"": ""https://symfony.com/sponsor"",
+                    ""type"": ""custom""
+                },
+                {
+                    ""url"": ""https://github.com/fabpot"",
+                    ""type"": ""github""
+                },
+                {
+                    ""url"": ""https://tidelift.com/funding/github/packagist/symfony/symfony"",
+                    ""type"": ""tidelift""
+                }
+            ],
+    },
+    ""plugin-api-version"": ""1.1.0""","    ""content-hash"": ""267af5215d3b1148d5a2bd588feec8fa"",
+    }",f1ae6c8481e5c19a6f1801a5548cada45702e01a,CVE-2020-11031,f1ae6c8481e5c19a6f1801a5548cada45702e01a,https://github.com/glpi-project/glpi,NVD_DIRECT_COMMIT,1337,COMPLETED,"""VAR-VAR"": ""889748826910604c38cf291aab5b831e"", ""VAR"": [ { ""VAR"": ""VAR: ""VAR"": ""VAR"" } ], ""VAR"": [ { ""VAR"": ""VAR: ""VAR"": ""VAR"" } ], ""VAR"": [ { ""VAR"": ""VAR: ""VAR"": ""VAR"" } ], { ""VAR"": ""VAR/VAR"", ""VAR"": ""VAR.13.0"", ""VAR"": { ""VAR"": ""VAR"", ""VAR"": ""VAR: ""VAR"": ""VAR"" }, ""VAR"": { ""VAR"": ""VAR"", ""VAR"": ""VAR: ""VAR"": ""VAR"", ""VAR"": """" }, ""VAR"": { ""VAR/VAR"": "">=1"", ""VAR"": ""^5.2.4|^5.3|^5.4|^5.5|^5.6|^7|^8"" }, ""VAR-VAR"": { ""VAR/VAR"": ""^3|^4|^5|^6|^7"" }, ""VAR"": { ""VAR-VAR"": ""VAR < 7.0: VAR VAR, VAR VAR (VAR), VAR VAR VAR (VAR), VAR VAR VAR."", ""VAR-VAR"": ""VAR >= 7.0: VAR VAR, VAR VAR (VAR), VAR VAR VAR (VAR), VAR VAR VAR."" }, ""VAR"": ""VAR"", ""VAR"": { ""VAR"": [ ""VAR.VAR"" ] }, ""VAR-VAR"": ""VAR: ""VAR"": [ ""VAR"" ], ""VAR"": [ { ""VAR"": ""VAR VAR VAR"", ""VAR"": ""VAR@VAR.VAR"" }, { ""VAR"": ""VAR VAR"", ""VAR"": ""VAR@VAR.VAR"" } ], ""VAR"": ""VAR VAR VAR VAR VAR; VAR VAR VAR VAR VAR VAR VAR"", ""VAR"": [ ""VAR"", ""VAR"", ""VAR"", ""VAR-VAR"", ""VAR"", ""VAR"", ""VAR"", ""VAR"", ""VAR-VAR VAR VAR VAR"", ""VAR VAR VAR-VAR"", ""VAR"", ""VAR-VAR VAR"", ""VAR 7748"", ""VAR 8032"", ""VAR"", ""VAR"", ""VAR"", ""VAR-VAR"", ""VAR-VAR"", ""VAR"", ""VAR"", ""VAR"", ""VAR"", ""VAR"", ""VAR VAR"", ""VAR VAR VAR"", ""VAR"", ""VAR"", ""VAR"", ""VAR-VAR VAR"", ""VAR-VAR VAR"", ""VAR-VAR VAR"" ], ""VAR"": ""2020-03-20T21:48:09+00:00"" }, ""VAR"": [ { ""VAR"": ""VAR: ""VAR"": ""VAR"" }, { ""VAR"": ""VAR: ""VAR"": ""VAR"" }, { ""VAR"": ""VAR: ""VAR"": ""VAR"" } ], ""VAR"": [ { ""VAR"": ""VAR: ""VAR"": ""VAR"" } ], ""VAR"": [ { ""VAR"": ""VAR: ""VAR"": ""VAR"" }, { ""VAR"": ""VAR: ""VAR"": ""VAR"" }, { ""VAR"": ""VAR: ""VAR"": ""VAR"" } ], ""VAR"": [ { ""VAR"": ""VAR: ""VAR"": ""VAR"" }, { ""VAR"": ""VAR: ""VAR"": ""VAR"" }, { ""VAR"": ""VAR: ""VAR"": ""VAR"" } ], ""VAR"": [ { ""VAR"": ""VAR: ""VAR"": ""VAR"" }, { ""VAR"": ""VAR: ""VAR"": ""VAR"" }, { ""VAR"": ""VAR: ""VAR"": ""VAR"" } ], ""VAR"": [ { ""VAR"": ""VAR: ""VAR"": ""VAR"" }, { ""VAR"": ""VAR: ""VAR"": ""VAR"" }, { ""VAR"": ""VAR: ""VAR"": ""VAR"" } ], ""VAR"": [ { ""VAR"": ""VAR: ""VAR"": ""VAR"" }, { ""VAR"": ""VAR: ""VAR"": ""VAR"" }, { ""VAR"": ""VAR: ""VAR"": ""VAR"" } ], }, ""VAR-VAR-VAR"": ""1.1.0"" ""VAR-VAR"": ""267af5215d3b1148d5a2bd588feec8fa"", }",13
+go_bb1f4416180511231de6d17a1f2f55c82aafc863,src/crypto/rand/rand_batched_test.go,"	if err := fillBatched(p); err != nil {
+		t.Fatalf(""batched function returned error: %s"", err)
+		if err := fillBatched(outputMarker[:howMuch]); err != nil {
+			t.Fatalf(""batched function returned error: %s"", err)
+	if b(make([]byte, 13)) == nil {
+	if b(make([]byte, 0)) != nil {","	if !fillBatched(p) {
+		t.Fatal(""batched function returned false"")
+		if !fillBatched(outputMarker[:howMuch]) {
+			t.Fatal(""batched function returned false"")
+	if b(make([]byte, 13)) {
+	if !b(make([]byte, 0)) {",bb1f4416180511231de6d17a1f2f55c82aafc863,CVE-2022-30634,bb1f4416180511231de6d17a1f2f55c82aafc863,https://github.com/golang/go,CPE_GIT_REPOBASED,74,COMPLETED,"VAR VAR := VAR(VAR); VAR != VAR { VAR.VAR(""VAR VAR VAR VAR: %VAR"", VAR) VAR VAR := VAR(VAR[:VAR]); VAR != VAR { VAR.VAR(""VAR VAR VAR VAR: %VAR"", VAR) VAR VAR(VAR([]VAR, 13)) == VAR { VAR VAR(VAR([]VAR, 0)) != VAR { VAR !VAR(VAR) { VAR.VAR(""VAR VAR VAR VAR"") VAR !VAR(VAR[:VAR]) { VAR.VAR(""VAR VAR VAR VAR"") VAR VAR(VAR([]VAR, 13)) { VAR !VAR(VAR([]VAR, 0)) {",13
+linux_f4351a199cc120ff9d59e06d02e8657d08e6cc46,sound/usmixer.c,"	int num_ins;
+	if (desc->bLength < 13) {
+		usb_audio_err(state->chip, ""invalid %s descriptor (id %d)\n"", name, unitid);
+		return -EINVAL;
+	}
+
+	num_ins = desc->bNrInPins;
+	if (desc->bLength < 13 + num_ins ||","	int num_ins = desc->bNrInPins;
+	if (desc->bLength < 13 || desc->bLength < 13 + num_ins ||",f4351a199cc120ff9d59e06d02e8657d08e6cc46,CVE-2019-15927,f4351a199cc120ff9d59e06d02e8657d08e6cc46,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,88,COMPLETED,"VAR VAR; VAR (VAR->VAR < 13) { VAR(VAR->VAR, ""VAR %VAR VAR (VAR %VAR)\VAR"", VAR, VAR); VAR -VAR; } VAR = VAR->VAR; VAR (VAR->VAR < 13 + VAR || VAR VAR = VAR->VAR; VAR (VAR->VAR < 13 || VAR->VAR < 13 + VAR ||",13
+openssl_95783193946982d5acfc9f8d43dc25c021f39b9c,ssl/s3_pkt.c,"#ifndef  EVP_CIPH_FLAG_TLS1_1_MULTIBLOCK
+# define EVP_CIPH_FLAG_TLS1_1_MULTIBLOCK 0
+#endif
+
+#if	defined(OPENSSL_SMALL_FOOTPRINT) || \
+	!(	defined(AES_ASM) &&	( \
+		defined(__x86_64)	|| defined(__x86_64__)	|| \
+		defined(_M_AMD64)	|| defined(_M_X64)	|| \
+		defined(__INTEL__)	) \
+	)
+# undef EVP_CIPH_FLAG_TLS1_1_MULTIBLOCK
+# define EVP_CIPH_FLAG_TLS1_1_MULTIBLOCK 0
+#endif
+
+	int tot;
+	unsigned int n,nw;
+#if !defined(OPENSSL_NO_MULTIBLOCK) && EVP_CIPH_FLAG_TLS1_1_MULTIBLOCK
+	unsigned int max_send_fragment;
+#endif
+	SSL3_BUFFER *wb=&(s->s3->wbuf);
+	/* first check if there is a SSL3_BUFFER still being written
+	 * out.  This will happen with non blocking IO */
+	if (wb->left != 0)
+		{
+		i = ssl3_write_pending(s,type,&buf[tot],s->s3->wpend_tot);
+		if (i<=0)
+			{
+			/* XXX should we ssl3_release_write_buffer if i<0? */
+			s->s3->wnum=tot;
+			return i;
+			}
+		tot += i;	/* this might be last fragment */
+		}
+
+#if !defined(OPENSSL_NO_MULTIBLOCK) && EVP_CIPH_FLAG_TLS1_1_MULTIBLOCK
+	/*
+	 * Depending on platform multi-block can deliver several *times*
+	 * better performance. Downside is that it has to allocate
+	 * jumbo buffer to accomodate up to 8 records, but the
+	 * compromise is considered worthy.
+	 */
+	if (type==SSL3_RT_APPLICATION_DATA &&
+	    len >= 4*(max_send_fragment=s->max_send_fragment) &&
+	    s->compress==NULL && s->msg_callback==NULL &&
+	    SSL_USE_EXPLICIT_IV(s) &&
+	    EVP_CIPHER_flags(s->enc_write_ctx->cipher)&EVP_CIPH_FLAG_TLS1_1_MULTIBLOCK)
+		{
+		unsigned char aad[13];
+		EVP_CTRL_TLS1_1_MULTIBLOCK_PARAM mb_param;
+		int packlen;
+
+		/* minimize address aliasing conflicts */
+		if ((max_send_fragment&0xffff) == 0)
+			max_send_fragment -= 512;
+
+		if (tot==0 || wb->buf==NULL)	/* allocate jumbo buffer */
+			{
+			ssl3_release_write_buffer(s);
+
+			packlen = EVP_CIPHER_CTX_ctrl(s->enc_write_ctx,
+					EVP_CTRL_TLS1_1_MULTIBLOCK_MAX_BUFSIZE,
+					max_send_fragment,NULL);
+
+			if (len>=8*max_send_fragment)	packlen *= 8;
+			else				packlen *= 4;
+
+			wb->buf=OPENSSL_malloc(packlen);
+			wb->len=packlen;
+			}
+		else if (tot==len)		/* done? */
+			{
+			OPENSSL_free(wb->buf);	/* free jumbo buffer */
+			wb->buf = NULL;
+			return tot;
+			}
+
+		n=(len-tot);
+		for (;;)
+			{
+			if (n < 4*max_send_fragment)
+				{
+				OPENSSL_free(wb->buf);	/* free jumbo buffer */
+				wb->buf = NULL;
+				break;
+				}
+
+			if (s->s3->alert_dispatch)
+				{
+				i=s->method->ssl_dispatch_alert(s);
+				if (i <= 0)
+					{
+					s->s3->wnum=tot;
+					return i;
+					}
+				}
+
+			if (n >= 8*max_send_fragment)
+				nw = max_send_fragment*(mb_param.interleave=8);
+			else
+				nw = max_send_fragment*(mb_param.interleave=4);
+
+			memcpy(aad,s->s3->write_sequence,8);
+			aad[8]=type;
+			aad[9]=(unsigned char)(s->version>>8);
+			aad[10]=(unsigned char)(s->version);
+			aad[11]=0;
+			aad[12]=0;
+			mb_param.out = NULL;
+			mb_param.inp = aad;
+			mb_param.len = nw;
+
+			packlen = EVP_CIPHER_CTX_ctrl(s->enc_write_ctx,
+					EVP_CTRL_TLS1_1_MULTIBLOCK_AAD,
+					sizeof(mb_param),&mb_param);
+
+			if (packlen<=0 || packlen>wb->len)	/* never happens */
+				{
+				OPENSSL_free(wb->buf);	/* free jumbo buffer */
+				wb->buf = NULL;
+				break;
+				}
+
+			mb_param.out = wb->buf;
+			mb_param.inp = &buf[tot];
+			mb_param.len = nw;
+
+			EVP_CIPHER_CTX_ctrl(s->enc_write_ctx,
+				EVP_CTRL_TLS1_1_MULTIBLOCK_ENCRYPT,
+				sizeof(mb_param),&mb_param);
+
+			s->s3->write_sequence[7] += mb_param.interleave;
+			if (s->s3->write_sequence[7] < mb_param.interleave)
+				{
+				int j=6;
+				while (j>=0 && (++s->s3->write_sequence[j--])==0) ;
+				}
+
+			wb->offset = 0;
+			wb->left = packlen;
+
+			s->s3->wpend_tot = nw;
+			s->s3->wpend_buf = &buf[tot];
+			s->s3->wpend_type= type;
+			s->s3->wpend_ret = nw;
+
+			i = ssl3_write_pending(s,type,&buf[tot],nw);
+			if (i<=0)
+				{
+				if (i<0)
+					{
+					OPENSSL_free(wb->buf);
+					wb->buf = NULL;
+					}
+				s->s3->wnum=tot;
+				return i;
+				}
+			if (i==(int)n)
+				{
+				OPENSSL_free(wb->buf);	/* free jumbo buffer */
+				wb->buf = NULL;
+				return tot+i;
+				}
+			n-=i;
+			tot+=i;
+			}
+		}
+	else
+#endif
+	if (tot==len)		/* done? */
+		{
+		if (s->mode & SSL_MODE_RELEASE_BUFFERS &&
+			!SSL_IS_DTLS(s))
+			ssl3_release_write_buffer(s);
+
+		return tot;
+		}
+
+			/* XXX should we ssl3_release_write_buffer if i<0? */
+
+			if ((i==(int)n) && s->mode & SSL_MODE_RELEASE_BUFFERS &&
+				!SSL_IS_DTLS(s))
+				ssl3_release_write_buffer(s);
+","	unsigned int tot,n,nw;
+
+			if (s->mode & SSL_MODE_RELEASE_BUFFERS &&
+				!SSL_IS_DTLS(s))
+				ssl3_release_write_buffer(s);",95783193946982d5acfc9f8d43dc25c021f39b9c,CVE-2015-0290,95783193946982d5acfc9f8d43dc25c021f39b9c,https://github.com/openssl/openssl,CPE_GIT_REPOBASED,88,COMPLETED,"    !( VAR(VAR) && ( \ VAR(VAR) || VAR(VAR) || \ VAR(VAR) || VAR(VAR) || \ VAR(VAR) ) \ )    VAR VAR; VAR VAR VAR,VAR;  VAR VAR VAR;  VAR *VAR=&(VAR->VAR->VAR); /* VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR. VAR VAR VAR VAR VAR VAR VAR */ VAR (VAR->VAR != 0) { VAR = VAR(VAR,VAR,&VAR[VAR],VAR->VAR->VAR); VAR (VAR<=0) {  VAR->VAR->VAR=VAR; VAR VAR; } VAR += VAR;  }  /* * VAR VAR VAR VAR-VAR VAR VAR VAR *VAR* * VAR VAR. VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR 8 VAR, VAR VAR * VAR VAR VAR VAR. */ VAR (VAR==VAR && VAR >= 4*(VAR=VAR->VAR) && VAR->VAR==VAR && VAR->VAR==VAR && VAR(VAR) && VAR(VAR->VAR->VAR)&VAR) { VAR VAR VAR[13]; VAR VAR; VAR VAR;  VAR ((VAR&0xffff) == 0) VAR -= 512; VAR (VAR==0 || VAR->VAR==VAR)  { VAR(VAR); VAR = VAR(VAR->VAR, VAR, VAR,VAR); VAR (VAR>=8*VAR) VAR *= 8; VAR VAR *= 4; VAR->VAR=VAR(VAR); VAR->VAR=VAR; } VAR VAR (VAR==VAR)  { VAR(VAR->VAR);  VAR->VAR = VAR; VAR VAR; } VAR=(VAR-VAR); VAR (;;) { VAR (VAR < 4*VAR) { VAR(VAR->VAR);  VAR->VAR = VAR; VAR; } VAR (VAR->VAR->VAR) { VAR=VAR->VAR->VAR(VAR); VAR (VAR <= 0) { VAR->VAR->VAR=VAR; VAR VAR; } } VAR (VAR >= 8*VAR) VAR = VAR*(VAR.VAR=8); VAR VAR = VAR*(VAR.VAR=4); VAR(VAR,VAR->VAR->VAR,8); VAR[8]=VAR; VAR[9]=(VAR VAR)(VAR->VAR>>8); VAR[10]=(VAR VAR)(VAR->VAR); VAR[11]=0; VAR[12]=0; VAR.VAR = VAR; VAR.VAR = VAR; VAR.VAR = VAR; VAR = VAR(VAR->VAR, VAR, VAR(VAR),&VAR); VAR (VAR<=0 || VAR>VAR->VAR)  { VAR(VAR->VAR);  VAR->VAR = VAR; VAR; } VAR.VAR = VAR->VAR; VAR.VAR = &VAR[VAR]; VAR.VAR = VAR; VAR(VAR->VAR, VAR, VAR(VAR),&VAR); VAR->VAR->VAR[7] += VAR.VAR; VAR (VAR->VAR->VAR[7] < VAR.VAR) { VAR VAR=6; VAR (VAR>=0 && (++VAR->VAR->VAR[VAR--])==0) ; } VAR->VAR = 0; VAR->VAR = VAR; VAR->VAR->VAR = VAR; VAR->VAR->VAR = &VAR[VAR]; VAR->VAR->VAR= VAR; VAR->VAR->VAR = VAR; VAR = VAR(VAR,VAR,&VAR[VAR],VAR); VAR (VAR<=0) { VAR (VAR<0) { VAR(VAR->VAR); VAR->VAR = VAR; } VAR->VAR->VAR=VAR; VAR VAR; } VAR (VAR==(VAR)VAR) { VAR(VAR->VAR);  VAR->VAR = VAR; VAR VAR+VAR; } VAR-=VAR; VAR+=VAR; } } VAR  VAR (VAR==VAR)  { VAR (VAR->VAR & VAR && !VAR(VAR)) VAR(VAR); VAR VAR; }  VAR ((VAR==(VAR)VAR) && VAR->VAR & VAR && !VAR(VAR)) VAR(VAR); VAR VAR VAR,VAR,VAR; VAR (VAR->VAR & VAR && !VAR(VAR)) VAR(VAR);",13
+openssl_f48b83b4fb7d6689584cf25f61ca63a4891f5b11,crypto/x509/x509_vfy.c,"    int i, j, remaining;
+    remaining = ctm->length;
+    /*
+     * Note that the following (historical) code allows much more slack in the
+     * time format than RFC5280. In RFC5280, the representation is fixed:
+     * UTCTime: YYMMDDHHMMSSZ
+     * GeneralizedTime: YYYYMMDDHHMMSSZ
+     */
+        /* YYMMDDHHMM[SS]Z or YYMMDDHHMM[SS](+-)hhmm */
+        int min_length = sizeof(""YYMMDDHHMMZ"") - 1;
+        int max_length = sizeof(""YYMMDDHHMMSS+hhmm"") - 1;
+        if (remaining < min_length || remaining > max_length)
+        remaining -= 10;
+        /* YYYYMMDDHHMM[SS[.fff]]Z or YYYYMMDDHHMM[SS[.f[f[f]]]](+-)hhmm */
+        int min_length = sizeof(""YYYYMMDDHHMMZ"") - 1;
+        int max_length = sizeof(""YYYYMMDDHHMMSS.fff+hhmm"") - 1;
+        if (remaining < min_length || remaining > max_length)
+        remaining -= 12;
+        /* SS (seconds) */
+        if (remaining < 2)
+            return 0;
+        remaining -= 2;
+        /*
+         * Skip any (up to three) fractional seconds...
+         * TODO(emilia): in RFC5280, fractional seconds are forbidden.
+         * Can we just kill them altogether?
+         */
+        if (remaining && *str == '.') {
+            remaining--;
+            for (i = 0; i < 3 && remaining; i++, str++, remaining--) {
+                if (*str < '0' || *str > '9')
+                    break;
+            }
+    /* We now need either a terminating 'Z' or an offset. */
+    if (!remaining)
+        return 0;
+    if (*str == 'Z') {
+        if (remaining != 1)
+            return 0;
+    } else {
+        /* (+-)HHMM */
+        /* Historical behaviour: the (+-)hhmm offset is forbidden in RFC5280. */
+        if (remaining != 5)
+            return 0;
+        if (str[1] < '0' || str[1] > '9' || str[2] < '0' || str[2] > '9' ||
+            str[3] < '0' || str[3] > '9' || str[4] < '0' || str[4] > '9')
+            return 0;","    int i, j;
+    i = ctm->length;
+        if ((i < 11) || (i > 17))
+        if (i < 13)
+        /* Skip any fractional seconds... */
+        if (*str == '.') {
+            while ((*str >= '0') && (*str <= '9'))
+                str++;
+    if (*str == 'Z')
+    else {",f48b83b4fb7d6689584cf25f61ca63a4891f5b11,CVE-2015-1789,f48b83b4fb7d6689584cf25f61ca63a4891f5b11,https://github.com/openssl/openssl,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR VAR, VAR, VAR; VAR = VAR->VAR; /* * VAR VAR VAR VAR (VAR) VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR. VAR VAR, VAR VAR VAR VAR: * VAR: VAR * VAR: VAR */  VAR VAR = VAR(""VAR"") - 1; VAR VAR = VAR(""VAR+VAR"") - 1; VAR (VAR < VAR || VAR > VAR) VAR -= 10;  VAR VAR = VAR(""VAR"") - 1; VAR VAR = VAR(""VAR.VAR+VAR"") - 1; VAR (VAR < VAR || VAR > VAR) VAR -= 12;  VAR (VAR < 2) VAR 0; VAR -= 2; /* * VAR VAR (VAR VAR VAR) VAR VAR... * VAR(VAR): VAR VAR, VAR VAR VAR VAR. * VAR VAR VAR VAR VAR VAR? */ VAR (VAR && *VAR == '.') { VAR--; VAR (VAR = 0; VAR < 3 && VAR; VAR++, VAR++, VAR--) { VAR (*VAR < '0' || *VAR > '9') VAR; }  VAR (!VAR) VAR 0; VAR (*VAR == 'VAR') { VAR (VAR != 1) VAR 0; } VAR {   VAR (VAR != 5) VAR 0; VAR (VAR[1] < '0' || VAR[1] > '9' || VAR[2] < '0' || VAR[2] > '9' || VAR[3] < '0' || VAR[3] > '9' || VAR[4] < '0' || VAR[4] > '9') VAR 0; VAR VAR, VAR; VAR = VAR->VAR; VAR ((VAR < 11) || (VAR > 17)) VAR (VAR < 13)  VAR (*VAR == '.') { VAR ((*VAR >= '0') && (*VAR <= '9')) VAR++; VAR (*VAR == 'VAR') VAR {",13
+xwiki-platform_2fc20891e6c6b0ca05ee07e315e7f435e8919f8d,xwiki-platform-core/xwiki-platform-menu/xwiki-platform-menu-ui/src/main/resources/Menu/MenuMacro.xml,"<xwikidoc version=""1.5"" reference=""Menu.MenuMacro"" locale="""">
+#set ($menuTemplateDoc = $xwiki.getDocument('MenuTemplate'))
+## No way to escape content in the code macro, so just remove {, see https://jira.xwiki.org/browse/XRENDERING-13.
+$menuTemplateDoc.content.replace('{', '')
+{{velocity}}
+## Include the content of the menu template.
+## Escape {{ in the rendered content to be sure that the HTML macro is not closed unintentionally.
+{{html}}$menuTemplateDoc.displayDocument().replace('{{', '&amp;amp;#123;&amp;amp;#123;'){{/html}}
+{{/velocity}}
+{{velocity}}
+## Include the content of the menu template.
+## Escape {{ in the rendered content to be sure that the HTML macro is not closed unintentionally.
+{{html}}$menuTemplateDoc.displayDocument().replace('{{', '&amp;amp;#123;&amp;amp;#123;'){{/html}}
+{{/velocity}}
+        <number>13</number>
+        <number>14</number>
+        <separator>, </separator>
+        <values>action=Action|doc.reference=Document|icon.theme=Icon theme|locale=Language|rendering.defaultsyntax=Default syntax|rendering.restricted=Restricted|rendering.targetsyntax=Target syntax|request.base=Request base URL|request.cookies|request.parameters=Request parameters|request.url=Request URL|request.wiki=Request wiki|user=User|wiki=Wiki</values>
+        <number>12</number>
+      <priority>
+        <disabled>0</disabled>
+        <name>priority</name>
+        <number>11</number>
+        <numberType>integer</numberType>
+        <prettyName>Priority</prettyName>
+        <size>10</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+      </priority>
+        &lt;button type=""button"" class=""navbar-toggle collapsed"" data-toggle=""collapse"" data-target=""#$!{escapetool.xml($id)}"" aria-expanded=""false""&gt;
+    (% id=""$!{services.rendering.escape($id, 'xwiki/2.1')}"" class=""menu menu-${services.rendering.escape($!type, 'xwiki/2.1')} collapse navbar-collapse"" %)(((
+      {{wikimacrocontent/}}
+  (% #if (""$!id"" != '') id=""${services.rendering.escape($id, 'xwiki/2.1')}""#end class=""menu menu-${services.rendering.escape($!type, 'xwiki/2.1')}"" %)(((
+    {{wikimacrocontent/}}
+      <contentJavaType>Wiki</contentJavaType>
+    <property>
+      <priority/>
+    </property>","<xwikidoc version=""1.3"" reference=""Menu.MenuMacro"" locale="""">
+$xwiki.getDocument('MenuTemplate').content
+{{include reference=""MenuTemplate"" /}}
+{{include reference=""MenuTemplate"" /}}
+        <number>12</number>
+        <number>13</number>
+        <separator> </separator>
+        <values>doc.reference=Document|icon.theme=Icon theme|locale=Language|request.base=Request base URL|request.parameters=Request parameters|request.url=Request URL|request.wiki=Request wiki|user=User|wiki=Wiki</values>
+        <number>11</number>
+        &lt;button type=""button"" class=""navbar-toggle collapsed"" data-toggle=""collapse"" data-target=""#$!{id}"" aria-expanded=""false""&gt;
+    (% id=""${id}"" class=""menu menu-$!type collapse navbar-collapse"" %)(((
+      $xcontext.macro.content
+  (% #if (""$!id"" != '') id=""$id""#end class=""menu menu-$!type"" %)(((
+    $xcontext.macro.content
+      <contentJavaType/>",2fc20891e6c6b0ca05ee07e315e7f435e8919f8d,CVE-2022-41934,2fc20891e6c6b0ca05ee07e315e7f435e8919f8d,https://github.com/xwiki/xwiki-platform,NVD_DIRECT_COMMIT,1337,COMPLETED,"<VAR VAR=""1.5"" VAR=""VAR.VAR"" VAR="""">   $VAR.VAR.VAR('{', '') {{VAR}}   {{VAR}}$VAR.VAR().VAR('{{', '&VAR;VAR; {{/VAR}} {{VAR}}   {{VAR}}$VAR.VAR().VAR('{{', '&VAR;VAR; {{/VAR}} <VAR>13</VAR> <VAR>14</VAR> <VAR>, </VAR> <VAR>VAR=VAR|VAR.VAR=VAR|VAR.VAR=VAR VAR|VAR=VAR|VAR.VAR=VAR VAR|VAR.VAR=VAR|VAR.VAR=VAR VAR|VAR.VAR=VAR VAR VAR|VAR.VAR|VAR.VAR=VAR VAR|VAR.VAR=VAR VAR|VAR.VAR=VAR VAR|VAR=VAR|VAR=VAR</VAR> <VAR>12</VAR> <VAR> <VAR>0</VAR> <VAR>VAR</VAR> <VAR>11</VAR> <VAR>VAR</VAR> <VAR>VAR</VAR> <VAR>10</VAR> <VAR>0</VAR> <VAR>VAR.VAR.VAR.VAR.VAR.VAR</VAR> </VAR> &VAR;VAR VAR=""VAR"" VAR=""VAR-VAR VAR"" VAR-VAR=""VAR"" VAR-VAR="" (% VAR=""$!{VAR.VAR.VAR($VAR, 'VAR/2.1')}"" VAR=""VAR VAR-${VAR.VAR.VAR($!VAR, 'VAR/2.1')} VAR VAR-VAR"" %)((( {{VAR/}} (%  {{VAR/}} <VAR>VAR</VAR> <VAR> <VAR/> </VAR> <VAR VAR=""1.3"" VAR=""VAR.VAR"" VAR=""""> $VAR.VAR('VAR').VAR {{VAR VAR=""VAR"" /}} {{VAR VAR=""VAR"" /}} <VAR>12</VAR> <VAR>13</VAR> <VAR> </VAR> <VAR>VAR.VAR=VAR|VAR.VAR=VAR VAR|VAR=VAR|VAR.VAR=VAR VAR VAR|VAR.VAR=VAR VAR|VAR.VAR=VAR VAR|VAR.VAR=VAR VAR|VAR=VAR|VAR=VAR</VAR> <VAR>11</VAR> &VAR;VAR VAR=""VAR"" VAR=""VAR-VAR VAR"" VAR-VAR=""VAR"" VAR-VAR="" (% VAR=""${VAR}"" VAR=""VAR VAR-$!VAR VAR VAR-VAR"" %)((( $VAR.VAR.VAR (%  $VAR.VAR.VAR <VAR/>",13
+xwiki-platform_59ccca24a8465a19f40c51d65fcc2c09c1edea16,xwiki-platform-core/xwiki-platform-menu/xwiki-platform-menu-ui/src/main/resources/Menu/MenuMacro.xml,"<xwikidoc version=""1.5"" reference=""Menu.MenuMacro"" locale="""">
+#set ($menuTemplateDoc = $xwiki.getDocument('MenuTemplate'))
+## No way to escape content in the code macro, so just remove {, see https://jira.xwiki.org/browse/XRENDERING-13.
+$menuTemplateDoc.content.replace('{', '')
+{{velocity}}
+## Include the content of the menu template.
+## Escape {{ in the rendered content to be sure that the HTML macro is not closed unintentionally.
+{{html}}$menuTemplateDoc.displayDocument().replace('{{', '&amp;amp;#123;&amp;amp;#123;'){{/html}}
+{{/velocity}}
+{{velocity}}
+## Include the content of the menu template.
+## Escape {{ in the rendered content to be sure that the HTML macro is not closed unintentionally.
+{{html}}$menuTemplateDoc.displayDocument().replace('{{', '&amp;amp;#123;&amp;amp;#123;'){{/html}}
+{{/velocity}}
+        <number>13</number>
+        <number>14</number>
+        <separator>, </separator>
+        <values>action=Action|doc.reference=Document|icon.theme=Icon theme|locale=Language|rendering.defaultsyntax=Default syntax|rendering.restricted=Restricted|rendering.targetsyntax=Target syntax|request.base=Request base URL|request.cookies|request.parameters=Request parameters|request.url=Request URL|request.wiki=Request wiki|user=User|wiki=Wiki</values>
+        <number>12</number>
+      <priority>
+        <disabled>0</disabled>
+        <name>priority</name>
+        <number>11</number>
+        <numberType>integer</numberType>
+        <prettyName>Priority</prettyName>
+        <size>10</size>
+        <unmodifiable>0</unmodifiable>
+        <classType>com.xpn.xwiki.objects.classes.NumberClass</classType>
+      </priority>
+        &lt;button type=""button"" class=""navbar-toggle collapsed"" data-toggle=""collapse"" data-target=""#$!{escapetool.xml($id)}"" aria-expanded=""false""&gt;
+    (% id=""$!{services.rendering.escape($id, 'xwiki/2.1')}"" class=""menu menu-${services.rendering.escape($!type, 'xwiki/2.1')} collapse navbar-collapse"" %)(((
+      {{wikimacrocontent/}}
+  (% #if (""$!id"" != '') id=""${services.rendering.escape($id, 'xwiki/2.1')}""#end class=""menu menu-${services.rendering.escape($!type, 'xwiki/2.1')}"" %)(((
+    {{wikimacrocontent/}}
+      <contentJavaType>Wiki</contentJavaType>
+    <property>
+      <priority/>
+    </property>","<xwikidoc version=""1.3"" reference=""Menu.MenuMacro"" locale="""">
+$xwiki.getDocument('MenuTemplate').content
+{{include reference=""MenuTemplate"" /}}
+{{include reference=""MenuTemplate"" /}}
+        <number>12</number>
+        <number>13</number>
+        <separator> </separator>
+        <values>doc.reference=Document|icon.theme=Icon theme|locale=Language|request.base=Request base URL|request.parameters=Request parameters|request.url=Request URL|request.wiki=Request wiki|user=User|wiki=Wiki</values>
+        <number>11</number>
+        &lt;button type=""button"" class=""navbar-toggle collapsed"" data-toggle=""collapse"" data-target=""#$!{id}"" aria-expanded=""false""&gt;
+    (% id=""${id}"" class=""menu menu-$!type collapse navbar-collapse"" %)(((
+      $xcontext.macro.content
+  (% #if (""$!id"" != '') id=""$id""#end class=""menu menu-$!type"" %)(((
+    $xcontext.macro.content
+      <contentJavaType/>",59ccca24a8465a19f40c51d65fcc2c09c1edea16,CVE-2022-41934,59ccca24a8465a19f40c51d65fcc2c09c1edea16,https://github.com/xwiki/xwiki-platform,NVD_DIRECT_COMMIT,1337,COMPLETED,"<VAR VAR=""1.5"" VAR=""VAR.VAR"" VAR="""">   $VAR.VAR.VAR('{', '') {{VAR}}   {{VAR}}$VAR.VAR().VAR('{{', '&VAR;VAR; {{/VAR}} {{VAR}}   {{VAR}}$VAR.VAR().VAR('{{', '&VAR;VAR; {{/VAR}} <VAR>13</VAR> <VAR>14</VAR> <VAR>, </VAR> <VAR>VAR=VAR|VAR.VAR=VAR|VAR.VAR=VAR VAR|VAR=VAR|VAR.VAR=VAR VAR|VAR.VAR=VAR|VAR.VAR=VAR VAR|VAR.VAR=VAR VAR VAR|VAR.VAR|VAR.VAR=VAR VAR|VAR.VAR=VAR VAR|VAR.VAR=VAR VAR|VAR=VAR|VAR=VAR</VAR> <VAR>12</VAR> <VAR> <VAR>0</VAR> <VAR>VAR</VAR> <VAR>11</VAR> <VAR>VAR</VAR> <VAR>VAR</VAR> <VAR>10</VAR> <VAR>0</VAR> <VAR>VAR.VAR.VAR.VAR.VAR.VAR</VAR> </VAR> &VAR;VAR VAR=""VAR"" VAR=""VAR-VAR VAR"" VAR-VAR=""VAR"" VAR-VAR="" (% VAR=""$!{VAR.VAR.VAR($VAR, 'VAR/2.1')}"" VAR=""VAR VAR-${VAR.VAR.VAR($!VAR, 'VAR/2.1')} VAR VAR-VAR"" %)((( {{VAR/}} (%  {{VAR/}} <VAR>VAR</VAR> <VAR> <VAR/> </VAR> <VAR VAR=""1.3"" VAR=""VAR.VAR"" VAR=""""> $VAR.VAR('VAR').VAR {{VAR VAR=""VAR"" /}} {{VAR VAR=""VAR"" /}} <VAR>12</VAR> <VAR>13</VAR> <VAR> </VAR> <VAR>VAR.VAR=VAR|VAR.VAR=VAR VAR|VAR=VAR|VAR.VAR=VAR VAR VAR|VAR.VAR=VAR VAR|VAR.VAR=VAR VAR|VAR.VAR=VAR VAR|VAR=VAR|VAR=VAR</VAR> <VAR>11</VAR> &VAR;VAR VAR=""VAR"" VAR=""VAR-VAR VAR"" VAR-VAR=""VAR"" VAR-VAR="" (% VAR=""${VAR}"" VAR=""VAR VAR-$!VAR VAR VAR-VAR"" %)((( $VAR.VAR.VAR (%  $VAR.VAR.VAR <VAR/>",13

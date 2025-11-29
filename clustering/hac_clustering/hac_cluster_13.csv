@@ -1,0 +1,3359 @@
+commit,file,added_code,deleted_code,hash_clean,cve_id,hash,repo_url,rel_type,score,extraction_status,text_norm,cluster_kmeans,cluster_hac
+argo-cd_3800a1e49d1d5a00a6692fee83396a37a6abe89a,util/oidc/oidc_test.go,"	app, err := NewClientApp(&settings.ArgoCDSettings{ServerSignature: signature, URL: expectedReturnURL}, """", """")
+func TestGenerateAppState_XSS(t *testing.T) {
+	signature, err := util.MakeSignature(32)
+	require.NoError(t, err)
+	app, err := NewClientApp(
+		&settings.ArgoCDSettings{
+			// Only return URLs starting with this base should be allowed.
+			URL: ""https://argocd.example.com"",
+			ServerSignature: signature,
+		},
+		"""", """",
+	)
+	require.NoError(t, err)
+
+	t.Run(""XSS fails"", func(t *testing.T) {
+		// This attack assumes the attacker has compromised the server's secret key. We use `generateAppState` here for
+		// convenience, but an attacker with access to the server secret could write their own code to generate the
+		// malicious cookie.
+
+		expectedReturnURL := ""javascript: alert('hi')""
+		generateResponse := httptest.NewRecorder()
+		state, err := app.generateAppState(expectedReturnURL, generateResponse)
+		require.NoError(t, err)
+
+		req := httptest.NewRequest(""GET"", ""/"", nil)
+		for _, cookie := range generateResponse.Result().Cookies() {
+			req.AddCookie(cookie)
+		}
+
+		returnURL, err := app.verifyAppState(req, httptest.NewRecorder(), state)
+		assert.ErrorIs(t, err, InvalidRedirectURLError)
+		assert.Empty(t, returnURL)
+	})
+
+	t.Run(""valid return URL succeeds"", func(t *testing.T) {
+		expectedReturnURL := ""https://argocd.example.com/some/path""
+		generateResponse := httptest.NewRecorder()
+		state, err := app.generateAppState(expectedReturnURL, generateResponse)
+		require.NoError(t, err)
+
+		req := httptest.NewRequest(""GET"", ""/"", nil)
+		for _, cookie := range generateResponse.Result().Cookies() {
+			req.AddCookie(cookie)
+		}
+
+		returnURL, err := app.verifyAppState(req, httptest.NewRecorder(), state)
+		assert.NoError(t, err, InvalidRedirectURLError)
+		assert.Equal(t, expectedReturnURL, returnURL)
+	})
+}
+","	app, err := NewClientApp(&settings.ArgoCDSettings{ServerSignature: signature}, """", """")",3800a1e49d1d5a00a6692fee83396a37a6abe89a,CVE-2022-31102,3800a1e49d1d5a00a6692fee83396a37a6abe89a,https://github.com/argoproj/argo-cd,GHSD_DIRECT_COMMIT,1337,COMPLETED,"VAR, VAR := VAR(&VAR.VAR{VAR: VAR, VAR: VAR}, """", """") VAR VAR(VAR *VAR.VAR) { VAR, VAR := VAR.VAR(32) VAR.VAR(VAR, VAR) VAR, VAR := VAR( &VAR.VAR{  VAR: ""VAR: VAR: VAR, }, """", """", ) VAR.VAR(VAR, VAR) VAR.VAR(""VAR VAR"", VAR(VAR *VAR.VAR) {    VAR := ""VAR: VAR('VAR')"" VAR := VAR.VAR() VAR, VAR := VAR.VAR(VAR, VAR) VAR.VAR(VAR, VAR) VAR := VAR.VAR(""VAR"", ""/"", VAR) VAR VAR, VAR := VAR VAR.VAR().VAR() { VAR.VAR(VAR) } VAR, VAR := VAR.VAR(VAR, VAR.VAR(), VAR) VAR.VAR(VAR, VAR, VAR) VAR.VAR(VAR, VAR) }) VAR.VAR(""VAR VAR VAR VAR"", VAR(VAR *VAR.VAR) { VAR := ""VAR: VAR := VAR.VAR() VAR, VAR := VAR.VAR(VAR, VAR) VAR.VAR(VAR, VAR) VAR := VAR.VAR(""VAR"", ""/"", VAR) VAR VAR, VAR := VAR VAR.VAR().VAR() { VAR.VAR(VAR) } VAR, VAR := VAR.VAR(VAR, VAR.VAR(), VAR) VAR.VAR(VAR, VAR, VAR) VAR.VAR(VAR, VAR, VAR) }) } VAR, VAR := VAR(&VAR.VAR{VAR: VAR}, """", """")",2,13
+cpython_511ca9452033ef95bc7d7fc404b8161068226002,Python/initconfig.c,"#include ""pycore_long.h""          // _PY_LONG_MAX_STR_DIGITS_THRESHOLD
+   The default is \""on\"" (or \""off\"" if you are running a local build).\n\
+\n\
+-X int_max_str_digits=number: limit the size of int<->str conversions.\n\
+    This helps avoid denial of service attacks when parsing untrusted data.\n\
+    The default is sys.int_info.default_max_str_digits.  0 disables."";
+""PYTHONINTMAXSTRDIGITS: limits the maximum digit characters in an int value\n""
+""   when converting from a string and when converting an int back to a str.\n""
+""   A value of 0 disables the limit.  Conversions to or from bases 2, 4, 8,\n""
+""   16, and 32 are never limited.\n""
+/* Excluded from public struct PyConfig for backporting reasons. */
+/* default to unconfigured, _PyLong_InitTypes() does the rest */
+int _Py_global_config_int_max_str_digits = -1;
+
+static PyStatus
+config_init_int_max_str_digits(PyConfig *config)
+{
+    int maxdigits;
+    int valid = 0;
+
+    const char *env = config_get_env(config, ""PYTHONINTMAXSTRDIGITS"");
+    if (env) {
+        if (!_Py_str_to_int(env, &maxdigits)) {
+            valid = ((maxdigits == 0) || (maxdigits >= _PY_LONG_MAX_STR_DIGITS_THRESHOLD));
+        }
+        if (!valid) {
+#define STRINGIFY(VAL) _STRINGIFY(VAL)
+#define _STRINGIFY(VAL) #VAL
+            return _PyStatus_ERR(
+                    ""PYTHONINTMAXSTRDIGITS: invalid limit; must be >= ""
+                    STRINGIFY(_PY_LONG_MAX_STR_DIGITS_THRESHOLD)
+                    "" or 0 for unlimited."");
+        }
+        _Py_global_config_int_max_str_digits = maxdigits;
+    }
+
+    const wchar_t *xoption = config_get_xoption(config, L""int_max_str_digits"");
+    if (xoption) {
+        const wchar_t *sep = wcschr(xoption, L'=');
+        if (sep) {
+            if (!config_wstr_to_int(sep + 1, &maxdigits)) {
+                valid = ((maxdigits == 0) || (maxdigits >= _PY_LONG_MAX_STR_DIGITS_THRESHOLD));
+            }
+        }
+        if (!valid) {
+            return _PyStatus_ERR(
+                    ""-X int_max_str_digits: invalid limit; must be >= ""
+                    STRINGIFY(_PY_LONG_MAX_STR_DIGITS_THRESHOLD)
+                    "" or 0 for unlimited."");
+#undef _STRINGIFY
+#undef STRINGIFY
+        }
+        _Py_global_config_int_max_str_digits = maxdigits;
+    }
+    return _PyStatus_OK();
+}
+
+    if (_Py_global_config_int_max_str_digits < 0) {
+        status = config_init_int_max_str_digits(config);
+        if (_PyStatus_EXCEPTION(status)) {
+            return status;
+        }
+    }
+","   The default is \""on\"" (or \""off\"" if you are running a local build)."";",511ca9452033ef95bc7d7fc404b8161068226002,CVE-2020-10735,511ca9452033ef95bc7d7fc404b8161068226002,https://github.com/python/cpython,NVD_GIT_REPOBASED,186,COMPLETED," VAR VAR VAR \""VAR\"" (VAR \""VAR\"" VAR VAR VAR VAR VAR VAR VAR).\VAR\ \VAR\ -VAR VAR=VAR: VAR VAR VAR VAR VAR<->VAR VAR.\VAR\ VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR.\VAR\ VAR VAR VAR VAR.VAR.VAR. 0 VAR.""; ""VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR\VAR"" "" VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR.\VAR"" "" VAR VAR VAR 0 VAR VAR VAR. VAR VAR VAR VAR VAR 2, 4, 8,\VAR"" "" 16, VAR 32 VAR VAR VAR.\VAR""   VAR VAR = -1; VAR VAR VAR(VAR *VAR) { VAR VAR; VAR VAR = 0; VAR VAR *VAR = VAR(VAR, ""VAR""); VAR (VAR) { VAR (!VAR(VAR, &VAR)) { VAR = ((VAR == 0) || (VAR >= VAR)); } VAR (!VAR) {   VAR VAR( ""VAR: VAR VAR; VAR VAR >= "" VAR(VAR) "" VAR 0 VAR VAR.""); } VAR = VAR; } VAR VAR *VAR = VAR(VAR, VAR""VAR""); VAR (VAR) { VAR VAR *VAR = VAR(VAR, VAR'='); VAR (VAR) { VAR (!VAR(VAR + 1, &VAR)) { VAR = ((VAR == 0) || (VAR >= VAR)); } } VAR (!VAR) { VAR VAR( ""-VAR VAR: VAR VAR; VAR VAR >= "" VAR(VAR) "" VAR 0 VAR VAR."");   } VAR = VAR; } VAR VAR(); } VAR (VAR < 0) { VAR = VAR(VAR); VAR (VAR(VAR)) { VAR VAR; } } VAR VAR VAR \""VAR\"" (VAR \""VAR\"" VAR VAR VAR VAR VAR VAR VAR)."";",1,13
+cpython_8f0fa4bd10aba723aff988720cd26b93be99bc12,Python/initconfig.c,"#include ""pycore_long.h""          // _PY_LONG_MAX_STR_DIGITS_THRESHOLD
+         -X int_max_str_digits=number: limit the size of int<->str conversions.\n\
+             This helps avoid denial of service attacks when parsing untrusted data.\n\
+             The default is sys.int_info.default_max_str_digits.  0 disables.\n\
+\n\
+""PYTHONINTMAXSTRDIGITS: limits the maximum digit characters in an int value\n""
+""   when converting from a string and when converting an int back to a str.\n""
+""   A value of 0 disables the limit.  Conversions to or from bases 2, 4, 8,\n""
+""   16, and 32 are never limited.\n""
+/* Excluded from public struct PyConfig for backporting reasons. */
+/* default to unconfigured, _PyLong_InitTypes() does the rest */
+int _Py_global_config_int_max_str_digits = -1;
+
+static PyStatus
+config_init_int_max_str_digits(PyConfig *config)
+{
+    int maxdigits;
+    int valid = 0;
+
+    const char *env = config_get_env(config, ""PYTHONINTMAXSTRDIGITS"");
+    if (env) {
+        if (!_Py_str_to_int(env, &maxdigits)) {
+            valid = ((maxdigits == 0) || (maxdigits >= _PY_LONG_MAX_STR_DIGITS_THRESHOLD));
+        }
+        if (!valid) {
+#define STRINGIFY(VAL) _STRINGIFY(VAL)
+#define _STRINGIFY(VAL) #VAL
+            return _PyStatus_ERR(
+                    ""PYTHONINTMAXSTRDIGITS: invalid limit; must be >= ""
+                    STRINGIFY(_PY_LONG_MAX_STR_DIGITS_THRESHOLD)
+                    "" or 0 for unlimited."");
+        }
+        _Py_global_config_int_max_str_digits = maxdigits;
+    }
+
+    const wchar_t *xoption = config_get_xoption(config, L""int_max_str_digits"");
+    if (xoption) {
+        const wchar_t *sep = wcschr(xoption, L'=');
+        if (sep) {
+            if (!config_wstr_to_int(sep + 1, &maxdigits)) {
+                valid = ((maxdigits == 0) || (maxdigits >= _PY_LONG_MAX_STR_DIGITS_THRESHOLD));
+            }
+        }
+        if (!valid) {
+            return _PyStatus_ERR(
+                    ""-X int_max_str_digits: invalid limit; must be >= ""
+                    STRINGIFY(_PY_LONG_MAX_STR_DIGITS_THRESHOLD)
+                    "" or 0 for unlimited."");
+#undef _STRINGIFY
+#undef STRINGIFY
+        }
+        _Py_global_config_int_max_str_digits = maxdigits;
+    }
+    return _PyStatus_OK();
+}
+    if (_Py_global_config_int_max_str_digits < 0) {
+        status = config_init_int_max_str_digits(config);
+        if (_PyStatus_EXCEPTION(status)) {
+            return status;
+        }
+    }",,8f0fa4bd10aba723aff988720cd26b93be99bc12,CVE-2020-10735,8f0fa4bd10aba723aff988720cd26b93be99bc12,https://github.com/python/cpython,NVD_GIT_REPOBASED,186,COMPLETED," -VAR VAR=VAR: VAR VAR VAR VAR VAR<->VAR VAR.\VAR\ VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR.\VAR\ VAR VAR VAR VAR.VAR.VAR. 0 VAR.\VAR\ \VAR\ ""VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR\VAR"" "" VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR.\VAR"" "" VAR VAR VAR 0 VAR VAR VAR. VAR VAR VAR VAR VAR 2, 4, 8,\VAR"" "" 16, VAR 32 VAR VAR VAR.\VAR""   VAR VAR = -1; VAR VAR VAR(VAR *VAR) { VAR VAR; VAR VAR = 0; VAR VAR *VAR = VAR(VAR, ""VAR""); VAR (VAR) { VAR (!VAR(VAR, &VAR)) { VAR = ((VAR == 0) || (VAR >= VAR)); } VAR (!VAR) {   VAR VAR( ""VAR: VAR VAR; VAR VAR >= "" VAR(VAR) "" VAR 0 VAR VAR.""); } VAR = VAR; } VAR VAR *VAR = VAR(VAR, VAR""VAR""); VAR (VAR) { VAR VAR *VAR = VAR(VAR, VAR'='); VAR (VAR) { VAR (!VAR(VAR + 1, &VAR)) { VAR = ((VAR == 0) || (VAR >= VAR)); } } VAR (!VAR) { VAR VAR( ""-VAR VAR: VAR VAR; VAR VAR >= "" VAR(VAR) "" VAR 0 VAR VAR."");   } VAR = VAR; } VAR VAR(); } VAR (VAR < 0) { VAR = VAR(VAR); VAR (VAR(VAR)) { VAR VAR; } } ",1,13
+cpython_cec1e9dfd769bd3a16142d0fdd1a36f19c77ed15,Python/initconfig.c,"#include ""pycore_long.h""          // _PY_LONG_MAX_STR_DIGITS_THRESHOLD
+         -X int_max_str_digits=number: limit the size of int<->str conversions.\n\
+             This helps avoid denial of service attacks when parsing untrusted data.\n\
+             The default is sys.int_info.default_max_str_digits.  0 disables.\n\
+""PYTHONINTMAXSTRDIGITS: limits the maximum digit characters in an int value\n""
+""   when converting from a string and when converting an int back to a str.\n""
+""   A value of 0 disables the limit.  Conversions to or from bases 2, 4, 8,\n""
+""   16, and 32 are never limited.\n""
+/* Excluded from public struct PyConfig for backporting reasons. */
+/* default to unconfigured, _PyLong_Init() does the rest */
+int _Py_global_config_int_max_str_digits = -1;
+
+static PyStatus
+config_init_int_max_str_digits(PyConfig *config)
+{
+    int maxdigits;
+    int valid = 0;
+
+    const char *env = config_get_env(config, ""PYTHONINTMAXSTRDIGITS"");
+    if (env) {
+        if (!_Py_str_to_int(env, &maxdigits)) {
+            valid = ((maxdigits == 0) || (maxdigits >= _PY_LONG_MAX_STR_DIGITS_THRESHOLD));
+        }
+        if (!valid) {
+#define STRINGIFY(VAL) _STRINGIFY(VAL)
+#define _STRINGIFY(VAL) #VAL
+            return _PyStatus_ERR(
+                    ""PYTHONINTMAXSTRDIGITS: invalid limit; must be >= ""
+                    STRINGIFY(_PY_LONG_MAX_STR_DIGITS_THRESHOLD)
+                    "" or 0 for unlimited."");
+        }
+        _Py_global_config_int_max_str_digits = maxdigits;
+    }
+
+    const wchar_t *xoption = config_get_xoption(config, L""int_max_str_digits"");
+    if (xoption) {
+        const wchar_t *sep = wcschr(xoption, L'=');
+        if (sep) {
+            if (!config_wstr_to_int(sep + 1, &maxdigits)) {
+                valid = ((maxdigits == 0) || (maxdigits >= _PY_LONG_MAX_STR_DIGITS_THRESHOLD));
+            }
+        }
+        if (!valid) {
+            return _PyStatus_ERR(
+                    ""-X int_max_str_digits: invalid limit; must be >= ""
+                    STRINGIFY(_PY_LONG_MAX_STR_DIGITS_THRESHOLD)
+                    "" or 0 for unlimited."");
+#undef _STRINGIFY
+#undef STRINGIFY
+        }
+        _Py_global_config_int_max_str_digits = maxdigits;
+    }
+    return _PyStatus_OK();
+}
+    if (_Py_global_config_int_max_str_digits < 0) {
+        status = config_init_int_max_str_digits(config);
+        if (_PyStatus_EXCEPTION(status)) {
+            return status;
+        }
+    }",,cec1e9dfd769bd3a16142d0fdd1a36f19c77ed15,CVE-2020-10735,cec1e9dfd769bd3a16142d0fdd1a36f19c77ed15,https://github.com/python/cpython,NVD_GIT_REPOBASED,186,COMPLETED," -VAR VAR=VAR: VAR VAR VAR VAR VAR<->VAR VAR.\VAR\ VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR.\VAR\ VAR VAR VAR VAR.VAR.VAR. 0 VAR.\VAR\ ""VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR\VAR"" "" VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR.\VAR"" "" VAR VAR VAR 0 VAR VAR VAR. VAR VAR VAR VAR VAR 2, 4, 8,\VAR"" "" 16, VAR 32 VAR VAR VAR.\VAR""   VAR VAR = -1; VAR VAR VAR(VAR *VAR) { VAR VAR; VAR VAR = 0; VAR VAR *VAR = VAR(VAR, ""VAR""); VAR (VAR) { VAR (!VAR(VAR, &VAR)) { VAR = ((VAR == 0) || (VAR >= VAR)); } VAR (!VAR) {   VAR VAR( ""VAR: VAR VAR; VAR VAR >= "" VAR(VAR) "" VAR 0 VAR VAR.""); } VAR = VAR; } VAR VAR *VAR = VAR(VAR, VAR""VAR""); VAR (VAR) { VAR VAR *VAR = VAR(VAR, VAR'='); VAR (VAR) { VAR (!VAR(VAR + 1, &VAR)) { VAR = ((VAR == 0) || (VAR >= VAR)); } } VAR (!VAR) { VAR VAR( ""-VAR VAR: VAR VAR; VAR VAR >= "" VAR(VAR) "" VAR 0 VAR VAR."");   } VAR = VAR; } VAR VAR(); } VAR (VAR < 0) { VAR = VAR(VAR); VAR (VAR(VAR)) { VAR VAR; } } ",1,13
+cpython_f8b71da9aac6ea74808dcdd0cc266e705431356b,Python/initconfig.c,"#include ""pycore_long.h""          // _PY_LONG_MAX_STR_DIGITS_THRESHOLD
+   The default is \""on\"" (or \""off\"" if you are running a local build).\n\
+\n\
+-X int_max_str_digits=number: limit the size of int<->str conversions.\n\
+    This helps avoid denial of service attacks when parsing untrusted data.\n\
+    The default is sys.int_info.default_max_str_digits.  0 disables."";
+""PYTHONINTMAXSTRDIGITS: limits the maximum digit characters in an int value\n""
+""   when converting from a string and when converting an int back to a str.\n""
+""   A value of 0 disables the limit.  Conversions to or from bases 2, 4, 8,\n""
+""   16, and 32 are never limited.\n""
+/* Excluded from public struct PyConfig for backporting reasons. */
+/* default to unconfigured, _PyLong_InitTypes() does the rest */
+int _Py_global_config_int_max_str_digits = -1;
+
+static PyStatus
+config_init_int_max_str_digits(PyConfig *config)
+{
+    int maxdigits;
+    int valid = 0;
+
+    const char *env = config_get_env(config, ""PYTHONINTMAXSTRDIGITS"");
+    if (env) {
+        if (!_Py_str_to_int(env, &maxdigits)) {
+            valid = ((maxdigits == 0) || (maxdigits >= _PY_LONG_MAX_STR_DIGITS_THRESHOLD));
+        }
+        if (!valid) {
+#define STRINGIFY(VAL) _STRINGIFY(VAL)
+#define _STRINGIFY(VAL) #VAL
+            return _PyStatus_ERR(
+                    ""PYTHONINTMAXSTRDIGITS: invalid limit; must be >= ""
+                    STRINGIFY(_PY_LONG_MAX_STR_DIGITS_THRESHOLD)
+                    "" or 0 for unlimited."");
+        }
+        _Py_global_config_int_max_str_digits = maxdigits;
+    }
+
+    const wchar_t *xoption = config_get_xoption(config, L""int_max_str_digits"");
+    if (xoption) {
+        const wchar_t *sep = wcschr(xoption, L'=');
+        if (sep) {
+            if (!config_wstr_to_int(sep + 1, &maxdigits)) {
+                valid = ((maxdigits == 0) || (maxdigits >= _PY_LONG_MAX_STR_DIGITS_THRESHOLD));
+            }
+        }
+        if (!valid) {
+            return _PyStatus_ERR(
+                    ""-X int_max_str_digits: invalid limit; must be >= ""
+                    STRINGIFY(_PY_LONG_MAX_STR_DIGITS_THRESHOLD)
+                    "" or 0 for unlimited."");
+#undef _STRINGIFY
+#undef STRINGIFY
+        }
+        _Py_global_config_int_max_str_digits = maxdigits;
+    }
+    return _PyStatus_OK();
+}
+    if (_Py_global_config_int_max_str_digits < 0) {
+        status = config_init_int_max_str_digits(config);
+        if (_PyStatus_EXCEPTION(status)) {
+            return status;
+        }
+    }","   The default is \""on\"" (or \""off\"" if you are running a local build)."";",f8b71da9aac6ea74808dcdd0cc266e705431356b,CVE-2020-10735,f8b71da9aac6ea74808dcdd0cc266e705431356b,https://github.com/python/cpython,NVD_GIT_REPOBASED,186,COMPLETED," VAR VAR VAR \""VAR\"" (VAR \""VAR\"" VAR VAR VAR VAR VAR VAR VAR).\VAR\ \VAR\ -VAR VAR=VAR: VAR VAR VAR VAR VAR<->VAR VAR.\VAR\ VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR.\VAR\ VAR VAR VAR VAR.VAR.VAR. 0 VAR.""; ""VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR\VAR"" "" VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR.\VAR"" "" VAR VAR VAR 0 VAR VAR VAR. VAR VAR VAR VAR VAR 2, 4, 8,\VAR"" "" 16, VAR 32 VAR VAR VAR.\VAR""   VAR VAR = -1; VAR VAR VAR(VAR *VAR) { VAR VAR; VAR VAR = 0; VAR VAR *VAR = VAR(VAR, ""VAR""); VAR (VAR) { VAR (!VAR(VAR, &VAR)) { VAR = ((VAR == 0) || (VAR >= VAR)); } VAR (!VAR) {   VAR VAR( ""VAR: VAR VAR; VAR VAR >= "" VAR(VAR) "" VAR 0 VAR VAR.""); } VAR = VAR; } VAR VAR *VAR = VAR(VAR, VAR""VAR""); VAR (VAR) { VAR VAR *VAR = VAR(VAR, VAR'='); VAR (VAR) { VAR (!VAR(VAR + 1, &VAR)) { VAR = ((VAR == 0) || (VAR >= VAR)); } } VAR (!VAR) { VAR VAR( ""-VAR VAR: VAR VAR; VAR VAR >= "" VAR(VAR) "" VAR 0 VAR VAR."");   } VAR = VAR; } VAR VAR(); } VAR (VAR < 0) { VAR = VAR(VAR); VAR (VAR(VAR)) { VAR VAR; } } VAR VAR VAR \""VAR\"" (VAR \""VAR\"" VAR VAR VAR VAR VAR VAR VAR)."";",1,13
+deno_99b5eaa2f4f81b0f6fb46a388808a0d8f40b91e1,cli/Cargo.toml,"version = ""1.32.1""","version = ""1.32.0""",99b5eaa2f4f81b0f6fb46a388808a0d8f40b91e1,CVE-2023-28445,99b5eaa2f4f81b0f6fb46a388808a0d8f40b91e1,https://github.com/denoland/deno,NVD_GIT_REPOBASED,74,COMPLETED,"VAR = ""1.32.1"" VAR = ""1.32.0""",2,13
+deno_99b5eaa2f4f81b0f6fb46a388808a0d8f40b91e1,ext/node/Cargo.toml,"version = ""0.32.0""","version = ""0.31.1""",99b5eaa2f4f81b0f6fb46a388808a0d8f40b91e1,CVE-2023-28445,99b5eaa2f4f81b0f6fb46a388808a0d8f40b91e1,https://github.com/denoland/deno,NVD_GIT_REPOBASED,74,COMPLETED,"VAR = ""0.32.0"" VAR = ""0.31.1""",2,13
+envoy_cb4c1afc8fd52d3743862cf773e34069a60f9c31,test/extensions/transport_sockets/proxy_protocol/proxy_protocol_integration_test.cc,"TEST_P(ProxyProtocolIntegrationTest, TestV1ProxyProtocolMultipleConnections) {
+  if (GetParam() != Network::Address::IpVersion::v4) {
+    return;
+  }
+
+  setup(envoy::config::core::v3::ProxyProtocolConfig::V1, false,
+        ""envoy.transport_sockets.raw_buffer"");
+  initialize();
+  auto listener_port = lookupPort(""listener_0"");
+
+  auto loopback2 = Network::Utility::resolveUrl(""tcp://127.0.0.2:0"");
+  auto tcp_client2 = makeTcpConnection(listener_port, nullptr, loopback2);
+
+  auto tcp_client = makeTcpConnection(listener_port);
+
+  ASSERT_TRUE(fake_upstreams_[0]->waitForRawConnection(fake_upstream_connection_));
+  FakeRawConnectionPtr conn2;
+  ASSERT_TRUE(fake_upstreams_[0]->waitForRawConnection(conn2));
+
+  std::string data1, data2;
+  ASSERT_TRUE(
+      fake_upstream_connection_->waitForData(FakeRawConnection::waitForAtLeastBytes(32), &data1));
+  ASSERT_TRUE(conn2->waitForData(FakeRawConnection::waitForAtLeastBytes(32), &data2));
+
+  EXPECT_NE(data1, data2);
+
+  tcp_client->close();
+  tcp_client2->close();
+}
+
+} // namespace Envoy",} // namespace Envoy,cb4c1afc8fd52d3743862cf773e34069a60f9c31,CVE-2020-35471,cb4c1afc8fd52d3743862cf773e34069a60f9c31,https://github.com/envoyproxy/envoy,NVD_GIT_REPOBASED,98,COMPLETED,"VAR(VAR, VAR) { VAR (VAR() != VAR::VAR::VAR::VAR) { VAR; } VAR(VAR::VAR::VAR::VAR::VAR::VAR, VAR, ""VAR.VAR.VAR""); VAR(); VAR VAR = VAR(""VAR""); VAR VAR = VAR::VAR::VAR(""VAR: VAR VAR = VAR(VAR, VAR, VAR); VAR VAR = VAR(VAR); VAR(VAR[0]->VAR(VAR)); VAR VAR; VAR(VAR[0]->VAR(VAR)); VAR::VAR VAR, VAR; VAR( VAR->VAR(VAR::VAR(32), &VAR)); VAR(VAR->VAR(VAR::VAR(32), &VAR)); VAR(VAR, VAR); VAR->VAR(); VAR->VAR(); } }  } ",2,13
+FFmpeg_b97a4b658814b2de8b9f2a3bce491c002d34de31,libavcodec/cbs_av1.c,"    uint32_t zeroes, bits_value, value;
+    int position;
+    zeroes = 0;
+        if (get_bits_left(gbc) < 1) {
+        if (get_bits1(gbc))
+        ++zeroes;
+        if (get_bits_left(gbc) < zeroes) {
+            av_log(ctx->log_ctx, AV_LOG_ERROR, ""Invalid uvlc code at ""
+                   ""%s: bitstream ended.\n"", name);
+            return AVERROR_INVALIDDATA;
+        }
+        bits_value = get_bits_long(gbc, zeroes);
+        value = bits_value + (UINT32_C(1) << zeroes) - 1;
+        char bits[65];
+        int i, j, k;
+
+        if (zeroes >= 32) {
+            while (zeroes > 32) {
+                k = FFMIN(zeroes - 32, 32);
+                for (i = 0; i < k; i++)
+                    bits[i] = '0';
+                bits[i] = 0;
+                ff_cbs_trace_syntax_element(ctx, position, name,
+                                            NULL, bits, 0);
+                zeroes -= k;
+                position += k;
+            }
+        }
+
+        for (i = 0; i < zeroes; i++)
+            bits[i] = '0';
+        bits[i++] = '1';
+
+        if (zeroes < 32) {
+            for (j = 0; j < zeroes; j++)
+                bits[i++] = (bits_value >> (zeroes - j - 1) & 1) ? '1' : '0';
+        }
+
+        ff_cbs_trace_syntax_element(ctx, position, name,
+                                    NULL, bits, value);","    uint32_t value;
+    int position, zeroes, i, j;
+    char bits[65];
+    zeroes = i = 0;
+        if (get_bits_left(gbc) < zeroes + 1) {
+        if (get_bits1(gbc)) {
+            bits[i++] = '1';
+        } else {
+            bits[i++] = '0';
+            ++zeroes;
+        }
+        value = get_bits_long(gbc, zeroes);
+
+        for (j = 0; j < zeroes; j++)
+            bits[i++] = (value >> (zeroes - j - 1) & 1) ? '1' : '0';
+        value += (1 << zeroes) - 1;
+        ff_cbs_trace_syntax_element(ctx, position, name, NULL,
+                                    bits, value);",b97a4b658814b2de8b9f2a3bce491c002d34de31,CVE-2019-1000016,b97a4b658814b2de8b9f2a3bce491c002d34de31,https://github.com/FFmpeg/FFmpeg,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR VAR, VAR, VAR; VAR VAR; VAR = 0; VAR (VAR(VAR) < 1) { VAR (VAR(VAR)) ++VAR; VAR (VAR(VAR) < VAR) { VAR(VAR->VAR, VAR, ""VAR VAR VAR VAR "" ""%VAR: VAR VAR.\VAR"", VAR); VAR VAR; } VAR = VAR(VAR, VAR); VAR = VAR + (VAR(1) << VAR) - 1; VAR VAR[65]; VAR VAR, VAR, VAR; VAR (VAR >= 32) { VAR (VAR > 32) { VAR = VAR(VAR - 32, 32); VAR (VAR = 0; VAR < VAR; VAR++) VAR[VAR] = '0'; VAR[VAR] = 0; VAR(VAR, VAR, VAR, VAR, VAR, 0); VAR -= VAR; VAR += VAR; } } VAR (VAR = 0; VAR < VAR; VAR++) VAR[VAR] = '0'; VAR[VAR++] = '1'; VAR (VAR < 32) { VAR (VAR = 0; VAR < VAR; VAR++) VAR[VAR++] = (VAR >> (VAR - VAR - 1) & 1) ? '1' : '0'; } VAR(VAR, VAR, VAR, VAR, VAR, VAR); VAR VAR; VAR VAR, VAR, VAR, VAR; VAR VAR[65]; VAR = VAR = 0; VAR (VAR(VAR) < VAR + 1) { VAR (VAR(VAR)) { VAR[VAR++] = '1'; } VAR { VAR[VAR++] = '0'; ++VAR; } VAR = VAR(VAR, VAR); VAR (VAR = 0; VAR < VAR; VAR++) VAR[VAR++] = (VAR >> (VAR - VAR - 1) & 1) ? '1' : '0'; VAR += (1 << VAR) - 1; VAR(VAR, VAR, VAR, VAR, VAR, VAR);",2,13
+FFmpeg_bf814387f42e9b0dea9d75c03db4723c88e7d962,libavcodec/jpegxl_parser.c,"    VLC level1_vlc = { 0 };
+    if (total_code != 32 && num_codes >= 2 || num_codes < 1) {
+        ret = AVERROR_INVALIDDATA;
+        goto end;
+    }
+    buf = av_mallocz(MAX_PREFIX_ALPHABET_SIZE * (2 * sizeof(int8_t) + sizeof(int16_t) + sizeof(uint32_t))
+    level2_lens_s = (int8_t *)(buf + MAX_PREFIX_ALPHABET_SIZE * sizeof(int8_t));
+    level2_syms = (int16_t *)(buf + MAX_PREFIX_ALPHABET_SIZE * (2 * sizeof(int8_t)));
+    level2_codecounts = (uint32_t *)(buf + MAX_PREFIX_ALPHABET_SIZE * (2 * sizeof(int8_t) + sizeof(int16_t)));
+        if (get_bits_left(gb) < 0) {
+            ret = AVERROR_BUFFER_TOO_SMALL;
+            goto end;
+        }
+                extra += 4 * (repeat_count_prev - 2) - repeat_count_prev;
+            extra = FFMIN(extra, dist->alphabet_size - i);
+                extra += 8 * (repeat_count_zero - 2) - repeat_count_zero;
+            extra = FFMIN(extra, dist->alphabet_size - i);","    VLC level1_vlc;
+    if (total_code != 32 && num_codes >= 2 || num_codes < 1)
+        return AVERROR_INVALIDDATA;
+    buf = av_mallocz(dist->alphabet_size * (2 * sizeof(int8_t) + sizeof(int16_t) + sizeof(uint32_t))
+    level2_lens_s = (int8_t *)(buf + dist->alphabet_size * sizeof(int8_t));
+    level2_syms = (int16_t *)(buf + dist->alphabet_size * (2 * sizeof(int8_t)));
+    level2_codecounts = (uint32_t *)(buf + dist->alphabet_size * (2 * sizeof(int8_t) + sizeof(int16_t)));
+                extra = 4 * (repeat_count_prev - 2) - repeat_count_prev + extra;
+            if (i + extra > dist->alphabet_size) {
+                ret = AVERROR_INVALIDDATA;
+                goto end;
+            }
+                extra = 8 * (repeat_count_zero - 2) - repeat_count_zero + extra;",bf814387f42e9b0dea9d75c03db4723c88e7d962,CVE-2023-46407,bf814387f42e9b0dea9d75c03db4723c88e7d962,https://github.com/FFmpeg/FFmpeg,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR VAR = { 0 }; VAR (VAR != 32 && VAR >= 2 || VAR < 1) { VAR = VAR; VAR VAR; } VAR = VAR(VAR * (2 * VAR(VAR) + VAR(VAR) + VAR(VAR)) VAR = (VAR *)(VAR + VAR * VAR(VAR)); VAR = (VAR *)(VAR + VAR * (2 * VAR(VAR))); VAR = (VAR *)(VAR + VAR * (2 * VAR(VAR) + VAR(VAR))); VAR (VAR(VAR) < 0) { VAR = VAR; VAR VAR; } VAR += 4 * (VAR - 2) - VAR; VAR = VAR(VAR, VAR->VAR - VAR); VAR += 8 * (VAR - 2) - VAR; VAR = VAR(VAR, VAR->VAR - VAR); VAR VAR; VAR (VAR != 32 && VAR >= 2 || VAR < 1) VAR VAR; VAR = VAR(VAR->VAR * (2 * VAR(VAR) + VAR(VAR) + VAR(VAR)) VAR = (VAR *)(VAR + VAR->VAR * VAR(VAR)); VAR = (VAR *)(VAR + VAR->VAR * (2 * VAR(VAR))); VAR = (VAR *)(VAR + VAR->VAR * (2 * VAR(VAR) + VAR(VAR))); VAR = 4 * (VAR - 2) - VAR + VAR; VAR (VAR + VAR > VAR->VAR) { VAR = VAR; VAR VAR; } VAR = 8 * (VAR - 2) - VAR + VAR;",2,13
+FreeRDP_5ad707ddf33d1d785a8ca1fbeec91d2eee985820,client/X11/xf_cliprdr.c,"static BOOL xf_cliprdr_process_dib(clipboardContext* cb, BYTE* data, int size)
+		return FALSE;
+	if ((bpp < 1) || (bpp > 32))
+	{
+		fprintf(stderr, ""%s: invalid bpp value %d"", __FUNCTION__, bpp);
+		return FALSE;
+	}
+
+	return TRUE;","static void xf_cliprdr_process_dib(clipboardContext* cb, BYTE* data, int size)
+		return;",5ad707ddf33d1d785a8ca1fbeec91d2eee985820,CVE-2014-0250,5ad707ddf33d1d785a8ca1fbeec91d2eee985820,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,80,COMPLETED,"VAR VAR VAR(VAR* VAR, VAR* VAR, VAR VAR) VAR VAR; VAR ((VAR < 1) || (VAR > 32)) { VAR(VAR, ""%VAR: VAR VAR VAR %VAR"", VAR, VAR); VAR VAR; } VAR VAR; VAR VAR VAR(VAR* VAR, VAR* VAR, VAR VAR) VAR;",2,13
+FreeRDP_5ad707ddf33d1d785a8ca1fbeec91d2eee985820,libfreerdp/core/orders.c,"	if ((cache_bitmap->bitmapBpp < 1) || (cache_bitmap->bitmapBpp > 32))
+	{
+		fprintf(stderr, ""%s: invalid bitmap bpp %d\n"", __FUNCTION__, cache_bitmap->bitmapBpp);
+		return FALSE;
+	}
+	if ((bitmapData->bpp < 1) || (bitmapData->bpp > 32))
+	{
+		fprintf(stderr, ""%s: invalid bpp value %d"", __FUNCTION__, bitmapData->bpp);
+		return FALSE;
+	}
+	if ((create_nine_grid_bitmap->bitmapBpp < 1) || (create_nine_grid_bitmap->bitmapBpp > 32))
+	{
+		fprintf(stderr, ""%s: invalid bpp value %d"", __FUNCTION__, create_nine_grid_bitmap->bitmapBpp);
+		return FALSE;
+	}
+	if ((stream_bitmap_first->bitmapBpp < 1) || (stream_bitmap_first->bitmapBpp > 32))
+	{
+		fprintf(stderr, ""%s: invalid bpp value %d"", __FUNCTION__, stream_bitmap_first->bitmapBpp);
+		return FALSE;
+	}
+",,5ad707ddf33d1d785a8ca1fbeec91d2eee985820,CVE-2014-0250,5ad707ddf33d1d785a8ca1fbeec91d2eee985820,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,80,COMPLETED,"VAR ((VAR->VAR < 1) || (VAR->VAR > 32)) { VAR(VAR, ""%VAR: VAR VAR VAR %VAR\VAR"", VAR, VAR->VAR); VAR VAR; } VAR ((VAR->VAR < 1) || (VAR->VAR > 32)) { VAR(VAR, ""%VAR: VAR VAR VAR %VAR"", VAR, VAR->VAR); VAR VAR; } VAR ((VAR->VAR < 1) || (VAR->VAR > 32)) { VAR(VAR, ""%VAR: VAR VAR VAR %VAR"", VAR, VAR->VAR); VAR VAR; } VAR ((VAR->VAR < 1) || (VAR->VAR > 32)) { VAR(VAR, ""%VAR: VAR VAR VAR %VAR"", VAR, VAR->VAR); VAR VAR; } ",2,13
+FreeRDP_5ad707ddf33d1d785a8ca1fbeec91d2eee985820,libfreerdp/core/surface.c,"	if ((cmd->bpp < 1) || (cmd->bpp > 32))
+	{
+		fprintf(stderr, ""%s: invalid bpp value %d"", __FUNCTION__, cmd->bpp);
+		return FALSE;
+	}
+",,5ad707ddf33d1d785a8ca1fbeec91d2eee985820,CVE-2014-0250,5ad707ddf33d1d785a8ca1fbeec91d2eee985820,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,80,COMPLETED,"VAR ((VAR->VAR < 1) || (VAR->VAR > 32)) { VAR(VAR, ""%VAR: VAR VAR VAR %VAR"", VAR, VAR->VAR); VAR VAR; } ",2,13
+FreeRDP_5ad707ddf33d1d785a8ca1fbeec91d2eee985820,libfreerdp/core/window.c,"	if ((icon_info->bpp < 1) || (icon_info->bpp > 32))
+	{
+		fprintf(stderr, ""%s: invalid bpp %d\n"", __FUNCTION__, icon_info->bpp);
+		return FALSE;
+	}",,5ad707ddf33d1d785a8ca1fbeec91d2eee985820,CVE-2014-0250,5ad707ddf33d1d785a8ca1fbeec91d2eee985820,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,80,COMPLETED,"VAR ((VAR->VAR < 1) || (VAR->VAR > 32)) { VAR(VAR, ""%VAR: VAR VAR %VAR\VAR"", VAR, VAR->VAR); VAR VAR; } ",2,13
+FreeRDP_61a58532dbb0b8d8654446b7fbb23cbeabae2e8c,libfreerdp/core/update.c,	if ((pointer_new->xorBpp < 1) || (pointer_new->xorBpp > 32)),	if ((pointer_new->xorBpp < 0) || (pointer_new->xorBpp > 32)),61a58532dbb0b8d8654446b7fbb23cbeabae2e8c,CVE-2014-0250,61a58532dbb0b8d8654446b7fbb23cbeabae2e8c,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,76,COMPLETED,VAR ((VAR->VAR < 1) || (VAR->VAR > 32)) VAR ((VAR->VAR < 0) || (VAR->VAR > 32)),2,13
+FreeRDP_640b90139622c9a8ac8a959066ef9d0c09936876,libfreerdp/core/update.c,"BOOL update_read_pointer_color(wStream* s, POINTER_COLOR_UPDATE* pointer_color, int xorBpp)
+		scanlineSize = (7 + xorBpp * pointer_color->width) / 8;
+		if (scanlineSize * pointer_color->height != pointer_color->lengthXorMask)
+		if (scanlineSize * pointer_color->height != pointer_color->lengthAndMask)
+	if ((pointer_new->xorBpp < 0) || (pointer_new->xorBpp > 32))
+	{
+		fprintf(stderr, ""%s: invalid xorBpp %d\n"", __FUNCTION__, pointer_new->xorBpp);
+		return FALSE;
+	}","BOOL update_read_pointer_color(wStream* s, POINTER_COLOR_UPDATE* pointer_color, int bpp)
+		scanlineSize = (7 + bpp * pointer_color->width) / 8;
+		if (scanlineSize * pointer_color->height > pointer_color->lengthXorMask)
+		if (scanlineSize * pointer_color->height > pointer_color->lengthAndMask)",640b90139622c9a8ac8a959066ef9d0c09936876,CVE-2014-0250,640b90139622c9a8ac8a959066ef9d0c09936876,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,76,COMPLETED,"VAR VAR(VAR* VAR, VAR* VAR, VAR VAR) VAR = (7 + VAR * VAR->VAR) / 8; VAR (VAR * VAR->VAR != VAR->VAR) VAR (VAR * VAR->VAR != VAR->VAR) VAR ((VAR->VAR < 0) || (VAR->VAR > 32)) { VAR(VAR, ""%VAR: VAR VAR %VAR\VAR"", VAR, VAR->VAR); VAR VAR; } VAR VAR(VAR* VAR, VAR* VAR, VAR VAR) VAR = (7 + VAR * VAR->VAR) / 8; VAR (VAR * VAR->VAR > VAR->VAR) VAR (VAR * VAR->VAR > VAR->VAR)",2,13
+FreeRDP_b73143cf7ee5fe4cdabcbf56908aa15d8a883821,channels/cliprdr/cliprdr_common.c,"	wStream sub1, sub2;
+	/* empty format list */
+	formatList->formats = NULL;
+
+	Stream_StaticInit(&sub1, Stream_Pointer(s), formatList->dataLen);
+	if (!Stream_SafeSeek(s, formatList->dataLen))
+		return ERROR_INVALID_DATA;
+		const size_t cap = Stream_Capacity(&sub1);
+		formatList->numFormats = (cap / 36);
+		if ((formatList->numFormats * 36) != cap)
+			WLog_ERR(TAG, ""Invalid short format list length: %"" PRIuz """", cap);
+		while (Stream_GetRemainingLength(&sub1) >= 4)
+			Stream_Read_UINT32(&sub1, formats[index].formatId); /* formatId (4 bytes) */
+			szFormatName = (char*)Stream_Pointer(&sub1);
+			wszFormatName = (WCHAR*)Stream_Pointer(&sub1);
+			if (!Stream_SafeSeek(&sub1, 32))
+				goto error_out;
+		sub2 = sub1;
+		while (Stream_GetRemainingLength(&sub1) > 0)
+			size_t rest;
+			if (!Stream_SafeSeek(&sub1, 4)) /* formatId (4 bytes) */
+				goto error_out;
+			wszFormatName = (WCHAR*)Stream_Pointer(&sub1);
+			rest = Stream_GetRemainingLength(&sub1);
+			formatNameLength = _wcsnlen(wszFormatName, rest / sizeof(WCHAR));
+			if (!Stream_SafeSeek(&sub1, (formatNameLength + 1) * sizeof(WCHAR)))
+				goto error_out;
+		while (Stream_GetRemainingLength(&sub2) >= 4)
+			size_t rest;
+			Stream_Read_UINT32(&sub2, formats[index].formatId); /* formatId (4 bytes) */
+			wszFormatName = (WCHAR*)Stream_Pointer(&sub2);
+			rest = Stream_GetRemainingLength(&sub2);
+			formatNameLength = _wcsnlen(wszFormatName, rest / sizeof(WCHAR));
+			if (!Stream_SafeSeek(&sub2, (formatNameLength + 1) * sizeof(WCHAR)))
+				goto error_out;
+				if (ConvertFromUnicode(CP_UTF8, 0, wszFormatName, formatNameLength,
+				                       &(formats[index].formatName), 0, NULL, NULL) < 1)
+		formatList->formats = NULL;
+		formatList->numFormats = 0;","	UINT32 dataLen = formatList->dataLen;
+	position = Stream_GetPosition(s);
+		/* empty format list */
+		formatList->formats = NULL;
+		formatList->numFormats = 0;
+		formatList->numFormats = (dataLen / 36);
+		if ((formatList->numFormats * 36) != dataLen)
+			WLog_ERR(TAG, ""Invalid short format list length: %"" PRIu32 """", dataLen);
+		while (dataLen)
+			Stream_Read_UINT32(s, formats[index].formatId); /* formatId (4 bytes) */
+			dataLen -= 4;
+				szFormatName = (char*)Stream_Pointer(s);
+
+				wszFormatName = (WCHAR*)Stream_Pointer(s);
+
+			Stream_Seek(s, 32);
+			dataLen -= 32;
+		while (dataLen)
+			Stream_Seek(s, 4); /* formatId (4 bytes) */
+			dataLen -= 4;
+			wszFormatName = (WCHAR*)Stream_Pointer(s);
+
+			if (!wszFormatName[0])
+				formatNameLength = 0;
+			else
+				formatNameLength = _wcslen(wszFormatName);
+
+			Stream_Seek(s, (formatNameLength + 1) * 2);
+			dataLen -= ((formatNameLength + 1) * 2);
+		dataLen = formatList->dataLen;
+		Stream_SetPosition(s, position);
+
+		while (dataLen)
+			Stream_Read_UINT32(s, formats[index].formatId); /* formatId (4 bytes) */
+			dataLen -= 4;
+			wszFormatName = (WCHAR*)Stream_Pointer(s);
+
+			if (!wszFormatName[0])
+				formatNameLength = 0;
+			else
+				formatNameLength = _wcslen(wszFormatName);
+				if (ConvertFromUnicode(CP_UTF8, 0, wszFormatName, -1, &(formats[index].formatName),
+				                       0, NULL, NULL) < 1)
+			Stream_Seek(s, (formatNameLength + 1) * 2);
+			dataLen -= ((formatNameLength + 1) * 2);
+",b73143cf7ee5fe4cdabcbf56908aa15d8a883821,CVE-2020-11085,b73143cf7ee5fe4cdabcbf56908aa15d8a883821,https://github.com/FreeRDP/FreeRDP,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR VAR, VAR;  VAR->VAR = VAR; VAR(&VAR, VAR(VAR), VAR->VAR); VAR (!VAR(VAR, VAR->VAR)) VAR VAR; VAR VAR VAR = VAR(&VAR); VAR->VAR = (VAR / 36); VAR ((VAR->VAR * 36) != VAR) VAR(VAR, ""VAR VAR VAR VAR VAR: %"" VAR """", VAR); VAR (VAR(&VAR) >= 4) VAR(&VAR, VAR[VAR].VAR);  VAR = (VAR*)VAR(&VAR); VAR = (VAR*)VAR(&VAR); VAR (!VAR(&VAR, 32)) VAR VAR; VAR = VAR; VAR (VAR(&VAR) > 0) VAR VAR; VAR (!VAR(&VAR, 4))  VAR VAR; VAR = (VAR*)VAR(&VAR); VAR = VAR(&VAR); VAR = VAR(VAR, VAR / VAR(VAR)); VAR (!VAR(&VAR, (VAR + 1) * VAR(VAR))) VAR VAR; VAR (VAR(&VAR) >= 4) VAR VAR; VAR(&VAR, VAR[VAR].VAR);  VAR = (VAR*)VAR(&VAR); VAR = VAR(&VAR); VAR = VAR(VAR, VAR / VAR(VAR)); VAR (!VAR(&VAR, (VAR + 1) * VAR(VAR))) VAR VAR; VAR (VAR(VAR, 0, VAR, VAR, &(VAR[VAR].VAR), 0, VAR, VAR) < 1) VAR->VAR = VAR; VAR->VAR = 0; VAR VAR = VAR->VAR; VAR = VAR(VAR);  VAR->VAR = VAR; VAR->VAR = 0; VAR->VAR = (VAR / 36); VAR ((VAR->VAR * 36) != VAR) VAR(VAR, ""VAR VAR VAR VAR VAR: %"" VAR """", VAR); VAR (VAR) VAR(VAR, VAR[VAR].VAR);  VAR -= 4; VAR = (VAR*)VAR(VAR); VAR = (VAR*)VAR(VAR); VAR(VAR, 32); VAR -= 32; VAR (VAR) VAR(VAR, 4);  VAR -= 4; VAR = (VAR*)VAR(VAR); VAR (!VAR[0]) VAR = 0; VAR VAR = VAR(VAR); VAR(VAR, (VAR + 1) * 2); VAR -= ((VAR + 1) * 2); VAR = VAR->VAR; VAR(VAR, VAR); VAR (VAR) VAR(VAR, VAR[VAR].VAR);  VAR -= 4; VAR = (VAR*)VAR(VAR); VAR (!VAR[0]) VAR = 0; VAR VAR = VAR(VAR); VAR (VAR(VAR, 0, VAR, -1, &(VAR[VAR].VAR), 0, VAR, VAR) < 1) VAR(VAR, (VAR + 1) * 2); VAR -= ((VAR + 1) * 2);",0,13
+FreeRDP_b8beb55913471952f92770c90c372139d78c16c0,libfreerdp/core/orders.c,"static BYTE get_cbr2_bpp(UINT32 bpp, BOOL* pValid)
+{
+	if (pValid)
+		*pValid = TRUE;
+	switch (bpp)
+	{
+		case 3:
+			return 8;
+		case 4:
+			return 16;
+		case 5:
+			return 24;
+		case 6:
+			return 32;
+		default:
+			WLog_WARN(TAG, ""Invalid bpp %"" PRIu32, bpp);
+			if (pValid)
+				*pValid = FALSE;
+			return 0;
+	}
+}
+static BYTE get_bmf_bpp(UINT32 bmf, BOOL* pValid)
+{
+	if (pValid)
+		*pValid = TRUE;
+	switch (bmf)
+	{
+		case 1:
+			return 1;
+		case 3:
+			return 8;
+		case 4:
+			return 16;
+		case 5:
+			return 24;
+		case 6:
+			return 32;
+		default:
+			WLog_WARN(TAG, ""Invalid bmf %"" PRIu32, bmf);
+			if (pValid)
+				*pValid = FALSE;
+			return 0;
+	}
+}
+static BYTE get_bpp_bmf(UINT32 bpp, BOOL* pValid)
+{
+	if (pValid)
+		*pValid = TRUE;
+	switch (bpp)
+	{
+		case 1:
+			return 1;
+		case 8:
+			return 3;
+		case 16:
+			return 4;
+		case 24:
+			return 5;
+		case 32:
+			return 6;
+		default:
+			WLog_WARN(TAG, ""Invalid color depth %"" PRIu32, bpp);
+			if (pValid)
+				*pValid = FALSE;
+			return 0;
+	}
+}
+		BOOL rc;
+		brush->bpp = get_bmf_bpp(brush->style, &rc);
+		if (!rc)
+			return FALSE;
+		BOOL rc;
+		brush->bpp = get_bmf_bpp(brush->style, &rc);
+		if (!rc)
+			return FALSE;
+	BOOL rc;
+	cache_bitmap_v2->bitmapBpp = get_cbr2_bpp(bitsPerPixelId, &rc);
+	if (!rc)
+		goto fail;
+	BOOL rc;
+	bitsPerPixelId = get_bpp_bmf(cache_bitmap_v2->bitmapBpp, &rc);
+	if (!rc)
+		return FALSE;
+	BOOL rc;
+	cache_bitmap_v3->bpp = get_cbr2_bpp(bitsPerPixelId, &rc);
+	if (!rc)
+		goto fail;
+	BOOL rc;
+	bitsPerPixelId = get_bpp_bmf(cache_bitmap_v3->bpp, &rc);
+	if (!rc)
+		return FALSE;
+	BOOL rc;
+	cache_brush->bpp = get_bmf_bpp(iBitmapFormat, &rc);
+	if (!rc)
+	BOOL rc;
+	iBitmapFormat = get_bpp_bmf(cache_brush->bpp, &rc);
+	if (!rc)
+		return FALSE;","static const BYTE CBR2_BPP[] = { 0, 0, 0, 8, 16, 24, 32 };
+
+static const BYTE BPP_CBR2[] = { 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0,
+	                             0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0 };
+
+static const BYTE CBR23_BPP[] = { 0, 0, 0, 8, 16, 24, 32 };
+
+static const BYTE BPP_CBR23[] = { 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0,
+	                              0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0 };
+
+static const BYTE BMF_BPP[] = { 0, 1, 0, 8, 16, 24, 32, 0 };
+static const BYTE BPP_BMF[] = { 0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0,
+	                            0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0 };
+		brush->bpp = BMF_BPP[brush->style & 0x07];
+
+		brush->bpp = BMF_BPP[brush->style & 0x07];
+
+	cache_bitmap_v2->bitmapBpp = CBR2_BPP[bitsPerPixelId];
+	bitsPerPixelId = BPP_CBR2[cache_bitmap_v2->bitmapBpp];
+	cache_bitmap_v3->bpp = CBR23_BPP[bitsPerPixelId];
+	bitsPerPixelId = BPP_CBR23[cache_bitmap_v3->bpp];
+	if (iBitmapFormat >= ARRAYSIZE(BMF_BPP))
+	cache_brush->bpp = BMF_BPP[iBitmapFormat];
+	iBitmapFormat = BPP_BMF[cache_brush->bpp];",b8beb55913471952f92770c90c372139d78c16c0,CVE-2020-11096,b8beb55913471952f92770c90c372139d78c16c0,https://github.com/FreeRDP/FreeRDP,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR VAR VAR(VAR VAR, VAR* VAR) { VAR (VAR) *VAR = VAR; VAR (VAR) { VAR 3: VAR 8; VAR 4: VAR 16; VAR 5: VAR 24; VAR 6: VAR 32; VAR: VAR(VAR, ""VAR VAR %"" VAR, VAR); VAR (VAR) *VAR = VAR; VAR 0; } } VAR VAR VAR(VAR VAR, VAR* VAR) { VAR (VAR) *VAR = VAR; VAR (VAR) { VAR 1: VAR 1; VAR 3: VAR 8; VAR 4: VAR 16; VAR 5: VAR 24; VAR 6: VAR 32; VAR: VAR(VAR, ""VAR VAR %"" VAR, VAR); VAR (VAR) *VAR = VAR; VAR 0; } } VAR VAR VAR(VAR VAR, VAR* VAR) { VAR (VAR) *VAR = VAR; VAR (VAR) { VAR 1: VAR 1; VAR 8: VAR 3; VAR 16: VAR 4; VAR 24: VAR 5; VAR 32: VAR 6; VAR: VAR(VAR, ""VAR VAR VAR %"" VAR, VAR); VAR (VAR) *VAR = VAR; VAR 0; } } VAR VAR; VAR->VAR = VAR(VAR->VAR, &VAR); VAR (!VAR) VAR VAR; VAR VAR; VAR->VAR = VAR(VAR->VAR, &VAR); VAR (!VAR) VAR VAR; VAR VAR; VAR->VAR = VAR(VAR, &VAR); VAR (!VAR) VAR VAR; VAR VAR; VAR = VAR(VAR->VAR, &VAR); VAR (!VAR) VAR VAR; VAR VAR; VAR->VAR = VAR(VAR, &VAR); VAR (!VAR) VAR VAR; VAR VAR; VAR = VAR(VAR->VAR, &VAR); VAR (!VAR) VAR VAR; VAR VAR; VAR->VAR = VAR(VAR, &VAR); VAR (!VAR) VAR VAR; VAR = VAR(VAR->VAR, &VAR); VAR (!VAR) VAR VAR; VAR VAR VAR VAR[] = { 0, 0, 0, 8, 16, 24, 32 }; VAR VAR VAR VAR[] = { 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0 }; VAR VAR VAR VAR[] = { 0, 0, 0, 8, 16, 24, 32 }; VAR VAR VAR VAR[] = { 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0 }; VAR VAR VAR VAR[] = { 0, 1, 0, 8, 16, 24, 32, 0 }; VAR VAR VAR VAR[] = { 0, 1, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0 }; VAR->VAR = VAR[VAR->VAR & 0x07]; VAR->VAR = VAR[VAR->VAR & 0x07]; VAR->VAR = VAR[VAR]; VAR = VAR[VAR->VAR]; VAR->VAR = VAR[VAR]; VAR = VAR[VAR->VAR]; VAR (VAR >= VAR(VAR)) VAR->VAR = VAR[VAR]; VAR = VAR[VAR->VAR];",1,13
+FreeRDP_d39a7ba5c38e3ba3b99b1558dc2ab0970cbfb0c5,winpr/libwinpr/file/generic.c,"static char* append(char* buffer, size_t size, const char* append)
+{
+	const size_t len = strnlen(buffer, size);
+	if (len == 0)
+		_snprintf(buffer, size, ""%s"", append);
+	else
+	{
+		strcat(buffer, ""|"");
+		strcat(buffer, append);
+	}
+
+	return buffer;
+}
+
+static const char* flagsToStr(char* buffer, size_t size, DWORD flags)
+{
+	char strflags[32] = { 0 };
+	if (flags & FILE_ATTRIBUTE_READONLY)
+		append(buffer, size, ""FILE_ATTRIBUTE_READONLY"");
+	if (flags & FILE_ATTRIBUTE_HIDDEN)
+		append(buffer, size, ""FILE_ATTRIBUTE_HIDDEN"");
+	if (flags & FILE_ATTRIBUTE_SYSTEM)
+		append(buffer, size, ""FILE_ATTRIBUTE_SYSTEM"");
+	if (flags & FILE_ATTRIBUTE_DIRECTORY)
+		append(buffer, size, ""FILE_ATTRIBUTE_DIRECTORY"");
+	if (flags & FILE_ATTRIBUTE_ARCHIVE)
+		append(buffer, size, ""FILE_ATTRIBUTE_ARCHIVE"");
+	if (flags & FILE_ATTRIBUTE_DEVICE)
+		append(buffer, size, ""FILE_ATTRIBUTE_DEVICE"");
+	if (flags & FILE_ATTRIBUTE_NORMAL)
+		append(buffer, size, ""FILE_ATTRIBUTE_NORMAL"");
+	if (flags & FILE_ATTRIBUTE_TEMPORARY)
+		append(buffer, size, ""FILE_ATTRIBUTE_TEMPORARY"");
+	if (flags & FILE_ATTRIBUTE_SPARSE_FILE)
+		append(buffer, size, ""FILE_ATTRIBUTE_SPARSE_FILE"");
+	if (flags & FILE_ATTRIBUTE_REPARSE_POINT)
+		append(buffer, size, ""FILE_ATTRIBUTE_REPARSE_POINT"");
+	if (flags & FILE_ATTRIBUTE_COMPRESSED)
+		append(buffer, size, ""FILE_ATTRIBUTE_COMPRESSED"");
+	if (flags & FILE_ATTRIBUTE_OFFLINE)
+		append(buffer, size, ""FILE_ATTRIBUTE_OFFLINE"");
+	if (flags & FILE_ATTRIBUTE_NOT_CONTENT_INDEXED)
+		append(buffer, size, ""FILE_ATTRIBUTE_NOT_CONTENT_INDEXED"");
+	if (flags & FILE_ATTRIBUTE_ENCRYPTED)
+		append(buffer, size, ""FILE_ATTRIBUTE_ENCRYPTED"");
+	if (flags & FILE_ATTRIBUTE_VIRTUAL)
+		append(buffer, size, ""FILE_ATTRIBUTE_VIRTUAL"");
+
+	_snprintf(strflags, sizeof(strflags), "" [0x%08"" PRIx32 ""]"", flags);
+	strcat(buffer, strflags);
+	return buffer;
+}
+
+	int fd;
+	BOOL rc = FALSE;
+	if (dwFileAttributes & ~FILE_ATTRIBUTE_READONLY)
+		char buffer[8192] = { 0 };
+		const char* flags =
+		    flagsToStr(buffer, sizeof(buffer), dwFileAttributes & ~FILE_ATTRIBUTE_READONLY);
+		WLog_WARN(TAG, ""[%s] Unsupported flags %s, ignoring!"", __FUNCTION__, flags);
+	fd = open(lpFileName, O_RDONLY);
+	if (fd < 0)
+		return FALSE;
+
+	if (fstat(fd, &st) != 0)
+		goto fail;
+
+	if (fchmod(fd, st.st_mode) != 0)
+		goto fail;
+	rc = TRUE;
+fail:
+	close(fd);
+	return rc;
+	if (dwFileAttributes & ~FILE_ATTRIBUTE_READONLY)
+	{
+		char buffer[8192] = { 0 };
+		const char* flags =
+		    flagsToStr(buffer, sizeof(buffer), dwFileAttributes & ~FILE_ATTRIBUTE_READONLY);
+		WLog_WARN(TAG, ""[%s] Unsupported flags %s, ignoring!"", __FUNCTION__, flags);
+	}
+","	if (stat(lpFileName, &st) != 0)
+		return FALSE;
+	if (chmod(lpFileName, st.st_mode) != 0)
+	{
+		return FALSE;
+	}
+	return TRUE;",d39a7ba5c38e3ba3b99b1558dc2ab0970cbfb0c5,CVE-2021-41159,d39a7ba5c38e3ba3b99b1558dc2ab0970cbfb0c5,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,98,COMPLETED,"VAR VAR* VAR(VAR* VAR, VAR VAR, VAR VAR* VAR) { VAR VAR VAR = VAR(VAR, VAR); VAR (VAR == 0) VAR(VAR, VAR, ""%VAR"", VAR); VAR { VAR(VAR, ""|""); VAR(VAR, VAR); } VAR VAR; } VAR VAR VAR* VAR(VAR* VAR, VAR VAR, VAR VAR) { VAR VAR[32] = { 0 }; VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR(VAR, VAR(VAR), "" [0x%08"" VAR ""]"", VAR); VAR(VAR, VAR); VAR VAR; } VAR VAR; VAR VAR = VAR; VAR (VAR & ~VAR) VAR VAR[8192] = { 0 }; VAR VAR* VAR = VAR(VAR, VAR(VAR), VAR & ~VAR); VAR(VAR, ""[%VAR] VAR VAR %VAR, VAR!"", VAR, VAR); VAR = VAR(VAR, VAR); VAR (VAR < 0) VAR VAR; VAR (VAR(VAR, &VAR) != 0) VAR VAR; VAR (VAR(VAR, VAR.VAR) != 0) VAR VAR; VAR = VAR; VAR: VAR(VAR); VAR VAR; VAR (VAR & ~VAR) { VAR VAR[8192] = { 0 }; VAR VAR* VAR = VAR(VAR, VAR(VAR), VAR & ~VAR); VAR(VAR, ""[%VAR] VAR VAR %VAR, VAR!"", VAR, VAR); } VAR (VAR(VAR, &VAR) != 0) VAR VAR; VAR (VAR(VAR, VAR.VAR) != 0) { VAR VAR; } VAR VAR;",0,13
+FreeRDP_d39a7ba5c38e3ba3b99b1558dc2ab0970cbfb0c5,winpr/libwinpr/file/generic.c,"static char* append(char* buffer, size_t size, const char* append)
+{
+	const size_t len = strnlen(buffer, size);
+	if (len == 0)
+		_snprintf(buffer, size, ""%s"", append);
+	else
+	{
+		strcat(buffer, ""|"");
+		strcat(buffer, append);
+	}
+
+	return buffer;
+}
+
+static const char* flagsToStr(char* buffer, size_t size, DWORD flags)
+{
+	char strflags[32] = { 0 };
+	if (flags & FILE_ATTRIBUTE_READONLY)
+		append(buffer, size, ""FILE_ATTRIBUTE_READONLY"");
+	if (flags & FILE_ATTRIBUTE_HIDDEN)
+		append(buffer, size, ""FILE_ATTRIBUTE_HIDDEN"");
+	if (flags & FILE_ATTRIBUTE_SYSTEM)
+		append(buffer, size, ""FILE_ATTRIBUTE_SYSTEM"");
+	if (flags & FILE_ATTRIBUTE_DIRECTORY)
+		append(buffer, size, ""FILE_ATTRIBUTE_DIRECTORY"");
+	if (flags & FILE_ATTRIBUTE_ARCHIVE)
+		append(buffer, size, ""FILE_ATTRIBUTE_ARCHIVE"");
+	if (flags & FILE_ATTRIBUTE_DEVICE)
+		append(buffer, size, ""FILE_ATTRIBUTE_DEVICE"");
+	if (flags & FILE_ATTRIBUTE_NORMAL)
+		append(buffer, size, ""FILE_ATTRIBUTE_NORMAL"");
+	if (flags & FILE_ATTRIBUTE_TEMPORARY)
+		append(buffer, size, ""FILE_ATTRIBUTE_TEMPORARY"");
+	if (flags & FILE_ATTRIBUTE_SPARSE_FILE)
+		append(buffer, size, ""FILE_ATTRIBUTE_SPARSE_FILE"");
+	if (flags & FILE_ATTRIBUTE_REPARSE_POINT)
+		append(buffer, size, ""FILE_ATTRIBUTE_REPARSE_POINT"");
+	if (flags & FILE_ATTRIBUTE_COMPRESSED)
+		append(buffer, size, ""FILE_ATTRIBUTE_COMPRESSED"");
+	if (flags & FILE_ATTRIBUTE_OFFLINE)
+		append(buffer, size, ""FILE_ATTRIBUTE_OFFLINE"");
+	if (flags & FILE_ATTRIBUTE_NOT_CONTENT_INDEXED)
+		append(buffer, size, ""FILE_ATTRIBUTE_NOT_CONTENT_INDEXED"");
+	if (flags & FILE_ATTRIBUTE_ENCRYPTED)
+		append(buffer, size, ""FILE_ATTRIBUTE_ENCRYPTED"");
+	if (flags & FILE_ATTRIBUTE_VIRTUAL)
+		append(buffer, size, ""FILE_ATTRIBUTE_VIRTUAL"");
+
+	_snprintf(strflags, sizeof(strflags), "" [0x%08"" PRIx32 ""]"", flags);
+	strcat(buffer, strflags);
+	return buffer;
+}
+
+	int fd;
+	BOOL rc = FALSE;
+	if (dwFileAttributes & ~FILE_ATTRIBUTE_READONLY)
+		char buffer[8192] = { 0 };
+		const char* flags =
+		    flagsToStr(buffer, sizeof(buffer), dwFileAttributes & ~FILE_ATTRIBUTE_READONLY);
+		WLog_WARN(TAG, ""[%s] Unsupported flags %s, ignoring!"", __FUNCTION__, flags);
+	fd = open(lpFileName, O_RDONLY);
+	if (fd < 0)
+		return FALSE;
+
+	if (fstat(fd, &st) != 0)
+		goto fail;
+
+	if (fchmod(fd, st.st_mode) != 0)
+		goto fail;
+	rc = TRUE;
+fail:
+	close(fd);
+	return rc;
+	if (dwFileAttributes & ~FILE_ATTRIBUTE_READONLY)
+	{
+		char buffer[8192] = { 0 };
+		const char* flags =
+		    flagsToStr(buffer, sizeof(buffer), dwFileAttributes & ~FILE_ATTRIBUTE_READONLY);
+		WLog_WARN(TAG, ""[%s] Unsupported flags %s, ignoring!"", __FUNCTION__, flags);
+	}
+","	if (stat(lpFileName, &st) != 0)
+		return FALSE;
+	if (chmod(lpFileName, st.st_mode) != 0)
+	{
+		return FALSE;
+	}
+	return TRUE;",d39a7ba5c38e3ba3b99b1558dc2ab0970cbfb0c5,CVE-2021-41160,d39a7ba5c38e3ba3b99b1558dc2ab0970cbfb0c5,https://github.com/FreeRDP/FreeRDP,NVD_GIT_REPOBASED,66,COMPLETED,"VAR VAR* VAR(VAR* VAR, VAR VAR, VAR VAR* VAR) { VAR VAR VAR = VAR(VAR, VAR); VAR (VAR == 0) VAR(VAR, VAR, ""%VAR"", VAR); VAR { VAR(VAR, ""|""); VAR(VAR, VAR); } VAR VAR; } VAR VAR VAR* VAR(VAR* VAR, VAR VAR, VAR VAR) { VAR VAR[32] = { 0 }; VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR (VAR & VAR) VAR(VAR, VAR, ""VAR""); VAR(VAR, VAR(VAR), "" [0x%08"" VAR ""]"", VAR); VAR(VAR, VAR); VAR VAR; } VAR VAR; VAR VAR = VAR; VAR (VAR & ~VAR) VAR VAR[8192] = { 0 }; VAR VAR* VAR = VAR(VAR, VAR(VAR), VAR & ~VAR); VAR(VAR, ""[%VAR] VAR VAR %VAR, VAR!"", VAR, VAR); VAR = VAR(VAR, VAR); VAR (VAR < 0) VAR VAR; VAR (VAR(VAR, &VAR) != 0) VAR VAR; VAR (VAR(VAR, VAR.VAR) != 0) VAR VAR; VAR = VAR; VAR: VAR(VAR); VAR VAR; VAR (VAR & ~VAR) { VAR VAR[8192] = { 0 }; VAR VAR* VAR = VAR(VAR, VAR(VAR), VAR & ~VAR); VAR(VAR, ""[%VAR] VAR VAR %VAR, VAR!"", VAR, VAR); } VAR (VAR(VAR, &VAR) != 0) VAR VAR; VAR (VAR(VAR, VAR.VAR) != 0) { VAR VAR; } VAR VAR;",0,13
+FreeRDP_d6f9d33a7db0b346195b6a15b5b99944ba41beee,libfreerdp/codec/planar.c,"			if (!planar->rlePlanesBuffer)
+				return FALSE;
+
+	memset(context->planes, 0, sizeof(context->planes));
+	memset(context->rlePlanes, 0, sizeof(context->rlePlanes));
+	memset(context->deltaPlanes, 0, sizeof(context->deltaPlanes));
+	if (context->maxPlaneSize > 0)
+	{
+		void* tmp = winpr_aligned_recalloc(context->planesBuffer, context->maxPlaneSize, 4, 32);
+		if (!tmp)
+			return FALSE;
+		context->planesBuffer = tmp;
+		tmp = winpr_aligned_recalloc(context->pTempData, context->maxPlaneSize, 6, 32);
+		if (!tmp)
+			return FALSE;
+		context->pTempData = tmp;
+		tmp = winpr_aligned_recalloc(context->deltaPlanesBuffer, context->maxPlaneSize, 4, 32);
+		if (!tmp)
+			return FALSE;
+		context->deltaPlanesBuffer = tmp;
+
+		tmp = winpr_aligned_recalloc(context->rlePlanesBuffer, context->maxPlaneSize, 4, 32);
+		if (!tmp)
+			return FALSE;
+		context->rlePlanesBuffer = tmp;
+
+		context->planes[0] = &context->planesBuffer[context->maxPlaneSize * 0];
+		context->planes[1] = &context->planesBuffer[context->maxPlaneSize * 1];
+		context->planes[2] = &context->planesBuffer[context->maxPlaneSize * 2];
+		context->planes[3] = &context->planesBuffer[context->maxPlaneSize * 3];
+		context->deltaPlanes[0] = &context->deltaPlanesBuffer[context->maxPlaneSize * 0];
+		context->deltaPlanes[1] = &context->deltaPlanesBuffer[context->maxPlaneSize * 1];
+		context->deltaPlanes[2] = &context->deltaPlanesBuffer[context->maxPlaneSize * 2];
+		context->deltaPlanes[3] = &context->deltaPlanesBuffer[context->maxPlaneSize * 3];
+	}","		{
+		}
+	void* tmp = winpr_aligned_recalloc(context->planesBuffer, context->maxPlaneSize, 4, 32);
+	if (!tmp)
+		return FALSE;
+	context->planesBuffer = tmp;
+	tmp = winpr_aligned_recalloc(context->pTempData, context->maxPlaneSize, 6, 32);
+	if (!tmp)
+		return FALSE;
+	context->pTempData = tmp;
+	tmp = winpr_aligned_recalloc(context->deltaPlanesBuffer, context->maxPlaneSize, 4, 32);
+	if (!tmp)
+		return FALSE;
+	context->deltaPlanesBuffer = tmp;
+	tmp = winpr_aligned_recalloc(context->rlePlanesBuffer, context->maxPlaneSize, 4, 32);
+	if (!tmp)
+		return FALSE;
+	context->rlePlanesBuffer = tmp;
+
+	context->planes[0] = &context->planesBuffer[context->maxPlaneSize * 0];
+	context->planes[1] = &context->planesBuffer[context->maxPlaneSize * 1];
+	context->planes[2] = &context->planesBuffer[context->maxPlaneSize * 2];
+	context->planes[3] = &context->planesBuffer[context->maxPlaneSize * 3];
+	context->deltaPlanes[0] = &context->deltaPlanesBuffer[context->maxPlaneSize * 0];
+	context->deltaPlanes[1] = &context->deltaPlanesBuffer[context->maxPlaneSize * 1];
+	context->deltaPlanes[2] = &context->deltaPlanesBuffer[context->maxPlaneSize * 2];
+	context->deltaPlanes[3] = &context->deltaPlanesBuffer[context->maxPlaneSize * 3];",d6f9d33a7db0b346195b6a15b5b99944ba41beee,CVE-2023-39355,d6f9d33a7db0b346195b6a15b5b99944ba41beee,https://github.com/FreeRDP/FreeRDP,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR (!VAR->VAR) VAR VAR; VAR(VAR->VAR, 0, VAR(VAR->VAR)); VAR(VAR->VAR, 0, VAR(VAR->VAR)); VAR(VAR->VAR, 0, VAR(VAR->VAR)); VAR (VAR->VAR > 0) { VAR* VAR = VAR(VAR->VAR, VAR->VAR, 4, 32); VAR (!VAR) VAR VAR; VAR->VAR = VAR; VAR = VAR(VAR->VAR, VAR->VAR, 6, 32); VAR (!VAR) VAR VAR; VAR->VAR = VAR; VAR = VAR(VAR->VAR, VAR->VAR, 4, 32); VAR (!VAR) VAR VAR; VAR->VAR = VAR; VAR = VAR(VAR->VAR, VAR->VAR, 4, 32); VAR (!VAR) VAR VAR; VAR->VAR = VAR; VAR->VAR[0] = &VAR->VAR[VAR->VAR * 0]; VAR->VAR[1] = &VAR->VAR[VAR->VAR * 1]; VAR->VAR[2] = &VAR->VAR[VAR->VAR * 2]; VAR->VAR[3] = &VAR->VAR[VAR->VAR * 3]; VAR->VAR[0] = &VAR->VAR[VAR->VAR * 0]; VAR->VAR[1] = &VAR->VAR[VAR->VAR * 1]; VAR->VAR[2] = &VAR->VAR[VAR->VAR * 2]; VAR->VAR[3] = &VAR->VAR[VAR->VAR * 3]; } { } VAR* VAR = VAR(VAR->VAR, VAR->VAR, 4, 32); VAR (!VAR) VAR VAR; VAR->VAR = VAR; VAR = VAR(VAR->VAR, VAR->VAR, 6, 32); VAR (!VAR) VAR VAR; VAR->VAR = VAR; VAR = VAR(VAR->VAR, VAR->VAR, 4, 32); VAR (!VAR) VAR VAR; VAR->VAR = VAR; VAR = VAR(VAR->VAR, VAR->VAR, 4, 32); VAR (!VAR) VAR VAR; VAR->VAR = VAR; VAR->VAR[0] = &VAR->VAR[VAR->VAR * 0]; VAR->VAR[1] = &VAR->VAR[VAR->VAR * 1]; VAR->VAR[2] = &VAR->VAR[VAR->VAR * 2]; VAR->VAR[3] = &VAR->VAR[VAR->VAR * 3]; VAR->VAR[0] = &VAR->VAR[VAR->VAR * 0]; VAR->VAR[1] = &VAR->VAR[VAR->VAR * 1]; VAR->VAR[2] = &VAR->VAR[VAR->VAR * 2]; VAR->VAR[3] = &VAR->VAR[VAR->VAR * 3];",2,13
+glpi_e0d6a24d16f11505663928cc47292aec77ca2612,inc/session.class.php,"    * Clean expired CSRF tokens
+   /**
+    * Get new IDOR token
+    * This token validates the itemtype used by an ajax request is the one asked by a dropdown.
+    * So, we avoid IDOR request where an attacker asks for an another itemtype
+    * than the originaly indtended
+    *
+    * @since 9.5.3
+    *
+    * @param string $itemtype
+    * @param array  $add_params more criteria to check validy of idor tokens
+    *
+    * @return string
+   **/
+   static public function getNewIDORToken(string $itemtype = """", array $add_params = []): string {
+      $token = """";
+      do {
+         $token = bin2hex(random_bytes(32));
+      } while ($token == '');
+
+      if (!isset($_SESSION['glpiidortokens'])) {
+         $_SESSION['glpiidortokens'] = [];
+      }
+
+      $_SESSION['glpiidortokens'][$token] = [
+         'itemtype' => $itemtype,
+         'expires'  => time() + GLPI_IDOR_EXPIRES
+      ] + $add_params;
+
+      return $token;
+   }
+
+
+   /**
+    * Validate that the page has a IDOR token in the POST data
+    * and that the token is legit/not expired.
+    * Tokens are kept in session until their time is expired (by default 2h)
+    * to permits multiple ajax calls for a dropdown
+    *
+    * @since 9.5.3
+    *
+    * @param array $data $_POST data
+    *
+    * @return boolean
+   **/
+   static public function validateIDOR(array $data = []): bool {
+      self::cleanIDORTokens();
+
+      if (!isset($data['_idor_token'])) {
+         return false;
+      }
+
+      $token = $data['_idor_token'];
+
+      if (isset($_SESSION['glpiidortokens'][$token])
+          && $_SESSION['glpiidortokens'][$token]['expires'] >= time()) {
+         $params =  $_SESSION['glpiidortokens'][$token];
+         unset($params['expires']);
+
+         // check all stored keys/values are present and identical in provided data
+         $keys_exists = array_intersect_assoc($params, $data);
+         if ($params == $keys_exists) {
+            return true;
+         }
+      }
+
+      return false;
+   }
+
+   /**
+    * Clean expired IDOR tokens
+    *
+    * @since 9.5.3
+    *
+    * @return void
+   **/
+   static public function cleanIDORTokens() {
+      $now = time();
+      if (isset($_SESSION['glpiidortokens']) && is_array($_SESSION['glpiidortokens'])) {
+         foreach ($_SESSION['glpiidortokens'] as $footprint => $token) {
+            if ($token['expires'] < $now) {
+               unset($_SESSION['glpiidortokens'][$footprint]);
+            }
+         }
+      }
+   }
+
+",    * Clean expires CSRF tokens,e0d6a24d16f11505663928cc47292aec77ca2612,CVE-2020-27663,e0d6a24d16f11505663928cc47292aec77ca2612,https://github.com/glpi-project/glpi,NVD_GIT_REPOBASED,88,COMPLETED,"* VAR VAR VAR VAR /** * VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. * VAR, VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR * * @VAR 9.5.3 * * @VAR VAR $VAR * @VAR VAR $VAR VAR VAR VAR VAR VAR VAR VAR VAR * * @VAR VAR **/ VAR VAR VAR VAR(VAR $VAR = """", VAR $VAR = []): VAR { $VAR = """"; VAR { $VAR = VAR(VAR(32)); } VAR ($VAR == ''); VAR (!VAR($VAR['VAR'])) { $VAR['VAR'] = []; } $VAR['VAR'][$VAR] = [ 'VAR' => $VAR, 'VAR' => VAR() + VAR ] + $VAR; VAR $VAR; } /** * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR/VAR VAR. * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR 2h) * VAR VAR VAR VAR VAR VAR VAR VAR * * @VAR 9.5.3 * * @VAR VAR $VAR $VAR VAR * * @VAR VAR **/ VAR VAR VAR VAR(VAR $VAR = []): VAR { VAR::VAR(); VAR (!VAR($VAR['VAR'])) { VAR VAR; } $VAR = $VAR['VAR']; VAR (VAR($VAR['VAR'][$VAR]) && $VAR['VAR'][$VAR]['VAR'] >= VAR()) { $VAR = $VAR['VAR'][$VAR]; VAR($VAR['VAR']);  $VAR = VAR($VAR, $VAR); VAR ($VAR == $VAR) { VAR VAR; } } VAR VAR; } /** * VAR VAR VAR VAR * * @VAR 9.5.3 * * @VAR VAR **/ VAR VAR VAR VAR() { $VAR = VAR(); VAR (VAR($VAR['VAR']) && VAR($VAR['VAR'])) { VAR ($VAR['VAR'] VAR $VAR => $VAR) { VAR ($VAR['VAR'] < $VAR) { VAR($VAR['VAR'][$VAR]); } } } } * VAR VAR VAR VAR",2,13
+glpi_e0d6a24d16f11505663928cc47292aec77ca2612,inc/session.class.php,"    * Clean expired CSRF tokens
+   /**
+    * Get new IDOR token
+    * This token validates the itemtype used by an ajax request is the one asked by a dropdown.
+    * So, we avoid IDOR request where an attacker asks for an another itemtype
+    * than the originaly indtended
+    *
+    * @since 9.5.3
+    *
+    * @param string $itemtype
+    * @param array  $add_params more criteria to check validy of idor tokens
+    *
+    * @return string
+   **/
+   static public function getNewIDORToken(string $itemtype = """", array $add_params = []): string {
+      $token = """";
+      do {
+         $token = bin2hex(random_bytes(32));
+      } while ($token == '');
+
+      if (!isset($_SESSION['glpiidortokens'])) {
+         $_SESSION['glpiidortokens'] = [];
+      }
+
+      $_SESSION['glpiidortokens'][$token] = [
+         'itemtype' => $itemtype,
+         'expires'  => time() + GLPI_IDOR_EXPIRES
+      ] + $add_params;
+
+      return $token;
+   }
+
+
+   /**
+    * Validate that the page has a IDOR token in the POST data
+    * and that the token is legit/not expired.
+    * Tokens are kept in session until their time is expired (by default 2h)
+    * to permits multiple ajax calls for a dropdown
+    *
+    * @since 9.5.3
+    *
+    * @param array $data $_POST data
+    *
+    * @return boolean
+   **/
+   static public function validateIDOR(array $data = []): bool {
+      self::cleanIDORTokens();
+
+      if (!isset($data['_idor_token'])) {
+         return false;
+      }
+
+      $token = $data['_idor_token'];
+
+      if (isset($_SESSION['glpiidortokens'][$token])
+          && $_SESSION['glpiidortokens'][$token]['expires'] >= time()) {
+         $params =  $_SESSION['glpiidortokens'][$token];
+         unset($params['expires']);
+
+         // check all stored keys/values are present and identical in provided data
+         $keys_exists = array_intersect_assoc($params, $data);
+         if ($params == $keys_exists) {
+            return true;
+         }
+      }
+
+      return false;
+   }
+
+   /**
+    * Clean expired IDOR tokens
+    *
+    * @since 9.5.3
+    *
+    * @return void
+   **/
+   static public function cleanIDORTokens() {
+      $now = time();
+      if (isset($_SESSION['glpiidortokens']) && is_array($_SESSION['glpiidortokens'])) {
+         foreach ($_SESSION['glpiidortokens'] as $footprint => $token) {
+            if ($token['expires'] < $now) {
+               unset($_SESSION['glpiidortokens'][$footprint]);
+            }
+         }
+      }
+   }
+
+",    * Clean expires CSRF tokens,e0d6a24d16f11505663928cc47292aec77ca2612,CVE-2020-27662,e0d6a24d16f11505663928cc47292aec77ca2612,https://github.com/glpi-project/glpi,NVD_GIT_REPOBASED,96,COMPLETED,"* VAR VAR VAR VAR /** * VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. * VAR, VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR * * @VAR 9.5.3 * * @VAR VAR $VAR * @VAR VAR $VAR VAR VAR VAR VAR VAR VAR VAR VAR * * @VAR VAR **/ VAR VAR VAR VAR(VAR $VAR = """", VAR $VAR = []): VAR { $VAR = """"; VAR { $VAR = VAR(VAR(32)); } VAR ($VAR == ''); VAR (!VAR($VAR['VAR'])) { $VAR['VAR'] = []; } $VAR['VAR'][$VAR] = [ 'VAR' => $VAR, 'VAR' => VAR() + VAR ] + $VAR; VAR $VAR; } /** * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR/VAR VAR. * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR 2h) * VAR VAR VAR VAR VAR VAR VAR VAR * * @VAR 9.5.3 * * @VAR VAR $VAR $VAR VAR * * @VAR VAR **/ VAR VAR VAR VAR(VAR $VAR = []): VAR { VAR::VAR(); VAR (!VAR($VAR['VAR'])) { VAR VAR; } $VAR = $VAR['VAR']; VAR (VAR($VAR['VAR'][$VAR]) && $VAR['VAR'][$VAR]['VAR'] >= VAR()) { $VAR = $VAR['VAR'][$VAR]; VAR($VAR['VAR']);  $VAR = VAR($VAR, $VAR); VAR ($VAR == $VAR) { VAR VAR; } } VAR VAR; } /** * VAR VAR VAR VAR * * @VAR 9.5.3 * * @VAR VAR **/ VAR VAR VAR VAR() { $VAR = VAR(); VAR (VAR($VAR['VAR']) && VAR($VAR['VAR'])) { VAR ($VAR['VAR'] VAR $VAR => $VAR) { VAR ($VAR['VAR'] < $VAR) { VAR($VAR['VAR'][$VAR]); } } } } * VAR VAR VAR VAR",2,13
+go_639b67ed114151c0d786aa26e7faeab942400703,src/crypto/internal/nistec/nistec_test.go,"	""fmt""
+func TestScalarMult(t *testing.T) {
+	t.Run(""P224"", func(t *testing.T) {
+		testScalarMult(t, nistec.NewP224Point, nistec.NewP224Generator, elliptic.P224())
+	})
+	t.Run(""P256"", func(t *testing.T) {
+		testScalarMult(t, nistec.NewP256Point, nistec.NewP256Generator, elliptic.P256())
+	})
+	t.Run(""P384"", func(t *testing.T) {
+		testScalarMult(t, nistec.NewP384Point, nistec.NewP384Generator, elliptic.P384())
+	})
+	t.Run(""P521"", func(t *testing.T) {
+		testScalarMult(t, nistec.NewP521Point, nistec.NewP521Generator, elliptic.P521())
+	})
+}
+
+func testScalarMult[P nistPoint[P]](t *testing.T, newPoint func() P, newGenerator func() P, c elliptic.Curve) {
+	G := newGenerator()
+	checkScalar := func(t *testing.T, scalar []byte) {
+		p1, err := newPoint().ScalarBaseMult(scalar)
+		fatalIfErr(t, err)
+		p2, err := newPoint().ScalarMult(G, scalar)
+		fatalIfErr(t, err)
+		if !bytes.Equal(p1.Bytes(), p2.Bytes()) {
+			t.Error(""[k]G != ScalarBaseMult(k)"")
+		}
+
+		d := new(big.Int).SetBytes(scalar)
+		d.Sub(c.Params().N, d)
+		d.Mod(d, c.Params().N)
+		g1, err := newPoint().ScalarBaseMult(d.FillBytes(make([]byte, len(scalar))))
+		fatalIfErr(t, err)
+		g1.Add(g1, p1)
+		if !bytes.Equal(g1.Bytes(), newPoint().Bytes()) {
+			t.Error(""[N - k]G + [k]G != ∞"")
+		}
+	}
+
+	byteLen := len(c.Params().N.Bytes())
+	bitLen := c.Params().N.BitLen()
+	t.Run(""0"", func(t *testing.T) { checkScalar(t, make([]byte, byteLen)) })
+	t.Run(""1"", func(t *testing.T) {
+		checkScalar(t, big.NewInt(1).FillBytes(make([]byte, byteLen)))
+	})
+	t.Run(""N-1"", func(t *testing.T) {
+		checkScalar(t, new(big.Int).Sub(c.Params().N, big.NewInt(1)).Bytes())
+	})
+	t.Run(""N"", func(t *testing.T) { checkScalar(t, c.Params().N.Bytes()) })
+	t.Run(""N+1"", func(t *testing.T) {
+		checkScalar(t, new(big.Int).Add(c.Params().N, big.NewInt(1)).Bytes())
+	})
+	t.Run(""all1s"", func(t *testing.T) {
+		s := new(big.Int).Lsh(big.NewInt(1), uint(bitLen))
+		s.Sub(s, big.NewInt(1))
+		checkScalar(t, s.Bytes())
+	})
+	if testing.Short() {
+		return
+	}
+	for i := 0; i < bitLen; i++ {
+		t.Run(fmt.Sprintf(""1<<%d"", i), func(t *testing.T) {
+			s := new(big.Int).Lsh(big.NewInt(1), uint(i))
+			checkScalar(t, s.FillBytes(make([]byte, byteLen)))
+		})
+	}
+	// Test N+1...N+32 since they risk overlapping with precomputed table values
+	// in the final additions.
+	for i := int64(2); i <= 32; i++ {
+		t.Run(fmt.Sprintf(""N+%d"", i), func(t *testing.T) {
+			checkScalar(t, new(big.Int).Add(c.Params().N, big.NewInt(i)).Bytes())
+		})
+	}
+}
+
+func fatalIfErr(t *testing.T, err error) {
+	t.Helper()
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+",,639b67ed114151c0d786aa26e7faeab942400703,CVE-2023-24532,639b67ed114151c0d786aa26e7faeab942400703,https://github.com/golang/go,CPE_GIT_REPOBASED,214,COMPLETED,"""VAR"" VAR VAR(VAR *VAR.VAR) { VAR.VAR(""VAR"", VAR(VAR *VAR.VAR) { VAR(VAR, VAR.VAR, VAR.VAR, VAR.VAR()) }) VAR.VAR(""VAR"", VAR(VAR *VAR.VAR) { VAR(VAR, VAR.VAR, VAR.VAR, VAR.VAR()) }) VAR.VAR(""VAR"", VAR(VAR *VAR.VAR) { VAR(VAR, VAR.VAR, VAR.VAR, VAR.VAR()) }) VAR.VAR(""VAR"", VAR(VAR *VAR.VAR) { VAR(VAR, VAR.VAR, VAR.VAR, VAR.VAR()) }) } VAR VAR[VAR VAR[VAR]](VAR *VAR.VAR, VAR VAR() VAR, VAR VAR() VAR, VAR VAR.VAR) { VAR := VAR() VAR := VAR(VAR *VAR.VAR, VAR []VAR) { VAR, VAR := VAR().VAR(VAR) VAR(VAR, VAR) VAR, VAR := VAR().VAR(VAR, VAR) VAR(VAR, VAR) VAR !VAR.VAR(VAR.VAR(), VAR.VAR()) { VAR.VAR(""[VAR]VAR != VAR(VAR)"") } VAR := VAR(VAR.VAR).VAR(VAR) VAR.VAR(VAR.VAR().VAR, VAR) VAR.VAR(VAR, VAR.VAR().VAR) VAR, VAR := VAR().VAR(VAR.VAR(VAR([]VAR, VAR(VAR)))) VAR(VAR, VAR) VAR.VAR(VAR, VAR) VAR !VAR.VAR(VAR.VAR(), VAR().VAR()) { VAR.VAR(""[VAR - VAR]VAR + [VAR]VAR != ∞"") } } VAR := VAR(VAR.VAR().VAR.VAR()) VAR := VAR.VAR().VAR.VAR() VAR.VAR(""0"", VAR(VAR *VAR.VAR) { VAR(VAR, VAR([]VAR, VAR)) }) VAR.VAR(""1"", VAR(VAR *VAR.VAR) { VAR(VAR, VAR.VAR(1).VAR(VAR([]VAR, VAR))) }) VAR.VAR(""VAR-1"", VAR(VAR *VAR.VAR) { VAR(VAR, VAR(VAR.VAR).VAR(VAR.VAR().VAR, VAR.VAR(1)).VAR()) }) VAR.VAR(""VAR"", VAR(VAR *VAR.VAR) { VAR(VAR, VAR.VAR().VAR.VAR()) }) VAR.VAR(""VAR+1"", VAR(VAR *VAR.VAR) { VAR(VAR, VAR(VAR.VAR).VAR(VAR.VAR().VAR, VAR.VAR(1)).VAR()) }) VAR.VAR(""VAR"", VAR(VAR *VAR.VAR) { VAR := VAR(VAR.VAR).VAR(VAR.VAR(1), VAR(VAR)) VAR.VAR(VAR, VAR.VAR(1)) VAR(VAR, VAR.VAR()) }) VAR VAR.VAR() { VAR } VAR VAR := 0; VAR < VAR; VAR++ { VAR.VAR(VAR.VAR(""1<<%VAR"", VAR), VAR(VAR *VAR.VAR) { VAR := VAR(VAR.VAR).VAR(VAR.VAR(1), VAR(VAR)) VAR(VAR, VAR.VAR(VAR([]VAR, VAR))) }) }   VAR VAR := VAR(2); VAR <= 32; VAR++ { VAR.VAR(VAR.VAR(""VAR+%VAR"", VAR), VAR(VAR *VAR.VAR) { VAR(VAR, VAR(VAR.VAR).VAR(VAR.VAR().VAR, VAR.VAR(VAR)).VAR()) }) } } VAR VAR(VAR *VAR.VAR, VAR VAR) { VAR.VAR() VAR VAR != VAR { VAR.VAR(VAR) } } ",2,13
+gpac_16c4fafc2881112eba7051cac48f922eb2b94e06,src/bifs/unquantize.c,	if (!NbBits || NbBits>32) return GF_NON_COMPLIANT_BITSTREAM;,	if (NbBits>32) return GF_NON_COMPLIANT_BITSTREAM;,16c4fafc2881112eba7051cac48f922eb2b94e06,CVE-2023-42298,16c4fafc2881112eba7051cac48f922eb2b94e06,https://github.com/gpac/gpac,NVD_GIT_REPOBASED,88,COMPLETED,VAR (!VAR || VAR>32) VAR VAR; VAR (VAR>32) VAR VAR;,2,13
+gpac_193633b1648582444fc99776cd741d7ba0125e86,src/media_tools/avilib.c,"						bih.bi_size = str2ulong((unsigned char *)&bih.bi_size);
+
+						if (i + bih.bi_size > hdrl_len) ERR_EXIT(AVI_ERR_READ)
+
+						AVI->bitmap_info_header = (alBITMAPINFOHEADER *) gf_malloc(bih.bi_size);
+							memcpy(AVI->bitmap_info_header, hdrl_data + i, bih.bi_size);
+						int avail = hdrl_len-i;
+						if (avail<32) ERR_EXIT(AVI_ERR_READ)
+						avail -= 32;
+						if (avail < AVI->video_superindex->nEntriesInUse*16) ERR_EXIT(AVI_ERR_READ)
+						int avail = hdrl_len-i;
+						if (avail<32) ERR_EXIT(AVI_ERR_READ)
+						avail -= 32;
+						if (avail < AVI->track[AVI->aptr].audio_superindex->nEntriesInUse*16) ERR_EXIT(AVI_ERR_READ)
+","						AVI->bitmap_info_header = (alBITMAPINFOHEADER *)
+						                          gf_malloc(str2ulong((unsigned char *)&bih.bi_size));
+							memcpy(AVI->bitmap_info_header, hdrl_data + i,
+							       str2ulong((unsigned char *)&bih.bi_size));",193633b1648582444fc99776cd741d7ba0125e86,CVE-2023-4758,193633b1648582444fc99776cd741d7ba0125e86,https://github.com/gpac/gpac,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR.VAR = VAR((VAR VAR *)&VAR.VAR); VAR (VAR + VAR.VAR > VAR) VAR(VAR) VAR->VAR = (VAR *) VAR(VAR.VAR); VAR(VAR->VAR, VAR + VAR, VAR.VAR); VAR VAR = VAR-VAR; VAR (VAR<32) VAR(VAR) VAR -= 32; VAR (VAR < VAR->VAR->VAR*16) VAR(VAR) VAR VAR = VAR-VAR; VAR (VAR<32) VAR(VAR) VAR -= 32; VAR (VAR < VAR->VAR[VAR->VAR].VAR->VAR*16) VAR(VAR) VAR->VAR = (VAR *) VAR(VAR((VAR VAR *)&VAR.VAR)); VAR(VAR->VAR, VAR + VAR, VAR((VAR VAR *)&VAR.VAR));",2,13
+gpac_261fab7f51479ae8b1732350d9d4cc456c4919af,include/gpac/internal/isomedia_dev.h,"			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[isom] not enough bytes in box %s: %d left, reading %d (file %s, line %d)\n"", gf_4cc_to_str(__ptr->type), __ptr->size, (bytes), __FILE__, __LINE__ )); \
+GF_Err gf_isom_base_sample_entry_read(GF_SampleEntryBox *ptr, GF_BitStream *bs);
+	//stored in other boxes, no need to delete it
+	struct __sample_encryption_box *senc;
+	//can be senc or PIFF psec
+typedef struct __sample_encryption_box
+	Bool is_piff;
+
+GF_SampleEncryptionBox *gf_isom_create_piff_psec_box(u8 version, u32 flags, u32 AlgorithmID, u8 IV_size, bin128 KID);
+GF_Err gf_isom_get_sample_cenc_info_ex(GF_TrackBox *trak, GF_TrackFragmentBox *traf, GF_SampleEncryptionBox *senc, u32 sample_number, u32 *IsEncrypted, u8 *IV_size, bin128 *KID,
+GF_Err gf_isom_get_sample_cenc_info_ex(GF_TrackBox *trak, void *traf, uGF_SampleEncryptionBox *senc, 32 sample_number, u32 *IsEncrypted, u8 *IV_size, bin128 *KID,","			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[isom] not enough bytes in box %s: %d left, reading %d\n"", gf_4cc_to_str(__ptr->type), __ptr->size, (bytes) )); \
+	struct __piff_sample_enc_box *piff_sample_encryption;
+typedef struct __piff_sample_enc_box
+	//do NOT change order above this point or insert anything, since we cast GF_PIFFSampleEncryptionBox into GF_SampleEncryptionBox
+
+} GF_PIFFSampleEncryptionBox;
+
+typedef struct __sample_encryption_box
+{
+	GF_ISOM_UUID_BOX
+	u8 version;
+	u32 flags;
+
+	GF_List *samp_aux_info; /*GF_CENCSampleAuxInfo*/
+	u64 bs_offset;
+
+#ifndef	GPAC_DISABLE_ISOM_FRAGMENTS
+	/*pointer to container traf*/
+	GF_TrackFragmentBox *traf;
+#endif
+	/*pointer to associated saio*/
+	GF_SampleAuxiliaryInfoSizeBox *cenc_saiz;
+	GF_SampleAuxiliaryInfoOffsetBox *cenc_saio;
+
+GF_PIFFSampleEncryptionBox *gf_isom_create_piff_psec_box(u8 version, u32 flags, u32 AlgorithmID, u8 IV_size, bin128 KID);
+GF_Err gf_isom_get_sample_cenc_info_ex(GF_TrackBox *trak, GF_TrackFragmentBox *traf, u32 sample_number, u32 *IsEncrypted, u8 *IV_size, bin128 *KID,
+GF_Err gf_isom_get_sample_cenc_info_ex(GF_TrackBox *trak, void *traf, u32 sample_number, u32 *IsEncrypted, u8 *IV_size, bin128 *KID,",261fab7f51479ae8b1732350d9d4cc456c4919af,CVE-2019-20159,261fab7f51479ae8b1732350d9d4cc456c4919af,https://github.com/gpac/gpac,NVD_GIT_REPOBASED,76,COMPLETED,"VAR(VAR, VAR, (""[VAR] VAR VAR VAR VAR VAR %VAR: %VAR VAR, VAR %VAR (VAR %VAR, VAR %VAR)\VAR"", VAR(VAR->VAR), VAR->VAR, (VAR), VAR, VAR )); \ VAR VAR(VAR *VAR, VAR *VAR);  VAR VAR *VAR;  VAR VAR VAR VAR VAR; VAR *VAR(VAR VAR, VAR VAR, VAR VAR, VAR VAR, VAR VAR); VAR VAR(VAR *VAR, VAR *VAR, VAR *VAR, VAR VAR, VAR *VAR, VAR *VAR, VAR *VAR, VAR VAR(VAR *VAR, VAR *VAR, VAR *VAR, 32 VAR, VAR *VAR, VAR *VAR, VAR *VAR, VAR(VAR, VAR, (""[VAR] VAR VAR VAR VAR VAR %VAR: %VAR VAR, VAR %VAR\VAR"", VAR(VAR->VAR), VAR->VAR, (VAR) )); \ VAR VAR *VAR; VAR VAR VAR  } VAR; VAR VAR VAR { VAR VAR VAR; VAR VAR; VAR *VAR;  VAR VAR;   VAR *VAR;   VAR *VAR; VAR *VAR; VAR *VAR(VAR VAR, VAR VAR, VAR VAR, VAR VAR, VAR VAR); VAR VAR(VAR *VAR, VAR *VAR, VAR VAR, VAR *VAR, VAR *VAR, VAR *VAR, VAR VAR(VAR *VAR, VAR *VAR, VAR VAR, VAR *VAR, VAR *VAR, VAR *VAR,",2,13
+gpac_9ea1fb39891669014a6e7592a4422e8de630cdc0,src/isomedia/box_code_base.c,"	e = gf_isom_read_box_list(s, bs, stbl_AddBox);
+	if (e) return e;
+	ISOM_DECREASE_SIZE(s, 4)
+
+	return gf_isom_read_box_list(s, bs, stsd_AddBox);
+	GF_Err e;
+	e = gf_isom_read_box_list(s, bs, traf_AddBox);
+	if (e) return e;
+
+	return gf_isom_read_box_list(s, bs, udta_AddBox);","	while (ptr->size) {
+		e = gf_isom_parse_box(&a, bs);
+		if (e) return e;
+		if (ptr->size<a->size) {
+			gf_isom_box_del(a);
+			return GF_ISOM_INVALID_FILE;
+		}
+		ISOM_DECREASE_SIZE(ptr, a->size);
+		e = stbl_AddBox(ptr, a);
+		if (e) return e;
+	}
+	for (i = 0; i < nb_entries; i++) {
+		e = gf_isom_parse_box(&a, bs);
+		if (e) return e;
+		e = stsd_AddBox(ptr, a);
+		if (e) return e;
+	}
+	return GF_OK;
+
+	while (ptr->size) {
+		GF_Err e = gf_isom_parse_box(&a, bs);
+		if (e) return e;
+		if (ptr->size<a->size) {
+			GF_LOG(GF_LOG_WARNING, GF_LOG_CONTAINER, (""[iso file] Box \""%s\"" is larger than container box\n"", gf_4cc_to_str(a->type)));
+			ptr->size = 0;
+		} else {
+			ISOM_DECREASE_SIZE(ptr, a->size);
+		}
+		e = traf_AddBox((GF_Box*)ptr, a);
+		if (e) return e;
+	}
+	while (ptr->size) {
+		/*if no udta type coded, break*/
+		sub_type = gf_bs_peek_bits(bs, 32, 0);
+		if (sub_type) {
+			e = gf_isom_parse_box(&a, bs);
+			if (e) return e;
+			e = udta_AddBox(ptr, a);
+			if (e) return e;
+			ISOM_DECREASE_SIZE(ptr, a->size);
+		} else {
+			gf_bs_read_u32(bs);
+			ISOM_DECREASE_SIZE(ptr, 4);
+		}
+	}
+	return GF_OK;",9ea1fb39891669014a6e7592a4422e8de630cdc0,CVE-2019-20169,9ea1fb39891669014a6e7592a4422e8de630cdc0,https://github.com/gpac/gpac,NVD_GIT_REPOBASED,76,COMPLETED,"VAR = VAR(VAR, VAR, VAR); VAR (VAR) VAR VAR; VAR(VAR, 4) VAR VAR(VAR, VAR, VAR); VAR VAR; VAR = VAR(VAR, VAR, VAR); VAR (VAR) VAR VAR; VAR VAR(VAR, VAR, VAR); VAR (VAR->VAR) { VAR = VAR(&VAR, VAR); VAR (VAR) VAR VAR; VAR (VAR->VAR<VAR->VAR) { VAR(VAR); VAR VAR; } VAR(VAR, VAR->VAR); VAR = VAR(VAR, VAR); VAR (VAR) VAR VAR; } VAR (VAR = 0; VAR < VAR; VAR++) { VAR = VAR(&VAR, VAR); VAR (VAR) VAR VAR; VAR = VAR(VAR, VAR); VAR (VAR) VAR VAR; } VAR VAR; VAR (VAR->VAR) { VAR VAR = VAR(&VAR, VAR); VAR (VAR) VAR VAR; VAR (VAR->VAR<VAR->VAR) { VAR(VAR, VAR, (""[VAR VAR] VAR \""%VAR\"" VAR VAR VAR VAR VAR\VAR"", VAR(VAR->VAR))); VAR->VAR = 0; } VAR { VAR(VAR, VAR->VAR); } VAR = VAR((VAR*)VAR, VAR); VAR (VAR) VAR VAR; } VAR (VAR->VAR) {  VAR = VAR(VAR, 32, 0); VAR (VAR) { VAR = VAR(&VAR, VAR); VAR (VAR) VAR VAR; VAR = VAR(VAR, VAR); VAR (VAR) VAR VAR; VAR(VAR, VAR->VAR); } VAR { VAR(VAR); VAR(VAR, 4); } } VAR VAR;",2,13
+gpac_9ea1fb39891669014a6e7592a4422e8de630cdc0,src/isomedia/box_code_base.c,"	e = gf_isom_read_box_list(s, bs, stbl_AddBox);
+	if (e) return e;
+	ISOM_DECREASE_SIZE(s, 4)
+
+	return gf_isom_read_box_list(s, bs, stsd_AddBox);
+	GF_Err e;
+	e = gf_isom_read_box_list(s, bs, traf_AddBox);
+	if (e) return e;
+
+	return gf_isom_read_box_list(s, bs, udta_AddBox);","	while (ptr->size) {
+		e = gf_isom_parse_box(&a, bs);
+		if (e) return e;
+		if (ptr->size<a->size) {
+			gf_isom_box_del(a);
+			return GF_ISOM_INVALID_FILE;
+		}
+		ISOM_DECREASE_SIZE(ptr, a->size);
+		e = stbl_AddBox(ptr, a);
+		if (e) return e;
+	}
+	for (i = 0; i < nb_entries; i++) {
+		e = gf_isom_parse_box(&a, bs);
+		if (e) return e;
+		e = stsd_AddBox(ptr, a);
+		if (e) return e;
+	}
+	return GF_OK;
+
+	while (ptr->size) {
+		GF_Err e = gf_isom_parse_box(&a, bs);
+		if (e) return e;
+		if (ptr->size<a->size) {
+			GF_LOG(GF_LOG_WARNING, GF_LOG_CONTAINER, (""[iso file] Box \""%s\"" is larger than container box\n"", gf_4cc_to_str(a->type)));
+			ptr->size = 0;
+		} else {
+			ISOM_DECREASE_SIZE(ptr, a->size);
+		}
+		e = traf_AddBox((GF_Box*)ptr, a);
+		if (e) return e;
+	}
+	while (ptr->size) {
+		/*if no udta type coded, break*/
+		sub_type = gf_bs_peek_bits(bs, 32, 0);
+		if (sub_type) {
+			e = gf_isom_parse_box(&a, bs);
+			if (e) return e;
+			e = udta_AddBox(ptr, a);
+			if (e) return e;
+			ISOM_DECREASE_SIZE(ptr, a->size);
+		} else {
+			gf_bs_read_u32(bs);
+			ISOM_DECREASE_SIZE(ptr, 4);
+		}
+	}
+	return GF_OK;",9ea1fb39891669014a6e7592a4422e8de630cdc0,CVE-2019-20168,9ea1fb39891669014a6e7592a4422e8de630cdc0,https://github.com/gpac/gpac,NVD_GIT_REPOBASED,76,COMPLETED,"VAR = VAR(VAR, VAR, VAR); VAR (VAR) VAR VAR; VAR(VAR, 4) VAR VAR(VAR, VAR, VAR); VAR VAR; VAR = VAR(VAR, VAR, VAR); VAR (VAR) VAR VAR; VAR VAR(VAR, VAR, VAR); VAR (VAR->VAR) { VAR = VAR(&VAR, VAR); VAR (VAR) VAR VAR; VAR (VAR->VAR<VAR->VAR) { VAR(VAR); VAR VAR; } VAR(VAR, VAR->VAR); VAR = VAR(VAR, VAR); VAR (VAR) VAR VAR; } VAR (VAR = 0; VAR < VAR; VAR++) { VAR = VAR(&VAR, VAR); VAR (VAR) VAR VAR; VAR = VAR(VAR, VAR); VAR (VAR) VAR VAR; } VAR VAR; VAR (VAR->VAR) { VAR VAR = VAR(&VAR, VAR); VAR (VAR) VAR VAR; VAR (VAR->VAR<VAR->VAR) { VAR(VAR, VAR, (""[VAR VAR] VAR \""%VAR\"" VAR VAR VAR VAR VAR\VAR"", VAR(VAR->VAR))); VAR->VAR = 0; } VAR { VAR(VAR, VAR->VAR); } VAR = VAR((VAR*)VAR, VAR); VAR (VAR) VAR VAR; } VAR (VAR->VAR) {  VAR = VAR(VAR, 32, 0); VAR (VAR) { VAR = VAR(&VAR, VAR); VAR (VAR) VAR VAR; VAR = VAR(VAR, VAR); VAR (VAR) VAR VAR; VAR(VAR, VAR->VAR); } VAR { VAR(VAR); VAR(VAR, 4); } } VAR VAR;",2,13
+iTop_f10e9c2d64d0304777660a4f70f1e80850ea864b,application/loginwebpage.class.inc.php,				$sToken = bin2hex(random_bytes(32));,"				$sToken = substr(md5(APPROOT.uniqid()), 0, 16);",f10e9c2d64d0304777660a4f70f1e80850ea864b,CVE-2022-39216,f10e9c2d64d0304777660a4f70f1e80850ea864b,https://github.com/Combodo/iTop,NVD_DIRECT_COMMIT,1337,COMPLETED,"$VAR = VAR(VAR(32)); $VAR = VAR(VAR(VAR.VAR()), 0, 16);",2,13
+krb5_57415dda6cf04e73ffc3723be518eddfae599bfd,src/likrb5/asn.1/asn1_encode.c,"        const uint8_t **remainder_out, size_t *rlen_out, int recursion)
+        if (recursion >= 32)
+            return ASN1_OVERFLOW;
+            ret = get_tag(p, len, &t, &c, &clen, &p, &len, recursion + 1);
+    ret = get_tag(*der, len, tag_out, &contents, &clen, &remainder, &rlen, 0);
+            ret = get_tag(asn1, len, &inner_tag, &asn1, &len, &rem, &rlen, 0);
+        ret = get_tag(asn1, len, &t, &contents, &clen, &asn1, &len, 0);
+        ret = get_tag(asn1, len, &t, &contents, &clen, &asn1, &len, 0);
+                  &clen, &remainder, &rlen, 0);","        const uint8_t **remainder_out, size_t *rlen_out)
+            ret = get_tag(p, len, &t, &c, &clen, &p, &len);
+    ret = get_tag(*der, len, tag_out, &contents, &clen, &remainder, &rlen);
+            ret = get_tag(asn1, len, &inner_tag, &asn1, &len, &rem, &rlen);
+        ret = get_tag(asn1, len, &t, &contents, &clen, &asn1, &len);
+        ret = get_tag(asn1, len, &t, &contents, &clen, &asn1, &len);
+                  &clen, &remainder, &rlen);",57415dda6cf04e73ffc3723be518eddfae599bfd,CVE-2020-28196,57415dda6cf04e73ffc3723be518eddfae599bfd,https://github.com/krb5/krb5,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR VAR **VAR, VAR *VAR, VAR VAR) VAR (VAR >= 32) VAR VAR; VAR = VAR(VAR, VAR, &VAR, &VAR, &VAR, &VAR, &VAR, VAR + 1); VAR = VAR(*VAR, VAR, VAR, &VAR, &VAR, &VAR, &VAR, 0); VAR = VAR(VAR, VAR, &VAR, &VAR, &VAR, &VAR, &VAR, 0); VAR = VAR(VAR, VAR, &VAR, &VAR, &VAR, &VAR, &VAR, 0); VAR = VAR(VAR, VAR, &VAR, &VAR, &VAR, &VAR, &VAR, 0); &VAR, &VAR, &VAR, 0); VAR VAR **VAR, VAR *VAR) VAR = VAR(VAR, VAR, &VAR, &VAR, &VAR, &VAR, &VAR); VAR = VAR(*VAR, VAR, VAR, &VAR, &VAR, &VAR, &VAR); VAR = VAR(VAR, VAR, &VAR, &VAR, &VAR, &VAR, &VAR); VAR = VAR(VAR, VAR, &VAR, &VAR, &VAR, &VAR, &VAR); VAR = VAR(VAR, VAR, &VAR, &VAR, &VAR, &VAR, &VAR); &VAR, &VAR, &VAR);",2,13
+linux_0f13864e5b24d9cbe18d125d41bfa4b726a82e40,drivers/isdn/i4l/isdn_net.c,"	char nr[ISDN_MSNLEN];
+		strlcpy(nr, setup->phone, ISDN_MSNLEN);
+		strlcpy(lp->msn, cfg->eaz, sizeof(lp->msn));
+		strlcpy(n->num, phone->phone, sizeof(n->num));","	char nr[32];
+		strcpy(nr, setup->phone);
+		strcpy(lp->msn, cfg->eaz);
+		strcpy(n->num, phone->phone);",0f13864e5b24d9cbe18d125d41bfa4b726a82e40,CVE-2007-6063,0f13864e5b24d9cbe18d125d41bfa4b726a82e40,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,84,COMPLETED,"VAR VAR[VAR]; VAR(VAR, VAR->VAR, VAR); VAR(VAR->VAR, VAR->VAR, VAR(VAR->VAR)); VAR(VAR->VAR, VAR->VAR, VAR(VAR->VAR)); VAR VAR[32]; VAR(VAR, VAR->VAR); VAR(VAR->VAR, VAR->VAR); VAR(VAR->VAR, VAR->VAR);",2,13
+linux_1bb57e940e1958e40d51f2078f50c3a96a9b2d75,drivers/net/ethernet/dlink/dl2k.c,"	struct mii_ioctl_data *miidata = if_mii(rq);
+	case SIOCGMIIPHY:
+		miidata->phy_id = phy_addr;
+	case SIOCGMIIREG:
+		miidata->val_out = mii_read (dev, phy_addr, miidata->reg_num);
+	case SIOCSMIIREG:
+		if (!capable(CAP_NET_ADMIN))
+			return -EPERM;
+		mii_write (dev, phy_addr, miidata->reg_num, miidata->val_in);","	struct mii_data *miidata = (struct mii_data *) &rq->ifr_ifru;
+
+	struct netdev_desc *desc;
+	int i;
+	case SIOCDEVPRIVATE:
+		break;
+
+	case SIOCDEVPRIVATE + 1:
+		miidata->out_value = mii_read (dev, phy_addr, miidata->reg_num);
+	case SIOCDEVPRIVATE + 2:
+		mii_write (dev, phy_addr, miidata->reg_num, miidata->in_value);
+	case SIOCDEVPRIVATE + 3:
+		break;
+	case SIOCDEVPRIVATE + 4:
+		break;
+	case SIOCDEVPRIVATE + 5:
+		netif_stop_queue (dev);
+	case SIOCDEVPRIVATE + 6:
+		netif_wake_queue (dev);
+		break;
+	case SIOCDEVPRIVATE + 7:
+		printk
+		    (""tx_full=%x cur_tx=%lx old_tx=%lx cur_rx=%lx old_rx=%lx\n"",
+		     netif_queue_stopped(dev), np->cur_tx, np->old_tx, np->cur_rx,
+		     np->old_rx);
+		break;
+	case SIOCDEVPRIVATE + 8:
+		printk(""TX ring:\n"");
+		for (i = 0; i < TX_RING_SIZE; i++) {
+			desc = &np->tx_ring[i];
+			printk
+			    (""%02x:cur:%08x next:%08x status:%08x frag1:%08x frag0:%08x"",
+			     i,
+			     (u32) (np->tx_ring_dma + i * sizeof (*desc)),
+			     (u32)le64_to_cpu(desc->next_desc),
+			     (u32)le64_to_cpu(desc->status),
+			     (u32)(le64_to_cpu(desc->fraginfo) >> 32),
+			     (u32)le64_to_cpu(desc->fraginfo));
+			printk (""\n"");
+		}
+		printk (""\n"");
+		break;
+",1bb57e940e1958e40d51f2078f50c3a96a9b2d75,CVE-2012-2313,1bb57e940e1958e40d51f2078f50c3a96a9b2d75,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR VAR *VAR = VAR(VAR); VAR VAR: VAR->VAR = VAR; VAR VAR: VAR->VAR = VAR (VAR, VAR, VAR->VAR); VAR VAR: VAR (!VAR(VAR)) VAR -VAR; VAR (VAR, VAR, VAR->VAR, VAR->VAR); VAR VAR *VAR = (VAR VAR *) &VAR->VAR; VAR VAR *VAR; VAR VAR; VAR VAR: VAR; VAR VAR + 1: VAR->VAR = VAR (VAR, VAR, VAR->VAR); VAR VAR + 2: VAR (VAR, VAR, VAR->VAR, VAR->VAR); VAR VAR + 3: VAR; VAR VAR + 4: VAR; VAR VAR + 5: VAR (VAR); VAR VAR + 6: VAR (VAR); VAR; VAR VAR + 7: VAR (""VAR=%VAR VAR=%VAR VAR=%VAR VAR=%VAR VAR=%VAR\VAR"", VAR(VAR), VAR->VAR, VAR->VAR, VAR->VAR, VAR->VAR); VAR; VAR VAR + 8: VAR(""VAR VAR:\VAR""); VAR (VAR = 0; VAR < VAR; VAR++) { VAR = &VAR->VAR[VAR]; VAR (""%02x:VAR:%08x VAR:%08x VAR:%08x VAR:%08x VAR:%08x"", VAR, (VAR) (VAR->VAR + VAR * VAR (*VAR)), (VAR)VAR(VAR->VAR), (VAR)VAR(VAR->VAR), (VAR)(VAR(VAR->VAR) >> 32), (VAR)VAR(VAR->VAR)); VAR (""\VAR""); } VAR (""\VAR""); VAR;",0,13
+linux_21c5977a836e399fc710ff2c5367845ed5c2527f,arch/alpha/kernel/osf_sys.c,"	if (len > 32)
+	if ((unsigned long)len > (unsigned long)count)
+		if (nbytes > sizeof(*hwrpb))
+	unsigned int status = 0;
+	ret = sys_wait4(pid, (unsigned int __user *) &status, options,
+			(struct rusage __user *) &r);
+	err |= put_user(status, ustatus);","	if (namelen > 32)
+	if (len > count)
+		if (nbytes < sizeof(*hwrpb))
+	ret = sys_wait4(pid, ustatus, options, (struct rusage __user *) &r);",21c5977a836e399fc710ff2c5367845ed5c2527f,CVE-2011-2211,21c5977a836e399fc710ff2c5367845ed5c2527f,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR (VAR > 32) VAR ((VAR VAR)VAR > (VAR VAR)VAR) VAR (VAR > VAR(*VAR)) VAR VAR VAR = 0; VAR = VAR(VAR, (VAR VAR VAR *) &VAR, VAR, (VAR VAR VAR *) &VAR); VAR |= VAR(VAR, VAR); VAR (VAR > 32) VAR (VAR > VAR) VAR (VAR < VAR(*VAR)) VAR = VAR(VAR, VAR, VAR, (VAR VAR VAR *) &VAR);",2,13
+linux_21c5977a836e399fc710ff2c5367845ed5c2527f,arch/alpha/kernel/osf_sys.c,"	if (len > 32)
+	if ((unsigned long)len > (unsigned long)count)
+		if (nbytes > sizeof(*hwrpb))
+	unsigned int status = 0;
+	ret = sys_wait4(pid, (unsigned int __user *) &status, options,
+			(struct rusage __user *) &r);
+	err |= put_user(status, ustatus);","	if (namelen > 32)
+	if (len > count)
+		if (nbytes < sizeof(*hwrpb))
+	ret = sys_wait4(pid, ustatus, options, (struct rusage __user *) &r);",21c5977a836e399fc710ff2c5367845ed5c2527f,CVE-2011-2210,21c5977a836e399fc710ff2c5367845ed5c2527f,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR (VAR > 32) VAR ((VAR VAR)VAR > (VAR VAR)VAR) VAR (VAR > VAR(*VAR)) VAR VAR VAR = 0; VAR = VAR(VAR, (VAR VAR VAR *) &VAR, VAR, (VAR VAR VAR *) &VAR); VAR |= VAR(VAR, VAR); VAR (VAR > 32) VAR (VAR > VAR) VAR (VAR < VAR(*VAR)) VAR = VAR(VAR, VAR, VAR, (VAR VAR VAR *) &VAR);",2,13
+linux_21c5977a836e399fc710ff2c5367845ed5c2527f,arch/alpha/kernel/osf_sys.c,"	if (len > 32)
+	if ((unsigned long)len > (unsigned long)count)
+		if (nbytes > sizeof(*hwrpb))
+	unsigned int status = 0;
+	ret = sys_wait4(pid, (unsigned int __user *) &status, options,
+			(struct rusage __user *) &r);
+	err |= put_user(status, ustatus);","	if (namelen > 32)
+	if (len > count)
+		if (nbytes < sizeof(*hwrpb))
+	ret = sys_wait4(pid, ustatus, options, (struct rusage __user *) &r);",21c5977a836e399fc710ff2c5367845ed5c2527f,CVE-2011-2209,21c5977a836e399fc710ff2c5367845ed5c2527f,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR (VAR > 32) VAR ((VAR VAR)VAR > (VAR VAR)VAR) VAR (VAR > VAR(*VAR)) VAR VAR VAR = 0; VAR = VAR(VAR, (VAR VAR VAR *) &VAR, VAR, (VAR VAR VAR *) &VAR); VAR |= VAR(VAR, VAR); VAR (VAR > 32) VAR (VAR > VAR) VAR (VAR < VAR(*VAR)) VAR = VAR(VAR, VAR, VAR, (VAR VAR VAR *) &VAR);",2,13
+linux_21c5977a836e399fc710ff2c5367845ed5c2527f,arch/alpha/kernel/osf_sys.c,"	if (len > 32)
+	if ((unsigned long)len > (unsigned long)count)
+		if (nbytes > sizeof(*hwrpb))
+	unsigned int status = 0;
+	ret = sys_wait4(pid, (unsigned int __user *) &status, options,
+			(struct rusage __user *) &r);
+	err |= put_user(status, ustatus);","	if (namelen > 32)
+	if (len > count)
+		if (nbytes < sizeof(*hwrpb))
+	ret = sys_wait4(pid, ustatus, options, (struct rusage __user *) &r);",21c5977a836e399fc710ff2c5367845ed5c2527f,CVE-2011-2208,21c5977a836e399fc710ff2c5367845ed5c2527f,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR (VAR > 32) VAR ((VAR VAR)VAR > (VAR VAR)VAR) VAR (VAR > VAR(*VAR)) VAR VAR VAR = 0; VAR = VAR(VAR, (VAR VAR VAR *) &VAR, VAR, (VAR VAR VAR *) &VAR); VAR |= VAR(VAR, VAR); VAR (VAR > 32) VAR (VAR > VAR) VAR (VAR < VAR(*VAR)) VAR = VAR(VAR, VAR, VAR, (VAR VAR VAR *) &VAR);",2,13
+linux_2a8859f373b0a86f0ece8ec8312607eacf12485d,arch/x86/kvm/mmu/paging_tmpl.h,"	#define CMPXCHG ""cmpxchgq""
+	#define CMPXCHG ""cmpxchgl""
+	#ifdef CONFIG_X86_64
+	#define CMPXCHG ""cmpxchgq""
+	#endif
+	signed char r;
+	if (!user_access_begin(ptep_user, sizeof(pt_element_t)))
+		return -EFAULT;
+
+#ifdef CMPXCHG
+	asm volatile(""1:"" LOCK_PREFIX CMPXCHG "" %[new], %[ptr]\n""
+		     ""setnz %b[r]\n""
+		     ""2:""
+		     _ASM_EXTABLE_TYPE_REG(1b, 2b, EX_TYPE_EFAULT_REG, %k[r])
+		     : [ptr] ""+m"" (*ptep_user),
+		       [old] ""+a"" (orig_pte),
+		       [r] ""=q"" (r)
+		     : [new] ""r"" (new_pte)
+		     : ""memory"");
+#else
+	asm volatile(""1:"" LOCK_PREFIX ""cmpxchg8b %[ptr]\n""
+		     ""setnz %b[r]\n""
+		     ""2:""
+		     _ASM_EXTABLE_TYPE_REG(1b, 2b, EX_TYPE_EFAULT_REG, %k[r])
+		     : [ptr] ""+m"" (*ptep_user),
+		       [old] ""+A"" (orig_pte),
+		       [r] ""=q"" (r)
+		     : [new_lo] ""b"" ((u32)new_pte),
+		       [new_hi] ""c"" ((u32)(new_pte >> 32))
+		     : ""memory"");
+#endif
+
+	user_access_end();
+	return r;","	#define CMPXCHG cmpxchg
+	#define CMPXCHG cmpxchg64
+	#define CMPXCHG cmpxchg
+	#define CMPXCHG cmpxchg64
+	int npages;
+	pt_element_t ret;
+	pt_element_t *table;
+	struct page *page;
+
+	npages = get_user_pages_fast((unsigned long)ptep_user, 1, FOLL_WRITE, &page);
+	if (likely(npages == 1)) {
+		table = kmap_atomic(page);
+		ret = CMPXCHG(&table[index], orig_pte, new_pte);
+		kunmap_atomic(table);
+
+		kvm_release_page_dirty(page);
+	} else {
+		struct vm_area_struct *vma;
+		unsigned long vaddr = (unsigned long)ptep_user & PAGE_MASK;
+		unsigned long pfn;
+		unsigned long paddr;
+
+		mmap_read_lock(current->mm);
+		vma = find_vma_intersection(current->mm, vaddr, vaddr + PAGE_SIZE);
+		if (!vma || !(vma->vm_flags & VM_PFNMAP)) {
+			mmap_read_unlock(current->mm);
+			return -EFAULT;
+		}
+		pfn = ((vaddr - vma->vm_start) >> PAGE_SHIFT) + vma->vm_pgoff;
+		paddr = pfn << PAGE_SHIFT;
+		table = memremap(paddr, PAGE_SIZE, MEMREMAP_WB);
+		if (!table) {
+			mmap_read_unlock(current->mm);
+			return -EFAULT;
+		}
+		ret = CMPXCHG(&table[index], orig_pte, new_pte);
+		memunmap(table);
+		mmap_read_unlock(current->mm);
+	}
+	return (ret != orig_pte);",2a8859f373b0a86f0ece8ec8312607eacf12485d,CVE-2022-1158,2a8859f373b0a86f0ece8ec8312607eacf12485d,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,76,COMPLETED,"     VAR VAR VAR; VAR (!VAR(VAR, VAR(VAR))) VAR -VAR;  VAR VAR(""1:"" VAR VAR "" %[VAR], %[VAR]\VAR"" ""VAR %VAR[VAR]\VAR"" ""2:"" VAR(1b, 2b, VAR, %VAR[VAR]) : [VAR] ""+VAR"" (*VAR), [VAR] ""+VAR"" (VAR), [VAR] ""=VAR"" (VAR) : [VAR] ""VAR"" (VAR) : ""VAR"");  VAR VAR(""1:"" VAR ""VAR %[VAR]\VAR"" ""VAR %VAR[VAR]\VAR"" ""2:"" VAR(1b, 2b, VAR, %VAR[VAR]) : [VAR] ""+VAR"" (*VAR), [VAR] ""+VAR"" (VAR), [VAR] ""=VAR"" (VAR) : [VAR] ""VAR"" ((VAR)VAR), [VAR] ""VAR"" ((VAR)(VAR >> 32)) : ""VAR"");  VAR(); VAR VAR;     VAR VAR; VAR VAR; VAR *VAR; VAR VAR *VAR; VAR = VAR((VAR VAR)VAR, 1, VAR, &VAR); VAR (VAR(VAR == 1)) { VAR = VAR(VAR); VAR = VAR(&VAR[VAR], VAR, VAR); VAR(VAR); VAR(VAR); } VAR { VAR VAR *VAR; VAR VAR VAR = (VAR VAR)VAR & VAR; VAR VAR VAR; VAR VAR VAR; VAR(VAR->VAR); VAR = VAR(VAR->VAR, VAR, VAR + VAR); VAR (!VAR || !(VAR->VAR & VAR)) { VAR(VAR->VAR); VAR -VAR; } VAR = ((VAR - VAR->VAR) >> VAR) + VAR->VAR; VAR = VAR << VAR; VAR = VAR(VAR, VAR, VAR); VAR (!VAR) { VAR(VAR->VAR); VAR -VAR; } VAR = VAR(&VAR[VAR], VAR, VAR); VAR(VAR); VAR(VAR->VAR); } VAR (VAR != VAR);",0,13
+linux_2b09d5d364986f724f17001ccfe4126b9b43a0be,drivers/video/fbdev/core/fbcon.c,"	if (font->width > 32 || font->height > 32)
+		return -EINVAL;
+
+	if (!(info->pixmap.blit_x & BIT(font->width - 1)) ||
+	    !(info->pixmap.blit_y & BIT(font->height - 1)))","	if (!(info->pixmap.blit_x & (1 << (font->width - 1))) ||
+	    !(info->pixmap.blit_y & (1 << (font->height - 1))))",2b09d5d364986f724f17001ccfe4126b9b43a0be,CVE-2023-3161,2b09d5d364986f724f17001ccfe4126b9b43a0be,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED,VAR (VAR->VAR > 32 || VAR->VAR > 32) VAR -VAR; VAR (!(VAR->VAR.VAR & VAR(VAR->VAR - 1)) || !(VAR->VAR.VAR & VAR(VAR->VAR - 1))) VAR (!(VAR->VAR.VAR & (1 << (VAR->VAR - 1))) || !(VAR->VAR.VAR & (1 << (VAR->VAR - 1)))),2,13
+linux_33ab91103b3415e12457e3104f0e4517ce12d0f3,arch/x86/kvm/emulate.c,"	/* NULL selector is not valid for TR, CS and (except for long mode) SS */
+	if (null_selector) {
+		if (seg == VCPU_SREG_CS || seg == VCPU_SREG_TR)
+			goto exception;
+
+		if (seg == VCPU_SREG_SS) {
+			if (ctxt->mode != X86EMUL_MODE_PROT64 || rpl != cpl)
+				goto exception;
+
+			/*
+			 * ctxt->ops->set_segment expects the CPL to be in
+			 * SS.DPL, so fake an expand-up 32-bit data segment.
+			 */
+			seg_desc.type = 3;
+			seg_desc.p = 1;
+			seg_desc.s = 1;
+			seg_desc.dpl = cpl;
+			seg_desc.d = 1;
+			seg_desc.g = 1;
+		}
+
+		/* Skip all following checks */
+	}
+
+	/*
+	 * None of MOV, POP and LSS can load a NULL selector in CPL=3, but
+	 * they can load it at CPL<3 (Intel's manual says only LSS can,
+	 * but it's wrong).
+	 *
+	 * However, the Intel manual says that putting IST=1/DPL=3 in
+	 * an interrupt gate will result in SS=3 (the AMD manual instead
+	 * says it doesn't), so allow SS=3 in __load_segment_descriptor
+	 * and only forbid it here.
+	 */
+	if (seg == VCPU_SREG_SS && selector == 3 &&
+	    ctxt->mode == X86EMUL_MODE_PROT64)
+		return emulate_exception(ctxt, GP_VECTOR, 0, true);
+","/* Does not support long mode */
+	/* NULL selector is not valid for TR, CS and SS (except for long mode) */
+	if ((seg == VCPU_SREG_CS
+	     || (seg == VCPU_SREG_SS
+		 && (ctxt->mode != X86EMUL_MODE_PROT64 || rpl != cpl))
+	     || seg == VCPU_SREG_TR)
+	    && null_selector)
+		goto exception;
+
+	if (null_selector) /* for NULL selector skip all following checks */",33ab91103b3415e12457e3104f0e4517ce12d0f3,CVE-2017-2583,33ab91103b3415e12457e3104f0e4517ce12d0f3,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED," VAR (VAR) { VAR (VAR == VAR || VAR == VAR) VAR VAR; VAR (VAR == VAR) { VAR (VAR->VAR != VAR || VAR != VAR) VAR VAR; /* * VAR->VAR->VAR VAR VAR VAR VAR VAR VAR * VAR.VAR, VAR VAR VAR VAR-VAR 32-VAR VAR VAR. */ VAR.VAR = 3; VAR.VAR = 1; VAR.VAR = 1; VAR.VAR = VAR; VAR.VAR = 1; VAR.VAR = 1; }  } /* * VAR VAR VAR, VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR=3, VAR * VAR VAR VAR VAR VAR VAR<3 (VAR'VAR VAR VAR VAR VAR VAR, * VAR VAR'VAR VAR). * * VAR, VAR VAR VAR VAR VAR VAR VAR=1/VAR=3 VAR * VAR VAR VAR VAR VAR VAR VAR=3 (VAR VAR VAR VAR * VAR VAR VAR'VAR), VAR VAR VAR=3 VAR VAR * VAR VAR VAR VAR VAR. */ VAR (VAR == VAR && VAR == 3 && VAR->VAR == VAR) VAR VAR(VAR, VAR, 0, VAR);   VAR ((VAR == VAR || (VAR == VAR && (VAR->VAR != VAR || VAR != VAR)) || VAR == VAR) && VAR) VAR VAR; VAR (VAR) ",2,13
+linux_468f6eafa6c44cb2c5d8aad35e12f06c240a812a,kernel/bpf/verifier.c,"/* WARNING: This function does calculations on 64-bit values, but the actual
+ * execution may occur on 32-bit values. Therefore, things like bitshifts
+ * need extra checks in the 32-bit case.
+ */
+	u64 insn_bitness = (BPF_CLASS(insn->code) == BPF_ALU64) ? 64 : 32;
+		if (umax_val >= insn_bitness) {
+			/* Shifts greater than 31 or 63 are undefined.
+			 * This includes shifts by a negative number.
+		if (umax_val >= insn_bitness) {
+			/* Shifts greater than 31 or 63 are undefined.
+			 * This includes shifts by a negative number.
+	if (BPF_CLASS(insn->code) != BPF_ALU64) {
+		/* 32-bit ALU ops are (32,32)->32 */
+		coerce_reg_to_size(dst_reg, 4);
+		coerce_reg_to_size(&src_reg, 4);
+	}
+","	if (BPF_CLASS(insn->code) != BPF_ALU64) {
+		/* 32-bit ALU ops are (32,32)->64 */
+		coerce_reg_to_size(dst_reg, 4);
+		coerce_reg_to_size(&src_reg, 4);
+	}
+		if (umax_val > 63) {
+			/* Shifts greater than 63 are undefined.  This includes
+			 * shifts by a negative number.
+		if (umax_val > 63) {
+			/* Shifts greater than 63 are undefined.  This includes
+			 * shifts by a negative number.",468f6eafa6c44cb2c5d8aad35e12f06c240a812a,CVE-2017-17852,468f6eafa6c44cb2c5d8aad35e12f06c240a812a,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED,"/* VAR: VAR VAR VAR VAR VAR 64-VAR VAR, VAR VAR VAR * VAR VAR VAR VAR 32-VAR VAR. VAR, VAR VAR VAR * VAR VAR VAR VAR VAR 32-VAR VAR. */ VAR VAR = (VAR(VAR->VAR) == VAR) ? 64 : 32; VAR (VAR >= VAR) { /* VAR VAR VAR 31 VAR 63 VAR VAR. * VAR VAR VAR VAR VAR VAR VAR. VAR (VAR >= VAR) { /* VAR VAR VAR 31 VAR 63 VAR VAR. * VAR VAR VAR VAR VAR VAR VAR. VAR (VAR(VAR->VAR) != VAR) {  VAR(VAR, 4); VAR(&VAR, 4); } VAR (VAR(VAR->VAR) != VAR) {  VAR(VAR, 4); VAR(&VAR, 4); } VAR (VAR > 63) { /* VAR VAR VAR 63 VAR VAR. VAR VAR * VAR VAR VAR VAR VAR. VAR (VAR > 63) { /* VAR VAR VAR 63 VAR VAR. VAR VAR * VAR VAR VAR VAR VAR.",0,13
+linux_48735d8d8bd701b1e0cd3d49c21e5e385ddcb077,drivers/net/wireless/libertas/scan.c,"			bss->ssid_len = min_t(int, 32, elem->len);
+			memcpy(bss->ssid, elem->data, bss->ssid_len);","			bss->ssid_len = elem->len;
+			memcpy(bss->ssid, elem->data, elem->len);",48735d8d8bd701b1e0cd3d49c21e5e385ddcb077,CVE-2008-5134,48735d8d8bd701b1e0cd3d49c21e5e385ddcb077,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,88,COMPLETED,"VAR->VAR = VAR(VAR, 32, VAR->VAR); VAR(VAR->VAR, VAR->VAR, VAR->VAR); VAR->VAR = VAR->VAR; VAR(VAR->VAR, VAR->VAR, VAR->VAR);",2,13
+linux_55749769fe608fa3f4a075e42e89d237c8e37637,arch/x86/kvm/xen.c,"	struct pvclock_wall_clock *wc;
+	u32 *wc_sec_hi;
+	u32 wc_version;
+	u64 wall_nsec;
+	do {
+		ret = kvm_gfn_to_pfn_cache_init(kvm, gpc, NULL, false, true,
+						gpa, PAGE_SIZE, false);
+		if (ret)
+			goto out;
+
+		/*
+		 * This code mirrors kvm_write_wall_clock() except that it writes
+		 * directly through the pfn cache and doesn't mark the page dirty.
+		 */
+		wall_nsec = ktime_get_real_ns() - get_kvmclock_ns(kvm);
+
+		/* It could be invalid again already, so we need to check */
+		read_lock_irq(&gpc->lock);
+
+		if (gpc->valid)
+			break;
+
+		read_unlock_irq(&gpc->lock);
+	} while (1);
+	if (IS_ENABLED(CONFIG_64BIT) && kvm->arch.xen.long_mode) {
+		struct shared_info *shinfo = gpc->khva;
+
+		wc_sec_hi = &shinfo->wc_sec_hi;
+		wc = &shinfo->wc;
+	} else
+	{
+		struct compat_shared_info *shinfo = gpc->khva;
+
+		wc_sec_hi = &shinfo->arch.wc_sec_hi;
+		wc = &shinfo->wc;
+	}
+
+	/* Increment and ensure an odd value */
+	wc_version = wc->version = (wc->version + 1) | 1;
+	smp_wmb();
+
+	wc->nsec = do_div(wall_nsec,  1000000000);
+	wc->sec = (u32)wall_nsec;
+	*wc_sec_hi = wall_nsec >> 32;
+	smp_wmb();
+
+	wc->version = wc_version + 1;
+	read_unlock_irq(&gpc->lock);","	int wc_ofs, sec_hi_ofs;
+	ret = kvm_gfn_to_pfn_cache_init(kvm, gpc, NULL, false, true, gpa,
+					PAGE_SIZE, false);
+	if (ret)
+		goto out;
+	/* 32-bit location by default */
+	wc_ofs = offsetof(struct compat_shared_info, wc);
+	sec_hi_ofs = offsetof(struct compat_shared_info, arch.wc_sec_hi);
+
+	if (kvm->arch.xen.long_mode) {
+		wc_ofs = offsetof(struct shared_info, wc);
+		sec_hi_ofs = offsetof(struct shared_info, wc_sec_hi);
+	}
+	kvm_write_wall_clock(kvm, gpa + wc_ofs, sec_hi_ofs - wc_ofs);",55749769fe608fa3f4a075e42e89d237c8e37637,CVE-2021-4095,55749769fe608fa3f4a075e42e89d237c8e37637,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,84,COMPLETED,"VAR VAR *VAR; VAR *VAR; VAR VAR; VAR VAR; VAR { VAR = VAR(VAR, VAR, VAR, VAR, VAR, VAR, VAR, VAR); VAR (VAR) VAR VAR; /* * VAR VAR VAR VAR() VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR VAR'VAR VAR VAR VAR VAR. */ VAR = VAR() - VAR(VAR);  VAR(&VAR->VAR); VAR (VAR->VAR) VAR; VAR(&VAR->VAR); } VAR (1); VAR (VAR(VAR) && VAR->VAR.VAR.VAR) { VAR VAR *VAR = VAR->VAR; VAR = &VAR->VAR; VAR = &VAR->VAR; } VAR { VAR VAR *VAR = VAR->VAR; VAR = &VAR->VAR.VAR; VAR = &VAR->VAR; }  VAR = VAR->VAR = (VAR->VAR + 1) | 1; VAR(); VAR->VAR = VAR(VAR, 1000000000); VAR->VAR = (VAR)VAR; *VAR = VAR >> 32; VAR(); VAR->VAR = VAR + 1; VAR(&VAR->VAR); VAR VAR, VAR; VAR = VAR(VAR, VAR, VAR, VAR, VAR, VAR, VAR, VAR); VAR (VAR) VAR VAR;  VAR = VAR(VAR VAR, VAR); VAR = VAR(VAR VAR, VAR.VAR); VAR (VAR->VAR.VAR.VAR) { VAR = VAR(VAR VAR, VAR); VAR = VAR(VAR VAR, VAR); } VAR(VAR, VAR + VAR, VAR - VAR);",2,13
+linux_74b6b20df8cfe90ada777d621b54c32e69e27cd7,drivers/staging/rtl8188eu/os_dep/ioctl_linux.c,"					if (sec_len > 0 &&
+					    sec_len <= len &&
+					    sec_len <= 32) {
+						memcpy(ssid[ssid_index].ssid, pos, sec_len);","					if (sec_len > 0 && sec_len <= len) {
+						memcpy(ssid[ssid_index].ssid, pos, ssid[ssid_index].ssid_length);",74b6b20df8cfe90ada777d621b54c32e69e27cd7,CVE-2021-28660,74b6b20df8cfe90ada777d621b54c32e69e27cd7,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,88,COMPLETED,"VAR (VAR > 0 && VAR <= VAR && VAR <= 32) { VAR(VAR[VAR].VAR, VAR, VAR); VAR (VAR > 0 && VAR <= VAR) { VAR(VAR[VAR].VAR, VAR, VAR[VAR].VAR);",2,13
+linux_87e3ca055cdc6c63fb82b9bec7c370405d03f6ef,tools/testing/selftests/kvm/include/x86_64/processor.h,"static __always_inline uint64_t kvm_cpu_supported_xcr0(void)
+{
+	if (!kvm_cpu_has_p(X86_PROPERTY_SUPPORTED_XCR0_LO))
+		return 0;
+
+	return kvm_cpu_property(X86_PROPERTY_SUPPORTED_XCR0_LO) |
+	       ((uint64_t)kvm_cpu_property(X86_PROPERTY_SUPPORTED_XCR0_HI) << 32);
+}
+",,87e3ca055cdc6c63fb82b9bec7c370405d03f6ef,CVE-2023-5090,87e3ca055cdc6c63fb82b9bec7c370405d03f6ef,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,76,COMPLETED,VAR VAR VAR VAR(VAR) { VAR (!VAR(VAR)) VAR 0; VAR VAR(VAR) | ((VAR)VAR(VAR) << 32); } ,2,13
+linux_8ed030dd0aa400d18c63861c2c6deb7c38f4edde,net/dccp/ccid.h,"/* maximum value for a CCID (RFC 4340, 19.5) */
+#define CCID_MAX		255
+#define CCID_SLAB_NAME_LENGTH	32
+	char			ccid_hc_rx_slab_name[CCID_SLAB_NAME_LENGTH];
+	char			ccid_hc_tx_slab_name[CCID_SLAB_NAME_LENGTH];","#define CCID_MAX 255
+	char			ccid_hc_rx_slab_name[32];
+	char			ccid_hc_tx_slab_name[32];",8ed030dd0aa400d18c63861c2c6deb7c38f4edde,CVE-2011-1093,8ed030dd0aa400d18c63861c2c6deb7c38f4edde,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,80,COMPLETED,   VAR VAR[VAR]; VAR VAR[VAR];  VAR VAR[32]; VAR VAR[32];,2,13
+linux_915d975b2ffa58a14bfcf16fafe00c41315949ff,net/core/skbuff.c,"	size_t obj_size;
+
+	obj_size = kmalloc_size_roundup(obj_size);
+	/* The following cast might truncate high-order bits of obj_size, this
+	 * is harmless because kmalloc(obj_size >= 2^32) will fail anyway.
+	 */
+	*size = (unsigned int)obj_size;
+","	unsigned int obj_size;
+	*size = obj_size = kmalloc_size_roundup(obj_size);",915d975b2ffa58a14bfcf16fafe00c41315949ff,CVE-2023-42752,915d975b2ffa58a14bfcf16fafe00c41315949ff,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,70,COMPLETED,"VAR VAR; VAR = VAR(VAR); /* VAR VAR VAR VAR VAR VAR-VAR VAR VAR VAR, VAR * VAR VAR VAR VAR(VAR >= 2^32) VAR VAR VAR. */ *VAR = (VAR VAR)VAR; VAR VAR VAR; *VAR = VAR = VAR(VAR);",2,13
+linux_91828a405ae454a9503c41a7744f6ff877a80714,mm/shmem.c,"		inode->i_generation = get_seconds();
+static struct dentry *shmem_get_parent(struct dentry *child)
+{
+	return ERR_PTR(-ESTALE);
+}
+
+static int shmem_match(struct inode *ino, void *vfh)
+{
+	__u32 *fh = vfh;
+	__u64 inum = fh[2];
+	inum = (inum << 32) | fh[1];
+	return ino->i_ino == inum && fh[0] == ino->i_generation;
+}
+
+static struct dentry *shmem_get_dentry(struct super_block *sb, void *vfh)
+{
+	struct dentry *de = NULL;
+	struct inode *inode;
+	__u32 *fh = vfh;
+	__u64 inum = fh[2];
+	inum = (inum << 32) | fh[1];
+
+	inode = ilookup5(sb, (unsigned long)(inum+fh[0]), shmem_match, vfh);
+	if (inode) {
+		de = d_find_alias(inode);
+		iput(inode);
+	}
+
+	return de? de: ERR_PTR(-ESTALE);
+}
+
+static struct dentry *shmem_decode_fh(struct super_block *sb, __u32 *fh,
+		int len, int type,
+		int (*acceptable)(void *context, struct dentry *de),
+		void *context)
+{
+	if (len < 3)
+		return ERR_PTR(-ESTALE);
+
+	return sb->s_export_op->find_exported_dentry(sb, fh, NULL, acceptable,
+							context);
+}
+
+static int shmem_encode_fh(struct dentry *dentry, __u32 *fh, int *len,
+				int connectable)
+{
+	struct inode *inode = dentry->d_inode;
+
+	if (*len < 3)
+		return 255;
+
+	if (hlist_unhashed(&inode->i_hash)) {
+		/* Unfortunately insert_inode_hash is not idempotent,
+		 * so as we hash inodes here rather than at creation
+		 * time, we need a lock to ensure we only try
+		 * to do it once
+		 */
+		static DEFINE_SPINLOCK(lock);
+		spin_lock(&lock);
+		if (hlist_unhashed(&inode->i_hash))
+			__insert_inode_hash(inode,
+					    inode->i_ino + inode->i_generation);
+		spin_unlock(&lock);
+	}
+
+	fh[0] = inode->i_generation;
+	fh[1] = inode->i_ino;
+	fh[2] = ((__u64)inode->i_ino) >> 32;
+
+	*len = 3;
+	return 1;
+}
+
+static struct export_operations shmem_export_ops = {
+	.get_parent     = shmem_get_parent,
+	.get_dentry     = shmem_get_dentry,
+	.encode_fh      = shmem_encode_fh,
+	.decode_fh      = shmem_decode_fh,
+};
+
+	sb->s_export_op = &shmem_export_ops;",,91828a405ae454a9503c41a7744f6ff877a80714,CVE-2008-7256,91828a405ae454a9503c41a7744f6ff877a80714,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,84,COMPLETED,"VAR->VAR = VAR(); VAR VAR VAR *VAR(VAR VAR *VAR) { VAR VAR(-VAR); } VAR VAR VAR(VAR VAR *VAR, VAR *VAR) { VAR *VAR = VAR; VAR VAR = VAR[2]; VAR = (VAR << 32) | VAR[1]; VAR VAR->VAR == VAR && VAR[0] == VAR->VAR; } VAR VAR VAR *VAR(VAR VAR *VAR, VAR *VAR) { VAR VAR *VAR = VAR; VAR VAR *VAR; VAR *VAR = VAR; VAR VAR = VAR[2]; VAR = (VAR << 32) | VAR[1]; VAR = VAR(VAR, (VAR VAR)(VAR+VAR[0]), VAR, VAR); VAR (VAR) { VAR = VAR(VAR); VAR(VAR); } VAR VAR? VAR: VAR(-VAR); } VAR VAR VAR *VAR(VAR VAR *VAR, VAR *VAR, VAR VAR, VAR VAR, VAR (*VAR)(VAR *VAR, VAR VAR *VAR), VAR *VAR) { VAR (VAR < 3) VAR VAR(-VAR); VAR VAR->VAR->VAR(VAR, VAR, VAR, VAR, VAR); } VAR VAR VAR(VAR VAR *VAR, VAR *VAR, VAR *VAR, VAR VAR) { VAR VAR *VAR = VAR->VAR; VAR (*VAR < 3) VAR 255; VAR (VAR(&VAR->VAR)) { /* VAR VAR VAR VAR VAR, * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR, VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR */ VAR VAR(VAR); VAR(&VAR); VAR (VAR(&VAR->VAR)) VAR(VAR, VAR->VAR + VAR->VAR); VAR(&VAR); } VAR[0] = VAR->VAR; VAR[1] = VAR->VAR; VAR[2] = ((VAR)VAR->VAR) >> 32; *VAR = 3; VAR 1; } VAR VAR VAR VAR = { .VAR = VAR, .VAR = VAR, .VAR = VAR, .VAR = VAR, }; VAR->VAR = &VAR; ",2,13
+linux_91828a405ae454a9503c41a7744f6ff877a80714,mm/shmem.c,"		inode->i_generation = get_seconds();
+static struct dentry *shmem_get_parent(struct dentry *child)
+{
+	return ERR_PTR(-ESTALE);
+}
+
+static int shmem_match(struct inode *ino, void *vfh)
+{
+	__u32 *fh = vfh;
+	__u64 inum = fh[2];
+	inum = (inum << 32) | fh[1];
+	return ino->i_ino == inum && fh[0] == ino->i_generation;
+}
+
+static struct dentry *shmem_get_dentry(struct super_block *sb, void *vfh)
+{
+	struct dentry *de = NULL;
+	struct inode *inode;
+	__u32 *fh = vfh;
+	__u64 inum = fh[2];
+	inum = (inum << 32) | fh[1];
+
+	inode = ilookup5(sb, (unsigned long)(inum+fh[0]), shmem_match, vfh);
+	if (inode) {
+		de = d_find_alias(inode);
+		iput(inode);
+	}
+
+	return de? de: ERR_PTR(-ESTALE);
+}
+
+static struct dentry *shmem_decode_fh(struct super_block *sb, __u32 *fh,
+		int len, int type,
+		int (*acceptable)(void *context, struct dentry *de),
+		void *context)
+{
+	if (len < 3)
+		return ERR_PTR(-ESTALE);
+
+	return sb->s_export_op->find_exported_dentry(sb, fh, NULL, acceptable,
+							context);
+}
+
+static int shmem_encode_fh(struct dentry *dentry, __u32 *fh, int *len,
+				int connectable)
+{
+	struct inode *inode = dentry->d_inode;
+
+	if (*len < 3)
+		return 255;
+
+	if (hlist_unhashed(&inode->i_hash)) {
+		/* Unfortunately insert_inode_hash is not idempotent,
+		 * so as we hash inodes here rather than at creation
+		 * time, we need a lock to ensure we only try
+		 * to do it once
+		 */
+		static DEFINE_SPINLOCK(lock);
+		spin_lock(&lock);
+		if (hlist_unhashed(&inode->i_hash))
+			__insert_inode_hash(inode,
+					    inode->i_ino + inode->i_generation);
+		spin_unlock(&lock);
+	}
+
+	fh[0] = inode->i_generation;
+	fh[1] = inode->i_ino;
+	fh[2] = ((__u64)inode->i_ino) >> 32;
+
+	*len = 3;
+	return 1;
+}
+
+static struct export_operations shmem_export_ops = {
+	.get_parent     = shmem_get_parent,
+	.get_dentry     = shmem_get_dentry,
+	.encode_fh      = shmem_encode_fh,
+	.decode_fh      = shmem_decode_fh,
+};
+
+	sb->s_export_op = &shmem_export_ops;",,91828a405ae454a9503c41a7744f6ff877a80714,CVE-2010-1643,91828a405ae454a9503c41a7744f6ff877a80714,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,84,COMPLETED,"VAR->VAR = VAR(); VAR VAR VAR *VAR(VAR VAR *VAR) { VAR VAR(-VAR); } VAR VAR VAR(VAR VAR *VAR, VAR *VAR) { VAR *VAR = VAR; VAR VAR = VAR[2]; VAR = (VAR << 32) | VAR[1]; VAR VAR->VAR == VAR && VAR[0] == VAR->VAR; } VAR VAR VAR *VAR(VAR VAR *VAR, VAR *VAR) { VAR VAR *VAR = VAR; VAR VAR *VAR; VAR *VAR = VAR; VAR VAR = VAR[2]; VAR = (VAR << 32) | VAR[1]; VAR = VAR(VAR, (VAR VAR)(VAR+VAR[0]), VAR, VAR); VAR (VAR) { VAR = VAR(VAR); VAR(VAR); } VAR VAR? VAR: VAR(-VAR); } VAR VAR VAR *VAR(VAR VAR *VAR, VAR *VAR, VAR VAR, VAR VAR, VAR (*VAR)(VAR *VAR, VAR VAR *VAR), VAR *VAR) { VAR (VAR < 3) VAR VAR(-VAR); VAR VAR->VAR->VAR(VAR, VAR, VAR, VAR, VAR); } VAR VAR VAR(VAR VAR *VAR, VAR *VAR, VAR *VAR, VAR VAR) { VAR VAR *VAR = VAR->VAR; VAR (*VAR < 3) VAR 255; VAR (VAR(&VAR->VAR)) { /* VAR VAR VAR VAR VAR, * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR, VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR */ VAR VAR(VAR); VAR(&VAR); VAR (VAR(&VAR->VAR)) VAR(VAR, VAR->VAR + VAR->VAR); VAR(&VAR); } VAR[0] = VAR->VAR; VAR[1] = VAR->VAR; VAR[2] = ((VAR)VAR->VAR) >> 32; *VAR = 3; VAR 1; } VAR VAR VAR VAR = { .VAR = VAR, .VAR = VAR, .VAR = VAR, .VAR = VAR, }; VAR->VAR = &VAR; ",2,13
+linux_9a936a2e0526089194159eae31238e36b1c19e74,arch/powerpc/kernel/cpu_setup_power4.S,"	li	r11,0
+	rldimi	r0,r11,32,31		/* clear EN_ATTN */",,9a936a2e0526089194159eae31238e36b1c19e74,CVE-2006-4093,9a936a2e0526089194159eae31238e36b1c19e74,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,96,COMPLETED,"VAR VAR,0 VAR VAR,VAR,32,31  ",0,13
+linux_ac011361bd4f6206b36d2a242500239881bf8d2a,tools/testing/selftests/net/af_unix/diag_uid.c,"// SPDX-License-Identifier: GPL-2.0
+/* Copyright Amazon.com Inc. or its affiliates. */
+
+#define _GNU_SOURCE
+#include <sched.h>
+
+#include <unistd.h>
+#include <linux/netlink.h>
+#include <linux/rtnetlink.h>
+#include <linux/sock_diag.h>
+#include <linux/unix_diag.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/un.h>
+
+#include ""../../kselftest_harness.h""
+
+FIXTURE(diag_uid)
+{
+	int netlink_fd;
+	int unix_fd;
+	__u32 inode;
+	__u64 cookie;
+};
+
+FIXTURE_VARIANT(diag_uid)
+{
+	int unshare;
+	int udiag_show;
+};
+
+FIXTURE_VARIANT_ADD(diag_uid, uid)
+{
+	.unshare = 0,
+	.udiag_show = UDIAG_SHOW_UID
+};
+
+FIXTURE_VARIANT_ADD(diag_uid, uid_unshare)
+{
+	.unshare = CLONE_NEWUSER,
+	.udiag_show = UDIAG_SHOW_UID
+};
+
+FIXTURE_SETUP(diag_uid)
+{
+	struct stat file_stat;
+	socklen_t optlen;
+	int ret;
+
+	if (variant->unshare)
+		ASSERT_EQ(unshare(variant->unshare), 0);
+
+	self->netlink_fd = socket(AF_NETLINK, SOCK_RAW, NETLINK_SOCK_DIAG);
+	ASSERT_NE(self->netlink_fd, -1);
+
+	self->unix_fd = socket(AF_UNIX, SOCK_STREAM, 0);
+	ASSERT_NE(self->unix_fd, -1);
+
+	ret = fstat(self->unix_fd, &file_stat);
+	ASSERT_EQ(ret, 0);
+
+	self->inode = file_stat.st_ino;
+
+	optlen = sizeof(self->cookie);
+	ret = getsockopt(self->unix_fd, SOL_SOCKET, SO_COOKIE, &self->cookie, &optlen);
+	ASSERT_EQ(ret, 0);
+}
+
+FIXTURE_TEARDOWN(diag_uid)
+{
+	close(self->netlink_fd);
+	close(self->unix_fd);
+}
+
+int send_request(struct __test_metadata *_metadata,
+		 FIXTURE_DATA(diag_uid) *self,
+		 const FIXTURE_VARIANT(diag_uid) *variant)
+{
+	struct {
+		struct nlmsghdr nlh;
+		struct unix_diag_req udr;
+	} req = {
+		.nlh = {
+			.nlmsg_len = sizeof(req),
+			.nlmsg_type = SOCK_DIAG_BY_FAMILY,
+			.nlmsg_flags = NLM_F_REQUEST
+		},
+		.udr = {
+			.sdiag_family = AF_UNIX,
+			.udiag_ino = self->inode,
+			.udiag_cookie = {
+				(__u32)self->cookie,
+				(__u32)(self->cookie >> 32)
+			},
+			.udiag_show = variant->udiag_show
+		}
+	};
+	struct sockaddr_nl nladdr = {
+		.nl_family = AF_NETLINK
+	};
+	struct iovec iov = {
+		.iov_base = &req,
+		.iov_len = sizeof(req)
+	};
+	struct msghdr msg = {
+		.msg_name = &nladdr,
+		.msg_namelen = sizeof(nladdr),
+		.msg_iov = &iov,
+		.msg_iovlen = 1
+	};
+
+	return sendmsg(self->netlink_fd, &msg, 0);
+}
+
+void render_response(struct __test_metadata *_metadata,
+		     struct unix_diag_req *udr, __u32 len)
+{
+	unsigned int rta_len = len - NLMSG_LENGTH(sizeof(*udr));
+	struct rtattr *attr;
+	uid_t uid;
+
+	ASSERT_GT(len, sizeof(*udr));
+	ASSERT_EQ(udr->sdiag_family, AF_UNIX);
+
+	attr = (struct rtattr *)(udr + 1);
+	ASSERT_NE(RTA_OK(attr, rta_len), 0);
+	ASSERT_EQ(attr->rta_type, UNIX_DIAG_UID);
+
+	uid = *(uid_t *)RTA_DATA(attr);
+	ASSERT_EQ(uid, getuid());
+}
+
+void receive_response(struct __test_metadata *_metadata,
+		      FIXTURE_DATA(diag_uid) *self)
+{
+	long buf[8192 / sizeof(long)];
+	struct sockaddr_nl nladdr = {
+		.nl_family = AF_NETLINK
+	};
+	struct iovec iov = {
+		.iov_base = buf,
+		.iov_len = sizeof(buf)
+	};
+	struct msghdr msg = {
+		.msg_name = &nladdr,
+		.msg_namelen = sizeof(nladdr),
+		.msg_iov = &iov,
+		.msg_iovlen = 1
+	};
+	struct unix_diag_req *udr;
+	struct nlmsghdr *nlh;
+	int ret;
+
+	ret = recvmsg(self->netlink_fd, &msg, 0);
+	ASSERT_GT(ret, 0);
+
+	nlh = (struct nlmsghdr *)buf;
+	ASSERT_NE(NLMSG_OK(nlh, ret), 0);
+	ASSERT_EQ(nlh->nlmsg_type, SOCK_DIAG_BY_FAMILY);
+
+	render_response(_metadata, NLMSG_DATA(nlh), nlh->nlmsg_len);
+
+	nlh = NLMSG_NEXT(nlh, ret);
+	ASSERT_EQ(NLMSG_OK(nlh, ret), 0);
+}
+
+TEST_F(diag_uid, 1)
+{
+	int ret;
+
+	ret = send_request(_metadata, self, variant);
+	ASSERT_GT(ret, 0);
+
+	receive_response(_metadata, self);
+}
+
+TEST_HARNESS_MAIN",,ac011361bd4f6206b36d2a242500239881bf8d2a,CVE-2023-28327,ac011361bd4f6206b36d2a242500239881bf8d2a,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,98,COMPLETED,"              VAR(VAR) { VAR VAR; VAR VAR; VAR VAR; VAR VAR; }; VAR(VAR) { VAR VAR; VAR VAR; }; VAR(VAR, VAR) { .VAR = 0, .VAR = VAR }; VAR(VAR, VAR) { .VAR = VAR, .VAR = VAR }; VAR(VAR) { VAR VAR VAR; VAR VAR; VAR VAR; VAR (VAR->VAR) VAR(VAR(VAR->VAR), 0); VAR->VAR = VAR(VAR, VAR, VAR); VAR(VAR->VAR, -1); VAR->VAR = VAR(VAR, VAR, 0); VAR(VAR->VAR, -1); VAR = VAR(VAR->VAR, &VAR); VAR(VAR, 0); VAR->VAR = VAR.VAR; VAR = VAR(VAR->VAR); VAR = VAR(VAR->VAR, VAR, VAR, &VAR->VAR, &VAR); VAR(VAR, 0); } VAR(VAR) { VAR(VAR->VAR); VAR(VAR->VAR); } VAR VAR(VAR VAR *VAR, VAR(VAR) *VAR, VAR VAR(VAR) *VAR) { VAR { VAR VAR VAR; VAR VAR VAR; } VAR = { .VAR = { .VAR = VAR(VAR), .VAR = VAR, .VAR = VAR }, .VAR = { .VAR = VAR, .VAR = VAR->VAR, .VAR = { (VAR)VAR->VAR, (VAR)(VAR->VAR >> 32) }, .VAR = VAR->VAR } }; VAR VAR VAR = { .VAR = VAR }; VAR VAR VAR = { .VAR = &VAR, .VAR = VAR(VAR) }; VAR VAR VAR = { .VAR = &VAR, .VAR = VAR(VAR), .VAR = &VAR, .VAR = 1 }; VAR VAR(VAR->VAR, &VAR, 0); } VAR VAR(VAR VAR *VAR, VAR VAR *VAR, VAR VAR) { VAR VAR VAR = VAR - VAR(VAR(*VAR)); VAR VAR *VAR; VAR VAR; VAR(VAR, VAR(*VAR)); VAR(VAR->VAR, VAR); VAR = (VAR VAR *)(VAR + 1); VAR(VAR(VAR, VAR), 0); VAR(VAR->VAR, VAR); VAR = *(VAR *)VAR(VAR); VAR(VAR, VAR()); } VAR VAR(VAR VAR *VAR, VAR(VAR) *VAR) { VAR VAR[8192 / VAR(VAR)]; VAR VAR VAR = { .VAR = VAR }; VAR VAR VAR = { .VAR = VAR, .VAR = VAR(VAR) }; VAR VAR VAR = { .VAR = &VAR, .VAR = VAR(VAR), .VAR = &VAR, .VAR = 1 }; VAR VAR *VAR; VAR VAR *VAR; VAR VAR; VAR = VAR(VAR->VAR, &VAR, 0); VAR(VAR, 0); VAR = (VAR VAR *)VAR; VAR(VAR(VAR, VAR), 0); VAR(VAR->VAR, VAR); VAR(VAR, VAR(VAR), VAR->VAR); VAR = VAR(VAR, VAR); VAR(VAR(VAR, VAR), 0); } VAR(VAR, 1) { VAR VAR; VAR = VAR(VAR, VAR, VAR); VAR(VAR, 0); VAR(VAR, VAR); } VAR ",2,13
+linux_ad67b74d2469d9b82aaa572d76474c95bc484d57,livsprintf.c,"#include <linux/siphash.h>
+#include <linux/compiler.h>
+static bool have_filled_random_ptr_key __read_mostly;
+static siphash_key_t ptr_key __read_mostly;
+
+static void fill_random_ptr_key(struct random_ready_callback *unused)
+{
+	get_random_bytes(&ptr_key, sizeof(ptr_key));
+	/*
+	 * have_filled_random_ptr_key==true is dependent on get_random_bytes().
+	 * ptr_to_id() needs to see have_filled_random_ptr_key==true
+	 * after get_random_bytes() returns.
+	 */
+	smp_mb();
+	WRITE_ONCE(have_filled_random_ptr_key, true);
+}
+
+static struct random_ready_callback random_ready = {
+	.func = fill_random_ptr_key
+};
+
+static int __init initialize_ptr_random(void)
+{
+	int ret = add_random_ready_callback(&random_ready);
+
+	if (!ret) {
+		return 0;
+	} else if (ret == -EALREADY) {
+		fill_random_ptr_key(&random_ready);
+		return 0;
+	}
+
+	return ret;
+}
+early_initcall(initialize_ptr_random);
+
+/* Maps a pointer to a 32 bit unique identifier. */
+static char *ptr_to_id(char *buf, char *end, void *ptr, struct printf_spec spec)
+{
+	unsigned long hashval;
+	const int default_width = 2 * sizeof(ptr);
+
+	if (unlikely(!have_filled_random_ptr_key)) {
+		spec.field_width = default_width;
+		/* string length must be less than default_width */
+		return string(buf, end, ""(ptrval)"", spec);
+	}
+
+#ifdef CONFIG_64BIT
+	hashval = (unsigned long)siphash_1u64((u64)ptr, &ptr_key);
+	/*
+	 * Mask off the first 32 bits, this makes explicit that we have
+	 * modified the address (and 32 bits is plenty for a unique ID).
+	 */
+	hashval = hashval & 0xffffffff;
+#else
+	hashval = (unsigned long)siphash_1u32((u32)ptr, &ptr_key);
+#endif
+
+	spec.flags |= SMALL;
+	if (spec.field_width == -1) {
+		spec.field_width = default_width;
+		spec.flags |= ZEROPAD;
+	}
+	spec.base = 16;
+
+	return number(buf, end, hashval, spec);
+}
+
+ *
+ * Note: The default behaviour (unadorned %p) is to hash the address,
+ * rendering it useful as a unique identifier.
+	/* default is to _not_ leak addresses, hash before printing */
+	return ptr_to_id(buf, end, ptr, spec);","	spec.flags |= SMALL;
+	if (spec.field_width == -1) {
+		spec.field_width = default_width;
+		spec.flags |= ZEROPAD;
+	}
+	spec.base = 16;
+	return number(buf, end, (unsigned long) ptr, spec);",ad67b74d2469d9b82aaa572d76474c95bc484d57,CVE-2018-5995,ad67b74d2469d9b82aaa572d76474c95bc484d57,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,76,COMPLETED,"  VAR VAR VAR VAR; VAR VAR VAR VAR; VAR VAR VAR(VAR VAR *VAR) { VAR(&VAR, VAR(VAR)); /* * VAR==VAR VAR VAR VAR VAR(). * VAR() VAR VAR VAR VAR==VAR * VAR VAR() VAR. */ VAR(); VAR(VAR, VAR); } VAR VAR VAR VAR = { .VAR = VAR }; VAR VAR VAR VAR(VAR) { VAR VAR = VAR(&VAR); VAR (!VAR) { VAR 0; } VAR VAR (VAR == -VAR) { VAR(&VAR); VAR 0; } VAR VAR; } VAR(VAR);  VAR VAR *VAR(VAR *VAR, VAR *VAR, VAR *VAR, VAR VAR VAR) { VAR VAR VAR; VAR VAR VAR = 2 * VAR(VAR); VAR (VAR(!VAR)) { VAR.VAR = VAR;  VAR VAR(VAR, VAR, ""(VAR)"", VAR); }  VAR = (VAR VAR)VAR((VAR)VAR, &VAR); /* * VAR VAR VAR VAR 32 VAR, VAR VAR VAR VAR VAR VAR * VAR VAR VAR (VAR 32 VAR VAR VAR VAR VAR VAR VAR). */ VAR = VAR & 0xffffffff;  VAR = (VAR VAR)VAR((VAR)VAR, &VAR);  VAR.VAR |= VAR; VAR (VAR.VAR == -1) { VAR.VAR = VAR; VAR.VAR |= VAR; } VAR.VAR = 16; VAR VAR(VAR, VAR, VAR, VAR); } * * VAR: VAR VAR VAR (VAR %VAR) VAR VAR VAR VAR VAR, * VAR VAR VAR VAR VAR VAR VAR.  VAR VAR(VAR, VAR, VAR, VAR); VAR.VAR |= VAR; VAR (VAR.VAR == -1) { VAR.VAR = VAR; VAR.VAR |= VAR; } VAR.VAR = 16; VAR VAR(VAR, VAR, (VAR VAR) VAR, VAR);",1,13
+linux_ad67b74d2469d9b82aaa572d76474c95bc484d57,livsprintf.c,"#include <linux/siphash.h>
+#include <linux/compiler.h>
+static bool have_filled_random_ptr_key __read_mostly;
+static siphash_key_t ptr_key __read_mostly;
+
+static void fill_random_ptr_key(struct random_ready_callback *unused)
+{
+	get_random_bytes(&ptr_key, sizeof(ptr_key));
+	/*
+	 * have_filled_random_ptr_key==true is dependent on get_random_bytes().
+	 * ptr_to_id() needs to see have_filled_random_ptr_key==true
+	 * after get_random_bytes() returns.
+	 */
+	smp_mb();
+	WRITE_ONCE(have_filled_random_ptr_key, true);
+}
+
+static struct random_ready_callback random_ready = {
+	.func = fill_random_ptr_key
+};
+
+static int __init initialize_ptr_random(void)
+{
+	int ret = add_random_ready_callback(&random_ready);
+
+	if (!ret) {
+		return 0;
+	} else if (ret == -EALREADY) {
+		fill_random_ptr_key(&random_ready);
+		return 0;
+	}
+
+	return ret;
+}
+early_initcall(initialize_ptr_random);
+
+/* Maps a pointer to a 32 bit unique identifier. */
+static char *ptr_to_id(char *buf, char *end, void *ptr, struct printf_spec spec)
+{
+	unsigned long hashval;
+	const int default_width = 2 * sizeof(ptr);
+
+	if (unlikely(!have_filled_random_ptr_key)) {
+		spec.field_width = default_width;
+		/* string length must be less than default_width */
+		return string(buf, end, ""(ptrval)"", spec);
+	}
+
+#ifdef CONFIG_64BIT
+	hashval = (unsigned long)siphash_1u64((u64)ptr, &ptr_key);
+	/*
+	 * Mask off the first 32 bits, this makes explicit that we have
+	 * modified the address (and 32 bits is plenty for a unique ID).
+	 */
+	hashval = hashval & 0xffffffff;
+#else
+	hashval = (unsigned long)siphash_1u32((u32)ptr, &ptr_key);
+#endif
+
+	spec.flags |= SMALL;
+	if (spec.field_width == -1) {
+		spec.field_width = default_width;
+		spec.flags |= ZEROPAD;
+	}
+	spec.base = 16;
+
+	return number(buf, end, hashval, spec);
+}
+
+ *
+ * Note: The default behaviour (unadorned %p) is to hash the address,
+ * rendering it useful as a unique identifier.
+	/* default is to _not_ leak addresses, hash before printing */
+	return ptr_to_id(buf, end, ptr, spec);","	spec.flags |= SMALL;
+	if (spec.field_width == -1) {
+		spec.field_width = default_width;
+		spec.flags |= ZEROPAD;
+	}
+	spec.base = 16;
+	return number(buf, end, (unsigned long) ptr, spec);",ad67b74d2469d9b82aaa572d76474c95bc484d57,CVE-2018-5953,ad67b74d2469d9b82aaa572d76474c95bc484d57,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,76,COMPLETED,"  VAR VAR VAR VAR; VAR VAR VAR VAR; VAR VAR VAR(VAR VAR *VAR) { VAR(&VAR, VAR(VAR)); /* * VAR==VAR VAR VAR VAR VAR(). * VAR() VAR VAR VAR VAR==VAR * VAR VAR() VAR. */ VAR(); VAR(VAR, VAR); } VAR VAR VAR VAR = { .VAR = VAR }; VAR VAR VAR VAR(VAR) { VAR VAR = VAR(&VAR); VAR (!VAR) { VAR 0; } VAR VAR (VAR == -VAR) { VAR(&VAR); VAR 0; } VAR VAR; } VAR(VAR);  VAR VAR *VAR(VAR *VAR, VAR *VAR, VAR *VAR, VAR VAR VAR) { VAR VAR VAR; VAR VAR VAR = 2 * VAR(VAR); VAR (VAR(!VAR)) { VAR.VAR = VAR;  VAR VAR(VAR, VAR, ""(VAR)"", VAR); }  VAR = (VAR VAR)VAR((VAR)VAR, &VAR); /* * VAR VAR VAR VAR 32 VAR, VAR VAR VAR VAR VAR VAR * VAR VAR VAR (VAR 32 VAR VAR VAR VAR VAR VAR VAR). */ VAR = VAR & 0xffffffff;  VAR = (VAR VAR)VAR((VAR)VAR, &VAR);  VAR.VAR |= VAR; VAR (VAR.VAR == -1) { VAR.VAR = VAR; VAR.VAR |= VAR; } VAR.VAR = 16; VAR VAR(VAR, VAR, VAR, VAR); } * * VAR: VAR VAR VAR (VAR %VAR) VAR VAR VAR VAR VAR, * VAR VAR VAR VAR VAR VAR VAR.  VAR VAR(VAR, VAR, VAR, VAR); VAR.VAR |= VAR; VAR (VAR.VAR == -1) { VAR.VAR = VAR; VAR.VAR |= VAR; } VAR.VAR = 16; VAR VAR(VAR, VAR, (VAR VAR) VAR, VAR);",1,13
+linux_ad67b74d2469d9b82aaa572d76474c95bc484d57,livsprintf.c,"#include <linux/siphash.h>
+#include <linux/compiler.h>
+static bool have_filled_random_ptr_key __read_mostly;
+static siphash_key_t ptr_key __read_mostly;
+
+static void fill_random_ptr_key(struct random_ready_callback *unused)
+{
+	get_random_bytes(&ptr_key, sizeof(ptr_key));
+	/*
+	 * have_filled_random_ptr_key==true is dependent on get_random_bytes().
+	 * ptr_to_id() needs to see have_filled_random_ptr_key==true
+	 * after get_random_bytes() returns.
+	 */
+	smp_mb();
+	WRITE_ONCE(have_filled_random_ptr_key, true);
+}
+
+static struct random_ready_callback random_ready = {
+	.func = fill_random_ptr_key
+};
+
+static int __init initialize_ptr_random(void)
+{
+	int ret = add_random_ready_callback(&random_ready);
+
+	if (!ret) {
+		return 0;
+	} else if (ret == -EALREADY) {
+		fill_random_ptr_key(&random_ready);
+		return 0;
+	}
+
+	return ret;
+}
+early_initcall(initialize_ptr_random);
+
+/* Maps a pointer to a 32 bit unique identifier. */
+static char *ptr_to_id(char *buf, char *end, void *ptr, struct printf_spec spec)
+{
+	unsigned long hashval;
+	const int default_width = 2 * sizeof(ptr);
+
+	if (unlikely(!have_filled_random_ptr_key)) {
+		spec.field_width = default_width;
+		/* string length must be less than default_width */
+		return string(buf, end, ""(ptrval)"", spec);
+	}
+
+#ifdef CONFIG_64BIT
+	hashval = (unsigned long)siphash_1u64((u64)ptr, &ptr_key);
+	/*
+	 * Mask off the first 32 bits, this makes explicit that we have
+	 * modified the address (and 32 bits is plenty for a unique ID).
+	 */
+	hashval = hashval & 0xffffffff;
+#else
+	hashval = (unsigned long)siphash_1u32((u32)ptr, &ptr_key);
+#endif
+
+	spec.flags |= SMALL;
+	if (spec.field_width == -1) {
+		spec.field_width = default_width;
+		spec.flags |= ZEROPAD;
+	}
+	spec.base = 16;
+
+	return number(buf, end, hashval, spec);
+}
+
+ *
+ * Note: The default behaviour (unadorned %p) is to hash the address,
+ * rendering it useful as a unique identifier.
+	/* default is to _not_ leak addresses, hash before printing */
+	return ptr_to_id(buf, end, ptr, spec);","	spec.flags |= SMALL;
+	if (spec.field_width == -1) {
+		spec.field_width = default_width;
+		spec.flags |= ZEROPAD;
+	}
+	spec.base = 16;
+	return number(buf, end, (unsigned long) ptr, spec);",ad67b74d2469d9b82aaa572d76474c95bc484d57,CVE-2018-7754,ad67b74d2469d9b82aaa572d76474c95bc484d57,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,72,COMPLETED,"  VAR VAR VAR VAR; VAR VAR VAR VAR; VAR VAR VAR(VAR VAR *VAR) { VAR(&VAR, VAR(VAR)); /* * VAR==VAR VAR VAR VAR VAR(). * VAR() VAR VAR VAR VAR==VAR * VAR VAR() VAR. */ VAR(); VAR(VAR, VAR); } VAR VAR VAR VAR = { .VAR = VAR }; VAR VAR VAR VAR(VAR) { VAR VAR = VAR(&VAR); VAR (!VAR) { VAR 0; } VAR VAR (VAR == -VAR) { VAR(&VAR); VAR 0; } VAR VAR; } VAR(VAR);  VAR VAR *VAR(VAR *VAR, VAR *VAR, VAR *VAR, VAR VAR VAR) { VAR VAR VAR; VAR VAR VAR = 2 * VAR(VAR); VAR (VAR(!VAR)) { VAR.VAR = VAR;  VAR VAR(VAR, VAR, ""(VAR)"", VAR); }  VAR = (VAR VAR)VAR((VAR)VAR, &VAR); /* * VAR VAR VAR VAR 32 VAR, VAR VAR VAR VAR VAR VAR * VAR VAR VAR (VAR 32 VAR VAR VAR VAR VAR VAR VAR). */ VAR = VAR & 0xffffffff;  VAR = (VAR VAR)VAR((VAR)VAR, &VAR);  VAR.VAR |= VAR; VAR (VAR.VAR == -1) { VAR.VAR = VAR; VAR.VAR |= VAR; } VAR.VAR = 16; VAR VAR(VAR, VAR, VAR, VAR); } * * VAR: VAR VAR VAR (VAR %VAR) VAR VAR VAR VAR VAR, * VAR VAR VAR VAR VAR VAR VAR.  VAR VAR(VAR, VAR, VAR, VAR); VAR.VAR |= VAR; VAR (VAR.VAR == -1) { VAR.VAR = VAR; VAR.VAR |= VAR; } VAR.VAR = 16; VAR VAR(VAR, VAR, (VAR VAR) VAR, VAR);",1,13
+linux_af2e8c68b9c5403f77096969c516f742f5bb29e0,arch/powerpc/kvm/book3s_hv_rmhandlers.S,"#include <asm/code-patching-asm.h>
+	/*
+	 * Possibly flush the link stack here, before we do a blr in
+	 * guest_exit_short_path.
+	 */
+1:	nop
+	patch_site 1b patch__call_kvm_flush_link_stack
+
+.balign 32
+.global kvm_flush_link_stack
+kvm_flush_link_stack:
+	/* Save LR into r0 */
+	mflr	r0
+
+	/* Flush the link stack. On Power8 it's up to 32 entries in size. */
+	.rept 32
+	bl	.+4
+	.endr
+
+	/* And on Power9 it's up to 64. */
+BEGIN_FTR_SECTION
+	.rept 32
+	bl	.+4
+	.endr
+END_FTR_SECTION_IFSET(CPU_FTR_ARCH_300)
+
+	/* Restore LR */
+	mtlr	r0
+	blr
+",,af2e8c68b9c5403f77096969c516f742f5bb29e0,CVE-2019-18660,af2e8c68b9c5403f77096969c516f742f5bb29e0,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,92,COMPLETED," /* * VAR VAR VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR * VAR. */ 1: VAR VAR 1b VAR .VAR 32 .VAR VAR VAR:  VAR VAR  .VAR 32 VAR .+4 .VAR  VAR .VAR 32 VAR .+4 .VAR VAR(VAR)  VAR VAR VAR ",2,13
+linux_b799207e1e1816b09e7a5920fbb2d5fcf6edd681,kernel/bpf/verifier.c,"	if (insn_bitness == 32) {
+		/* Relevant for 32-bit RSH: Information can propagate towards
+		 * LSB, so it isn't sufficient to only truncate the output to
+		 * 32 bits.
+		 */
+		coerce_reg_to_size(dst_reg, 4);
+		coerce_reg_to_size(&src_reg, 4);
+	}
+","		coerce_reg_to_size(&src_reg, 4);",b799207e1e1816b09e7a5920fbb2d5fcf6edd681,CVE-2018-18445,b799207e1e1816b09e7a5920fbb2d5fcf6edd681,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR (VAR == 32) { /* VAR VAR 32-VAR VAR: VAR VAR VAR VAR * VAR, VAR VAR VAR'VAR VAR VAR VAR VAR VAR VAR VAR * 32 VAR. */ VAR(VAR, 4); VAR(&VAR, 4); } VAR(&VAR, 4);",2,13
+linux_cdeb5d7d890e14f3b70e8087e745c4a6a7d9f337,arch/powerpc/kvm/book3s_hv_rmhandlers.S,"	std	r3, 32(r1)	// Save SRR1 wakeup value
+	// About to go to guest, clear saved SRR1
+	li	r0, 0
+	std	r0, 32(r1)
+
+	// Return SRR1 wakeup value, or 0 if we went into the guest
+	ld	r3, 32(r1)","	/* set up r3 for return */
+	mfspr	r3,SPRN_SRR1",cdeb5d7d890e14f3b70e8087e745c4a6a7d9f337,CVE-2021-43056,cdeb5d7d890e14f3b70e8087e745c4a6a7d9f337,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,96,COMPLETED,"VAR VAR, 32(VAR)   VAR VAR, 0 VAR VAR, 32(VAR)  VAR VAR, 32(VAR)  VAR VAR,VAR",2,13
+linux_d2b9d2a5ad5ef04ff978c9923d19730cb05efd55,arch/powerpc/kernel/signal_32.c,"	/* Get the top half of the MSR from the user context */
+	if (__get_user(msr_hi, &tm_sr->mc_gregs[PT_MSR]))
+		return 1;
+	msr_hi <<= 32;
+	/* If TM bits are set to the reserved value, it's an invalid context */
+	if (MSR_TM_RESV(msr_hi))
+		return 1;
+	/* Pull in the MSR TM bits from the user context */
+	regs->msr = (regs->msr & ~MSR_TS_MASK) | (msr_hi & MSR_TS_MASK);","	/* Get the top half of the MSR */
+	if (__get_user(msr_hi, &tm_sr->mc_gregs[PT_MSR]))
+		return 1;
+	/* Pull in MSR TM from user context */
+	regs->msr = (regs->msr & ~MSR_TS_MASK) | ((msr_hi<<32) & MSR_TS_MASK);",d2b9d2a5ad5ef04ff978c9923d19730cb05efd55,CVE-2015-8844,d2b9d2a5ad5ef04ff978c9923d19730cb05efd55,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED," VAR (VAR(VAR, &VAR->VAR[VAR])) VAR 1; VAR <<= 32;  VAR (VAR(VAR)) VAR 1;  VAR->VAR = (VAR->VAR & ~VAR) | (VAR & VAR);  VAR (VAR(VAR, &VAR->VAR[VAR])) VAR 1;  VAR->VAR = (VAR->VAR & ~VAR) | ((VAR<<32) & VAR);",2,13
+linux_d81a12bc29ae4038770e05dce4ab7f26fd5880fb,sound/oss/soundcard.c,"		if (strncmp(name, mixer_vols[i].name, 32) == 0) {
+	strncpy(mixer_vols[n].name, name, 32);","		if (strcmp(name, mixer_vols[i].name) == 0) {
+	strcpy(mixer_vols[n].name, name);",d81a12bc29ae4038770e05dce4ab7f26fd5880fb,CVE-2010-4527,d81a12bc29ae4038770e05dce4ab7f26fd5880fb,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,100,COMPLETED,"VAR (VAR(VAR, VAR[VAR].VAR, 32) == 0) { VAR(VAR[VAR].VAR, VAR, 32); VAR (VAR(VAR, VAR[VAR].VAR) == 0) { VAR(VAR[VAR].VAR, VAR);",2,13
+linux_eefdca043e8391dcd719711716492063030b55ac,arch/x86/ia32/ia32entry.S,"	 * the %rax value we should see.  Instead, we just truncate that
+	 * value to 32 bits again as we did on entry from user mode.
+	 * If it's a new value set by user_regset during entry tracing,
+	 * this matches the normal truncation of the user-mode value.
+	 * If it's -1 to make us punt the syscall, then (u32)-1 is still
+	 * an appropriately invalid value.
+	movl %eax,%eax			/* zero extension */",	 * the value it wants us to use in the table lookup.,eefdca043e8391dcd719711716492063030b55ac,CVE-2010-3301,eefdca043e8391dcd719711716492063030b55ac,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,80,COMPLETED,"* VAR %VAR VAR VAR VAR VAR. VAR, VAR VAR VAR VAR * VAR VAR 32 VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. * VAR VAR'VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR, * VAR VAR VAR VAR VAR VAR VAR VAR-VAR VAR. * VAR VAR'VAR -1 VAR VAR VAR VAR VAR VAR, VAR (VAR)-1 VAR VAR * VAR VAR VAR VAR. VAR %VAR,%VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR.",2,13
+linux_f122dfe4476890d60b8c679128cd2259ec96a24c,arch/x86/kvm/mmu/paging_tmpl.h,"		ret = __try_cmpxchg_user(ptep_user, &orig_pte, pte, fault);","static int FNAME(cmpxchg_gpte)(struct kvm_vcpu *vcpu, struct kvm_mmu *mmu,
+			       pt_element_t __user *ptep_user, unsigned index,
+			       pt_element_t orig_pte, pt_element_t new_pte)
+{
+	signed char r;
+
+	if (!user_access_begin(ptep_user, sizeof(pt_element_t)))
+		return -EFAULT;
+
+#ifdef CMPXCHG
+	asm volatile(""1:"" LOCK_PREFIX CMPXCHG "" %[new], %[ptr]\n""
+		     ""setnz %b[r]\n""
+		     ""2:""
+		     _ASM_EXTABLE_TYPE_REG(1b, 2b, EX_TYPE_EFAULT_REG, %k[r])
+		     : [ptr] ""+m"" (*ptep_user),
+		       [old] ""+a"" (orig_pte),
+		       [r] ""=q"" (r)
+		     : [new] ""r"" (new_pte)
+		     : ""memory"");
+#else
+	asm volatile(""1:"" LOCK_PREFIX ""cmpxchg8b %[ptr]\n""
+		     ""setnz %b[r]\n""
+		     ""2:""
+		     _ASM_EXTABLE_TYPE_REG(1b, 2b, EX_TYPE_EFAULT_REG, %k[r])
+		     : [ptr] ""+m"" (*ptep_user),
+		       [old] ""+A"" (orig_pte),
+		       [r] ""=q"" (r)
+		     : [new_lo] ""b"" ((u32)new_pte),
+		       [new_hi] ""c"" ((u32)(new_pte >> 32))
+		     : ""memory"");
+#endif
+
+	user_access_end();
+	return r;
+}
+
+		ret = FNAME(cmpxchg_gpte)(vcpu, mmu, ptep_user, index, orig_pte, pte);",f122dfe4476890d60b8c679128cd2259ec96a24c,CVE-2022-1158,f122dfe4476890d60b8c679128cd2259ec96a24c,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,76,COMPLETED,"VAR = VAR(VAR, &VAR, VAR, VAR); VAR VAR VAR(VAR)(VAR VAR *VAR, VAR VAR *VAR, VAR VAR *VAR, VAR VAR, VAR VAR, VAR VAR) { VAR VAR VAR; VAR (!VAR(VAR, VAR(VAR))) VAR -VAR;  VAR VAR(""1:"" VAR VAR "" %[VAR], %[VAR]\VAR"" ""VAR %VAR[VAR]\VAR"" ""2:"" VAR(1b, 2b, VAR, %VAR[VAR]) : [VAR] ""+VAR"" (*VAR), [VAR] ""+VAR"" (VAR), [VAR] ""=VAR"" (VAR) : [VAR] ""VAR"" (VAR) : ""VAR"");  VAR VAR(""1:"" VAR ""VAR %[VAR]\VAR"" ""VAR %VAR[VAR]\VAR"" ""2:"" VAR(1b, 2b, VAR, %VAR[VAR]) : [VAR] ""+VAR"" (*VAR), [VAR] ""+VAR"" (VAR), [VAR] ""=VAR"" (VAR) : [VAR] ""VAR"" ((VAR)VAR), [VAR] ""VAR"" ((VAR)(VAR >> 32)) : ""VAR"");  VAR(); VAR VAR; } VAR = VAR(VAR)(VAR, VAR, VAR, VAR, VAR, VAR);",0,13
+linux_f17722f917b2f21497deb6edc62fb1683daa08e6,fs/ext4/super.c," * However there is other limiting factor. We do store extents in the form
+ * of starting block and length, hence the resulting length of the extent
+ * covering maximum file size must fit into on-disk format containers as
+ * well. Given that length is always by 1 unit bigger than max unit (because
+ * we count 0 as well) we have to lower the s_maxbytes by one fs block.
+ *
+	/*
+	 * 32-bit extent-start container, ee_block. We lower the maxbytes
+	 * by one fs block, so ee_len can cover the extent of maximum file
+	 * size
+	 */
+	res = (1LL << 32) - 1;","	/* 32-bit extent-start container, ee_block */
+	res = 1LL << 32;
+	res -= 1;",f17722f917b2f21497deb6edc62fb1683daa08e6,CVE-2011-2695,f17722f917b2f21497deb6edc62fb1683daa08e6,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,80,COMPLETED,"* VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR VAR VAR-VAR VAR VAR VAR * VAR. VAR VAR VAR VAR VAR VAR 1 VAR VAR VAR VAR VAR (VAR * VAR VAR 0 VAR VAR) VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. * /* * 32-VAR VAR-VAR VAR, VAR. VAR VAR VAR VAR * VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR */ VAR = (1LL << 32) - 1;  VAR = 1LL << 32; VAR -= 1;",2,13
+linux_fecf31ee395b0295f2d7260aa29946b7605f7c85,net/netfilter/nf_tables_api.c,"	if (desc->field_count >= ARRAY_SIZE(desc->field_len))
+		return -E2BIG;
+
+	if (!len || len > U8_MAX)
+		return -EINVAL;
+	u32 num_regs = 0;
+	int rem, err, i;
+	for (i = 0; i < desc->field_count; i++)
+		num_regs += DIV_ROUND_UP(desc->field_len[i], sizeof(u32));
+
+	if (num_regs > NFT_REG32_COUNT)
+		return -E2BIG;
+","
+	if (len * BITS_PER_BYTE / 32 > NFT_REG32_COUNT)
+		return -E2BIG;
+	int rem, err;",fecf31ee395b0295f2d7260aa29946b7605f7c85,CVE-2022-2078,fecf31ee395b0295f2d7260aa29946b7605f7c85,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,76,COMPLETED,"VAR (VAR->VAR >= VAR(VAR->VAR)) VAR -VAR; VAR (!VAR || VAR > VAR) VAR -VAR; VAR VAR = 0; VAR VAR, VAR, VAR; VAR (VAR = 0; VAR < VAR->VAR; VAR++) VAR += VAR(VAR->VAR[VAR], VAR(VAR)); VAR (VAR > VAR) VAR -VAR; VAR (VAR * VAR / 32 > VAR) VAR -VAR; VAR VAR, VAR;",2,13
+moodle_3ab2851d2a59721445945d0706c58092e07e861e,mnet/lib.php,"   $binnet    = str_pad( decbin($lnetwork), 32, ""0"", STR_PAD_LEFT );
+   $binip     = str_pad( decbin($laddress), 32, ""0"", STR_PAD_LEFT );","   $binnet    = str_pad( decbin($lnetwork),32,""0"",""STR_PAD_LEFT"" );
+   $binip     = str_pad( decbin($laddress),32,""0"",""STR_PAD_LEFT"" );",3ab2851d2a59721445945d0706c58092e07e861e,CVE-2011-4584,3ab2851d2a59721445945d0706c58092e07e861e,https://github.com/moodle/moodle,CPE_GIT_REPOBASED,76,COMPLETED,"$VAR = VAR( VAR($VAR), 32, ""0"", VAR ); $VAR = VAR( VAR($VAR), 32, ""0"", VAR ); $VAR = VAR( VAR($VAR),32,""0"",""VAR"" ); $VAR = VAR( VAR($VAR),32,""0"",""VAR"" );",2,13
+moodle_3ab2851d2a59721445945d0706c58092e07e861e,mnet/lib.php,"   $binnet    = str_pad( decbin($lnetwork), 32, ""0"", STR_PAD_LEFT );
+   $binip     = str_pad( decbin($laddress), 32, ""0"", STR_PAD_LEFT );","   $binnet    = str_pad( decbin($lnetwork),32,""0"",""STR_PAD_LEFT"" );
+   $binip     = str_pad( decbin($laddress),32,""0"",""STR_PAD_LEFT"" );",3ab2851d2a59721445945d0706c58092e07e861e,CVE-2011-4588,3ab2851d2a59721445945d0706c58092e07e861e,https://github.com/moodle/moodle,CPE_GIT_REPOBASED,96,COMPLETED,"$VAR = VAR( VAR($VAR), 32, ""0"", VAR ); $VAR = VAR( VAR($VAR), 32, ""0"", VAR ); $VAR = VAR( VAR($VAR),32,""0"",""VAR"" ); $VAR = VAR( VAR($VAR),32,""0"",""VAR"" );",2,13
+moodle_3ab2851d2a59721445945d0706c58092e07e861e,mnet/lib.php,"   $binnet    = str_pad( decbin($lnetwork), 32, ""0"", STR_PAD_LEFT );
+   $binip     = str_pad( decbin($laddress), 32, ""0"", STR_PAD_LEFT );","   $binnet    = str_pad( decbin($lnetwork),32,""0"",""STR_PAD_LEFT"" );
+   $binip     = str_pad( decbin($laddress),32,""0"",""STR_PAD_LEFT"" );",3ab2851d2a59721445945d0706c58092e07e861e,CVE-2011-4591,3ab2851d2a59721445945d0706c58092e07e861e,https://github.com/moodle/moodle,CPE_GIT_REPOBASED,68,COMPLETED,"$VAR = VAR( VAR($VAR), 32, ""0"", VAR ); $VAR = VAR( VAR($VAR), 32, ""0"", VAR ); $VAR = VAR( VAR($VAR),32,""0"",""VAR"" ); $VAR = VAR( VAR($VAR),32,""0"",""VAR"" );",2,13
+moodle_f1d1a60e0ac8549c08e66062f3cd0110e4a92e24,repository/lib.php,"
+            if (isset($file['source'])) {
+                $file['sourcekey'] = sha1($file['source'] . self::get_secret_key() . sesskey());
+            }
+
+
+    /**
+     * Generate a secret key to be used for passing sensitive information around.
+     *
+     * @return string repository secret key.
+     */
+    final static public function get_secret_key() {
+        global $CFG;
+
+        if (!isset($CFG->reposecretkey)) {
+            set_config('reposecretkey', time() . random_string(32));
+        }
+        return $CFG->reposecretkey;
+    }",,f1d1a60e0ac8549c08e66062f3cd0110e4a92e24,CVE-2018-1042,f1d1a60e0ac8549c08e66062f3cd0110e4a92e24,https://github.com/moodle/moodle,GHSD_DIRECT_COMMIT,1337,COMPLETED,"VAR (VAR($VAR['VAR'])) { $VAR['VAR'] = VAR($VAR['VAR'] . VAR::VAR() . VAR()); } /** * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. * * @VAR VAR VAR VAR VAR. */ VAR VAR VAR VAR VAR() { VAR $VAR; VAR (!VAR($VAR->VAR)) { VAR('VAR', VAR() . VAR(32)); } VAR $VAR->VAR; } ",2,13
+openssl_5b139f95c9a47a55a0c54100f3837b1eee942b04,crypto/poly1305/asm/poly1305-ppc.pl,"   $VSXFRAME += 12*16;	# v20-v31 offload
+	stvx	v23,r11,$sp
+	stvx	v24,r10,$sp
+	stvx	v25,r11,$sp
+	addi	r11,r11,32
+	stvx	v23,r11,$sp
+	stvx	v24,r10,$sp
+	stvx	v25,r11,$sp
+	addi	r11,r11,32
+	lvx	v21,r11,$sp
+	lvx	v22,r10,$sp
+	lvx	v23,r11,$sp
+	lvx	v24,r10,$sp
+	lvx	v25,r11,$sp
+	lvx	v26,r10,$sp
+	lvx	v27,r11,$sp
+	lvx	v28,r10,$sp
+	lvx	v29,r11,$sp
+	addi	r11,r11,32
+	lvx	v30,r10,$sp
+	lvx	v31,r11,$sp","   $VSXFRAME += 13*16;	# v20-v31 offload
+	stvx	v23,r10,$sp
+	addi	r10,r10,32
+	stvx	v24,r11,$sp
+	stvx	v25,r10,$sp
+	stvx	v23,r10,$sp
+	addi	r10,r10,32
+	stvx	v24,r11,$sp
+	stvx	v25,r10,$sp
+	lvx	v21,r10,$sp
+	addi	r10,r10,32
+	lvx	v22,r11,$sp
+	lvx	v23,r10,$sp
+	lvx	v24,r11,$sp
+	lvx	v25,r10,$sp
+	lvx	v26,r11,$sp
+	lvx	v27,r10,$sp
+	lvx	v28,r11,$sp
+	lvx	v29,r10,$sp
+	lvx	v30,r11,$sp
+	lvx	v31,r10,$sp",5b139f95c9a47a55a0c54100f3837b1eee942b04,CVE-2023-6129,5b139f95c9a47a55a0c54100f3837b1eee942b04,https://github.com/openssl/openssl,NVD_DIRECT_COMMIT,1337,COMPLETED,"$VAR += 12*16;  VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,32 VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,32 VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,32 VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR $VAR += 13*16;  VAR VAR,VAR,$VAR VAR VAR,VAR,32 VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,32 VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,32 VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR VAR VAR,VAR,$VAR",2,13
+openssl_d333ebaf9c77332754a9d5e111e2f53e1de54fdd,INSTALL.W32," CAVEAT LECTOR
+ -------------
+
+ ### Default install and config paths
+
+ ./Configure defaults to '/usr/local/ssl' as installation top.  This is
+ suitable for Unix, but not for Windows, where this usually is a world
+ writable directory and therefore accessible for change by untrusted users.
+ It is therefore recommended to set your own --prefix or --openssldir to
+ some location that is not world writeable (see the example above)
+
+   > perl Configure BC-32 --prefix=c:\some\openssl\dir
+   $ ./config --prefix=c:/some/openssl/dir
+   like this:
+
+   $ ./Configure --cross-compile-prefix=i386-mingw32- \
+     --prefix=c:/some/openssl/dir mingw ...
+
+      (""c:\openssl"" should be whatever you specified to --prefix when
+      configuring the build)
+","   > perl Configure BC-32
+   $ ./config
+   with './Configure --cross-compile-prefix=i386-mingw32- mingw ...'.",d333ebaf9c77332754a9d5e111e2f53e1de54fdd,CVE-2019-1552,d333ebaf9c77332754a9d5e111e2f53e1de54fdd,https://github.com/openssl/openssl,CPE_GIT_REPOBASED,144,COMPLETED,"VAR VAR -------------  ./VAR VAR VAR '/VAR/VAR/VAR' VAR VAR VAR. VAR VAR VAR VAR VAR, VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR VAR VAR --VAR VAR --VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR VAR VAR) > VAR VAR VAR-32 --VAR=VAR:\VAR\VAR\VAR $ ./VAR --VAR=VAR:/VAR/VAR/VAR VAR VAR: $ ./VAR --VAR-VAR-VAR=VAR-VAR- \ --VAR=VAR:/VAR/VAR/VAR VAR ... (""VAR:\VAR"" VAR VAR VAR VAR VAR VAR --VAR VAR VAR VAR VAR) > VAR VAR VAR-32 $ ./VAR VAR './VAR --VAR-VAR-VAR=VAR-VAR- VAR ...'.",2,13
+squid_b3a0719affab099c684f1cd62b79ab02816fa962,src/client_side.cc,"    char *receivedHost = nullptr;
+    if (vhost && (receivedHost = hp->getHostHeaderField())) {
+        SBuf host(receivedHost);
+            // remove existing :port (if any), cope with IPv6+ without port
+            const auto lastColonPos = host.rfind(':');
+            if (lastColonPos != SBuf::npos && *host.rbegin() != ']') {
+                host.chop(0, lastColonPos); // truncate until the last colon
+            host.appendf("":%d"", vport);
+        const auto url_sz = scheme.length() + host.length() + url.length() + 32;
+        snprintf(uri, url_sz, SQUIDSBUFPH ""://"" SQUIDSBUFPH SQUIDSBUFPH, SQUIDSBUFPRINT(scheme), SQUIDSBUFPRINT(host), SQUIDSBUFPRINT(url));","    char *host = NULL;
+    if (vhost && (host = hp->getHostHeaderField())) {
+        char thost[256];
+            thost[0] = '\0';
+            char *t = NULL;
+            if (host[strlen(host) - 1] != ']' && (t = strrchr(host,':')) != nullptr) {
+                strncpy(thost, host, (t-host));
+                snprintf(thost+(t-host), sizeof(thost)-(t-host), "":%d"", vport);
+                host = thost;
+            } else if (!t) {
+                snprintf(thost, sizeof(thost), ""%s:%d"",host, vport);
+                host = thost;
+        const int url_sz = scheme.length() + strlen(host) + url.length() + 32;
+        snprintf(uri, url_sz, SQUIDSBUFPH ""://%s"" SQUIDSBUFPH, SQUIDSBUFPRINT(scheme), host, SQUIDSBUFPRINT(url));",b3a0719affab099c684f1cd62b79ab02816fa962,CVE-2020-8450,b3a0719affab099c684f1cd62b79ab02816fa962,https://github.com/squid-cache/squid,CPE_GIT_REPOBASED,76,COMPLETED,"VAR *VAR = VAR; VAR (VAR && (VAR = VAR->VAR())) { VAR VAR(VAR);  VAR VAR VAR = VAR.VAR(':'); VAR (VAR != VAR::VAR && *VAR.VAR() != ']') { VAR.VAR(0, VAR);  VAR.VAR("":%VAR"", VAR); VAR VAR VAR = VAR.VAR() + VAR.VAR() + VAR.VAR() + 32; VAR(VAR, VAR, VAR "": VAR *VAR = VAR; VAR (VAR && (VAR = VAR->VAR())) { VAR VAR[256]; VAR[0] = '\0'; VAR *VAR = VAR; VAR (VAR[VAR(VAR) - 1] != ']' && (VAR = VAR(VAR,':')) != VAR) { VAR(VAR, VAR, (VAR-VAR)); VAR(VAR+(VAR-VAR), VAR(VAR)-(VAR-VAR), "":%VAR"", VAR); VAR = VAR; } VAR VAR (!VAR) { VAR(VAR, VAR(VAR), ""%VAR:%VAR"",VAR, VAR); VAR = VAR; VAR VAR VAR = VAR.VAR() + VAR(VAR) + VAR.VAR() + 32; VAR(VAR, VAR, VAR "":",2,13
+squid_b3a0719affab099c684f1cd62b79ab02816fa962,src/client_side.cc,"    char *receivedHost = nullptr;
+    if (vhost && (receivedHost = hp->getHostHeaderField())) {
+        SBuf host(receivedHost);
+            // remove existing :port (if any), cope with IPv6+ without port
+            const auto lastColonPos = host.rfind(':');
+            if (lastColonPos != SBuf::npos && *host.rbegin() != ']') {
+                host.chop(0, lastColonPos); // truncate until the last colon
+            host.appendf("":%d"", vport);
+        const auto url_sz = scheme.length() + host.length() + url.length() + 32;
+        snprintf(uri, url_sz, SQUIDSBUFPH ""://"" SQUIDSBUFPH SQUIDSBUFPH, SQUIDSBUFPRINT(scheme), SQUIDSBUFPRINT(host), SQUIDSBUFPRINT(url));","    char *host = NULL;
+    if (vhost && (host = hp->getHostHeaderField())) {
+        char thost[256];
+            thost[0] = '\0';
+            char *t = NULL;
+            if (host[strlen(host) - 1] != ']' && (t = strrchr(host,':')) != nullptr) {
+                strncpy(thost, host, (t-host));
+                snprintf(thost+(t-host), sizeof(thost)-(t-host), "":%d"", vport);
+                host = thost;
+            } else if (!t) {
+                snprintf(thost, sizeof(thost), ""%s:%d"",host, vport);
+                host = thost;
+        const int url_sz = scheme.length() + strlen(host) + url.length() + 32;
+        snprintf(uri, url_sz, SQUIDSBUFPH ""://%s"" SQUIDSBUFPH, SQUIDSBUFPRINT(scheme), host, SQUIDSBUFPRINT(url));",b3a0719affab099c684f1cd62b79ab02816fa962,CVE-2020-8449,b3a0719affab099c684f1cd62b79ab02816fa962,https://github.com/squid-cache/squid,CPE_GIT_REPOBASED,72,COMPLETED,"VAR *VAR = VAR; VAR (VAR && (VAR = VAR->VAR())) { VAR VAR(VAR);  VAR VAR VAR = VAR.VAR(':'); VAR (VAR != VAR::VAR && *VAR.VAR() != ']') { VAR.VAR(0, VAR);  VAR.VAR("":%VAR"", VAR); VAR VAR VAR = VAR.VAR() + VAR.VAR() + VAR.VAR() + 32; VAR(VAR, VAR, VAR "": VAR *VAR = VAR; VAR (VAR && (VAR = VAR->VAR())) { VAR VAR[256]; VAR[0] = '\0'; VAR *VAR = VAR; VAR (VAR[VAR(VAR) - 1] != ']' && (VAR = VAR(VAR,':')) != VAR) { VAR(VAR, VAR, (VAR-VAR)); VAR(VAR+(VAR-VAR), VAR(VAR)-(VAR-VAR), "":%VAR"", VAR); VAR = VAR; } VAR VAR (!VAR) { VAR(VAR, VAR(VAR), ""%VAR:%VAR"",VAR, VAR); VAR = VAR; VAR VAR VAR = VAR.VAR() + VAR(VAR) + VAR.VAR() + 32; VAR(VAR, VAR, VAR "":",2,13
+trafficserver_6e5070118a20772a30c3fccee2cf1c44f0a21fc0,tests/gold_tests/chunked_encoding/replays/chunked_in_http_1_0.replay.yaml,"#  Licensed to the Apache Software Foundation (ASF) under one
+#  or more contributor license agreements.  See the NOTICE file
+#  distributed with this work for additional information
+#  regarding copyright ownership.  The ASF licenses this file
+#  to you under the Apache License, Version 2.0 (the
+#  ""License""); you may not use this file except in compliance
+#  with the License.  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an ""AS IS"" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+meta:
+  version: ""1.0""
+
+sessions:
+- transactions:
+  - client-request:
+      method: ""POST""
+      # HTTP/1.0 does not support Transfer-Encoding. ATS should therefore
+      # reject it with a 4xx response.
+      version: ""1.0""
+      url: /unexpected/chunk/header
+      headers:
+        fields:
+        - [ Host, example.com ]
+        - [ Transfer-Encoding, chunked ]
+        - [ uuid, 51 ]
+      content:
+        size: 32
+
+    # This request should not make it to the server, but if it does reply with
+    # a 200 response so that we detect the non-4xx response we expect.
+    server-response:
+      status: 200
+      reason: OK
+      headers:
+        fields:
+        - [ Content-Length, 16 ]
+        - [ X-Response, ""Unexpected origin response."" ]
+
+    proxy-response:
+      status: 406
+      reason: ""Transcoding Not Available""",,6e5070118a20772a30c3fccee2cf1c44f0a21fc0,CVE-2021-37148,6e5070118a20772a30c3fccee2cf1c44f0a21fc0,https://github.com/apache/trafficserver,CPE_GIT_REPOBASED,72,COMPLETED,"               VAR: VAR: ""1.0"" VAR: - VAR: - VAR-VAR: VAR: ""VAR""   VAR: ""1.0"" VAR: /VAR/VAR/VAR VAR: VAR: - [ VAR, VAR.VAR ] - [ VAR-VAR, VAR ] - [ VAR, 51 ] VAR: VAR: 32   VAR-VAR: VAR: 200 VAR: VAR VAR: VAR: - [ VAR-VAR, 16 ] - [ VAR-VAR, ""VAR VAR VAR."" ] VAR-VAR: VAR: 406 VAR: ""VAR VAR VAR"" ",1,13
+urllib3_0aa3e24fcd75f1bb59ab159e9f8adb44055b2271,_appveyor/install.ps1,"# Sample script to install Python and pip under Windows
+# Authors: Olivier Grisel, Jonathan Helmus, Kyle Kastner, and Alex Willmer
+# License: CC0 1.0 Universal: http://creativecommons.org/publicdomain/zero/1.0/
+
+$MINICONDA_URL = ""http://repo.continuum.io/miniconda/""
+$BASE_URL = ""https://www.python.org/ftp/python/""
+$GET_PIP_URL = ""https://bootstrap.pypa.io/get-pip.py""
+$GET_PIP_PATH = ""C:\get-pip.py""
+
+$PYTHON_PRERELEASE_REGEX = @""
+(?x)
+(?<major>\d+)
+\.
+(?<minor>\d+)
+\.
+(?<micro>\d+)
+(?<prerelease>[a-z]{1,2}\d+)
+""@
+
+
+function Download ($filename, $url) {
+    $webclient = New-Object System.Net.WebClient
+
+    $basedir = $pwd.Path + ""\""
+    $filepath = $basedir + $filename
+    if (Test-Path $filename) {
+        Write-Host ""Reusing"" $filepath
+        return $filepath
+    }
+
+    # Download and retry up to 3 times in case of network transient errors.
+    Write-Host ""Downloading"" $filename ""from"" $url
+    $retry_attempts = 2
+    for ($i = 0; $i -lt $retry_attempts; $i++) {
+        try {
+            $webclient.DownloadFile($url, $filepath)
+            break
+        }
+        Catch [Exception]{
+            Start-Sleep 1
+        }
+    }
+    if (Test-Path $filepath) {
+        Write-Host ""File saved at"" $filepath
+    } else {
+        # Retry once to get the error message if any at the last try
+        $webclient.DownloadFile($url, $filepath)
+    }
+    return $filepath
+}
+
+
+function ParsePythonVersion ($python_version) {
+    if ($python_version -match $PYTHON_PRERELEASE_REGEX) {
+        return ([int]$matches.major, [int]$matches.minor, [int]$matches.micro,
+                $matches.prerelease)
+    }
+    $version_obj = [version]$python_version
+    return ($version_obj.major, $version_obj.minor, $version_obj.build, """")
+}
+
+
+function DownloadPython ($python_version, $platform_suffix) {
+    $major, $minor, $micro, $prerelease = ParsePythonVersion $python_version
+
+    if (($major -le 2 -and $micro -eq 0) `
+        -or ($major -eq 3 -and $minor -le 2 -and $micro -eq 0) `
+        ) {
+        $dir = ""$major.$minor""
+        $python_version = ""$major.$minor$prerelease""
+    } else {
+        $dir = ""$major.$minor.$micro""
+    }
+
+    if ($prerelease) {
+        if (($major -le 2) `
+            -or ($major -eq 3 -and $minor -eq 1) `
+            -or ($major -eq 3 -and $minor -eq 2) `
+            -or ($major -eq 3 -and $minor -eq 3) `
+            ) {
+            $dir = ""$dir/prev""
+        }
+    }
+
+    if (($major -le 2) -or ($major -le 3 -and $minor -le 4)) {
+        $ext = ""msi""
+        if ($platform_suffix) {
+            $platform_suffix = "".$platform_suffix""
+        }
+    } else {
+        $ext = ""exe""
+        if ($platform_suffix) {
+            $platform_suffix = ""-$platform_suffix""
+        }
+    }
+
+    $filename = ""python-$python_version$platform_suffix.$ext""
+    $url = ""$BASE_URL$dir/$filename""
+    $filepath = Download $filename $url
+    return $filepath
+}
+
+
+function InstallPython ($python_version, $architecture, $python_home) {
+    Write-Host ""Installing Python"" $python_version ""for"" $architecture ""bit architecture to"" $python_home
+    if (Test-Path $python_home) {
+        Write-Host $python_home ""already exists, skipping.""
+        return $false
+    }
+    if ($architecture -eq ""32"") {
+        $platform_suffix = """"
+    } else {
+        $platform_suffix = ""amd64""
+    }
+    $installer_path = DownloadPython $python_version $platform_suffix
+    $installer_ext = [System.IO.Path]::GetExtension($installer_path)
+    Write-Host ""Installing $installer_path to $python_home""
+    $install_log = $python_home + "".log""
+    if ($installer_ext -eq '.msi') {
+        InstallPythonMSI $installer_path $python_home $install_log
+    } else {
+        InstallPythonEXE $installer_path $python_home $install_log
+    }
+    if (Test-Path $python_home) {
+        Write-Host ""Python $python_version ($architecture) installation complete""
+    } else {
+        Write-Host ""Failed to install Python in $python_home""
+        Get-Content -Path $install_log
+        Exit 1
+    }
+}
+
+
+function InstallPythonEXE ($exepath, $python_home, $install_log) {
+    $install_args = ""/quiet InstallAllUsers=1 TargetDir=$python_home""
+    RunCommand $exepath $install_args
+}
+
+
+function InstallPythonMSI ($msipath, $python_home, $install_log) {
+    $install_args = ""/qn /log $install_log /i $msipath TARGETDIR=$python_home""
+    $uninstall_args = ""/qn /x $msipath""
+    RunCommand ""msiexec.exe"" $install_args
+    if (-not(Test-Path $python_home)) {
+        Write-Host ""Python seems to be installed else-where, reinstalling.""
+        RunCommand ""msiexec.exe"" $uninstall_args
+        RunCommand ""msiexec.exe"" $install_args
+    }
+}
+
+function RunCommand ($command, $command_args) {
+    Write-Host $command $command_args
+    Start-Process -FilePath $command -ArgumentList $command_args -Wait -Passthru
+}
+
+
+function InstallPip ($python_home) {
+    $pip_path = $python_home + ""\Scripts\pip.exe""
+    $python_path = $python_home + ""\python.exe""
+    if (-not(Test-Path $pip_path)) {
+        Write-Host ""Installing pip...""
+        $webclient = New-Object System.Net.WebClient
+        $webclient.DownloadFile($GET_PIP_URL, $GET_PIP_PATH)
+        Write-Host ""Executing:"" $python_path $GET_PIP_PATH
+        & $python_path $GET_PIP_PATH
+    } else {
+        Write-Host ""pip already installed.""
+    }
+}
+
+
+function DownloadMiniconda ($python_version, $platform_suffix) {
+    if ($python_version -eq ""3.4"") {
+        $filename = ""Miniconda3-3.5.5-Windows-"" + $platform_suffix + "".exe""
+    } else {
+        $filename = ""Miniconda-3.5.5-Windows-"" + $platform_suffix + "".exe""
+    }
+    $url = $MINICONDA_URL + $filename
+    $filepath = Download $filename $url
+    return $filepath
+}
+
+
+function InstallMiniconda ($python_version, $architecture, $python_home) {
+    Write-Host ""Installing Python"" $python_version ""for"" $architecture ""bit architecture to"" $python_home
+    if (Test-Path $python_home) {
+        Write-Host $python_home ""already exists, skipping.""
+        return $false
+    }
+    if ($architecture -eq ""32"") {
+        $platform_suffix = ""x86""
+    } else {
+        $platform_suffix = ""x86_64""
+    }
+    $filepath = DownloadMiniconda $python_version $platform_suffix
+    Write-Host ""Installing"" $filepath ""to"" $python_home
+    $install_log = $python_home + "".log""
+    $args = ""/S /D=$python_home""
+    Write-Host $filepath $args
+    Start-Process -FilePath $filepath -ArgumentList $args -Wait -Passthru
+    if (Test-Path $python_home) {
+        Write-Host ""Python $python_version ($architecture) installation complete""
+    } else {
+        Write-Host ""Failed to install Python in $python_home""
+        Get-Content -Path $install_log
+        Exit 1
+    }
+}
+
+
+function InstallMinicondaPip ($python_home) {
+    $pip_path = $python_home + ""\Scripts\pip.exe""
+    $conda_path = $python_home + ""\Scripts\conda.exe""
+    if (-not(Test-Path $pip_path)) {
+        Write-Host ""Installing pip...""
+        $args = ""install --yes pip""
+        Write-Host $conda_path $args
+        Start-Process -FilePath ""$conda_path"" -ArgumentList $args -Wait -Passthru
+    } else {
+        Write-Host ""pip already installed.""
+    }
+}
+
+function main () {
+    InstallPython $env:PYTHON_VERSION $env:PYTHON_ARCH $env:PYTHON
+    InstallPip $env:PYTHON
+}
+
+main",,0aa3e24fcd75f1bb59ab159e9f8adb44055b2271,CVE-2019-11236,0aa3e24fcd75f1bb59ab159e9f8adb44055b2271,https://github.com/urllib3/urllib3,NVD_GIT_REPOBASED,98,COMPLETED,"   $VAR = ""VAR: $VAR = ""VAR: $VAR = ""VAR: $VAR = ""VAR:\VAR-VAR.VAR"" $VAR = @"" (?VAR) (?<VAR>\VAR+) \. (?<VAR>\VAR+) \. (?<VAR>\VAR+) (?<VAR>[VAR-VAR]{1,2}\VAR+) ""@ VAR VAR ($VAR, $VAR) { $VAR = VAR-VAR VAR.VAR.VAR $VAR = $VAR.VAR + ""\"" $VAR = $VAR + $VAR VAR (VAR-VAR $VAR) { VAR-VAR ""VAR"" $VAR VAR $VAR }  VAR-VAR ""VAR"" $VAR ""VAR"" $VAR $VAR = 2 VAR ($VAR = 0; $VAR -VAR $VAR; $VAR++) { VAR { $VAR.VAR($VAR, $VAR) VAR } VAR [VAR]{ VAR-VAR 1 } } VAR (VAR-VAR $VAR) { VAR-VAR ""VAR VAR VAR"" $VAR } VAR {  $VAR.VAR($VAR, $VAR) } VAR $VAR } VAR VAR ($VAR) { VAR ($VAR -VAR $VAR) { VAR ([VAR]$VAR.VAR, [VAR]$VAR.VAR, [VAR]$VAR.VAR, $VAR.VAR) } $VAR = [VAR]$VAR VAR ($VAR.VAR, $VAR.VAR, $VAR.VAR, """") } VAR VAR ($VAR, $VAR) { $VAR, $VAR, $VAR, $VAR = VAR $VAR VAR (($VAR -VAR 2 -VAR $VAR -VAR 0) ` -VAR ($VAR -VAR 3 -VAR $VAR -VAR 2 -VAR $VAR -VAR 0) ` ) { $VAR = ""$VAR.$VAR"" $VAR = ""$VAR.$VAR$VAR"" } VAR { $VAR = ""$VAR.$VAR.$VAR"" } VAR ($VAR) { VAR (($VAR -VAR 2) ` -VAR ($VAR -VAR 3 -VAR $VAR -VAR 1) ` -VAR ($VAR -VAR 3 -VAR $VAR -VAR 2) ` -VAR ($VAR -VAR 3 -VAR $VAR -VAR 3) ` ) { $VAR = ""$VAR/VAR"" } } VAR (($VAR -VAR 2) -VAR ($VAR -VAR 3 -VAR $VAR -VAR 4)) { $VAR = ""VAR"" VAR ($VAR) { $VAR = "".$VAR"" } } VAR { $VAR = ""VAR"" VAR ($VAR) { $VAR = ""-$VAR"" } } $VAR = ""VAR-$VAR$VAR.$VAR"" $VAR = ""$VAR$VAR/$VAR"" $VAR = VAR $VAR $VAR VAR $VAR } VAR VAR ($VAR, $VAR, $VAR) { VAR-VAR ""VAR VAR"" $VAR ""VAR"" $VAR ""VAR VAR VAR"" $VAR VAR (VAR-VAR $VAR) { VAR-VAR $VAR ""VAR VAR, VAR."" VAR $VAR } VAR ($VAR -VAR ""32"") { $VAR = """" } VAR { $VAR = ""VAR"" } $VAR = VAR $VAR $VAR $VAR = [VAR.VAR.VAR]::VAR($VAR) VAR-VAR ""VAR $VAR VAR $VAR"" $VAR = $VAR + "".VAR"" VAR ($VAR -VAR '.VAR') { VAR $VAR $VAR $VAR } VAR { VAR $VAR $VAR $VAR } VAR (VAR-VAR $VAR) { VAR-VAR ""VAR $VAR ($VAR) VAR VAR"" } VAR { VAR-VAR ""VAR VAR VAR VAR VAR $VAR"" VAR-VAR -VAR $VAR VAR 1 } } VAR VAR ($VAR, $VAR, $VAR) { $VAR = ""/VAR VAR=1 VAR=$VAR"" VAR $VAR $VAR } VAR VAR ($VAR, $VAR, $VAR) { $VAR = ""/VAR /VAR $VAR /VAR $VAR VAR=$VAR"" $VAR = ""/VAR /VAR $VAR"" VAR ""VAR.VAR"" $VAR VAR (-VAR(VAR-VAR $VAR)) { VAR-VAR ""VAR VAR VAR VAR VAR VAR-VAR, VAR."" VAR ""VAR.VAR"" $VAR VAR ""VAR.VAR"" $VAR } } VAR VAR ($VAR, $VAR) { VAR-VAR $VAR $VAR VAR-VAR -VAR $VAR -VAR $VAR -VAR -VAR } VAR VAR ($VAR) { $VAR = $VAR + ""\VAR\VAR.VAR"" $VAR = $VAR + ""\VAR.VAR"" VAR (-VAR(VAR-VAR $VAR)) { VAR-VAR ""VAR VAR..."" $VAR = VAR-VAR VAR.VAR.VAR $VAR.VAR($VAR, $VAR) VAR-VAR ""VAR:"" $VAR $VAR & $VAR $VAR } VAR { VAR-VAR ""VAR VAR VAR."" } } VAR VAR ($VAR, $VAR) { VAR ($VAR -VAR ""3.4"") { $VAR = ""VAR-3.5.5-VAR-"" + $VAR + "".VAR"" } VAR { $VAR = ""VAR-3.5.5-VAR-"" + $VAR + "".VAR"" } $VAR = $VAR + $VAR $VAR = VAR $VAR $VAR VAR $VAR } VAR VAR ($VAR, $VAR, $VAR) { VAR-VAR ""VAR VAR"" $VAR ""VAR"" $VAR ""VAR VAR VAR"" $VAR VAR (VAR-VAR $VAR) { VAR-VAR $VAR ""VAR VAR, VAR."" VAR $VAR } VAR ($VAR -VAR ""32"") { $VAR = ""VAR"" } VAR { $VAR = ""VAR"" } $VAR = VAR $VAR $VAR VAR-VAR ""VAR"" $VAR ""VAR"" $VAR $VAR = $VAR + "".VAR"" $VAR = ""/VAR /VAR=$VAR"" VAR-VAR $VAR $VAR VAR-VAR -VAR $VAR -VAR $VAR -VAR -VAR VAR (VAR-VAR $VAR) { VAR-VAR ""VAR $VAR ($VAR) VAR VAR"" } VAR { VAR-VAR ""VAR VAR VAR VAR VAR $VAR"" VAR-VAR -VAR $VAR VAR 1 } } VAR VAR ($VAR) { $VAR = $VAR + ""\VAR\VAR.VAR"" $VAR = $VAR + ""\VAR\VAR.VAR"" VAR (-VAR(VAR-VAR $VAR)) { VAR-VAR ""VAR VAR..."" $VAR = ""VAR --VAR VAR"" VAR-VAR $VAR $VAR VAR-VAR -VAR ""$VAR"" -VAR $VAR -VAR -VAR } VAR { VAR-VAR ""VAR VAR VAR."" } } VAR VAR () { VAR $VAR:VAR $VAR:VAR $VAR:VAR VAR $VAR:VAR } VAR ",2,13
+urllib3_9b76785331243689a9d52cef3db05ef7462cb02d,_appveyor/install.ps1,"# Sample script to install Python and pip under Windows
+# Authors: Olivier Grisel, Jonathan Helmus, Kyle Kastner, and Alex Willmer
+# License: CC0 1.0 Universal: http://creativecommons.org/publicdomain/zero/1.0/
+
+$MINICONDA_URL = ""http://repo.continuum.io/miniconda/""
+$BASE_URL = ""https://www.python.org/ftp/python/""
+$GET_PIP_URL = ""https://bootstrap.pypa.io/get-pip.py""
+$GET_PIP_PATH = ""C:\get-pip.py""
+
+$PYTHON_PRERELEASE_REGEX = @""
+(?x)
+(?<major>\d+)
+\.
+(?<minor>\d+)
+\.
+(?<micro>\d+)
+(?<prerelease>[a-z]{1,2}\d+)
+""@
+
+
+function Download ($filename, $url) {
+    $webclient = New-Object System.Net.WebClient
+
+    $basedir = $pwd.Path + ""\""
+    $filepath = $basedir + $filename
+    if (Test-Path $filename) {
+        Write-Host ""Reusing"" $filepath
+        return $filepath
+    }
+
+    # Download and retry up to 3 times in case of network transient errors.
+    Write-Host ""Downloading"" $filename ""from"" $url
+    $retry_attempts = 2
+    for ($i = 0; $i -lt $retry_attempts; $i++) {
+        try {
+            $webclient.DownloadFile($url, $filepath)
+            break
+        }
+        Catch [Exception]{
+            Start-Sleep 1
+        }
+    }
+    if (Test-Path $filepath) {
+        Write-Host ""File saved at"" $filepath
+    } else {
+        # Retry once to get the error message if any at the last try
+        $webclient.DownloadFile($url, $filepath)
+    }
+    return $filepath
+}
+
+
+function ParsePythonVersion ($python_version) {
+    if ($python_version -match $PYTHON_PRERELEASE_REGEX) {
+        return ([int]$matches.major, [int]$matches.minor, [int]$matches.micro,
+                $matches.prerelease)
+    }
+    $version_obj = [version]$python_version
+    return ($version_obj.major, $version_obj.minor, $version_obj.build, """")
+}
+
+
+function DownloadPython ($python_version, $platform_suffix) {
+    $major, $minor, $micro, $prerelease = ParsePythonVersion $python_version
+
+    if (($major -le 2 -and $micro -eq 0) `
+        -or ($major -eq 3 -and $minor -le 2 -and $micro -eq 0) `
+        ) {
+        $dir = ""$major.$minor""
+        $python_version = ""$major.$minor$prerelease""
+    } else {
+        $dir = ""$major.$minor.$micro""
+    }
+
+    if ($prerelease) {
+        if (($major -le 2) `
+            -or ($major -eq 3 -and $minor -eq 1) `
+            -or ($major -eq 3 -and $minor -eq 2) `
+            -or ($major -eq 3 -and $minor -eq 3) `
+            ) {
+            $dir = ""$dir/prev""
+        }
+    }
+
+    if (($major -le 2) -or ($major -le 3 -and $minor -le 4)) {
+        $ext = ""msi""
+        if ($platform_suffix) {
+            $platform_suffix = "".$platform_suffix""
+        }
+    } else {
+        $ext = ""exe""
+        if ($platform_suffix) {
+            $platform_suffix = ""-$platform_suffix""
+        }
+    }
+
+    $filename = ""python-$python_version$platform_suffix.$ext""
+    $url = ""$BASE_URL$dir/$filename""
+    $filepath = Download $filename $url
+    return $filepath
+}
+
+
+function InstallPython ($python_version, $architecture, $python_home) {
+    Write-Host ""Installing Python"" $python_version ""for"" $architecture ""bit architecture to"" $python_home
+    if (Test-Path $python_home) {
+        Write-Host $python_home ""already exists, skipping.""
+        return $false
+    }
+    if ($architecture -eq ""32"") {
+        $platform_suffix = """"
+    } else {
+        $platform_suffix = ""amd64""
+    }
+    $installer_path = DownloadPython $python_version $platform_suffix
+    $installer_ext = [System.IO.Path]::GetExtension($installer_path)
+    Write-Host ""Installing $installer_path to $python_home""
+    $install_log = $python_home + "".log""
+    if ($installer_ext -eq '.msi') {
+        InstallPythonMSI $installer_path $python_home $install_log
+    } else {
+        InstallPythonEXE $installer_path $python_home $install_log
+    }
+    if (Test-Path $python_home) {
+        Write-Host ""Python $python_version ($architecture) installation complete""
+    } else {
+        Write-Host ""Failed to install Python in $python_home""
+        Get-Content -Path $install_log
+        Exit 1
+    }
+}
+
+
+function InstallPythonEXE ($exepath, $python_home, $install_log) {
+    $install_args = ""/quiet InstallAllUsers=1 TargetDir=$python_home""
+    RunCommand $exepath $install_args
+}
+
+
+function InstallPythonMSI ($msipath, $python_home, $install_log) {
+    $install_args = ""/qn /log $install_log /i $msipath TARGETDIR=$python_home""
+    $uninstall_args = ""/qn /x $msipath""
+    RunCommand ""msiexec.exe"" $install_args
+    if (-not(Test-Path $python_home)) {
+        Write-Host ""Python seems to be installed else-where, reinstalling.""
+        RunCommand ""msiexec.exe"" $uninstall_args
+        RunCommand ""msiexec.exe"" $install_args
+    }
+}
+
+function RunCommand ($command, $command_args) {
+    Write-Host $command $command_args
+    Start-Process -FilePath $command -ArgumentList $command_args -Wait -Passthru
+}
+
+
+function InstallPip ($python_home) {
+    $pip_path = $python_home + ""\Scripts\pip.exe""
+    $python_path = $python_home + ""\python.exe""
+    if (-not(Test-Path $pip_path)) {
+        Write-Host ""Installing pip...""
+        $webclient = New-Object System.Net.WebClient
+        $webclient.DownloadFile($GET_PIP_URL, $GET_PIP_PATH)
+        Write-Host ""Executing:"" $python_path $GET_PIP_PATH
+        & $python_path $GET_PIP_PATH
+    } else {
+        Write-Host ""pip already installed.""
+    }
+}
+
+
+function DownloadMiniconda ($python_version, $platform_suffix) {
+    if ($python_version -eq ""3.4"") {
+        $filename = ""Miniconda3-3.5.5-Windows-"" + $platform_suffix + "".exe""
+    } else {
+        $filename = ""Miniconda-3.5.5-Windows-"" + $platform_suffix + "".exe""
+    }
+    $url = $MINICONDA_URL + $filename
+    $filepath = Download $filename $url
+    return $filepath
+}
+
+
+function InstallMiniconda ($python_version, $architecture, $python_home) {
+    Write-Host ""Installing Python"" $python_version ""for"" $architecture ""bit architecture to"" $python_home
+    if (Test-Path $python_home) {
+        Write-Host $python_home ""already exists, skipping.""
+        return $false
+    }
+    if ($architecture -eq ""32"") {
+        $platform_suffix = ""x86""
+    } else {
+        $platform_suffix = ""x86_64""
+    }
+    $filepath = DownloadMiniconda $python_version $platform_suffix
+    Write-Host ""Installing"" $filepath ""to"" $python_home
+    $install_log = $python_home + "".log""
+    $args = ""/S /D=$python_home""
+    Write-Host $filepath $args
+    Start-Process -FilePath $filepath -ArgumentList $args -Wait -Passthru
+    if (Test-Path $python_home) {
+        Write-Host ""Python $python_version ($architecture) installation complete""
+    } else {
+        Write-Host ""Failed to install Python in $python_home""
+        Get-Content -Path $install_log
+        Exit 1
+    }
+}
+
+
+function InstallMinicondaPip ($python_home) {
+    $pip_path = $python_home + ""\Scripts\pip.exe""
+    $conda_path = $python_home + ""\Scripts\conda.exe""
+    if (-not(Test-Path $pip_path)) {
+        Write-Host ""Installing pip...""
+        $args = ""install --yes pip""
+        Write-Host $conda_path $args
+        Start-Process -FilePath ""$conda_path"" -ArgumentList $args -Wait -Passthru
+    } else {
+        Write-Host ""pip already installed.""
+    }
+}
+
+function main () {
+    InstallPython $env:PYTHON_VERSION $env:PYTHON_ARCH $env:PYTHON
+    InstallPip $env:PYTHON
+}
+
+main",,9b76785331243689a9d52cef3db05ef7462cb02d,CVE-2019-11236,9b76785331243689a9d52cef3db05ef7462cb02d,https://github.com/urllib3/urllib3,NVD_GIT_REPOBASED,70,COMPLETED,"   $VAR = ""VAR: $VAR = ""VAR: $VAR = ""VAR: $VAR = ""VAR:\VAR-VAR.VAR"" $VAR = @"" (?VAR) (?<VAR>\VAR+) \. (?<VAR>\VAR+) \. (?<VAR>\VAR+) (?<VAR>[VAR-VAR]{1,2}\VAR+) ""@ VAR VAR ($VAR, $VAR) { $VAR = VAR-VAR VAR.VAR.VAR $VAR = $VAR.VAR + ""\"" $VAR = $VAR + $VAR VAR (VAR-VAR $VAR) { VAR-VAR ""VAR"" $VAR VAR $VAR }  VAR-VAR ""VAR"" $VAR ""VAR"" $VAR $VAR = 2 VAR ($VAR = 0; $VAR -VAR $VAR; $VAR++) { VAR { $VAR.VAR($VAR, $VAR) VAR } VAR [VAR]{ VAR-VAR 1 } } VAR (VAR-VAR $VAR) { VAR-VAR ""VAR VAR VAR"" $VAR } VAR {  $VAR.VAR($VAR, $VAR) } VAR $VAR } VAR VAR ($VAR) { VAR ($VAR -VAR $VAR) { VAR ([VAR]$VAR.VAR, [VAR]$VAR.VAR, [VAR]$VAR.VAR, $VAR.VAR) } $VAR = [VAR]$VAR VAR ($VAR.VAR, $VAR.VAR, $VAR.VAR, """") } VAR VAR ($VAR, $VAR) { $VAR, $VAR, $VAR, $VAR = VAR $VAR VAR (($VAR -VAR 2 -VAR $VAR -VAR 0) ` -VAR ($VAR -VAR 3 -VAR $VAR -VAR 2 -VAR $VAR -VAR 0) ` ) { $VAR = ""$VAR.$VAR"" $VAR = ""$VAR.$VAR$VAR"" } VAR { $VAR = ""$VAR.$VAR.$VAR"" } VAR ($VAR) { VAR (($VAR -VAR 2) ` -VAR ($VAR -VAR 3 -VAR $VAR -VAR 1) ` -VAR ($VAR -VAR 3 -VAR $VAR -VAR 2) ` -VAR ($VAR -VAR 3 -VAR $VAR -VAR 3) ` ) { $VAR = ""$VAR/VAR"" } } VAR (($VAR -VAR 2) -VAR ($VAR -VAR 3 -VAR $VAR -VAR 4)) { $VAR = ""VAR"" VAR ($VAR) { $VAR = "".$VAR"" } } VAR { $VAR = ""VAR"" VAR ($VAR) { $VAR = ""-$VAR"" } } $VAR = ""VAR-$VAR$VAR.$VAR"" $VAR = ""$VAR$VAR/$VAR"" $VAR = VAR $VAR $VAR VAR $VAR } VAR VAR ($VAR, $VAR, $VAR) { VAR-VAR ""VAR VAR"" $VAR ""VAR"" $VAR ""VAR VAR VAR"" $VAR VAR (VAR-VAR $VAR) { VAR-VAR $VAR ""VAR VAR, VAR."" VAR $VAR } VAR ($VAR -VAR ""32"") { $VAR = """" } VAR { $VAR = ""VAR"" } $VAR = VAR $VAR $VAR $VAR = [VAR.VAR.VAR]::VAR($VAR) VAR-VAR ""VAR $VAR VAR $VAR"" $VAR = $VAR + "".VAR"" VAR ($VAR -VAR '.VAR') { VAR $VAR $VAR $VAR } VAR { VAR $VAR $VAR $VAR } VAR (VAR-VAR $VAR) { VAR-VAR ""VAR $VAR ($VAR) VAR VAR"" } VAR { VAR-VAR ""VAR VAR VAR VAR VAR $VAR"" VAR-VAR -VAR $VAR VAR 1 } } VAR VAR ($VAR, $VAR, $VAR) { $VAR = ""/VAR VAR=1 VAR=$VAR"" VAR $VAR $VAR } VAR VAR ($VAR, $VAR, $VAR) { $VAR = ""/VAR /VAR $VAR /VAR $VAR VAR=$VAR"" $VAR = ""/VAR /VAR $VAR"" VAR ""VAR.VAR"" $VAR VAR (-VAR(VAR-VAR $VAR)) { VAR-VAR ""VAR VAR VAR VAR VAR VAR-VAR, VAR."" VAR ""VAR.VAR"" $VAR VAR ""VAR.VAR"" $VAR } } VAR VAR ($VAR, $VAR) { VAR-VAR $VAR $VAR VAR-VAR -VAR $VAR -VAR $VAR -VAR -VAR } VAR VAR ($VAR) { $VAR = $VAR + ""\VAR\VAR.VAR"" $VAR = $VAR + ""\VAR.VAR"" VAR (-VAR(VAR-VAR $VAR)) { VAR-VAR ""VAR VAR..."" $VAR = VAR-VAR VAR.VAR.VAR $VAR.VAR($VAR, $VAR) VAR-VAR ""VAR:"" $VAR $VAR & $VAR $VAR } VAR { VAR-VAR ""VAR VAR VAR."" } } VAR VAR ($VAR, $VAR) { VAR ($VAR -VAR ""3.4"") { $VAR = ""VAR-3.5.5-VAR-"" + $VAR + "".VAR"" } VAR { $VAR = ""VAR-3.5.5-VAR-"" + $VAR + "".VAR"" } $VAR = $VAR + $VAR $VAR = VAR $VAR $VAR VAR $VAR } VAR VAR ($VAR, $VAR, $VAR) { VAR-VAR ""VAR VAR"" $VAR ""VAR"" $VAR ""VAR VAR VAR"" $VAR VAR (VAR-VAR $VAR) { VAR-VAR $VAR ""VAR VAR, VAR."" VAR $VAR } VAR ($VAR -VAR ""32"") { $VAR = ""VAR"" } VAR { $VAR = ""VAR"" } $VAR = VAR $VAR $VAR VAR-VAR ""VAR"" $VAR ""VAR"" $VAR $VAR = $VAR + "".VAR"" $VAR = ""/VAR /VAR=$VAR"" VAR-VAR $VAR $VAR VAR-VAR -VAR $VAR -VAR $VAR -VAR -VAR VAR (VAR-VAR $VAR) { VAR-VAR ""VAR $VAR ($VAR) VAR VAR"" } VAR { VAR-VAR ""VAR VAR VAR VAR VAR $VAR"" VAR-VAR -VAR $VAR VAR 1 } } VAR VAR ($VAR) { $VAR = $VAR + ""\VAR\VAR.VAR"" $VAR = $VAR + ""\VAR\VAR.VAR"" VAR (-VAR(VAR-VAR $VAR)) { VAR-VAR ""VAR VAR..."" $VAR = ""VAR --VAR VAR"" VAR-VAR $VAR $VAR VAR-VAR -VAR ""$VAR"" -VAR $VAR -VAR -VAR } VAR { VAR-VAR ""VAR VAR VAR."" } } VAR VAR () { VAR $VAR:VAR $VAR:VAR $VAR:VAR VAR $VAR:VAR } VAR ",2,13
+urllib3_a74c9cfbaed9f811e7563cfc3dce894928e0221a,_appveyor/install.ps1,"# Sample script to install Python and pip under Windows
+# Authors: Olivier Grisel, Jonathan Helmus, Kyle Kastner, and Alex Willmer
+# License: CC0 1.0 Universal: http://creativecommons.org/publicdomain/zero/1.0/
+
+$MINICONDA_URL = ""http://repo.continuum.io/miniconda/""
+$BASE_URL = ""https://www.python.org/ftp/python/""
+$GET_PIP_URL = ""https://bootstrap.pypa.io/get-pip.py""
+$GET_PIP_PATH = ""C:\get-pip.py""
+
+$PYTHON_PRERELEASE_REGEX = @""
+(?x)
+(?<major>\d+)
+\.
+(?<minor>\d+)
+\.
+(?<micro>\d+)
+(?<prerelease>[a-z]{1,2}\d+)
+""@
+
+
+function Download ($filename, $url) {
+    $webclient = New-Object System.Net.WebClient
+
+    $basedir = $pwd.Path + ""\""
+    $filepath = $basedir + $filename
+    if (Test-Path $filename) {
+        Write-Host ""Reusing"" $filepath
+        return $filepath
+    }
+
+    # Download and retry up to 3 times in case of network transient errors.
+    Write-Host ""Downloading"" $filename ""from"" $url
+    $retry_attempts = 2
+    for ($i = 0; $i -lt $retry_attempts; $i++) {
+        try {
+            $webclient.DownloadFile($url, $filepath)
+            break
+        }
+        Catch [Exception]{
+            Start-Sleep 1
+        }
+    }
+    if (Test-Path $filepath) {
+        Write-Host ""File saved at"" $filepath
+    } else {
+        # Retry once to get the error message if any at the last try
+        $webclient.DownloadFile($url, $filepath)
+    }
+    return $filepath
+}
+
+
+function ParsePythonVersion ($python_version) {
+    if ($python_version -match $PYTHON_PRERELEASE_REGEX) {
+        return ([int]$matches.major, [int]$matches.minor, [int]$matches.micro,
+                $matches.prerelease)
+    }
+    $version_obj = [version]$python_version
+    return ($version_obj.major, $version_obj.minor, $version_obj.build, """")
+}
+
+
+function DownloadPython ($python_version, $platform_suffix) {
+    $major, $minor, $micro, $prerelease = ParsePythonVersion $python_version
+
+    if (($major -le 2 -and $micro -eq 0) `
+        -or ($major -eq 3 -and $minor -le 2 -and $micro -eq 0) `
+        ) {
+        $dir = ""$major.$minor""
+        $python_version = ""$major.$minor$prerelease""
+    } else {
+        $dir = ""$major.$minor.$micro""
+    }
+
+    if ($prerelease) {
+        if (($major -le 2) `
+            -or ($major -eq 3 -and $minor -eq 1) `
+            -or ($major -eq 3 -and $minor -eq 2) `
+            -or ($major -eq 3 -and $minor -eq 3) `
+            ) {
+            $dir = ""$dir/prev""
+        }
+    }
+
+    if (($major -le 2) -or ($major -le 3 -and $minor -le 4)) {
+        $ext = ""msi""
+        if ($platform_suffix) {
+            $platform_suffix = "".$platform_suffix""
+        }
+    } else {
+        $ext = ""exe""
+        if ($platform_suffix) {
+            $platform_suffix = ""-$platform_suffix""
+        }
+    }
+
+    $filename = ""python-$python_version$platform_suffix.$ext""
+    $url = ""$BASE_URL$dir/$filename""
+    $filepath = Download $filename $url
+    return $filepath
+}
+
+
+function InstallPython ($python_version, $architecture, $python_home) {
+    Write-Host ""Installing Python"" $python_version ""for"" $architecture ""bit architecture to"" $python_home
+    if (Test-Path $python_home) {
+        Write-Host $python_home ""already exists, skipping.""
+        return $false
+    }
+    if ($architecture -eq ""32"") {
+        $platform_suffix = """"
+    } else {
+        $platform_suffix = ""amd64""
+    }
+    $installer_path = DownloadPython $python_version $platform_suffix
+    $installer_ext = [System.IO.Path]::GetExtension($installer_path)
+    Write-Host ""Installing $installer_path to $python_home""
+    $install_log = $python_home + "".log""
+    if ($installer_ext -eq '.msi') {
+        InstallPythonMSI $installer_path $python_home $install_log
+    } else {
+        InstallPythonEXE $installer_path $python_home $install_log
+    }
+    if (Test-Path $python_home) {
+        Write-Host ""Python $python_version ($architecture) installation complete""
+    } else {
+        Write-Host ""Failed to install Python in $python_home""
+        Get-Content -Path $install_log
+        Exit 1
+    }
+}
+
+
+function InstallPythonEXE ($exepath, $python_home, $install_log) {
+    $install_args = ""/quiet InstallAllUsers=1 TargetDir=$python_home""
+    RunCommand $exepath $install_args
+}
+
+
+function InstallPythonMSI ($msipath, $python_home, $install_log) {
+    $install_args = ""/qn /log $install_log /i $msipath TARGETDIR=$python_home""
+    $uninstall_args = ""/qn /x $msipath""
+    RunCommand ""msiexec.exe"" $install_args
+    if (-not(Test-Path $python_home)) {
+        Write-Host ""Python seems to be installed else-where, reinstalling.""
+        RunCommand ""msiexec.exe"" $uninstall_args
+        RunCommand ""msiexec.exe"" $install_args
+    }
+}
+
+function RunCommand ($command, $command_args) {
+    Write-Host $command $command_args
+    Start-Process -FilePath $command -ArgumentList $command_args -Wait -Passthru
+}
+
+
+function InstallPip ($python_home) {
+    $pip_path = $python_home + ""\Scripts\pip.exe""
+    $python_path = $python_home + ""\python.exe""
+    if (-not(Test-Path $pip_path)) {
+        Write-Host ""Installing pip...""
+        $webclient = New-Object System.Net.WebClient
+        $webclient.DownloadFile($GET_PIP_URL, $GET_PIP_PATH)
+        Write-Host ""Executing:"" $python_path $GET_PIP_PATH
+        & $python_path $GET_PIP_PATH
+    } else {
+        Write-Host ""pip already installed.""
+    }
+}
+
+
+function DownloadMiniconda ($python_version, $platform_suffix) {
+    if ($python_version -eq ""3.4"") {
+        $filename = ""Miniconda3-3.5.5-Windows-"" + $platform_suffix + "".exe""
+    } else {
+        $filename = ""Miniconda-3.5.5-Windows-"" + $platform_suffix + "".exe""
+    }
+    $url = $MINICONDA_URL + $filename
+    $filepath = Download $filename $url
+    return $filepath
+}
+
+
+function InstallMiniconda ($python_version, $architecture, $python_home) {
+    Write-Host ""Installing Python"" $python_version ""for"" $architecture ""bit architecture to"" $python_home
+    if (Test-Path $python_home) {
+        Write-Host $python_home ""already exists, skipping.""
+        return $false
+    }
+    if ($architecture -eq ""32"") {
+        $platform_suffix = ""x86""
+    } else {
+        $platform_suffix = ""x86_64""
+    }
+    $filepath = DownloadMiniconda $python_version $platform_suffix
+    Write-Host ""Installing"" $filepath ""to"" $python_home
+    $install_log = $python_home + "".log""
+    $args = ""/S /D=$python_home""
+    Write-Host $filepath $args
+    Start-Process -FilePath $filepath -ArgumentList $args -Wait -Passthru
+    if (Test-Path $python_home) {
+        Write-Host ""Python $python_version ($architecture) installation complete""
+    } else {
+        Write-Host ""Failed to install Python in $python_home""
+        Get-Content -Path $install_log
+        Exit 1
+    }
+}
+
+
+function InstallMinicondaPip ($python_home) {
+    $pip_path = $python_home + ""\Scripts\pip.exe""
+    $conda_path = $python_home + ""\Scripts\conda.exe""
+    if (-not(Test-Path $pip_path)) {
+        Write-Host ""Installing pip...""
+        $args = ""install --yes pip""
+        Write-Host $conda_path $args
+        Start-Process -FilePath ""$conda_path"" -ArgumentList $args -Wait -Passthru
+    } else {
+        Write-Host ""pip already installed.""
+    }
+}
+
+function main () {
+    InstallPython $env:PYTHON_VERSION $env:PYTHON_ARCH $env:PYTHON
+    InstallPip $env:PYTHON
+}
+
+main",,a74c9cfbaed9f811e7563cfc3dce894928e0221a,CVE-2020-7212,a74c9cfbaed9f811e7563cfc3dce894928e0221a,https://github.com/urllib3/urllib3,NVD_DIRECT_COMMIT,1337,COMPLETED,"   $VAR = ""VAR: $VAR = ""VAR: $VAR = ""VAR: $VAR = ""VAR:\VAR-VAR.VAR"" $VAR = @"" (?VAR) (?<VAR>\VAR+) \. (?<VAR>\VAR+) \. (?<VAR>\VAR+) (?<VAR>[VAR-VAR]{1,2}\VAR+) ""@ VAR VAR ($VAR, $VAR) { $VAR = VAR-VAR VAR.VAR.VAR $VAR = $VAR.VAR + ""\"" $VAR = $VAR + $VAR VAR (VAR-VAR $VAR) { VAR-VAR ""VAR"" $VAR VAR $VAR }  VAR-VAR ""VAR"" $VAR ""VAR"" $VAR $VAR = 2 VAR ($VAR = 0; $VAR -VAR $VAR; $VAR++) { VAR { $VAR.VAR($VAR, $VAR) VAR } VAR [VAR]{ VAR-VAR 1 } } VAR (VAR-VAR $VAR) { VAR-VAR ""VAR VAR VAR"" $VAR } VAR {  $VAR.VAR($VAR, $VAR) } VAR $VAR } VAR VAR ($VAR) { VAR ($VAR -VAR $VAR) { VAR ([VAR]$VAR.VAR, [VAR]$VAR.VAR, [VAR]$VAR.VAR, $VAR.VAR) } $VAR = [VAR]$VAR VAR ($VAR.VAR, $VAR.VAR, $VAR.VAR, """") } VAR VAR ($VAR, $VAR) { $VAR, $VAR, $VAR, $VAR = VAR $VAR VAR (($VAR -VAR 2 -VAR $VAR -VAR 0) ` -VAR ($VAR -VAR 3 -VAR $VAR -VAR 2 -VAR $VAR -VAR 0) ` ) { $VAR = ""$VAR.$VAR"" $VAR = ""$VAR.$VAR$VAR"" } VAR { $VAR = ""$VAR.$VAR.$VAR"" } VAR ($VAR) { VAR (($VAR -VAR 2) ` -VAR ($VAR -VAR 3 -VAR $VAR -VAR 1) ` -VAR ($VAR -VAR 3 -VAR $VAR -VAR 2) ` -VAR ($VAR -VAR 3 -VAR $VAR -VAR 3) ` ) { $VAR = ""$VAR/VAR"" } } VAR (($VAR -VAR 2) -VAR ($VAR -VAR 3 -VAR $VAR -VAR 4)) { $VAR = ""VAR"" VAR ($VAR) { $VAR = "".$VAR"" } } VAR { $VAR = ""VAR"" VAR ($VAR) { $VAR = ""-$VAR"" } } $VAR = ""VAR-$VAR$VAR.$VAR"" $VAR = ""$VAR$VAR/$VAR"" $VAR = VAR $VAR $VAR VAR $VAR } VAR VAR ($VAR, $VAR, $VAR) { VAR-VAR ""VAR VAR"" $VAR ""VAR"" $VAR ""VAR VAR VAR"" $VAR VAR (VAR-VAR $VAR) { VAR-VAR $VAR ""VAR VAR, VAR."" VAR $VAR } VAR ($VAR -VAR ""32"") { $VAR = """" } VAR { $VAR = ""VAR"" } $VAR = VAR $VAR $VAR $VAR = [VAR.VAR.VAR]::VAR($VAR) VAR-VAR ""VAR $VAR VAR $VAR"" $VAR = $VAR + "".VAR"" VAR ($VAR -VAR '.VAR') { VAR $VAR $VAR $VAR } VAR { VAR $VAR $VAR $VAR } VAR (VAR-VAR $VAR) { VAR-VAR ""VAR $VAR ($VAR) VAR VAR"" } VAR { VAR-VAR ""VAR VAR VAR VAR VAR $VAR"" VAR-VAR -VAR $VAR VAR 1 } } VAR VAR ($VAR, $VAR, $VAR) { $VAR = ""/VAR VAR=1 VAR=$VAR"" VAR $VAR $VAR } VAR VAR ($VAR, $VAR, $VAR) { $VAR = ""/VAR /VAR $VAR /VAR $VAR VAR=$VAR"" $VAR = ""/VAR /VAR $VAR"" VAR ""VAR.VAR"" $VAR VAR (-VAR(VAR-VAR $VAR)) { VAR-VAR ""VAR VAR VAR VAR VAR VAR-VAR, VAR."" VAR ""VAR.VAR"" $VAR VAR ""VAR.VAR"" $VAR } } VAR VAR ($VAR, $VAR) { VAR-VAR $VAR $VAR VAR-VAR -VAR $VAR -VAR $VAR -VAR -VAR } VAR VAR ($VAR) { $VAR = $VAR + ""\VAR\VAR.VAR"" $VAR = $VAR + ""\VAR.VAR"" VAR (-VAR(VAR-VAR $VAR)) { VAR-VAR ""VAR VAR..."" $VAR = VAR-VAR VAR.VAR.VAR $VAR.VAR($VAR, $VAR) VAR-VAR ""VAR:"" $VAR $VAR & $VAR $VAR } VAR { VAR-VAR ""VAR VAR VAR."" } } VAR VAR ($VAR, $VAR) { VAR ($VAR -VAR ""3.4"") { $VAR = ""VAR-3.5.5-VAR-"" + $VAR + "".VAR"" } VAR { $VAR = ""VAR-3.5.5-VAR-"" + $VAR + "".VAR"" } $VAR = $VAR + $VAR $VAR = VAR $VAR $VAR VAR $VAR } VAR VAR ($VAR, $VAR, $VAR) { VAR-VAR ""VAR VAR"" $VAR ""VAR"" $VAR ""VAR VAR VAR"" $VAR VAR (VAR-VAR $VAR) { VAR-VAR $VAR ""VAR VAR, VAR."" VAR $VAR } VAR ($VAR -VAR ""32"") { $VAR = ""VAR"" } VAR { $VAR = ""VAR"" } $VAR = VAR $VAR $VAR VAR-VAR ""VAR"" $VAR ""VAR"" $VAR $VAR = $VAR + "".VAR"" $VAR = ""/VAR /VAR=$VAR"" VAR-VAR $VAR $VAR VAR-VAR -VAR $VAR -VAR $VAR -VAR -VAR VAR (VAR-VAR $VAR) { VAR-VAR ""VAR $VAR ($VAR) VAR VAR"" } VAR { VAR-VAR ""VAR VAR VAR VAR VAR $VAR"" VAR-VAR -VAR $VAR VAR 1 } } VAR VAR ($VAR) { $VAR = $VAR + ""\VAR\VAR.VAR"" $VAR = $VAR + ""\VAR\VAR.VAR"" VAR (-VAR(VAR-VAR $VAR)) { VAR-VAR ""VAR VAR..."" $VAR = ""VAR --VAR VAR"" VAR-VAR $VAR $VAR VAR-VAR -VAR ""$VAR"" -VAR $VAR -VAR -VAR } VAR { VAR-VAR ""VAR VAR VAR."" } } VAR VAR () { VAR $VAR:VAR $VAR:VAR $VAR:VAR VAR $VAR:VAR } VAR ",2,13
+vyper_2c73f8352635c0a433423a5b94740de1a118e508,vyper/codegen/expr.py,"            left_keccak = keccak256_helper(self.expr, left, self.context)
+            right_keccak = keccak256_helper(self.expr, right, self.context)
+            if op not in (""eq"", ""ne""):
+                return  # raises
+                # use hash even for Bytes[N<=32], because there could be dirty
+                # bytes past the bytes data.
+                return IRnode.from_list([op, left_keccak, right_keccak], typ=""bool"")","    LOAD,
+    bytes_data_ptr,
+            length_mismatch = left.typ.maxlen != right.typ.maxlen
+            left_over_32 = left.typ.maxlen > 32
+            right_over_32 = right.typ.maxlen > 32
+
+            if length_mismatch or left_over_32 or right_over_32:
+                left_keccak = keccak256_helper(self.expr, left, self.context)
+                right_keccak = keccak256_helper(self.expr, right, self.context)
+
+                if op == ""eq"" or op == ""ne"":
+                    return IRnode.from_list([op, left_keccak, right_keccak], typ=""bool"")
+
+                else:
+                    return
+
+                def load_bytearray(side):
+                    return LOAD(bytes_data_ptr(side))
+
+                return IRnode.from_list(
+                    # CMC 2022-03-24 TODO investigate this.
+                    [op, load_bytearray(left), load_bytearray(right)],
+                    typ=""bool"",
+                )",2c73f8352635c0a433423a5b94740de1a118e508,CVE-2022-24787,2c73f8352635c0a433423a5b94740de1a118e508,https://github.com/vyperlang/vyper,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR = VAR(VAR.VAR, VAR, VAR.VAR) VAR = VAR(VAR.VAR, VAR, VAR.VAR) VAR VAR VAR VAR (""VAR"", ""VAR""): VAR    VAR VAR.VAR([VAR, VAR, VAR], VAR=""VAR"") VAR, VAR, VAR = VAR.VAR.VAR != VAR.VAR.VAR VAR = VAR.VAR.VAR > 32 VAR = VAR.VAR.VAR > 32 VAR VAR VAR VAR VAR VAR: VAR = VAR(VAR.VAR, VAR, VAR.VAR) VAR = VAR(VAR.VAR, VAR, VAR.VAR) VAR VAR == ""VAR"" VAR VAR == ""VAR"": VAR VAR.VAR([VAR, VAR, VAR], VAR=""VAR"") VAR: VAR VAR VAR(VAR): VAR VAR(VAR(VAR)) VAR VAR.VAR(  [VAR, VAR(VAR), VAR(VAR)], VAR=""VAR"", )",2,13
+vyper_2c73f8352635c0a433423a5b94740de1a118e508,vyper/codegen/keccak256_helper.py,"from vyper.codegen.core import bytes_data_ptr, ensure_in_memory, get_bytearray_length
+def keccak256_helper(expr, to_hash, context):
+    _check_byteslike(to_hash.typ, expr)
+    if isinstance(to_hash, bytes):
+        return IRnode.from_list(bytes_to_int(keccak256(to_hash)), typ=BaseType(""bytes32""))
+    if is_base_type(to_hash.typ, ""bytes32""):
+                [""mstore"", MemoryPositions.FREE_VAR_SPACE, to_hash],
+    to_hash = ensure_in_memory(to_hash, context)
+
+    with to_hash.cache_when_complex(""buf"") as (b1, to_hash):
+        data = bytes_data_ptr(to_hash)
+        len_ = get_bytearray_length(to_hash)
+        return b1.resolve(
+            IRnode.from_list(
+                [""sha3"", data, len_],
+                typ=""bytes32"",
+                annotation=""keccak256"",
+                add_gas_estimate=_gas_bound(ceil(to_hash.typ.maxlen / 32)),
+            )
+        )","from vyper.codegen.core import ensure_in_memory
+def keccak256_helper(expr, ir_arg, context):
+    sub = ir_arg  # TODO get rid of useless variable
+    _check_byteslike(sub.typ, expr)
+    if isinstance(sub, bytes):
+        return IRnode.from_list(bytes_to_int(keccak256(sub)), typ=BaseType(""bytes32""))
+    if is_base_type(sub.typ, ""bytes32""):
+                [""mstore"", MemoryPositions.FREE_VAR_SPACE, sub],
+    sub = ensure_in_memory(sub, context)
+
+    return IRnode.from_list(
+        [
+            ""with"",
+            ""_buf"",
+            sub,
+            [""sha3"", [""add"", ""_buf"", 32], [""mload"", ""_buf""]],
+        ],
+        typ=BaseType(""bytes32""),
+        annotation=""keccak256"",
+        add_gas_estimate=_gas_bound(ceil(sub.typ.maxlen / 32)),
+    )",2c73f8352635c0a433423a5b94740de1a118e508,CVE-2022-24787,2c73f8352635c0a433423a5b94740de1a118e508,https://github.com/vyperlang/vyper,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR VAR.VAR.VAR VAR VAR, VAR, VAR VAR VAR(VAR, VAR, VAR): VAR(VAR.VAR, VAR) VAR VAR(VAR, VAR): VAR VAR.VAR(VAR(VAR(VAR)), VAR=VAR(""VAR"")) VAR VAR(VAR.VAR, ""VAR""): [""VAR"", VAR.VAR, VAR], VAR = VAR(VAR, VAR) VAR VAR.VAR(""VAR"") VAR (VAR, VAR): VAR = VAR(VAR) VAR = VAR(VAR) VAR VAR.VAR( VAR.VAR( [""VAR"", VAR, VAR], VAR=""VAR"", VAR=""VAR"", VAR=VAR(VAR(VAR.VAR.VAR / 32)), ) ) VAR VAR.VAR.VAR VAR VAR VAR VAR(VAR, VAR, VAR): VAR = VAR  VAR(VAR.VAR, VAR) VAR VAR(VAR, VAR): VAR VAR.VAR(VAR(VAR(VAR)), VAR=VAR(""VAR"")) VAR VAR(VAR.VAR, ""VAR""): [""VAR"", VAR.VAR, VAR], VAR = VAR(VAR, VAR) VAR VAR.VAR( [ ""VAR"", ""VAR"", VAR, [""VAR"", [""VAR"", ""VAR"", 32], [""VAR"", ""VAR""]], ], VAR=VAR(""VAR""), VAR=""VAR"", VAR=VAR(VAR(VAR.VAR.VAR / 32)), )",2,13

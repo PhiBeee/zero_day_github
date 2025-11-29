@@ -1,0 +1,170 @@
+commit,file,added_code,deleted_code,hash_clean,cve_id,hash,repo_url,rel_type,score,extraction_status,text_norm,cluster_kmeans
+cpython_a4ae828ee416a66d8c7bf5ee71d653c2cc6a26dd,Modules/_pickle.c,"    size_t mt_mask;
+    size_t mt_used;
+    size_t mt_allocated;
+    size_t memo_size;       /* Capacity of the memo array */
+    size_t memo_len;        /* Number of objects in the memo */
+    for (size_t i = 0; i < self->mt_allocated; i++) {
+    size_t mask = self->mt_mask;
+_PyMemoTable_ResizeTable(PyMemoTable *self, size_t min_size)
+    size_t new_size = MT_MINSIZE;
+    size_t to_process;
+    if (min_size > PY_SSIZE_T_MAX) {
+
+    /* Find the smallest valid table size >= min_size. */
+    while (new_size < min_size) {
+        new_size <<= 1;
+    }
+    if (SIZE_MAX / 3 >= self->mt_used && self->mt_used * 3 < self->mt_allocated * 2) {
+    }
+    // self->mt_used is always < PY_SSIZE_T_MAX, so this can't overflow.
+    size_t desired_size = (self->mt_used > 50000 ? 2 : 4) * self->mt_used;
+    return _PyMemoTable_ResizeTable(self, desired_size);
+_Unpickler_ResizeMemoList(UnpicklerObject *self, size_t new_size)
+    size_t i;
+_Unpickler_MemoGet(UnpicklerObject *self, size_t idx)
+    if (idx >= self->memo_size)
+_Unpickler_MemoPut(UnpicklerObject *self, size_t idx, PyObject *value)
+    for (size_t i = 0; i < memo->mt_allocated; ++i) {
+    size_t i;
+    size_t new_memo_size = 0;
+        for (size_t i = 0; i < new_memo_size; i++) {
+        for (size_t i = new_memo_size - 1; i != SIZE_MAX; i--) {","    Py_ssize_t mt_mask;
+    Py_ssize_t mt_used;
+    Py_ssize_t mt_allocated;
+    Py_ssize_t memo_size;       /* Capacity of the memo array */
+    Py_ssize_t memo_len;        /* Number of objects in the memo */
+    Py_ssize_t i;
+    for (i = 0; i < self->mt_allocated; i++) {
+    size_t mask = (size_t)self->mt_mask;
+_PyMemoTable_ResizeTable(PyMemoTable *self, Py_ssize_t min_size)
+    Py_ssize_t new_size = MT_MINSIZE;
+    Py_ssize_t to_process;
+    /* Find the smallest valid table size >= min_size. */
+    while (new_size < min_size && new_size > 0)
+        new_size <<= 1;
+    if (new_size <= 0) {
+    if (!(self->mt_used * 3 >= (self->mt_mask + 1) * 2))
+    return _PyMemoTable_ResizeTable(self,
+        (self->mt_used > 50000 ? 2 : 4) * self->mt_used);
+_Unpickler_ResizeMemoList(UnpicklerObject *self, Py_ssize_t new_size)
+    Py_ssize_t i;
+_Unpickler_MemoGet(UnpicklerObject *self, Py_ssize_t idx)
+    if (idx < 0 || idx >= self->memo_size)
+_Unpickler_MemoPut(UnpicklerObject *self, Py_ssize_t idx, PyObject *value)
+    Py_ssize_t i;
+    for (i = 0; i < memo->mt_allocated; ++i) {
+    Py_ssize_t i;
+    Py_ssize_t new_memo_size = 0;
+    Py_ssize_t i;
+        for (i = 0; i < new_memo_size; i++) {
+        i = new_memo_size;
+        while (--i >= 0) {",a4ae828ee416a66d8c7bf5ee71d653c2cc6a26dd,CVE-2018-20406,a4ae828ee416a66d8c7bf5ee71d653c2cc6a26dd,https://github.com/python/cpython,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR VAR; VAR VAR; VAR VAR; VAR VAR;  VAR VAR;  VAR (VAR VAR = 0; VAR < VAR->VAR; VAR++) { VAR VAR = VAR->VAR; VAR(VAR *VAR, VAR VAR) VAR VAR = VAR; VAR VAR; VAR (VAR > VAR) {  VAR (VAR < VAR) { VAR <<= 1; } VAR (VAR / 3 >= VAR->VAR && VAR->VAR * 3 < VAR->VAR * 2) { }  VAR VAR = (VAR->VAR > 50000 ? 2 : 4) * VAR->VAR; VAR VAR(VAR, VAR); VAR(VAR *VAR, VAR VAR) VAR VAR; VAR(VAR *VAR, VAR VAR) VAR (VAR >= VAR->VAR) VAR(VAR *VAR, VAR VAR, VAR *VAR) VAR (VAR VAR = 0; VAR < VAR->VAR; ++VAR) { VAR VAR; VAR VAR = 0; VAR (VAR VAR = 0; VAR < VAR; VAR++) { VAR (VAR VAR = VAR - 1; VAR != VAR; VAR--) { VAR VAR; VAR VAR; VAR VAR; VAR VAR;  VAR VAR;  VAR VAR; VAR (VAR = 0; VAR < VAR->VAR; VAR++) { VAR VAR = (VAR)VAR->VAR; VAR(VAR *VAR, VAR VAR) VAR VAR = VAR; VAR VAR;  VAR (VAR < VAR && VAR > 0) VAR <<= 1; VAR (VAR <= 0) { VAR (!(VAR->VAR * 3 >= (VAR->VAR + 1) * 2)) VAR VAR(VAR, (VAR->VAR > 50000 ? 2 : 4) * VAR->VAR); VAR(VAR *VAR, VAR VAR) VAR VAR; VAR(VAR *VAR, VAR VAR) VAR (VAR < 0 || VAR >= VAR->VAR) VAR(VAR *VAR, VAR VAR, VAR *VAR) VAR VAR; VAR (VAR = 0; VAR < VAR->VAR; ++VAR) { VAR VAR; VAR VAR = 0; VAR VAR; VAR (VAR = 0; VAR < VAR; VAR++) { VAR = VAR; VAR (--VAR >= 0) {",17
+django_42a66e969023c00536256469f0e8b8a099ef109d,tests/utils_tests/test_text.py,"    def test_truncate_chars_html(self):
+        perf_test_values = [
+            (('</a' + '\t' * 50000) + '//>', None),
+            ('&' * 50000, '&' * 7 + '...'),
+            ('_X<<<<<<<<<<<>', None),
+        ]
+        for value, expected in perf_test_values:
+            truncator = text.Truncator(value)
+            self.assertEqual(expected if expected else value, truncator.chars(10, html=True))
+
+        self.assertEqual('<p>I &lt;3 python,...</p>', truncator.words(3, '...', html=True))
+        perf_test_values = [
+            ('</a' + '\t' * 50000) + '//>',
+            '&' * 50000,
+            '_X<<<<<<<<<<<>',
+        ]
+        for value in perf_test_values:
+            truncator = text.Truncator(value)
+            self.assertEqual(value, truncator.words(50, html=True))","        self.assertEqual('<p>I &lt;3 python...</p>', truncator.words(3, '...', html=True))
+        re_tag_catastrophic_test = ('</a' + '\t' * 50000) + '//>'
+        truncator = text.Truncator(re_tag_catastrophic_test)
+        self.assertEqual(re_tag_catastrophic_test, truncator.words(500, html=True))",42a66e969023c00536256469f0e8b8a099ef109d,CVE-2019-14232,42a66e969023c00536256469f0e8b8a099ef109d,https://github.com/django/django,GHSD_GIT_REPOBASED,152,COMPLETED,"VAR VAR(VAR): VAR = [ (('</VAR' + '\VAR' * 50000) + ' ('&' * 50000, '&' * 7 + '...'), ('VAR<<<<<<<<<<<>', VAR), ] VAR VAR, VAR VAR VAR: VAR = VAR.VAR(VAR) VAR.VAR(VAR VAR VAR VAR VAR, VAR.VAR(10, VAR=VAR)) VAR.VAR('<VAR>VAR &VAR;3 VAR,...</VAR>', VAR.VAR(3, '...', VAR=VAR)) VAR = [ ('</VAR' + '\VAR' * 50000) + ' '&' * 50000, 'VAR<<<<<<<<<<<>', ] VAR VAR VAR VAR: VAR = VAR.VAR(VAR) VAR.VAR(VAR, VAR.VAR(50, VAR=VAR)) VAR.VAR('<VAR>VAR &VAR;3 VAR...</VAR>', VAR.VAR(3, '...', VAR=VAR)) VAR = ('</VAR' + '\VAR' * 50000) + ' VAR = VAR.VAR(VAR) VAR.VAR(VAR, VAR.VAR(500, VAR=VAR))",17
+django_94c5da1d17a6b0d378866c66b605102c19f7988c,tests/utils_tests/test_text.py,"        re_tag_catastrophic_test = ('</a' + '\t' * 50000) + '//>'
+        truncator = text.Truncator(re_tag_catastrophic_test)
+        self.assertEqual(re_tag_catastrophic_test, truncator.words(500, html=True))
+",,94c5da1d17a6b0d378866c66b605102c19f7988c,CVE-2018-7537,94c5da1d17a6b0d378866c66b605102c19f7988c,https://github.com/django/django,GHSD_GIT_REPOBASED,84,COMPLETED,"VAR = ('</VAR' + '\VAR' * 50000) + ' VAR = VAR.VAR(VAR) VAR.VAR(VAR, VAR.VAR(500, VAR=VAR)) ",17
+django_97b7dd59bb8d6163239061e2022153c3415d146d,tests/utils_tests/test_text.py,"        re_tag_catastrophic_test = ('</a' + '\t' * 50000) + '//>'
+        truncator = text.Truncator(re_tag_catastrophic_test)
+        self.assertEqual(re_tag_catastrophic_test, truncator.words(500, html=True))
+",,97b7dd59bb8d6163239061e2022153c3415d146d,CVE-2018-7537,97b7dd59bb8d6163239061e2022153c3415d146d,https://github.com/django/django,GHSD_GIT_REPOBASED,84,COMPLETED,"VAR = ('</VAR' + '\VAR' * 50000) + ' VAR = VAR.VAR(VAR) VAR.VAR(VAR, VAR.VAR(500, VAR=VAR)) ",17
+django_a91436360b79a6ff995c3e5018bcc666dfaf1539,tests/utils_tests/test_text.py,"        re_tag_catastrophic_test = ('</a' + '\t' * 50000) + '//>'
+        truncator = text.Truncator(re_tag_catastrophic_test)
+        self.assertEqual(re_tag_catastrophic_test, truncator.words(500, html=True))
+",,a91436360b79a6ff995c3e5018bcc666dfaf1539,CVE-2018-7537,a91436360b79a6ff995c3e5018bcc666dfaf1539,https://github.com/django/django,GHSD_GIT_REPOBASED,148,COMPLETED,"VAR = ('</VAR' + '\VAR' * 50000) + ' VAR = VAR.VAR(VAR) VAR.VAR(VAR, VAR.VAR(500, VAR=VAR)) ",17
+django_abf89d729f210c692a50e0ad3f75fb6bec6fae16,tests/utils_tests/test_html.py,"
+    def test_urlize_unchanged_inputs(self):
+        tests = (
+            ('a' + '@a' * 50000) + 'a',  # simple_email_re catastrophic test
+            ('a' + '.' * 1000000) + 'a',  # trailing_punctuation catastrophic test
+        )
+        for value in tests:
+            self.assertEqual(html.urlize(value), value)",,abf89d729f210c692a50e0ad3f75fb6bec6fae16,CVE-2018-7536,abf89d729f210c692a50e0ad3f75fb6bec6fae16,https://github.com/django/django,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR VAR(VAR): VAR = ( ('VAR' + '@VAR' * 50000) + 'VAR',  ('VAR' + '.' * 1000000) + 'VAR',  ) VAR VAR VAR VAR: VAR.VAR(VAR.VAR(VAR), VAR) ",17
+django_c23723a1551340cc7d3126f04fcfd178fa224193,tests/utils_tests/test_text.py,"    def test_truncate_chars_html(self):
+        perf_test_values = [
+            (('</a' + '\t' * 50000) + '//>', None),
+            ('&' * 50000, '&' * 7 + '...'),
+            ('_X<<<<<<<<<<<>', None),
+        ]
+        for value, expected in perf_test_values:
+            with self.subTest(value=value):
+                truncator = text.Truncator(value)
+                self.assertEqual(expected if expected else value, truncator.chars(10, html=True))
+
+        self.assertEqual('<p>I &lt;3 python,...</p>', truncator.words(3, '...', html=True))
+        perf_test_values = [
+            ('</a' + '\t' * 50000) + '//>',
+            '&' * 50000,
+            '_X<<<<<<<<<<<>',
+        ]
+        for value in perf_test_values:
+            with self.subTest(value=value):
+                truncator = text.Truncator(value)
+                self.assertEqual(value, truncator.words(50, html=True))","        self.assertEqual('<p>I &lt;3 python...</p>', truncator.words(3, '...', html=True))
+        re_tag_catastrophic_test = ('</a' + '\t' * 50000) + '//>'
+        truncator = text.Truncator(re_tag_catastrophic_test)
+        self.assertEqual(re_tag_catastrophic_test, truncator.words(500, html=True))",c23723a1551340cc7d3126f04fcfd178fa224193,CVE-2019-14232,c23723a1551340cc7d3126f04fcfd178fa224193,https://github.com/django/django,GHSD_GIT_REPOBASED,152,COMPLETED,"VAR VAR(VAR): VAR = [ (('</VAR' + '\VAR' * 50000) + ' ('&' * 50000, '&' * 7 + '...'), ('VAR<<<<<<<<<<<>', VAR), ] VAR VAR, VAR VAR VAR: VAR VAR.VAR(VAR=VAR): VAR = VAR.VAR(VAR) VAR.VAR(VAR VAR VAR VAR VAR, VAR.VAR(10, VAR=VAR)) VAR.VAR('<VAR>VAR &VAR;3 VAR,...</VAR>', VAR.VAR(3, '...', VAR=VAR)) VAR = [ ('</VAR' + '\VAR' * 50000) + ' '&' * 50000, 'VAR<<<<<<<<<<<>', ] VAR VAR VAR VAR: VAR VAR.VAR(VAR=VAR): VAR = VAR.VAR(VAR) VAR.VAR(VAR, VAR.VAR(50, VAR=VAR)) VAR.VAR('<VAR>VAR &VAR;3 VAR...</VAR>', VAR.VAR(3, '...', VAR=VAR)) VAR = ('</VAR' + '\VAR' * 50000) + ' VAR = VAR.VAR(VAR) VAR.VAR(VAR, VAR.VAR(500, VAR=VAR))",17
+django_c3289717c6f21a8cf23daff1c78c0c014b94041f,tests/utils_tests/test_text.py,"    def test_truncate_chars_html(self):
+        perf_test_values = [
+            (('</a' + '\t' * 50000) + '//>', None),
+            ('&' * 50000, '&' * 9 + '…'),
+            ('_X<<<<<<<<<<<>', None),
+        ]
+        for value, expected in perf_test_values:
+            with self.subTest(value=value):
+                truncator = text.Truncator(value)
+                self.assertEqual(expected if expected else value, truncator.chars(10, html=True))
+
+        self.assertEqual('<p>I &lt;3 python,…</p>', truncator.words(3, html=True))
+        perf_test_values = [
+            ('</a' + '\t' * 50000) + '//>',
+            '&' * 50000,
+            '_X<<<<<<<<<<<>',
+        ]
+        for value in perf_test_values:
+            with self.subTest(value=value):
+                truncator = text.Truncator(value)
+                self.assertEqual(value, truncator.words(50, html=True))","        self.assertEqual('<p>I &lt;3 python…</p>', truncator.words(3, html=True))
+        re_tag_catastrophic_test = ('</a' + '\t' * 50000) + '//>'
+        truncator = text.Truncator(re_tag_catastrophic_test)
+        self.assertEqual(re_tag_catastrophic_test, truncator.words(500, html=True))",c3289717c6f21a8cf23daff1c78c0c014b94041f,CVE-2019-14232,c3289717c6f21a8cf23daff1c78c0c014b94041f,https://github.com/django/django,GHSD_GIT_REPOBASED,152,COMPLETED,"VAR VAR(VAR): VAR = [ (('</VAR' + '\VAR' * 50000) + ' ('&' * 50000, '&' * 9 + '…'), ('VAR<<<<<<<<<<<>', VAR), ] VAR VAR, VAR VAR VAR: VAR VAR.VAR(VAR=VAR): VAR = VAR.VAR(VAR) VAR.VAR(VAR VAR VAR VAR VAR, VAR.VAR(10, VAR=VAR)) VAR.VAR('<VAR>VAR &VAR;3 VAR,…</VAR>', VAR.VAR(3, VAR=VAR)) VAR = [ ('</VAR' + '\VAR' * 50000) + ' '&' * 50000, 'VAR<<<<<<<<<<<>', ] VAR VAR VAR VAR: VAR VAR.VAR(VAR=VAR): VAR = VAR.VAR(VAR) VAR.VAR(VAR, VAR.VAR(50, VAR=VAR)) VAR.VAR('<VAR>VAR &VAR;3 VAR…</VAR>', VAR.VAR(3, VAR=VAR)) VAR = ('</VAR' + '\VAR' * 50000) + ' VAR = VAR.VAR(VAR) VAR.VAR(VAR, VAR.VAR(500, VAR=VAR))",17
+django_d17974a287a6ea2e361daff88fcc004cbd6835fa,tests/utils_tests/test_text.py,"        re_tag_catastrophic_test = ('</a' + '\t' * 50000) + '//>'
+        truncator = text.Truncator(re_tag_catastrophic_test)
+        self.assertEqual(re_tag_catastrophic_test, truncator.words(500, html=True))
+",,d17974a287a6ea2e361daff88fcc004cbd6835fa,CVE-2018-7537,d17974a287a6ea2e361daff88fcc004cbd6835fa,https://github.com/django/django,GHSD_GIT_REPOBASED,84,COMPLETED,"VAR = ('</VAR' + '\VAR' * 50000) + ' VAR = VAR.VAR(VAR) VAR.VAR(VAR, VAR.VAR(500, VAR=VAR)) ",17
+django_e157315da3ae7005fa0683ffc9751dbeca7306c8,tests/utils_tests/test_html.py,"    smart_urlquote, strip_spaces_between_tags, strip_tags, urlize,
+
+    def test_urlize_unchanged_inputs(self):
+        tests = (
+            ('a' + '@a' * 50000) + 'a',  # simple_email_re catastrophic test
+            ('a' + '.' * 1000000) + 'a',  # trailing_punctuation catastrophic test
+        )
+        for value in tests:
+            with self.subTest(value=value):
+                self.assertEqual(urlize(value), value)","    smart_urlquote, strip_spaces_between_tags, strip_tags,",e157315da3ae7005fa0683ffc9751dbeca7306c8,CVE-2018-7536,e157315da3ae7005fa0683ffc9751dbeca7306c8,https://github.com/django/django,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR, VAR, VAR, VAR, VAR VAR(VAR): VAR = ( ('VAR' + '@VAR' * 50000) + 'VAR',  ('VAR' + '.' * 1000000) + 'VAR',  ) VAR VAR VAR VAR: VAR VAR.VAR(VAR=VAR): VAR.VAR(VAR(VAR), VAR) VAR, VAR, VAR,",17
+envoy_542f84c66e9f6479bc31c6f53157c60472b25240,docs/root/configuration/best_practices/edge.rst,"* :ref:`Listener connection limits. <config_listeners_runtime>`
+* :ref:`Global downstream connection limits <config_overload_manager>`.
+          overload:
+            global_downstream_max_connections: 50000",* :ref:`Connection limits. <config_listeners_runtime>`,542f84c66e9f6479bc31c6f53157c60472b25240,CVE-2020-8663,542f84c66e9f6479bc31c6f53157c60472b25240,https://github.com/envoyproxy/envoy,NVD_GIT_REPOBASED,76,COMPLETED,* :VAR:`VAR VAR VAR. <VAR>` * :VAR:`VAR VAR VAR VAR <VAR>`. VAR: VAR: 50000 * :VAR:`VAR VAR. <VAR>`,17

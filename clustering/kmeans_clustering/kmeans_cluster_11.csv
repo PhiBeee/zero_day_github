@@ -1,0 +1,1890 @@
+commit,file,added_code,deleted_code,hash_clean,cve_id,hash,repo_url,rel_type,score,extraction_status,text_norm,cluster_kmeans
+gpac_71f9871fc210e60df041b58c84572782b4849de9,src/isomedia/box_code_base.c,"		ISOM_DECREASE_SIZE_NO_ERR(ptr, 8)
+		if ((tag_size < 8) || (tag_size>ptr->size) || (name_size>ptr->size)) {
+		ISOM_DECREASE_SIZE_NO_ERR(ptr, 10)
+		tag_size -= 8;
+		} else {
+			prop_size = 0;","		ISOM_DECREASE_SIZE_NO_ERR(ptr, 18)
+		tag_size -= 8;
+
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));",71f9871fc210e60df041b58c84572782b4849de9,CVE-2022-24249,71f9871fc210e60df041b58c84572782b4849de9,https://github.com/gpac/gpac,NVD_GIT_REPOBASED,106,COMPLETED,"VAR(VAR, 8) VAR ((VAR < 8) || (VAR>VAR->VAR) || (VAR>VAR->VAR)) { VAR(VAR, 10) VAR -= 8; } VAR { VAR = 0; VAR(VAR, 18) VAR -= 8; VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR));",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21852,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21858,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21841,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21862,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21850,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21843,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21848,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21844,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21842,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21861,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21856,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21851,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21838,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21840,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21860,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21837,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21849,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21847,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21853,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21836,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21859,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,114,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21835,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21839,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21854,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21855,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21834,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21845,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21846,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_8cd33e8977fd5f4215e4b67c309fd403762bfeb7,src/isomedia/box_code_base.c,"		u32 name_size = (u32) ptr->size;
+		if (name_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in hdlr\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->nameUTF8 = (char*)gf_malloc(name_size);
+		gf_bs_read_data(bs, ptr->nameUTF8, name_size);
+		if (ptr->nameUTF8[name_size-1]) {
+			if (name_size > 1)
+				memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (name_size-1) );
+			ptr->nameUTF8[name_size-1] = 0;
+	if ((u64)ptr->attribute_count > (u64)SIZE_MAX/sizeof(u32)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in stri\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u64)ptr->entry_count > (u64)SIZE_MAX/sizeof(GF_TrickPlayBoxEntry)) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in trik\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+		if (name_size >= (u32)0xFFFFFFFF) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid name_size %lu in xtra\n"", name_size));
+			return GF_ISOM_INVALID_FILE;
+		}
+","		ptr->nameUTF8 = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->nameUTF8, (u32) ptr->size);
+		if (ptr->nameUTF8[ptr->size-1]) {
+			memmove(ptr->nameUTF8, ptr->nameUTF8+1, sizeof(char) * (u32) (ptr->size-1) );
+			ptr->nameUTF8[ptr->size-1] = 0;",8cd33e8977fd5f4215e4b67c309fd403762bfeb7,CVE-2021-21857,8cd33e8977fd5f4215e4b67c309fd403762bfeb7,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR > 1) VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR-1) ); VAR->VAR[VAR-1] = 0; VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR > (VAR)VAR/VAR(VAR)) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR) VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) { VAR(VAR->VAR, VAR->VAR+1, VAR(VAR) * (VAR) (VAR->VAR-1) ); VAR->VAR[VAR->VAR-1] = 0;",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21846,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21842,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21861,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21838,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21856,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21843,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21850,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21848,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21840,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21860,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21837,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21862,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21847,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21849,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21854,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21841,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21858,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21853,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21836,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21859,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21851,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21835,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21839,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21855,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21834,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21844,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21845,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21852,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+gpac_bbd741e0e5a6e7e1e90a73c350acc061dde9450b,src/isomedia/box_code_base.c,"		u32 location_size = (u32) ptr->size;
+		if (location_size < 1) {
+			GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+			return GF_ISOM_INVALID_FILE;
+		}
+		ptr->location = (char*)gf_malloc(location_size);
+		gf_bs_read_data(bs, ptr->location, location_size);
+		if (ptr->location[location_size-1]) {
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in sdp box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in rtp_hnti box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+
+	if (length >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid length %lu in name box\n"", length));
+		return GF_ISOM_INVALID_FILE;
+	}
+
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in txtc box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}
+	if ((u32)ptr->size >= (u32)0xFFFFFFFF) {
+		GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[iso file] Invalid size %llu in svhd box\n"", ptr->size));
+		return GF_ISOM_INVALID_FILE;
+	}","		ptr->location = (char*)gf_malloc((u32) ptr->size);
+		gf_bs_read_data(bs, ptr->location, (u32)ptr->size);
+		if (ptr->location[ptr->size-1]) {",bbd741e0e5a6e7e1e90a73c350acc061dde9450b,CVE-2021-21857,bbd741e0e5a6e7e1e90a73c350acc061dde9450b,https://github.com/gpac/gpac,CPE_GIT_REPOBASED,106,COMPLETED,"VAR VAR = (VAR) VAR->VAR; VAR (VAR < 1) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR(VAR); VAR(VAR, VAR->VAR, VAR); VAR (VAR->VAR[VAR-1]) { VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR (VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR ((VAR)VAR->VAR >= (VAR)0xFFFFFFFF) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR\VAR"", VAR->VAR)); VAR VAR; } VAR->VAR = (VAR*)VAR((VAR) VAR->VAR); VAR(VAR, VAR->VAR, (VAR)VAR->VAR); VAR (VAR->VAR[VAR->VAR-1]) {",11
+linux_b1a7288dedc6caf9023f2676b4f5ed34cf0d4029,tools/testing/selftests/bpf/verifier/value_ptr_arith.c,"{
+	""map access: trying to leak tained dst reg"",
+	.insns = {
+	BPF_MOV64_IMM(BPF_REG_0, 0),
+	BPF_ST_MEM(BPF_DW, BPF_REG_10, -8, 0),
+	BPF_MOV64_REG(BPF_REG_2, BPF_REG_10),
+	BPF_ALU64_IMM(BPF_ADD, BPF_REG_2, -8),
+	BPF_LD_MAP_FD(BPF_REG_1, 0),
+	BPF_RAW_INSN(BPF_JMP | BPF_CALL, 0, 0, 0, BPF_FUNC_map_lookup_elem),
+	BPF_JMP_IMM(BPF_JNE, BPF_REG_0, 0, 1),
+	BPF_EXIT_INSN(),
+	BPF_MOV64_REG(BPF_REG_2, BPF_REG_0),
+	BPF_MOV32_IMM(BPF_REG_1, 0xFFFFFFFF),
+	BPF_MOV32_REG(BPF_REG_1, BPF_REG_1),
+	BPF_ALU64_REG(BPF_SUB, BPF_REG_2, BPF_REG_1),
+	BPF_STX_MEM(BPF_DW, BPF_REG_0, BPF_REG_2, 0),
+	BPF_MOV64_IMM(BPF_REG_0, 0),
+	BPF_EXIT_INSN(),
+	},
+	.fixup_map_array_48b = { 4 },
+	.result = REJECT,
+	.errstr = ""math between map_value pointer and 4294967295 is not allowed"",
+},",,b1a7288dedc6caf9023f2676b4f5ed34cf0d4029,CVE-2021-45402,b1a7288dedc6caf9023f2676b4f5ed34cf0d4029,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,78,COMPLETED,"{ ""VAR VAR: VAR VAR VAR VAR VAR VAR"", .VAR = { VAR(VAR, 0), VAR(VAR, VAR, -8, 0), VAR(VAR, VAR), VAR(VAR, VAR, -8), VAR(VAR, 0), VAR(VAR | VAR, 0, 0, 0, VAR), VAR(VAR, VAR, 0, 1), VAR(), VAR(VAR, VAR), VAR(VAR, 0xFFFFFFFF), VAR(VAR, VAR), VAR(VAR, VAR, VAR), VAR(VAR, VAR, VAR, 0), VAR(VAR, 0), VAR(), }, .VAR = { 4 }, .VAR = VAR, .VAR = ""VAR VAR VAR VAR VAR 4294967295 VAR VAR VAR"", }, ",11

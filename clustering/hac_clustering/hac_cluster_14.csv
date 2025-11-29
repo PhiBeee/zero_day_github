@@ -1,0 +1,1727 @@
+commit,file,added_code,deleted_code,hash_clean,cve_id,hash,repo_url,rel_type,score,extraction_status,text_norm,cluster_kmeans,cluster_hac
+cacti_4e4dd6784adfc07b6011da999809d86a06f0f4e5,aggregate_graphs.php,"		$selected_items = sanitize_unserialize_selected_items($_POST['selected_items']);
+
+		if ($selected_items != false) {
+			if ($_POST['drp_action'] == '1') { /* delete */
+				api_aggregate_remove_multi($selected_items);
+			}elseif ($_POST['drp_action'] == '2') { /* migrate to template */
+				api_aggregate_convert_template($selected_items);
+			}elseif ($_POST['drp_action'] == '3') { /* create aggregate from aggregate */
+				$aggregate_name = $_REQUEST['aggregate_name'];
+				api_aggregate_create($aggregate_name, $selected_items);
+			}elseif ($_POST['drp_action'] == '10') { /* associate with aggregate */
+				api_aggregate_associate($selected_items);
+			}elseif ($_POST['drp_action'] == '11') { /* dis-associate with aggregate */
+				api_aggregate_disassociate($selected_items);
+			}elseif (preg_match('/^tr_([0-9]+)$/', $_POST['drp_action'], $matches)) { /* place on tree */
+				input_validate_input_number(get_request_var_post('tree_id'));
+				input_validate_input_number(get_request_var_post('tree_item_id'));
+				for ($i=0;($i<count($selected_items));$i++) {
+					api_tree_item_save(0, $_POST['tree_id'], TREE_ITEM_TYPE_GRAPH, $_POST['tree_item_id'], '', $selected_items[$i], read_graph_config_option('default_rra_id'), 0, 0, 0, false);
+				}","		$selected_items = unserialize(stripslashes($_POST['selected_items']));
+
+		if ($_POST['drp_action'] == '1') { /* delete */
+			for ($i=0;($i<count($selected_items));$i++) {
+				/* ================= input validation ================= */
+				input_validate_input_number($selected_items[$i]);
+				/* ==================================================== */
+			}
+
+			api_aggregate_remove_multi($selected_items);
+		}elseif ($_POST['drp_action'] == '2') { /* migrate to template */
+			for ($i=0;($i<count($selected_items));$i++) {
+				/* ================= input validation ================= */
+				input_validate_input_number($selected_items[$i]);
+				/* ==================================================== */
+			}
+
+			api_aggregate_convert_template($selected_items);
+		}elseif ($_POST['drp_action'] == '3') { /* create aggregate from aggregate */
+			for ($i=0;($i<count($selected_items));$i++) {
+				/* ================= input validation ================= */
+				input_validate_input_number($selected_items[$i]);
+				/* ==================================================== */
+			}
+			$aggregate_name = $_REQUEST['aggregate_name'];
+
+			api_aggregate_create($aggregate_name, $selected_items);
+		}elseif ($_POST['drp_action'] == '10') { /* associate with aggregate */
+			for ($i=0;($i<count($selected_items));$i++) {
+				/* ================= input validation ================= */
+				input_validate_input_number($selected_items[$i]);
+				/* ==================================================== */
+			}
+
+			api_aggregate_associate($selected_items);
+		}elseif ($_POST['drp_action'] == '11') { /* dis-associate with aggregate */
+			for ($i=0;($i<count($selected_items));$i++) {
+				/* ================= input validation ================= */
+				input_validate_input_number($selected_items[$i]);
+				/* ==================================================== */
+			}
+
+			api_aggregate_disassociate($selected_items);
+		}elseif (preg_match('/^tr_([0-9]+)$/', $_POST['drp_action'], $matches)) { /* place on tree */
+			input_validate_input_number(get_request_var_post('tree_id'));
+			input_validate_input_number(get_request_var_post('tree_item_id'));
+			for ($i=0;($i<count($selected_items));$i++) {
+				/* ================= input validation ================= */
+				input_validate_input_number($selected_items[$i]);
+				/* ==================================================== */
+
+				api_tree_item_save(0, $_POST['tree_id'], TREE_ITEM_TYPE_GRAPH, $_POST['tree_item_id'], '', $selected_items[$i], read_graph_config_option('default_rra_id'), 0, 0, 0, false);",4e4dd6784adfc07b6011da999809d86a06f0f4e5,CVE-2017-1000031,4e4dd6784adfc07b6011da999809d86a06f0f4e5,https://github.com/Cacti/cacti,CPE_GIT_REPOBASED,76,COMPLETED,"$VAR = VAR($VAR['VAR']); VAR ($VAR != VAR) { VAR ($VAR['VAR'] == '1') {  VAR($VAR); }VAR ($VAR['VAR'] == '2') {  VAR($VAR); }VAR ($VAR['VAR'] == '3') {  $VAR = $VAR['VAR']; VAR($VAR, $VAR); }VAR ($VAR['VAR'] == '10') {  VAR($VAR); }VAR ($VAR['VAR'] == '11') {  VAR($VAR); }VAR (VAR('/^VAR([0-9]+)$/', $VAR['VAR'], $VAR)) {  VAR(VAR('VAR')); VAR(VAR('VAR')); VAR ($VAR=0;($VAR<VAR($VAR));$VAR++) { VAR(0, $VAR['VAR'], VAR, $VAR['VAR'], '', $VAR[$VAR], VAR('VAR'), 0, 0, 0, VAR); } $VAR = VAR(VAR($VAR['VAR'])); VAR ($VAR['VAR'] == '1') {  VAR ($VAR=0;($VAR<VAR($VAR));$VAR++) {  VAR($VAR[$VAR]);  } VAR($VAR); }VAR ($VAR['VAR'] == '2') {  VAR ($VAR=0;($VAR<VAR($VAR));$VAR++) {  VAR($VAR[$VAR]);  } VAR($VAR); }VAR ($VAR['VAR'] == '3') {  VAR ($VAR=0;($VAR<VAR($VAR));$VAR++) {  VAR($VAR[$VAR]);  } $VAR = $VAR['VAR']; VAR($VAR, $VAR); }VAR ($VAR['VAR'] == '10') {  VAR ($VAR=0;($VAR<VAR($VAR));$VAR++) {  VAR($VAR[$VAR]);  } VAR($VAR); }VAR ($VAR['VAR'] == '11') {  VAR ($VAR=0;($VAR<VAR($VAR));$VAR++) {  VAR($VAR[$VAR]);  } VAR($VAR); }VAR (VAR('/^VAR([0-9]+)$/', $VAR['VAR'], $VAR)) {  VAR(VAR('VAR')); VAR(VAR('VAR')); VAR ($VAR=0;($VAR<VAR($VAR));$VAR++) {  VAR($VAR[$VAR]);  VAR(0, $VAR['VAR'], VAR, $VAR['VAR'], '', $VAR[$VAR], VAR('VAR'), 0, 0, 0, VAR);",4,14
+cilium_b0d3140aa079b31d2f3889b0f695cf7add393e68,CHANGELOG.md,"## v1.11.5
+
+Summary of Changes
+------------------
+
+**Minor Changes:**
+* datapath: Allow egress GW with XDP (Backport PR #19671, Upstream PR #19587, @brb)
+* hubble/relay: Make the Hubble Peer service available by making it a Kubernetes service to eliminate the need to share a local Unix domain socket between a privileged pod (cilium daemon) and an unprivileged one (hubble-relay). (Backport PR #19752, Upstream PR #18620, @nathanjsweet)
+* k8s: keep KVStore CiliumNode labels synced with Node object (Backport PR #19481, Upstream PR #19375, @jibi)
+* metrics: Add go_* metrics (Backport PR #19585, Upstream PR #19153, @chancez)
+
+**Bugfixes:**
+* Add missing packet trace for some non-NodePort SNAT egress (Backport PR #19752, Upstream PR #19158, @YutaroHayakawa)
+* clustermesh-apiserver: fixed nil pointer dereference (Backport PR #19752, Upstream PR #18957, @abocim)
+* Fatal when IPv6 is enabled but corresponding kernel modules are missing (Backport PR #19481, Upstream PR #18941, @vadorovsky)
+* Fix drop for packets sent via AF_PACKET + mmap ring buffer in pod (Backport PR #19481, Upstream PR #19308, @liuyuan10)
+* Fixed Cilium agent regression causing a crash due to ipcache controller being scheduled too soon. (Backport PR #19573, Upstream PR #19501, @jrajahalme)
+* Improve garbage collection for resources allocated by ToFQDNs policy for services which rotate IP addresses frequently such as Amazon S3 (Backport PR #19585, Upstream PR #19452, @joestringer)
+* operator: Add cilium node garbage collector (Backport PR #19752, Upstream PR #19576, @sayboras)
+* operator: fix identity GC collection (Backport PR #19671, Upstream PR #19649, @aanm)
+* Use identity labels for selector matching for Egress NAT Gateway (Backport PR #19481, Upstream PR #19194, @blzhao-0)
+
+**CI Changes:**
+* jenkinsfiles: add `IMAGE_REGISTRY` env parameter (Backport PR #19519, Upstream PR #19459, @nbusseneau)
+* jenkinsfiles: Increase VM boot timeout (Backport PR #19481, Upstream PR #19458, @pchaigno)
+
+**Misc Changes:**
+* add robots.txt to Cilium documentation (Backport PR #19585, Upstream PR #19578, @aanm)
+* build(deps): bump actions/checkout from 3.0.1 to 3.0.2 (#19538, @dependabot[bot])
+* build(deps): bump docker/build-push-action from 2.10.0 to 3 (#19729, @dependabot[bot])
+* build(deps): bump docker/login-action from 1.14.1 to 2 (#19731, @dependabot[bot])
+* build(deps): bump docker/setup-buildx-action from 1.6.0 to 1.7.0 (#19618, @dependabot[bot])
+* build(deps): bump docker/setup-buildx-action from 1.7.0 to 2 (#19730, @dependabot[bot])
+* build(deps): bump docker/setup-qemu-action from 1.2.0 to 2 (#19732, @dependabot[bot])
+* build(deps): bump github/codeql-action from 2.1.8 to 2.1.9 (#19600, @dependabot[bot])
+* daemon, fqdn: Add flag to control FQDN regex LRU size (Backport PR #19671, Upstream PR #19383, @christarazi)
+* daemon: Initialize k8sCachesSynced channel before calling Initk8sSubsystem() (Backport PR #19573, Upstream PR #19626, @jrajahalme)
+* docs: fix version warning URL to point to docs.cilium.io (Backport PR #19585, Upstream PR #19563, @aanm)
+* docs: improve description for session affinity with KPR (Backport PR #19519, Upstream PR #19478, @julianwiedmann)
+* docs: improve guide to setup Cilium overlay on EKS (Backport PR #19481, Upstream PR #19207, @oliwave)
+* docs: move sitemap-index.xml to static directory (Backport PR #19752, Upstream PR #19681, @aanm)
+* docs: set right path for robots.txt (Backport PR #19671, Upstream PR #19638, @aanm)
+* docs: set the right url for API version check (Backport PR #19671, Upstream PR #19610, @aanm)
+* docs: Update max MTU value for Nodeport XDP on AWS (Backport PR #19671, Upstream PR #19593, @qmonnet)
+* identity: Initialize local identity allocator early (Backport PR #19573, Upstream PR #19556, @jrajahalme)
+* images/cilium: remove cilium group from Dockerfile (Backport PR #19752, Upstream PR #19711, @aanm)
+* LRP minor improvements (Backport PR #19519, Upstream PR #19489, @aditighag)
+* make: check that Go major/minor version matches required version (Backport PR #19585, Upstream PR #19528, @tklauser)
+* pkg/bpf: add map name in error message for OpenParallel (Backport PR #19519, Upstream PR #19491, @aanm)
+* pkg/k8s: use subresource ""nodes/status"" to update node annotations (Backport PR #19673, Upstream PR #19590, @aanm)
+* pkg/labels: Optimize SortedList() and FormatForKVStore() (Backport PR #19671, Upstream PR #19423, @christarazi)
+* pkg/policy/api: Optimize FQDNSelector String() (Backport PR #19671, Upstream PR #19570, @christarazi)
+* Removes any log swallowing that was occuring on daemon/cmd init (Backport PR #19671, Upstream PR #19188, @ldelossa)
+* test/upgrade: use the unreleased helm chart of stable branches (Backport PR #19752, Upstream PR #19710, @aanm)
+* Trimmed down Cilium's Cluster Roles to only the necessary rules (Backport PR #19673, Upstream PR #19074, @aanm)
+* v1.11: images/runtime: update CNI plugins to 1.1.1 (#19691, @tklauser)
+
+**Other Changes:**
+* install: Update image digests for v1.11.4 (#19476, @joestringer)
+",,b0d3140aa079b31d2f3889b0f695cf7add393e68,CVE-2022-29178,b0d3140aa079b31d2f3889b0f695cf7add393e68,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,84,COMPLETED," VAR VAR VAR ------------------ **VAR VAR:** * VAR: VAR VAR VAR VAR VAR (VAR VAR  * VAR/VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR) VAR VAR VAR VAR (VAR-VAR). (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR* VAR (VAR VAR  **VAR:** * VAR VAR VAR VAR VAR VAR VAR-VAR VAR VAR (VAR VAR  * VAR-VAR: VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR + VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  **VAR VAR:** * VAR: VAR `VAR` VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR (VAR VAR  **VAR VAR:** * VAR VAR.VAR VAR VAR VAR (VAR VAR  * VAR(VAR): VAR VAR/VAR VAR 3.0.1 VAR 3.0.2 ( * VAR(VAR): VAR VAR/VAR-VAR-VAR VAR 2.10.0 VAR 3 ( * VAR(VAR): VAR VAR/VAR-VAR VAR 1.14.1 VAR 2 ( * VAR(VAR): VAR VAR/VAR-VAR-VAR VAR 1.6.0 VAR 1.7.0 ( * VAR(VAR): VAR VAR/VAR-VAR-VAR VAR 1.7.0 VAR 2 ( * VAR(VAR): VAR VAR/VAR-VAR-VAR VAR 1.2.0 VAR 2 ( * VAR(VAR): VAR VAR/VAR-VAR VAR 2.1.8 VAR 2.1.9 ( * VAR, VAR: VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR() (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR.VAR.VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR-VAR.VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR.VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR (VAR VAR  * VAR/VAR: VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR/VAR VAR VAR VAR VAR (VAR VAR  * VAR/VAR: VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR/VAR: VAR VAR ""VAR/VAR"" VAR VAR VAR VAR (VAR VAR  * VAR/VAR: VAR VAR() VAR VAR() (VAR VAR  * VAR/VAR/VAR: VAR VAR VAR() (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR/VAR VAR (VAR VAR  * VAR/VAR: VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR'VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR.11: VAR/VAR: VAR VAR VAR VAR 1.1.1 ( **VAR VAR:** * VAR: VAR VAR VAR VAR VAR.11.4 ( ",12,14
+cilium_b0d3140aa079b31d2f3889b0f695cf7add393e68,CHANGELOG.md,"## v1.11.5
+
+Summary of Changes
+------------------
+
+**Minor Changes:**
+* datapath: Allow egress GW with XDP (Backport PR #19671, Upstream PR #19587, @brb)
+* hubble/relay: Make the Hubble Peer service available by making it a Kubernetes service to eliminate the need to share a local Unix domain socket between a privileged pod (cilium daemon) and an unprivileged one (hubble-relay). (Backport PR #19752, Upstream PR #18620, @nathanjsweet)
+* k8s: keep KVStore CiliumNode labels synced with Node object (Backport PR #19481, Upstream PR #19375, @jibi)
+* metrics: Add go_* metrics (Backport PR #19585, Upstream PR #19153, @chancez)
+
+**Bugfixes:**
+* Add missing packet trace for some non-NodePort SNAT egress (Backport PR #19752, Upstream PR #19158, @YutaroHayakawa)
+* clustermesh-apiserver: fixed nil pointer dereference (Backport PR #19752, Upstream PR #18957, @abocim)
+* Fatal when IPv6 is enabled but corresponding kernel modules are missing (Backport PR #19481, Upstream PR #18941, @vadorovsky)
+* Fix drop for packets sent via AF_PACKET + mmap ring buffer in pod (Backport PR #19481, Upstream PR #19308, @liuyuan10)
+* Fixed Cilium agent regression causing a crash due to ipcache controller being scheduled too soon. (Backport PR #19573, Upstream PR #19501, @jrajahalme)
+* Improve garbage collection for resources allocated by ToFQDNs policy for services which rotate IP addresses frequently such as Amazon S3 (Backport PR #19585, Upstream PR #19452, @joestringer)
+* operator: Add cilium node garbage collector (Backport PR #19752, Upstream PR #19576, @sayboras)
+* operator: fix identity GC collection (Backport PR #19671, Upstream PR #19649, @aanm)
+* Use identity labels for selector matching for Egress NAT Gateway (Backport PR #19481, Upstream PR #19194, @blzhao-0)
+
+**CI Changes:**
+* jenkinsfiles: add `IMAGE_REGISTRY` env parameter (Backport PR #19519, Upstream PR #19459, @nbusseneau)
+* jenkinsfiles: Increase VM boot timeout (Backport PR #19481, Upstream PR #19458, @pchaigno)
+
+**Misc Changes:**
+* add robots.txt to Cilium documentation (Backport PR #19585, Upstream PR #19578, @aanm)
+* build(deps): bump actions/checkout from 3.0.1 to 3.0.2 (#19538, @dependabot[bot])
+* build(deps): bump docker/build-push-action from 2.10.0 to 3 (#19729, @dependabot[bot])
+* build(deps): bump docker/login-action from 1.14.1 to 2 (#19731, @dependabot[bot])
+* build(deps): bump docker/setup-buildx-action from 1.6.0 to 1.7.0 (#19618, @dependabot[bot])
+* build(deps): bump docker/setup-buildx-action from 1.7.0 to 2 (#19730, @dependabot[bot])
+* build(deps): bump docker/setup-qemu-action from 1.2.0 to 2 (#19732, @dependabot[bot])
+* build(deps): bump github/codeql-action from 2.1.8 to 2.1.9 (#19600, @dependabot[bot])
+* daemon, fqdn: Add flag to control FQDN regex LRU size (Backport PR #19671, Upstream PR #19383, @christarazi)
+* daemon: Initialize k8sCachesSynced channel before calling Initk8sSubsystem() (Backport PR #19573, Upstream PR #19626, @jrajahalme)
+* docs: fix version warning URL to point to docs.cilium.io (Backport PR #19585, Upstream PR #19563, @aanm)
+* docs: improve description for session affinity with KPR (Backport PR #19519, Upstream PR #19478, @julianwiedmann)
+* docs: improve guide to setup Cilium overlay on EKS (Backport PR #19481, Upstream PR #19207, @oliwave)
+* docs: move sitemap-index.xml to static directory (Backport PR #19752, Upstream PR #19681, @aanm)
+* docs: set right path for robots.txt (Backport PR #19671, Upstream PR #19638, @aanm)
+* docs: set the right url for API version check (Backport PR #19671, Upstream PR #19610, @aanm)
+* docs: Update max MTU value for Nodeport XDP on AWS (Backport PR #19671, Upstream PR #19593, @qmonnet)
+* identity: Initialize local identity allocator early (Backport PR #19573, Upstream PR #19556, @jrajahalme)
+* images/cilium: remove cilium group from Dockerfile (Backport PR #19752, Upstream PR #19711, @aanm)
+* LRP minor improvements (Backport PR #19519, Upstream PR #19489, @aditighag)
+* make: check that Go major/minor version matches required version (Backport PR #19585, Upstream PR #19528, @tklauser)
+* pkg/bpf: add map name in error message for OpenParallel (Backport PR #19519, Upstream PR #19491, @aanm)
+* pkg/k8s: use subresource ""nodes/status"" to update node annotations (Backport PR #19673, Upstream PR #19590, @aanm)
+* pkg/labels: Optimize SortedList() and FormatForKVStore() (Backport PR #19671, Upstream PR #19423, @christarazi)
+* pkg/policy/api: Optimize FQDNSelector String() (Backport PR #19671, Upstream PR #19570, @christarazi)
+* Removes any log swallowing that was occuring on daemon/cmd init (Backport PR #19671, Upstream PR #19188, @ldelossa)
+* test/upgrade: use the unreleased helm chart of stable branches (Backport PR #19752, Upstream PR #19710, @aanm)
+* Trimmed down Cilium's Cluster Roles to only the necessary rules (Backport PR #19673, Upstream PR #19074, @aanm)
+* v1.11: images/runtime: update CNI plugins to 1.1.1 (#19691, @tklauser)
+
+**Other Changes:**
+* install: Update image digests for v1.11.4 (#19476, @joestringer)
+",,b0d3140aa079b31d2f3889b0f695cf7add393e68,CVE-2022-29179,b0d3140aa079b31d2f3889b0f695cf7add393e68,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED," VAR VAR VAR ------------------ **VAR VAR:** * VAR: VAR VAR VAR VAR VAR (VAR VAR  * VAR/VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR) VAR VAR VAR VAR (VAR-VAR). (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR* VAR (VAR VAR  **VAR:** * VAR VAR VAR VAR VAR VAR VAR-VAR VAR VAR (VAR VAR  * VAR-VAR: VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR + VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  **VAR VAR:** * VAR: VAR `VAR` VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR (VAR VAR  **VAR VAR:** * VAR VAR.VAR VAR VAR VAR (VAR VAR  * VAR(VAR): VAR VAR/VAR VAR 3.0.1 VAR 3.0.2 ( * VAR(VAR): VAR VAR/VAR-VAR-VAR VAR 2.10.0 VAR 3 ( * VAR(VAR): VAR VAR/VAR-VAR VAR 1.14.1 VAR 2 ( * VAR(VAR): VAR VAR/VAR-VAR-VAR VAR 1.6.0 VAR 1.7.0 ( * VAR(VAR): VAR VAR/VAR-VAR-VAR VAR 1.7.0 VAR 2 ( * VAR(VAR): VAR VAR/VAR-VAR-VAR VAR 1.2.0 VAR 2 ( * VAR(VAR): VAR VAR/VAR-VAR VAR 2.1.8 VAR 2.1.9 ( * VAR, VAR: VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR() (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR.VAR.VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR-VAR.VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR.VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR (VAR VAR  * VAR/VAR: VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR/VAR VAR VAR VAR VAR (VAR VAR  * VAR/VAR: VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR/VAR: VAR VAR ""VAR/VAR"" VAR VAR VAR VAR (VAR VAR  * VAR/VAR: VAR VAR() VAR VAR() (VAR VAR  * VAR/VAR/VAR: VAR VAR VAR() (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR/VAR VAR (VAR VAR  * VAR/VAR: VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR'VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR.11: VAR/VAR: VAR VAR VAR VAR 1.1.1 ( **VAR VAR:** * VAR: VAR VAR VAR VAR VAR.11.4 ( ",12,14
+cilium_b0d3140aa079b31d2f3889b0f695cf7add393e68,Documentation/helm-values.rst,"     - ``{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.11.5"",""useDigest"":false}``
+     - ``{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.11.5"",""useDigest"":false}``
+     - ``{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.11.5"",""useDigest"":false}``
+     - ``{""alibabacloudDigest"":"""",""awsDigest"":"""",""azureDigest"":"""",""genericDigest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.11.5"",""useDigest"":false}``
+     - ``{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.11.5"",""useDigest"":false}``","     - ``{""digest"":""sha256:ce6ade955e6aaec9f9956c1ac5ec7e923465c26747aa56d93118fcb14e4326b7"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.11.4"",""useDigest"":true}``
+     - ``{""digest"":""sha256:460d50bd0c6bcdfa3c62b0488541c102a4079f5def07d2649ff67bc24fd0dd3f"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.11.4"",""useDigest"":true}``
+     - ``{""digest"":""sha256:d9d4c7759175db31aa32eaa68274bb9355d468fbc87e23123c80052e3ed63116"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.11.4"",""useDigest"":true}``
+     - ``{""alibabacloudDigest"":""sha256:bb6eb1d389d87d435b6ddb7c32955459ccdea15d6542da2bcb38738c8dca15d9"",""awsDigest"":""sha256:3ef7a13d962d977815d12846c04fade989195722ba6628bffaf865fb46d4b6a0"",""azureDigest"":""sha256:e507e3ece5a3cb45daf2e879bd3888681f297c76523661551ecdd38d8c46c798"",""genericDigest"":""sha256:bf75ad0dc47691a3a519b8ab148ed3a792ffa2f1e309e6efa955f30a40e95adc"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.11.4"",""useDigest"":true}``
+     - ``{""digest"":""sha256:d9d4c7759175db31aa32eaa68274bb9355d468fbc87e23123c80052e3ed63116"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.11.4"",""useDigest"":true}``",b0d3140aa079b31d2f3889b0f695cf7add393e68,CVE-2022-29178,b0d3140aa079b31d2f3889b0f695cf7add393e68,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,84,COMPLETED,"- ``{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.11.5"",""VAR"":VAR}`` - ``{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.11.5"",""VAR"":VAR}`` - ``{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.11.5"",""VAR"":VAR}`` - ``{""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.11.5"",""VAR"":VAR}`` - ``{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.11.5"",""VAR"":VAR}`` - ``{""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.11.4"",""VAR"":VAR}`` - ``{""VAR"":""VAR:460d50bd0c6bcdfa3c62b0488541c102a4079f5def07d2649ff67bc24fd0dd3f"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.11.4"",""VAR"":VAR}`` - ``{""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.11.4"",""VAR"":VAR}`` - ``{""VAR"":""VAR:VAR"",""VAR"":""VAR:3ef7a13d962d977815d12846c04fade989195722ba6628bffaf865fb46d4b6a0"",""VAR"":""VAR:VAR"",""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.11.4"",""VAR"":VAR}`` - ``{""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.11.4"",""VAR"":VAR}``",0,14
+cilium_b0d3140aa079b31d2f3889b0f695cf7add393e68,Documentation/helm-values.rst,"     - ``{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.11.5"",""useDigest"":false}``
+     - ``{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.11.5"",""useDigest"":false}``
+     - ``{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.11.5"",""useDigest"":false}``
+     - ``{""alibabacloudDigest"":"""",""awsDigest"":"""",""azureDigest"":"""",""genericDigest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.11.5"",""useDigest"":false}``
+     - ``{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.11.5"",""useDigest"":false}``","     - ``{""digest"":""sha256:ce6ade955e6aaec9f9956c1ac5ec7e923465c26747aa56d93118fcb14e4326b7"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.11.4"",""useDigest"":true}``
+     - ``{""digest"":""sha256:460d50bd0c6bcdfa3c62b0488541c102a4079f5def07d2649ff67bc24fd0dd3f"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.11.4"",""useDigest"":true}``
+     - ``{""digest"":""sha256:d9d4c7759175db31aa32eaa68274bb9355d468fbc87e23123c80052e3ed63116"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.11.4"",""useDigest"":true}``
+     - ``{""alibabacloudDigest"":""sha256:bb6eb1d389d87d435b6ddb7c32955459ccdea15d6542da2bcb38738c8dca15d9"",""awsDigest"":""sha256:3ef7a13d962d977815d12846c04fade989195722ba6628bffaf865fb46d4b6a0"",""azureDigest"":""sha256:e507e3ece5a3cb45daf2e879bd3888681f297c76523661551ecdd38d8c46c798"",""genericDigest"":""sha256:bf75ad0dc47691a3a519b8ab148ed3a792ffa2f1e309e6efa955f30a40e95adc"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.11.4"",""useDigest"":true}``
+     - ``{""digest"":""sha256:d9d4c7759175db31aa32eaa68274bb9355d468fbc87e23123c80052e3ed63116"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.11.4"",""useDigest"":true}``",b0d3140aa079b31d2f3889b0f695cf7add393e68,CVE-2022-29179,b0d3140aa079b31d2f3889b0f695cf7add393e68,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED,"- ``{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.11.5"",""VAR"":VAR}`` - ``{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.11.5"",""VAR"":VAR}`` - ``{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.11.5"",""VAR"":VAR}`` - ``{""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.11.5"",""VAR"":VAR}`` - ``{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.11.5"",""VAR"":VAR}`` - ``{""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.11.4"",""VAR"":VAR}`` - ``{""VAR"":""VAR:460d50bd0c6bcdfa3c62b0488541c102a4079f5def07d2649ff67bc24fd0dd3f"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.11.4"",""VAR"":VAR}`` - ``{""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.11.4"",""VAR"":VAR}`` - ``{""VAR"":""VAR:VAR"",""VAR"":""VAR:3ef7a13d962d977815d12846c04fade989195722ba6628bffaf865fb46d4b6a0"",""VAR"":""VAR:VAR"",""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.11.4"",""VAR"":VAR}`` - ``{""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.11.4"",""VAR"":VAR}``",0,14
+cilium_b0d3140aa079b31d2f3889b0f695cf7add393e68,install/kubernetes/cilium/Chart.yaml,"version: 1.11.5
+appVersion: 1.11.5
+icon: https://cdn.jsdelivr.net/gh/cilium/cilium@v1.11.5/Documentation/images/logo-solo.svg","version: 1.11.4
+appVersion: 1.11.4
+icon: https://cdn.jsdelivr.net/gh/cilium/cilium@v1.11.4/Documentation/images/logo-solo.svg",b0d3140aa079b31d2f3889b0f695cf7add393e68,CVE-2022-29178,b0d3140aa079b31d2f3889b0f695cf7add393e68,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,84,COMPLETED,VAR: 1.11.5 VAR: 1.11.5 VAR: VAR: VAR: 1.11.4 VAR: 1.11.4 VAR: VAR:,0,14
+cilium_b0d3140aa079b31d2f3889b0f695cf7add393e68,install/kubernetes/cilium/Chart.yaml,"version: 1.11.5
+appVersion: 1.11.5
+icon: https://cdn.jsdelivr.net/gh/cilium/cilium@v1.11.5/Documentation/images/logo-solo.svg","version: 1.11.4
+appVersion: 1.11.4
+icon: https://cdn.jsdelivr.net/gh/cilium/cilium@v1.11.4/Documentation/images/logo-solo.svg",b0d3140aa079b31d2f3889b0f695cf7add393e68,CVE-2022-29179,b0d3140aa079b31d2f3889b0f695cf7add393e68,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED,VAR: 1.11.5 VAR: 1.11.5 VAR: VAR: VAR: 1.11.4 VAR: 1.11.4 VAR: VAR:,0,14
+cilium_b0d3140aa079b31d2f3889b0f695cf7add393e68,install/kubernetes/cilium/README.md,"![Version: 1.11.5](https://img.shields.io/badge/Version-1.11.5-informational?style=flat-square) ![AppVersion: 1.11.5](https://img.shields.io/badge/AppVersion-1.11.5-informational?style=flat-square)
+| clustermesh.apiserver.image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.11.5"",""useDigest"":false}` | Clustermesh API server image. |
+| hubble.relay.image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.11.5"",""useDigest"":false}` | Hubble-relay container image. |
+| image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.11.5"",""useDigest"":false}` | Agent container image. |
+| operator.image | object | `{""alibabacloudDigest"":"""",""awsDigest"":"""",""azureDigest"":"""",""genericDigest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.11.5"",""useDigest"":false}` | cilium-operator image. |
+| preflight.image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.11.5"",""useDigest"":false}` | Cilium pre-flight image. |","![Version: 1.11.4](https://img.shields.io/badge/Version-1.11.4-informational?style=flat-square) ![AppVersion: 1.11.4](https://img.shields.io/badge/AppVersion-1.11.4-informational?style=flat-square)
+| clustermesh.apiserver.image | object | `{""digest"":""sha256:ce6ade955e6aaec9f9956c1ac5ec7e923465c26747aa56d93118fcb14e4326b7"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.11.4"",""useDigest"":true}` | Clustermesh API server image. |
+| hubble.relay.image | object | `{""digest"":""sha256:460d50bd0c6bcdfa3c62b0488541c102a4079f5def07d2649ff67bc24fd0dd3f"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.11.4"",""useDigest"":true}` | Hubble-relay container image. |
+| image | object | `{""digest"":""sha256:d9d4c7759175db31aa32eaa68274bb9355d468fbc87e23123c80052e3ed63116"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.11.4"",""useDigest"":true}` | Agent container image. |
+| operator.image | object | `{""alibabacloudDigest"":""sha256:bb6eb1d389d87d435b6ddb7c32955459ccdea15d6542da2bcb38738c8dca15d9"",""awsDigest"":""sha256:3ef7a13d962d977815d12846c04fade989195722ba6628bffaf865fb46d4b6a0"",""azureDigest"":""sha256:e507e3ece5a3cb45daf2e879bd3888681f297c76523661551ecdd38d8c46c798"",""genericDigest"":""sha256:bf75ad0dc47691a3a519b8ab148ed3a792ffa2f1e309e6efa955f30a40e95adc"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.11.4"",""useDigest"":true}` | cilium-operator image. |
+| preflight.image | object | `{""digest"":""sha256:d9d4c7759175db31aa32eaa68274bb9355d468fbc87e23123c80052e3ed63116"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.11.4"",""useDigest"":true}` | Cilium pre-flight image. |",b0d3140aa079b31d2f3889b0f695cf7add393e68,CVE-2022-29178,b0d3140aa079b31d2f3889b0f695cf7add393e68,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,84,COMPLETED,"![VAR: 1.11.5](VAR: | VAR.VAR.VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.11.5"",""VAR"":VAR}` | VAR VAR VAR VAR. | | VAR.VAR.VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.11.5"",""VAR"":VAR}` | VAR-VAR VAR VAR. | | VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.11.5"",""VAR"":VAR}` | VAR VAR VAR. | | VAR.VAR | VAR | `{""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.11.5"",""VAR"":VAR}` | VAR-VAR VAR. | | VAR.VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.11.5"",""VAR"":VAR}` | VAR VAR-VAR VAR. | ![VAR: 1.11.4](VAR: | VAR.VAR.VAR | VAR | `{""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.11.4"",""VAR"":VAR}` | VAR VAR VAR VAR. | | VAR.VAR.VAR | VAR | `{""VAR"":""VAR:460d50bd0c6bcdfa3c62b0488541c102a4079f5def07d2649ff67bc24fd0dd3f"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.11.4"",""VAR"":VAR}` | VAR-VAR VAR VAR. | | VAR | VAR | `{""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.11.4"",""VAR"":VAR}` | VAR VAR VAR. | | VAR.VAR | VAR | `{""VAR"":""VAR:VAR"",""VAR"":""VAR:3ef7a13d962d977815d12846c04fade989195722ba6628bffaf865fb46d4b6a0"",""VAR"":""VAR:VAR"",""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.11.4"",""VAR"":VAR}` | VAR-VAR VAR. | | VAR.VAR | VAR | `{""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.11.4"",""VAR"":VAR}` | VAR VAR-VAR VAR. |",0,14
+cilium_b0d3140aa079b31d2f3889b0f695cf7add393e68,install/kubernetes/cilium/README.md,"![Version: 1.11.5](https://img.shields.io/badge/Version-1.11.5-informational?style=flat-square) ![AppVersion: 1.11.5](https://img.shields.io/badge/AppVersion-1.11.5-informational?style=flat-square)
+| clustermesh.apiserver.image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.11.5"",""useDigest"":false}` | Clustermesh API server image. |
+| hubble.relay.image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.11.5"",""useDigest"":false}` | Hubble-relay container image. |
+| image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.11.5"",""useDigest"":false}` | Agent container image. |
+| operator.image | object | `{""alibabacloudDigest"":"""",""awsDigest"":"""",""azureDigest"":"""",""genericDigest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.11.5"",""useDigest"":false}` | cilium-operator image. |
+| preflight.image | object | `{""digest"":"""",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.11.5"",""useDigest"":false}` | Cilium pre-flight image. |","![Version: 1.11.4](https://img.shields.io/badge/Version-1.11.4-informational?style=flat-square) ![AppVersion: 1.11.4](https://img.shields.io/badge/AppVersion-1.11.4-informational?style=flat-square)
+| clustermesh.apiserver.image | object | `{""digest"":""sha256:ce6ade955e6aaec9f9956c1ac5ec7e923465c26747aa56d93118fcb14e4326b7"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/clustermesh-apiserver"",""tag"":""v1.11.4"",""useDigest"":true}` | Clustermesh API server image. |
+| hubble.relay.image | object | `{""digest"":""sha256:460d50bd0c6bcdfa3c62b0488541c102a4079f5def07d2649ff67bc24fd0dd3f"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/hubble-relay"",""tag"":""v1.11.4"",""useDigest"":true}` | Hubble-relay container image. |
+| image | object | `{""digest"":""sha256:d9d4c7759175db31aa32eaa68274bb9355d468fbc87e23123c80052e3ed63116"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.11.4"",""useDigest"":true}` | Agent container image. |
+| operator.image | object | `{""alibabacloudDigest"":""sha256:bb6eb1d389d87d435b6ddb7c32955459ccdea15d6542da2bcb38738c8dca15d9"",""awsDigest"":""sha256:3ef7a13d962d977815d12846c04fade989195722ba6628bffaf865fb46d4b6a0"",""azureDigest"":""sha256:e507e3ece5a3cb45daf2e879bd3888681f297c76523661551ecdd38d8c46c798"",""genericDigest"":""sha256:bf75ad0dc47691a3a519b8ab148ed3a792ffa2f1e309e6efa955f30a40e95adc"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/operator"",""suffix"":"""",""tag"":""v1.11.4"",""useDigest"":true}` | cilium-operator image. |
+| preflight.image | object | `{""digest"":""sha256:d9d4c7759175db31aa32eaa68274bb9355d468fbc87e23123c80052e3ed63116"",""override"":null,""pullPolicy"":""IfNotPresent"",""repository"":""quay.io/cilium/cilium"",""tag"":""v1.11.4"",""useDigest"":true}` | Cilium pre-flight image. |",b0d3140aa079b31d2f3889b0f695cf7add393e68,CVE-2022-29179,b0d3140aa079b31d2f3889b0f695cf7add393e68,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED,"![VAR: 1.11.5](VAR: | VAR.VAR.VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.11.5"",""VAR"":VAR}` | VAR VAR VAR VAR. | | VAR.VAR.VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.11.5"",""VAR"":VAR}` | VAR-VAR VAR VAR. | | VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.11.5"",""VAR"":VAR}` | VAR VAR VAR. | | VAR.VAR | VAR | `{""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.11.5"",""VAR"":VAR}` | VAR-VAR VAR. | | VAR.VAR | VAR | `{""VAR"":"""",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.11.5"",""VAR"":VAR}` | VAR VAR-VAR VAR. | ![VAR: 1.11.4](VAR: | VAR.VAR.VAR | VAR | `{""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.11.4"",""VAR"":VAR}` | VAR VAR VAR VAR. | | VAR.VAR.VAR | VAR | `{""VAR"":""VAR:460d50bd0c6bcdfa3c62b0488541c102a4079f5def07d2649ff67bc24fd0dd3f"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR-VAR"",""VAR"":""VAR.11.4"",""VAR"":VAR}` | VAR-VAR VAR VAR. | | VAR | VAR | `{""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.11.4"",""VAR"":VAR}` | VAR VAR VAR. | | VAR.VAR | VAR | `{""VAR"":""VAR:VAR"",""VAR"":""VAR:3ef7a13d962d977815d12846c04fade989195722ba6628bffaf865fb46d4b6a0"",""VAR"":""VAR:VAR"",""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":"""",""VAR"":""VAR.11.4"",""VAR"":VAR}` | VAR-VAR VAR. | | VAR.VAR | VAR | `{""VAR"":""VAR:VAR"",""VAR"":VAR,""VAR"":""VAR"",""VAR"":""VAR.VAR/VAR/VAR"",""VAR"":""VAR.11.4"",""VAR"":VAR}` | VAR VAR-VAR VAR. |",0,14
+cilium_b0d3140aa079b31d2f3889b0f695cf7add393e68,install/kubernetes/cilium/values.yaml,"  tag: v1.11.5
+  digest: """"
+  useDigest: false
+      tag: v1.11.5
+      digest: """"
+      useDigest: false
+    tag: v1.11.5
+    genericDigest: """"
+    azureDigest: """"
+    awsDigest: """"
+    alibabacloudDigest: """"
+    useDigest: false
+    tag: v1.11.5
+    digest: """"
+    useDigest: false
+      tag: v1.11.5
+      digest: """"
+      useDigest: false","  tag: v1.11.4
+  digest: ""sha256:d9d4c7759175db31aa32eaa68274bb9355d468fbc87e23123c80052e3ed63116""
+  useDigest: true
+      tag: v1.11.4
+      digest: ""sha256:460d50bd0c6bcdfa3c62b0488541c102a4079f5def07d2649ff67bc24fd0dd3f""
+      useDigest: true
+    tag: v1.11.4
+    genericDigest: ""sha256:bf75ad0dc47691a3a519b8ab148ed3a792ffa2f1e309e6efa955f30a40e95adc""
+    azureDigest: ""sha256:e507e3ece5a3cb45daf2e879bd3888681f297c76523661551ecdd38d8c46c798""
+    awsDigest: ""sha256:3ef7a13d962d977815d12846c04fade989195722ba6628bffaf865fb46d4b6a0""
+    alibabacloudDigest: ""sha256:bb6eb1d389d87d435b6ddb7c32955459ccdea15d6542da2bcb38738c8dca15d9""
+    useDigest: true
+    tag: v1.11.4
+    digest: ""sha256:d9d4c7759175db31aa32eaa68274bb9355d468fbc87e23123c80052e3ed63116""
+    useDigest: true
+      tag: v1.11.4
+      digest: ""sha256:ce6ade955e6aaec9f9956c1ac5ec7e923465c26747aa56d93118fcb14e4326b7""
+      useDigest: true",b0d3140aa079b31d2f3889b0f695cf7add393e68,CVE-2022-29178,b0d3140aa079b31d2f3889b0f695cf7add393e68,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,84,COMPLETED,"VAR: VAR.11.5 VAR: """" VAR: VAR VAR: VAR.11.5 VAR: """" VAR: VAR VAR: VAR.11.5 VAR: """" VAR: """" VAR: """" VAR: """" VAR: VAR VAR: VAR.11.5 VAR: """" VAR: VAR VAR: VAR.11.5 VAR: """" VAR: VAR VAR: VAR.11.4 VAR: ""VAR:VAR"" VAR: VAR VAR: VAR.11.4 VAR: ""VAR:460d50bd0c6bcdfa3c62b0488541c102a4079f5def07d2649ff67bc24fd0dd3f"" VAR: VAR VAR: VAR.11.4 VAR: ""VAR:VAR"" VAR: ""VAR:VAR"" VAR: ""VAR:3ef7a13d962d977815d12846c04fade989195722ba6628bffaf865fb46d4b6a0"" VAR: ""VAR:VAR"" VAR: VAR VAR: VAR.11.4 VAR: ""VAR:VAR"" VAR: VAR VAR: VAR.11.4 VAR: ""VAR:VAR"" VAR: VAR",0,14
+cilium_b0d3140aa079b31d2f3889b0f695cf7add393e68,install/kubernetes/cilium/values.yaml,"  tag: v1.11.5
+  digest: """"
+  useDigest: false
+      tag: v1.11.5
+      digest: """"
+      useDigest: false
+    tag: v1.11.5
+    genericDigest: """"
+    azureDigest: """"
+    awsDigest: """"
+    alibabacloudDigest: """"
+    useDigest: false
+    tag: v1.11.5
+    digest: """"
+    useDigest: false
+      tag: v1.11.5
+      digest: """"
+      useDigest: false","  tag: v1.11.4
+  digest: ""sha256:d9d4c7759175db31aa32eaa68274bb9355d468fbc87e23123c80052e3ed63116""
+  useDigest: true
+      tag: v1.11.4
+      digest: ""sha256:460d50bd0c6bcdfa3c62b0488541c102a4079f5def07d2649ff67bc24fd0dd3f""
+      useDigest: true
+    tag: v1.11.4
+    genericDigest: ""sha256:bf75ad0dc47691a3a519b8ab148ed3a792ffa2f1e309e6efa955f30a40e95adc""
+    azureDigest: ""sha256:e507e3ece5a3cb45daf2e879bd3888681f297c76523661551ecdd38d8c46c798""
+    awsDigest: ""sha256:3ef7a13d962d977815d12846c04fade989195722ba6628bffaf865fb46d4b6a0""
+    alibabacloudDigest: ""sha256:bb6eb1d389d87d435b6ddb7c32955459ccdea15d6542da2bcb38738c8dca15d9""
+    useDigest: true
+    tag: v1.11.4
+    digest: ""sha256:d9d4c7759175db31aa32eaa68274bb9355d468fbc87e23123c80052e3ed63116""
+    useDigest: true
+      tag: v1.11.4
+      digest: ""sha256:ce6ade955e6aaec9f9956c1ac5ec7e923465c26747aa56d93118fcb14e4326b7""
+      useDigest: true",b0d3140aa079b31d2f3889b0f695cf7add393e68,CVE-2022-29179,b0d3140aa079b31d2f3889b0f695cf7add393e68,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED,"VAR: VAR.11.5 VAR: """" VAR: VAR VAR: VAR.11.5 VAR: """" VAR: VAR VAR: VAR.11.5 VAR: """" VAR: """" VAR: """" VAR: """" VAR: VAR VAR: VAR.11.5 VAR: """" VAR: VAR VAR: VAR.11.5 VAR: """" VAR: VAR VAR: VAR.11.4 VAR: ""VAR:VAR"" VAR: VAR VAR: VAR.11.4 VAR: ""VAR:460d50bd0c6bcdfa3c62b0488541c102a4079f5def07d2649ff67bc24fd0dd3f"" VAR: VAR VAR: VAR.11.4 VAR: ""VAR:VAR"" VAR: ""VAR:VAR"" VAR: ""VAR:3ef7a13d962d977815d12846c04fade989195722ba6628bffaf865fb46d4b6a0"" VAR: ""VAR:VAR"" VAR: VAR VAR: VAR.11.4 VAR: ""VAR:VAR"" VAR: VAR VAR: VAR.11.4 VAR: ""VAR:VAR"" VAR: VAR",0,14
+cilium_c5577e8e8987ec4355751094f09248fb58734fdc,CHANGELOG.md,"## v1.11.15
+
+Summary of Changes
+------------------
+
+**Minor Changes:**
+* envoy: Bump envoy to 1.23.4 (Backport PR #23958, Upstream PR #23800, @sayboras)
+* helm: Add pod and container security context (Backport PR #24089, Upstream PR #23443, @sayboras)
+* helm: Add SA automount configuration (Backport PR #24089, Upstream PR #23441, @sayboras)
+
+**Bugfixes:**
+* Add the option to preserve CNI configuration file on agent shutdown. This can help prevent issues where pods can no longer be deleted. This may cause some transient error messages to be displayed if a pod is scheduled while Cilium is being upgraded. (Backport PR #24198, Upstream PR #24009, @squeed)
+* agent: fix incorrect deletion of veth host interfaces on bootstrap (Backport PR #23958, Upstream PR #23787, @giorio94)
+* clustermesh: fix services cache bloat due to incorrect deletion (Backport PR #24089, Upstream PR #23947, @giorio94)
+* daemon: fix panic when running with etcd with endpoint crd disabled (Backport PR #24385, Upstream PR #24085, @tommyp1ckles)
+* envoy: Avoid empty typeURL for all resources (Backport PR #23862, Upstream PR #23763, @sayboras)
+* Fix connectivity issue upon agent restart in case of ipv6 + direct routing + KPR replacement (Backport PR #23958, Upstream PR #23857, @giorio94)
+* Fix enable-stale-cilium-endpoint-cleanup flag not actually disabling the cleanup init set when set to false. This provides a workaround for an existing panic that can occur when running using etcd kvstore. (Backport PR #24308, Upstream PR #23874, @sjdot)
+* Fix IPv6 policy enforcement for SNATed traffic from the Host (Backport PR #24368, Upstream PR #24132, @ysksuzuki)
+* Fix leaking service backend entries when services with terminating backends were deleted. (#23858, @aditighag)
+* ipam/crd: Fix panic due to concurrent map read and map write (Backport PR #23958, Upstream PR #23713, @gandro)
+* node: require ipv4 address when wireguard is enabled (Backport PR #24040, Upstream PR #23552, @giorio94)
+
+**Misc Changes:**
+* Add leader requirement to watch from Etcd. (Backport PR #24089, Upstream PR #23590, @marseel)
+* bpf: Fix usage of tunnel map structs (Backport PR #24089, Upstream PR #23469, @pchaigno)
+* bugtool: Add ingress/egress tc filter dump (Backport PR #24198, Upstream PR #24057, @joestringer)
+* chore(deps): update all github action dependencies (v1.11) (minor) (#24004, @renovate[bot])
+* chore(deps): update all github action dependencies (v1.11) (patch) (#23995, @renovate[bot])
+* chore(deps): update dependency cilium/hubble to v0.11.2 (v1.11) (#23924, @renovate[bot])
+* chore(deps): update docker.io/library/ubuntu:20.04 docker digest to 9fa30fc (v1.11) (#24141, @renovate[bot])
+* chore(deps): update quay.io/cilium/hubble docker tag to v0.11.2 (v1.11) (#23949, @renovate[bot])
+* docs: Document CONFIG_PERF_EVENTS requirement (Backport PR #24198, Upstream PR #24055, @joestringer)
+* docs: Fix the dead link to Mellanox performance tuning guide (Backport PR #24089, Upstream PR #24012, @gentoo-root)
+* docs: replace usage of api.twitter.com (Backport PR #23958, Upstream PR #23669, @kaworu)
+* Enable Google Analytics 4 (Backport PR #24066, Upstream PR #22220, @chalin)
+* fix(deps): update module golang.org/x/net to v0.7.0 [security] (master) (Backport PR #23958, Upstream PR #23904, @renovate[bot])
+* Fixed link to broken anchor in RKE doc (Backport PR #23958, Upstream PR #23706, @raphink)
+* IPsec: Remove `IP_POOLS` logic (Backport PR #24089, Upstream PR #24030, @pchaigno)
+* Node ID restoration (Backport PR #23686, Upstream PR #23578, @pchaigno)
+* Remove / in RKE doc link as it causes redirect bug (Backport PR #23958, Upstream PR #23728, @raphink)
+* workflow: fixes LLVM, Clang cache and install path (Backport PR #23958, Upstream PR #23740, @brlbil)
+
+**Other Changes:**
+* images: update cilium-{runtime,builder} for 1.11 (#24302, @nebril)
+* install: Update image digests for v1.11.14 (#23737, @joestringer)
+* Revert ""Pick up etcd v3.4.23"" (#23789, @michi-covalent)
+* v1.11 - Backport initContainer change (#24329, @ferozsalam)
+",,c5577e8e8987ec4355751094f09248fb58734fdc,CVE-2023-27594,c5577e8e8987ec4355751094f09248fb58734fdc,https://github.com/cilium/cilium,NVD_GIT_REPOBASED,68,COMPLETED," VAR VAR VAR ------------------ **VAR VAR:** * VAR: VAR VAR VAR 1.23.4 (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR (VAR VAR  **VAR:** * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR + VAR VAR + VAR VAR (VAR VAR  * VAR VAR-VAR-VAR-VAR-VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. ( * VAR/VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR (VAR VAR  **VAR VAR:** * VAR VAR VAR VAR VAR VAR VAR. (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR/VAR VAR VAR VAR (VAR VAR  * VAR(VAR): VAR VAR VAR VAR VAR (VAR.11) (VAR) ( * VAR(VAR): VAR VAR VAR VAR VAR (VAR.11) (VAR) ( * VAR(VAR): VAR VAR VAR/VAR VAR VAR.11.2 (VAR.11) ( * VAR(VAR): VAR VAR.VAR/VAR/VAR:20.04 VAR VAR VAR 9fa30fc (VAR.11) ( * VAR(VAR): VAR VAR.VAR/VAR/VAR VAR VAR VAR VAR.11.2 (VAR.11) ( * VAR: VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR VAR VAR.VAR.VAR (VAR VAR  * VAR VAR VAR 4 (VAR VAR  * VAR(VAR): VAR VAR VAR.VAR/VAR/VAR VAR VAR.7.0 [VAR] (VAR) (VAR VAR  * VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR `VAR` VAR (VAR VAR  * VAR VAR VAR (VAR VAR  * VAR / VAR VAR VAR VAR VAR VAR VAR VAR VAR (VAR VAR  * VAR: VAR VAR, VAR VAR VAR VAR VAR (VAR VAR  **VAR VAR:** * VAR: VAR VAR-{VAR,VAR} VAR 1.11 ( * VAR: VAR VAR VAR VAR VAR.11.14 ( * VAR ""VAR VAR VAR VAR.4.23"" ( * VAR.11 - VAR VAR VAR ( ",0,14
+cpython_1ef61cf71a218c71860ff6aecf0fd51edb8b65dc,Grammar/python.gram,"import_stmt[stmt_ty]:
+    | 'try' &&':' b=block ex[asdl_excepthandler_seq*]=except_star_block+ el=[else_block] f=[finally_block] {
+        CHECK_VERSION(stmt_ty, 11, ""Exception groups are"",
+    | &(STRING|FSTRING_START) strings
+fstring_middle[expr_ty]:
+    | fstring_replacement_field
+    | t=FSTRING_MIDDLE { _PyPegen_constant_from_token(p, t) }
+fstring_replacement_field[expr_ty]:
+    | '{' a=(yield_expr | star_expressions) debug_expr=""=""? conversion=[fstring_conversion] format=[fstring_full_format_spec] '}' {
+        _PyPegen_formatted_value(p, a, debug_expr, conversion, format, EXTRA)
+    }
+    | invalid_replacement_field
+fstring_conversion[expr_ty]:
+    | conv_token=""!"" conv=NAME { _PyPegen_check_fstring_conversion(p, conv_token, conv) }
+fstring_full_format_spec[expr_ty]:
+    | ':' spec=fstring_format_spec* { spec ? _PyAST_JoinedStr((asdl_expr_seq*)spec, EXTRA) : NULL }
+fstring_format_spec[expr_ty]:
+    | t=FSTRING_MIDDLE { _PyPegen_constant_from_token(p, t) }
+    | fstring_replacement_field
+fstring[expr_ty]:
+    | a=FSTRING_START b=fstring_middle* c=FSTRING_END { _PyPegen_joined_str(p, a, (asdl_expr_seq*)b, c) }
+
+string[expr_ty]: s[Token*]=STRING { _PyPegen_constant_from_string(p, s) }
+strings[expr_ty] (memo): a[asdl_expr_seq*]=(fstring|string)+ { _PyPegen_concatenate_strings(p, a, EXTRA) }
+   | a='lambda' [lambda_params] b=':' &(FSTRING_MIDDLE | fstring_replacement_field)  {
+        RAISE_SYNTAX_ERROR_KNOWN_RANGE(a, b, ""f-string: lambda expressions are not allowed without parentheses"") }
+
+invalid_replacement_field:
+    | '{' a='=' { RAISE_SYNTAX_ERROR_KNOWN_LOCATION(a, ""f-string: valid expression required before '='"") }
+    | '{' a='!' { RAISE_SYNTAX_ERROR_KNOWN_LOCATION(a, ""f-string: valid expression required before '!'"") }
+    | '{' a=':' { RAISE_SYNTAX_ERROR_KNOWN_LOCATION(a, ""f-string: valid expression required before ':'"") }
+    | '{' a='}' { RAISE_SYNTAX_ERROR_KNOWN_LOCATION(a, ""f-string: valid expression required before '}'"") }
+    | '{' !(yield_expr | star_expressions) { RAISE_SYNTAX_ERROR_ON_NEXT_TOKEN(""f-string: expecting a valid expression after '{'"")}
+    | '{' (yield_expr | star_expressions) !('=' | '!' | ':' | '}') {
+        PyErr_Occurred() ? NULL : RAISE_SYNTAX_ERROR_ON_NEXT_TOKEN(""f-string: expecting '=', or '!', or ':', or '}'"") }
+    | '{' (yield_expr | star_expressions) '=' !('!' | ':' | '}') {
+        PyErr_Occurred() ? NULL : RAISE_SYNTAX_ERROR_ON_NEXT_TOKEN(""f-string: expecting '!', or ':', or '}'"") }
+    | '{' (yield_expr | star_expressions) '='? invalid_conversion_character
+    | '{' (yield_expr | star_expressions) '='? ['!' NAME] !(':' | '}') {
+        PyErr_Occurred() ? NULL : RAISE_SYNTAX_ERROR_ON_NEXT_TOKEN(""f-string: expecting ':' or '}'"") }
+    | '{' (yield_expr | star_expressions) '='? ['!' NAME] ':' fstring_format_spec* !'}' {
+        PyErr_Occurred() ? NULL : RAISE_SYNTAX_ERROR_ON_NEXT_TOKEN(""f-string: expecting '}', or format specs"") }
+    | '{' (yield_expr | star_expressions) '='? ['!' NAME] !'}' {
+        PyErr_Occurred() ? NULL : RAISE_SYNTAX_ERROR_ON_NEXT_TOKEN(""f-string: expecting '}'"") }
+
+invalid_conversion_character:
+    | '!' &(':' | '}') { RAISE_SYNTAX_ERROR_ON_NEXT_TOKEN(""f-string: missing conversion character"") }
+    | '!' !NAME { RAISE_SYNTAX_ERROR_ON_NEXT_TOKEN(""f-string: invalid conversion character"") }","import_stmt[stmt_ty]:
+    | 'try' &&':' b=block ex[asdl_excepthandler_seq*]=except_star_block+ el=[else_block] f=[finally_block] {
+        CHECK_VERSION(stmt_ty, 11, ""Exception groups are"",
+    | &STRING strings
+strings[expr_ty] (memo): a=STRING+ { _PyPegen_concatenate_strings(p, a) }
+",1ef61cf71a218c71860ff6aecf0fd51edb8b65dc,CVE-2023-33595,1ef61cf71a218c71860ff6aecf0fd51edb8b65dc,https://github.com/python/cpython,NVD_GIT_REPOBASED,66,COMPLETED,"VAR[VAR]: | 'VAR' &&':' VAR=VAR VAR[VAR*]=VAR+ VAR=[VAR] VAR=[VAR] { VAR(VAR, 11, ""VAR VAR VAR"", | &(VAR|VAR) VAR VAR[VAR]: | VAR | VAR=VAR { VAR(VAR, VAR) } VAR[VAR]: | '{' VAR=(VAR | VAR) VAR=""=""? VAR=[VAR] VAR=[VAR] '}' { VAR(VAR, VAR, VAR, VAR, VAR, VAR) } | VAR VAR[VAR]: | VAR=""!"" VAR=VAR { VAR(VAR, VAR, VAR) } VAR[VAR]: | ':' VAR=VAR* { VAR ? VAR((VAR*)VAR, VAR) : VAR } VAR[VAR]: | VAR=VAR { VAR(VAR, VAR) } | VAR VAR[VAR]: | VAR=VAR VAR=VAR* VAR=VAR { VAR(VAR, VAR, (VAR*)VAR, VAR) } VAR[VAR]: VAR[VAR*]=VAR { VAR(VAR, VAR) } VAR[VAR] (VAR): VAR[VAR*]=(VAR|VAR)+ { VAR(VAR, VAR, VAR) } | VAR='VAR' [VAR] VAR=':' &(VAR | VAR) { VAR(VAR, VAR, ""VAR-VAR: VAR VAR VAR VAR VAR VAR VAR"") } VAR: | '{' VAR='=' { VAR(VAR, ""VAR-VAR: VAR VAR VAR VAR '='"") } | '{' VAR='!' { VAR(VAR, ""VAR-VAR: VAR VAR VAR VAR '!'"") } | '{' VAR=':' { VAR(VAR, ""VAR-VAR: VAR VAR VAR VAR ':'"") } | '{' VAR='}' { VAR(VAR, ""VAR-VAR: VAR VAR VAR VAR '}'"") } | '{' !(VAR | VAR) { VAR(""VAR-VAR: VAR VAR VAR VAR VAR '{'"")} | '{' (VAR | VAR) !('=' | '!' | ':' | '}') { VAR() ? VAR : VAR(""VAR-VAR: VAR '=', VAR '!', VAR ':', VAR '}'"") } | '{' (VAR | VAR) '=' !('!' | ':' | '}') { VAR() ? VAR : VAR(""VAR-VAR: VAR '!', VAR ':', VAR '}'"") } | '{' (VAR | VAR) '='? VAR | '{' (VAR | VAR) '='? ['!' VAR] !(':' | '}') { VAR() ? VAR : VAR(""VAR-VAR: VAR ':' VAR '}'"") } | '{' (VAR | VAR) '='? ['!' VAR] ':' VAR* !'}' { VAR() ? VAR : VAR(""VAR-VAR: VAR '}', VAR VAR VAR"") } | '{' (VAR | VAR) '='? ['!' VAR] !'}' { VAR() ? VAR : VAR(""VAR-VAR: VAR '}'"") } VAR: | '!' &(':' | '}') { VAR(""VAR-VAR: VAR VAR VAR"") } | '!' !VAR { VAR(""VAR-VAR: VAR VAR VAR"") } VAR[VAR]: | 'VAR' &&':' VAR=VAR VAR[VAR*]=VAR+ VAR=[VAR] VAR=[VAR] { VAR(VAR, 11, ""VAR VAR VAR"", | &VAR VAR VAR[VAR] (VAR): VAR=VAR+ { VAR(VAR, VAR) }",0,14
+cpython_b9509ba7a9c668b984dab876c7926fe1dc5aa0ba,Doc/library/mailcap.rst,"   .. versionchanged:: 3.11
+
+      To prevent security issues with shell metacharacters (symbols that have
+      special effects in a shell command line), ``findmatch`` will refuse
+      to inject ASCII characters other than alphanumerics and ``@+=:,./-_``
+      into the returned command line.
+
+      If a disallowed character appears in *filename*, ``findmatch`` will always
+      return ``(None, None)`` as if no entry was found.
+      If such a character appears elsewhere (a value in *plist* or in *MIMEtype*),
+      ``findmatch`` will ignore all mailcap entries which use that value.
+      A :mod:`warning <warnings>` will be raised in either case.",,b9509ba7a9c668b984dab876c7926fe1dc5aa0ba,CVE-2015-20107,b9509ba7a9c668b984dab876c7926fe1dc5aa0ba,https://github.com/python/cpython,NVD_GIT_REPOBASED,166,COMPLETED,".. VAR:: 3.11 VAR VAR VAR VAR VAR VAR VAR (VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR), ``VAR`` VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR ``@+=:,./-VAR`` VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR *VAR*, ``VAR`` VAR VAR VAR ``(VAR, VAR)`` VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR (VAR VAR VAR *VAR* VAR VAR *VAR*), ``VAR`` VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR :VAR:`VAR <VAR>` VAR VAR VAR VAR VAR VAR. ",0,14
+cpython_c59a16e2c7495a90e6d23a48ec98623f3fb1e176,Doc/library/mailcap.rst,"   .. versionchanged:: 3.11
+
+      To prevent security issues with shell metacharacters (symbols that have
+      special effects in a shell command line), ``findmatch`` will refuse
+      to inject ASCII characters other than alphanumerics and ``@+=:,./-_``
+      into the returned command line.
+
+      If a disallowed character appears in *filename*, ``findmatch`` will always
+      return ``(None, None)`` as if no entry was found.
+      If such a character appears elsewhere (a value in *plist* or in *MIMEtype*),
+      ``findmatch`` will ignore all mailcap entries which use that value.
+      A :mod:`warning <warnings>` will be raised in either case.",,c59a16e2c7495a90e6d23a48ec98623f3fb1e176,CVE-2015-20107,c59a16e2c7495a90e6d23a48ec98623f3fb1e176,https://github.com/python/cpython,NVD_GIT_REPOBASED,172,COMPLETED,".. VAR:: 3.11 VAR VAR VAR VAR VAR VAR VAR (VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR), ``VAR`` VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR ``@+=:,./-VAR`` VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR *VAR*, ``VAR`` VAR VAR VAR ``(VAR, VAR)`` VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR (VAR VAR VAR *VAR* VAR VAR *VAR*), ``VAR`` VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR :VAR:`VAR <VAR>` VAR VAR VAR VAR VAR VAR. ",0,14
+cpython_c9f07813ab8e664d8c34413c4fc2d4f86c061a92,Litest/test_urlparse.py,"    ("";a=b"", [(';a', 'b')]),
+    (""a=a+b;b=b+c"", [('a', 'a b;b=b c')]),
+    (b"";a=b"", [(b';a', b'b')]),
+    (b""a=a+b;b=b+c"", [(b'a', b'a b;b=b c')]),
+    ("";a=b"", {';a': ['b']}),
+    (""a=a+b;b=b+c"", {'a': ['a b;b=b c']}),
+    (b"";a=b"", {b';a': [b'b']}),
+    (b""a=a+b;b=b+c"", {b'a':[ b'a b;b=b c']}),
+    def test_parse_qs_separator(self):
+        parse_qs_semicolon_cases = [
+            ("";"", {}),
+            ("";;"", {}),
+            ("";a=b"", {'a': ['b']}),
+            (""a=a+b;b=b+c"", {'a': ['a b'], 'b': ['b c']}),
+            (""a=1;a=2"", {'a': ['1', '2']}),
+            (b"";"", {}),
+            (b"";;"", {}),
+            (b"";a=b"", {b'a': [b'b']}),
+            (b""a=a+b;b=b+c"", {b'a': [b'a b'], b'b': [b'b c']}),
+            (b""a=1;a=2"", {b'a': [b'1', b'2']}),
+        ]
+        for orig, expect in parse_qs_semicolon_cases:
+            with self.subTest(f""Original: {orig!r}, Expected: {expect!r}""):
+                result = urllib.parse.parse_qs(orig, separator=';')
+                self.assertEqual(result, expect, ""Error parsing %r"" % orig)
+
+
+    def test_parse_qsl_separator(self):
+        parse_qsl_semicolon_cases = [
+            ("";"", []),
+            ("";;"", []),
+            ("";a=b"", [('a', 'b')]),
+            (""a=a+b;b=b+c"", [('a', 'a b'), ('b', 'b c')]),
+            (""a=1;a=2"", [('a', '1'), ('a', '2')]),
+            (b"";"", []),
+            (b"";;"", []),
+            (b"";a=b"", [(b'a', b'b')]),
+            (b""a=a+b;b=b+c"", [(b'a', b'a b'), (b'b', b'b c')]),
+            (b""a=1;a=2"", [(b'a', b'1'), (b'a', b'2')]),
+        ]
+        for orig, expect in parse_qsl_semicolon_cases:
+            with self.subTest(f""Original: {orig!r}, Expected: {expect!r}""):
+                result = urllib.parse.parse_qsl(orig, separator=';')
+                self.assertEqual(result, expect, ""Error parsing %r"" % orig)
+
+","    ("";"", []),
+    ("";;"", []),
+    ("";a=b"", [('a', 'b')]),
+    (""a=a+b;b=b+c"", [('a', 'a b'), ('b', 'b c')]),
+    (""a=1;a=2"", [('a', '1'), ('a', '2')]),
+    (b"";"", []),
+    (b"";;"", []),
+    (b"";a=b"", [(b'a', b'b')]),
+    (b""a=a+b;b=b+c"", [(b'a', b'a b'), (b'b', b'b c')]),
+    (b""a=1;a=2"", [(b'a', b'1'), (b'a', b'2')]),
+    ("";"", {}),
+    ("";;"", {}),
+    ("";a=b"", {'a': ['b']}),
+    (""a=a+b;b=b+c"", {'a': ['a b'], 'b': ['b c']}),
+    (""a=1;a=2"", {'a': ['1', '2']}),
+    (b"";"", {}),
+    (b"";;"", {}),
+    (b"";a=b"", {b'a': [b'b']}),
+    (b""a=a+b;b=b+c"", {b'a': [b'a b'], b'b': [b'b c']}),
+    (b""a=1;a=2"", {b'a': [b'1', b'2']}),
+        with self.assertRaises(ValueError):
+            urllib.parse.parse_qs(';'.join(['a=a']*11), max_num_fields=10)",c9f07813ab8e664d8c34413c4fc2d4f86c061a92,CVE-2021-23336,c9f07813ab8e664d8c34413c4fc2d4f86c061a92,https://github.com/python/cpython,NVD_GIT_REPOBASED,120,COMPLETED,"("";VAR=VAR"", [(';VAR', 'VAR')]), (""VAR=VAR+VAR;VAR=VAR+VAR"", [('VAR', 'VAR VAR;VAR=VAR VAR')]), (VAR"";VAR=VAR"", [(VAR';VAR', VAR'VAR')]), (VAR""VAR=VAR+VAR;VAR=VAR+VAR"", [(VAR'VAR', VAR'VAR VAR;VAR=VAR VAR')]), ("";VAR=VAR"", {';VAR': ['VAR']}), (""VAR=VAR+VAR;VAR=VAR+VAR"", {'VAR': ['VAR VAR;VAR=VAR VAR']}), (VAR"";VAR=VAR"", {VAR';VAR': [VAR'VAR']}), (VAR""VAR=VAR+VAR;VAR=VAR+VAR"", {VAR'VAR':[ VAR'VAR VAR;VAR=VAR VAR']}), VAR VAR(VAR): VAR = [ ("";"", {}), ("";;"", {}), ("";VAR=VAR"", {'VAR': ['VAR']}), (""VAR=VAR+VAR;VAR=VAR+VAR"", {'VAR': ['VAR VAR'], 'VAR': ['VAR VAR']}), (""VAR=1;VAR=2"", {'VAR': ['1', '2']}), (VAR"";"", {}), (VAR"";;"", {}), (VAR"";VAR=VAR"", {VAR'VAR': [VAR'VAR']}), (VAR""VAR=VAR+VAR;VAR=VAR+VAR"", {VAR'VAR': [VAR'VAR VAR'], VAR'VAR': [VAR'VAR VAR']}), (VAR""VAR=1;VAR=2"", {VAR'VAR': [VAR'1', VAR'2']}), ] VAR VAR, VAR VAR VAR: VAR VAR.VAR(VAR""VAR: {VAR!VAR}, VAR: {VAR!VAR}""): VAR = VAR.VAR.VAR(VAR, VAR=';') VAR.VAR(VAR, VAR, ""VAR VAR %VAR"" % VAR) VAR VAR(VAR): VAR = [ ("";"", []), ("";;"", []), ("";VAR=VAR"", [('VAR', 'VAR')]), (""VAR=VAR+VAR;VAR=VAR+VAR"", [('VAR', 'VAR VAR'), ('VAR', 'VAR VAR')]), (""VAR=1;VAR=2"", [('VAR', '1'), ('VAR', '2')]), (VAR"";"", []), (VAR"";;"", []), (VAR"";VAR=VAR"", [(VAR'VAR', VAR'VAR')]), (VAR""VAR=VAR+VAR;VAR=VAR+VAR"", [(VAR'VAR', VAR'VAR VAR'), (VAR'VAR', VAR'VAR VAR')]), (VAR""VAR=1;VAR=2"", [(VAR'VAR', VAR'1'), (VAR'VAR', VAR'2')]), ] VAR VAR, VAR VAR VAR: VAR VAR.VAR(VAR""VAR: {VAR!VAR}, VAR: {VAR!VAR}""): VAR = VAR.VAR.VAR(VAR, VAR=';') VAR.VAR(VAR, VAR, ""VAR VAR %VAR"" % VAR) ("";"", []), ("";;"", []), ("";VAR=VAR"", [('VAR', 'VAR')]), (""VAR=VAR+VAR;VAR=VAR+VAR"", [('VAR', 'VAR VAR'), ('VAR', 'VAR VAR')]), (""VAR=1;VAR=2"", [('VAR', '1'), ('VAR', '2')]), (VAR"";"", []), (VAR"";;"", []), (VAR"";VAR=VAR"", [(VAR'VAR', VAR'VAR')]), (VAR""VAR=VAR+VAR;VAR=VAR+VAR"", [(VAR'VAR', VAR'VAR VAR'), (VAR'VAR', VAR'VAR VAR')]), (VAR""VAR=1;VAR=2"", [(VAR'VAR', VAR'1'), (VAR'VAR', VAR'2')]), ("";"", {}), ("";;"", {}), ("";VAR=VAR"", {'VAR': ['VAR']}), (""VAR=VAR+VAR;VAR=VAR+VAR"", {'VAR': ['VAR VAR'], 'VAR': ['VAR VAR']}), (""VAR=1;VAR=2"", {'VAR': ['1', '2']}), (VAR"";"", {}), (VAR"";;"", {}), (VAR"";VAR=VAR"", {VAR'VAR': [VAR'VAR']}), (VAR""VAR=VAR+VAR;VAR=VAR+VAR"", {VAR'VAR': [VAR'VAR VAR'], VAR'VAR': [VAR'VAR VAR']}), (VAR""VAR=1;VAR=2"", {VAR'VAR': [VAR'1', VAR'2']}), VAR VAR.VAR(VAR): VAR.VAR.VAR(';'.VAR(['VAR=VAR']*11), VAR=10)",0,14
+cpython_f8b71da9aac6ea74808dcdd0cc266e705431356b,Doc/library/functions.rst,"   .. versionchanged:: 3.11
+      :class:`int` string inputs and string representations can be limited to
+      help avoid denial of service attacks. A :exc:`ValueError` is raised when
+      the limit is exceeded while converting a string *x* to an :class:`int` or
+      when converting an :class:`int` into a string would exceed the limit.
+      See the :ref:`integer string conversion length limitation
+      <int_max_str_digits>` documentation.",,f8b71da9aac6ea74808dcdd0cc266e705431356b,CVE-2020-10735,f8b71da9aac6ea74808dcdd0cc266e705431356b,https://github.com/python/cpython,NVD_GIT_REPOBASED,186,COMPLETED,.. VAR:: 3.11 :VAR:`VAR` VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR :VAR:`VAR` VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR *VAR* VAR VAR :VAR:`VAR` VAR VAR VAR VAR :VAR:`VAR` VAR VAR VAR VAR VAR VAR VAR. VAR VAR :VAR:`VAR VAR VAR VAR VAR <VAR>` VAR. ,0,14
+cpython_f8b71da9aac6ea74808dcdd0cc266e705431356b,Doc/library/json.rst,".. warning::
+   Be cautious when parsing JSON data from untrusted sources. A malicious
+   JSON string may cause the decoder to consume considerable CPU and memory
+   resources. Limiting the size of data to be parsed is recommended.
+
+   .. versionchanged:: 3.11
+      The default *parse_int* of :func:`int` now limits the maximum length of
+      the integer string via the interpreter's :ref:`integer string
+      conversion length limitation <int_max_str_digits>` to help avoid denial
+      of service attacks.
+",,f8b71da9aac6ea74808dcdd0cc266e705431356b,CVE-2020-10735,f8b71da9aac6ea74808dcdd0cc266e705431356b,https://github.com/python/cpython,NVD_GIT_REPOBASED,186,COMPLETED,.. VAR:: VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. .. VAR:: 3.11 VAR VAR *VAR* VAR :VAR:`VAR` VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR'VAR :VAR:`VAR VAR VAR VAR VAR <VAR>` VAR VAR VAR VAR VAR VAR VAR. ,0,14
+cpython_f8b71da9aac6ea74808dcdd0cc266e705431356b,Doc/library/sys.rst,"   ============================= ==============================================================================================================
+   ============================= ==============================================================================================================
+   :const:`int_max_str_digits`   :option:`-X int_max_str_digits <-X>` (:ref:`integer string conversion length limitation <int_max_str_digits>`)
+   ============================= ==============================================================================================================
+   .. versionchanged:: 3.11
+      Added the ``int_max_str_digits`` attribute.
+
+.. function:: get_int_max_str_digits()
+
+   Returns the current value for the :ref:`integer string conversion length
+   limitation <int_max_str_digits>`. See also :func:`set_int_max_str_digits`.
+
+   .. versionadded:: 3.11
+
+   +----------------------------------------+-----------------------------------------------+
+   | Attribute                              | Explanation                                   |
+   +========================================+===============================================+
+   | :const:`bits_per_digit`                | number of bits held in each digit.  Python    |
+   |                                        | integers are stored internally in base        |
+   |                                        | ``2**int_info.bits_per_digit``                |
+   +----------------------------------------+-----------------------------------------------+
+   | :const:`sizeof_digit`                  | size in bytes of the C type used to           |
+   |                                        | represent a digit                             |
+   +----------------------------------------+-----------------------------------------------+
+   | :const:`default_max_str_digits`        | default value for                             |
+   |                                        | :func:`sys.get_int_max_str_digits` when it    |
+   |                                        | is not otherwise explicitly configured.       |
+   +----------------------------------------+-----------------------------------------------+
+   | :const:`str_digits_check_threshold`    | minimum non-zero value for                    |
+   |                                        | :func:`sys.set_int_max_str_digits`,           |
+   |                                        | :envvar:`PYTHONINTMAXSTRDIGITS`, or           |
+   |                                        | :option:`-X int_max_str_digits <-X>`.         |
+   +----------------------------------------+-----------------------------------------------+
+   .. versionchanged:: 3.11
+      Added ``default_max_str_digits`` and ``str_digits_check_threshold``.
+
+.. function:: set_int_max_str_digits(n)
+
+   Set the :ref:`integer string conversion length limitation
+   <int_max_str_digits>` used by this interpreter. See also
+   :func:`get_int_max_str_digits`.
+
+   .. versionadded:: 3.11
+","   ============================= ================================================================
+   ============================= ================================================================
+   ============================= ================================================================
+   +-------------------------+----------------------------------------------+
+   | Attribute               | Explanation                                  |
+   +=========================+==============================================+
+   | :const:`bits_per_digit` | number of bits held in each digit.  Python   |
+   |                         | integers are stored internally in base       |
+   |                         | ``2**int_info.bits_per_digit``               |
+   +-------------------------+----------------------------------------------+
+   | :const:`sizeof_digit`   | size in bytes of the C type used to          |
+   |                         | represent a digit                            |
+   +-------------------------+----------------------------------------------+",f8b71da9aac6ea74808dcdd0cc266e705431356b,CVE-2020-10735,f8b71da9aac6ea74808dcdd0cc266e705431356b,https://github.com/python/cpython,NVD_GIT_REPOBASED,186,COMPLETED,"============================= ============================================================================================================== ============================= ============================================================================================================== :VAR:`VAR` :VAR:`-VAR VAR <-VAR>` (:VAR:`VAR VAR VAR VAR VAR <VAR>`) ============================= ============================================================================================================== .. VAR:: 3.11 VAR VAR ``VAR`` VAR. .. VAR:: VAR() VAR VAR VAR VAR VAR VAR :VAR:`VAR VAR VAR VAR VAR <VAR>`. VAR VAR :VAR:`VAR`. .. VAR:: 3.11 +----------------------------------------+-----------------------------------------------+ | VAR | VAR | +========================================+===============================================+ | :VAR:`VAR` | VAR VAR VAR VAR VAR VAR VAR. VAR | | | VAR VAR VAR VAR VAR VAR | | | ``2**VAR.VAR`` | +----------------------------------------+-----------------------------------------------+ | :VAR:`VAR` | VAR VAR VAR VAR VAR VAR VAR VAR VAR | | | VAR VAR VAR | +----------------------------------------+-----------------------------------------------+ | :VAR:`VAR` | VAR VAR VAR | | | :VAR:`VAR.VAR` VAR VAR | | | VAR VAR VAR VAR VAR. | +----------------------------------------+-----------------------------------------------+ | :VAR:`VAR` | VAR VAR-VAR VAR VAR | | | :VAR:`VAR.VAR`, | | | :VAR:`VAR`, VAR | | | :VAR:`-VAR VAR <-VAR>`. | +----------------------------------------+-----------------------------------------------+ .. VAR:: 3.11 VAR ``VAR`` VAR ``VAR``. .. VAR:: VAR(VAR) VAR VAR :VAR:`VAR VAR VAR VAR VAR <VAR>` VAR VAR VAR VAR. VAR VAR :VAR:`VAR`. .. VAR:: 3.11 ============================= ================================================================ ============================= ================================================================ ============================= ================================================================ +-------------------------+----------------------------------------------+ | VAR | VAR | +=========================+==============================================+ | :VAR:`VAR` | VAR VAR VAR VAR VAR VAR VAR. VAR | | | VAR VAR VAR VAR VAR VAR | | | ``2**VAR.VAR`` | +-------------------------+----------------------------------------------+ | :VAR:`VAR` | VAR VAR VAR VAR VAR VAR VAR VAR VAR | | | VAR VAR VAR | +-------------------------+----------------------------------------------+",0,14
+cpython_f8b71da9aac6ea74808dcdd0cc266e705431356b,Doc/using/cmdline.rst,"   * ``-X int_max_str_digits`` configures the :ref:`integer string conversion
+     length limitation <int_max_str_digits>`.  See also
+     :envvar:`PYTHONINTMAXSTRDIGITS`.
+   .. versionadded:: 3.11
+      The ``-X int_max_str_digits`` option.
+.. envvar:: PYTHONINTMAXSTRDIGITS
+
+   If this variable is set to an integer, it is used to configure the
+   interpreter's global :ref:`integer string conversion length limitation
+   <int_max_str_digits>`.
+
+   .. versionadded:: 3.11",,f8b71da9aac6ea74808dcdd0cc266e705431356b,CVE-2020-10735,f8b71da9aac6ea74808dcdd0cc266e705431356b,https://github.com/python/cpython,NVD_GIT_REPOBASED,186,COMPLETED,"* ``-VAR VAR`` VAR VAR :VAR:`VAR VAR VAR VAR VAR <VAR>`. VAR VAR :VAR:`VAR`. .. VAR:: 3.11 VAR ``-VAR VAR`` VAR. .. VAR:: VAR VAR VAR VAR VAR VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR VAR'VAR VAR :VAR:`VAR VAR VAR VAR VAR <VAR>`. .. VAR:: 3.11 ",0,14
+cpython_fae93ab16377db23ba6abc10480b04a58db62bdd,Doc/library/mailcap.rst,"   .. versionchanged:: 3.11
+
+      To prevent security issues with shell metacharacters (symbols that have
+      special effects in a shell command line), ``findmatch`` will refuse
+      to inject ASCII characters other than alphanumerics and ``@+=:,./-_``
+      into the returned command line.
+
+      If a disallowed character appears in *filename*, ``findmatch`` will always
+      return ``(None, None)`` as if no entry was found.
+      If such a character appears elsewhere (a value in *plist* or in *MIMEtype*),
+      ``findmatch`` will ignore all mailcap entries which use that value.
+      A :mod:`warning <warnings>` will be raised in either case.",,fae93ab16377db23ba6abc10480b04a58db62bdd,CVE-2015-20107,fae93ab16377db23ba6abc10480b04a58db62bdd,https://github.com/python/cpython,NVD_GIT_REPOBASED,168,COMPLETED,".. VAR:: 3.11 VAR VAR VAR VAR VAR VAR VAR (VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR), ``VAR`` VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR ``@+=:,./-VAR`` VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR *VAR*, ``VAR`` VAR VAR VAR ``(VAR, VAR)`` VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR (VAR VAR VAR *VAR* VAR VAR *VAR*), ``VAR`` VAR VAR VAR VAR VAR VAR VAR VAR VAR. VAR :VAR:`VAR <VAR>` VAR VAR VAR VAR VAR VAR. ",0,14
+cpython_fcbe0cb04d35189401c0c880ebfb4311e952d776,Litest/test_urlparse.py,"    ("";a=b"", [(';a', 'b')]),
+    (""a=a+b;b=b+c"", [('a', 'a b;b=b c')]),
+    (b"";a=b"", [(b';a', b'b')]),
+    (b""a=a+b;b=b+c"", [(b'a', b'a b;b=b c')]),
+    ("";a=b"", {';a': ['b']}),
+    (""a=a+b;b=b+c"", {'a': ['a b;b=b c']}),
+    (b"";a=b"", {b';a': [b'b']}),
+    (b""a=a+b;b=b+c"", {b'a':[ b'a b;b=b c']}),
+    def test_parse_qs_separator(self):
+        parse_qs_semicolon_cases = [
+            ("";"", {}),
+            ("";;"", {}),
+            ("";a=b"", {'a': ['b']}),
+            (""a=a+b;b=b+c"", {'a': ['a b'], 'b': ['b c']}),
+            (""a=1;a=2"", {'a': ['1', '2']}),
+            (b"";"", {}),
+            (b"";;"", {}),
+            (b"";a=b"", {b'a': [b'b']}),
+            (b""a=a+b;b=b+c"", {b'a': [b'a b'], b'b': [b'b c']}),
+            (b""a=1;a=2"", {b'a': [b'1', b'2']}),
+        ]
+        for orig, expect in parse_qs_semicolon_cases:
+            with self.subTest(f""Original: {orig!r}, Expected: {expect!r}""):
+                result = urllib.parse.parse_qs(orig, separator=';')
+                self.assertEqual(result, expect, ""Error parsing %r"" % orig)
+
+
+    def test_parse_qsl_separator(self):
+        parse_qsl_semicolon_cases = [
+            ("";"", []),
+            ("";;"", []),
+            ("";a=b"", [('a', 'b')]),
+            (""a=a+b;b=b+c"", [('a', 'a b'), ('b', 'b c')]),
+            (""a=1;a=2"", [('a', '1'), ('a', '2')]),
+            (b"";"", []),
+            (b"";;"", []),
+            (b"";a=b"", [(b'a', b'b')]),
+            (b""a=a+b;b=b+c"", [(b'a', b'a b'), (b'b', b'b c')]),
+            (b""a=1;a=2"", [(b'a', b'1'), (b'a', b'2')]),
+        ]
+        for orig, expect in parse_qsl_semicolon_cases:
+            with self.subTest(f""Original: {orig!r}, Expected: {expect!r}""):
+                result = urllib.parse.parse_qsl(orig, separator=';')
+                self.assertEqual(result, expect, ""Error parsing %r"" % orig)
+
+","    ("";"", []),
+    ("";;"", []),
+    ("";a=b"", [('a', 'b')]),
+    (""a=a+b;b=b+c"", [('a', 'a b'), ('b', 'b c')]),
+    (""a=1;a=2"", [('a', '1'), ('a', '2')]),
+    (b"";"", []),
+    (b"";;"", []),
+    (b"";a=b"", [(b'a', b'b')]),
+    (b""a=a+b;b=b+c"", [(b'a', b'a b'), (b'b', b'b c')]),
+    (b""a=1;a=2"", [(b'a', b'1'), (b'a', b'2')]),
+    ("";"", {}),
+    ("";;"", {}),
+    ("";a=b"", {'a': ['b']}),
+    (""a=a+b;b=b+c"", {'a': ['a b'], 'b': ['b c']}),
+    (""a=1;a=2"", {'a': ['1', '2']}),
+    (b"";"", {}),
+    (b"";;"", {}),
+    (b"";a=b"", {b'a': [b'b']}),
+    (b""a=a+b;b=b+c"", {b'a': [b'a b'], b'b': [b'b c']}),
+    (b""a=1;a=2"", {b'a': [b'1', b'2']}),
+        with self.assertRaises(ValueError):
+            urllib.parse.parse_qs(';'.join(['a=a']*11), max_num_fields=10)",fcbe0cb04d35189401c0c880ebfb4311e952d776,CVE-2021-23336,fcbe0cb04d35189401c0c880ebfb4311e952d776,https://github.com/python/cpython,NVD_GIT_REPOBASED,152,COMPLETED,"("";VAR=VAR"", [(';VAR', 'VAR')]), (""VAR=VAR+VAR;VAR=VAR+VAR"", [('VAR', 'VAR VAR;VAR=VAR VAR')]), (VAR"";VAR=VAR"", [(VAR';VAR', VAR'VAR')]), (VAR""VAR=VAR+VAR;VAR=VAR+VAR"", [(VAR'VAR', VAR'VAR VAR;VAR=VAR VAR')]), ("";VAR=VAR"", {';VAR': ['VAR']}), (""VAR=VAR+VAR;VAR=VAR+VAR"", {'VAR': ['VAR VAR;VAR=VAR VAR']}), (VAR"";VAR=VAR"", {VAR';VAR': [VAR'VAR']}), (VAR""VAR=VAR+VAR;VAR=VAR+VAR"", {VAR'VAR':[ VAR'VAR VAR;VAR=VAR VAR']}), VAR VAR(VAR): VAR = [ ("";"", {}), ("";;"", {}), ("";VAR=VAR"", {'VAR': ['VAR']}), (""VAR=VAR+VAR;VAR=VAR+VAR"", {'VAR': ['VAR VAR'], 'VAR': ['VAR VAR']}), (""VAR=1;VAR=2"", {'VAR': ['1', '2']}), (VAR"";"", {}), (VAR"";;"", {}), (VAR"";VAR=VAR"", {VAR'VAR': [VAR'VAR']}), (VAR""VAR=VAR+VAR;VAR=VAR+VAR"", {VAR'VAR': [VAR'VAR VAR'], VAR'VAR': [VAR'VAR VAR']}), (VAR""VAR=1;VAR=2"", {VAR'VAR': [VAR'1', VAR'2']}), ] VAR VAR, VAR VAR VAR: VAR VAR.VAR(VAR""VAR: {VAR!VAR}, VAR: {VAR!VAR}""): VAR = VAR.VAR.VAR(VAR, VAR=';') VAR.VAR(VAR, VAR, ""VAR VAR %VAR"" % VAR) VAR VAR(VAR): VAR = [ ("";"", []), ("";;"", []), ("";VAR=VAR"", [('VAR', 'VAR')]), (""VAR=VAR+VAR;VAR=VAR+VAR"", [('VAR', 'VAR VAR'), ('VAR', 'VAR VAR')]), (""VAR=1;VAR=2"", [('VAR', '1'), ('VAR', '2')]), (VAR"";"", []), (VAR"";;"", []), (VAR"";VAR=VAR"", [(VAR'VAR', VAR'VAR')]), (VAR""VAR=VAR+VAR;VAR=VAR+VAR"", [(VAR'VAR', VAR'VAR VAR'), (VAR'VAR', VAR'VAR VAR')]), (VAR""VAR=1;VAR=2"", [(VAR'VAR', VAR'1'), (VAR'VAR', VAR'2')]), ] VAR VAR, VAR VAR VAR: VAR VAR.VAR(VAR""VAR: {VAR!VAR}, VAR: {VAR!VAR}""): VAR = VAR.VAR.VAR(VAR, VAR=';') VAR.VAR(VAR, VAR, ""VAR VAR %VAR"" % VAR) ("";"", []), ("";;"", []), ("";VAR=VAR"", [('VAR', 'VAR')]), (""VAR=VAR+VAR;VAR=VAR+VAR"", [('VAR', 'VAR VAR'), ('VAR', 'VAR VAR')]), (""VAR=1;VAR=2"", [('VAR', '1'), ('VAR', '2')]), (VAR"";"", []), (VAR"";;"", []), (VAR"";VAR=VAR"", [(VAR'VAR', VAR'VAR')]), (VAR""VAR=VAR+VAR;VAR=VAR+VAR"", [(VAR'VAR', VAR'VAR VAR'), (VAR'VAR', VAR'VAR VAR')]), (VAR""VAR=1;VAR=2"", [(VAR'VAR', VAR'1'), (VAR'VAR', VAR'2')]), ("";"", {}), ("";;"", {}), ("";VAR=VAR"", {'VAR': ['VAR']}), (""VAR=VAR+VAR;VAR=VAR+VAR"", {'VAR': ['VAR VAR'], 'VAR': ['VAR VAR']}), (""VAR=1;VAR=2"", {'VAR': ['1', '2']}), (VAR"";"", {}), (VAR"";;"", {}), (VAR"";VAR=VAR"", {VAR'VAR': [VAR'VAR']}), (VAR""VAR=VAR+VAR;VAR=VAR+VAR"", {VAR'VAR': [VAR'VAR VAR'], VAR'VAR': [VAR'VAR VAR']}), (VAR""VAR=1;VAR=2"", {VAR'VAR': [VAR'1', VAR'2']}), VAR VAR.VAR(VAR): VAR.VAR.VAR(';'.VAR(['VAR=VAR']*11), VAR=10)",0,14
+deno_99b5eaa2f4f81b0f6fb46a388808a0d8f40b91e1,lockfile/Cargo.toml,"version = ""0.11.0""","version = ""0.10.0""",99b5eaa2f4f81b0f6fb46a388808a0d8f40b91e1,CVE-2023-28445,99b5eaa2f4f81b0f6fb46a388808a0d8f40b91e1,https://github.com/denoland/deno,NVD_GIT_REPOBASED,74,COMPLETED,"VAR = ""0.11.0"" VAR = ""0.10.0""",0,14
+FFmpeg_900f39692ca0337a98a7cf047e4e2611071810c2,libavformat/mxfdec.c,"    if(segment->nb_index_entries && length < 11)
+        return AVERROR_INVALIDDATA;
+        if(avio_feof(pb))
+            return AVERROR_INVALIDDATA;",,900f39692ca0337a98a7cf047e4e2611071810c2,CVE-2017-14170,900f39692ca0337a98a7cf047e4e2611071810c2,https://github.com/FFmpeg/FFmpeg,NVD_DIRECT_COMMIT,1337,COMPLETED,VAR(VAR->VAR && VAR < 11) VAR VAR; VAR(VAR(VAR)) VAR VAR; ,0,14
+FFmpeg_9c0beaf0d3bb72f6e83b3b155a598a9ec28c8468,libavcodec/aacdec_template.c,"    // The previous checks would end up at 8 at this point for 22.2
+    if (tags == 16 && i == 8) {
+        e2c_vec[i] = (struct elem_to_channel) {
+            .av_position  = AV_CH_TOP_FRONT_CENTER,
+            .syn_ele      = layout_map[i][0],
+            .elem_id      = layout_map[i][1],
+            .aac_position = layout_map[i][2]
+        }; i++;
+        i += assign_pair(e2c_vec, layout_map, i,
+                         AV_CH_TOP_FRONT_LEFT,
+                         AV_CH_TOP_FRONT_RIGHT,
+                         AAC_CHANNEL_FRONT);
+        i += assign_pair(e2c_vec, layout_map, i,
+                         AV_CH_TOP_SIDE_LEFT,
+                         AV_CH_TOP_SIDE_RIGHT,
+                         AAC_CHANNEL_SIDE);
+        e2c_vec[i] = (struct elem_to_channel) {
+            .av_position  = AV_CH_TOP_CENTER,
+            .syn_ele      = layout_map[i][0],
+            .elem_id      = layout_map[i][1],
+            .aac_position = layout_map[i][2]
+        }; i++;
+        i += assign_pair(e2c_vec, layout_map, i,
+                         AV_CH_TOP_BACK_LEFT,
+                         AV_CH_TOP_BACK_RIGHT,
+                         AAC_CHANNEL_BACK);
+        e2c_vec[i] = (struct elem_to_channel) {
+            .av_position  = AV_CH_TOP_BACK_CENTER,
+            .syn_ele      = layout_map[i][0],
+            .elem_id      = layout_map[i][1],
+            .aac_position = layout_map[i][2]
+        }; i++;
+        e2c_vec[i] = (struct elem_to_channel) {
+            .av_position  = AV_CH_BOTTOM_FRONT_CENTER,
+            .syn_ele      = layout_map[i][0],
+            .elem_id      = layout_map[i][1],
+            .aac_position = layout_map[i][2]
+        }; i++;
+        i += assign_pair(e2c_vec, layout_map, i,
+                         AV_CH_BOTTOM_FRONT_LEFT,
+                         AV_CH_BOTTOM_FRONT_RIGHT,
+                         AAC_CHANNEL_FRONT);
+    }
+
+
+    if (tags == 16 && total_non_cc_elements == 16) {
+        // For 22.2 reorder the result as needed
+        FFSWAP(struct elem_to_channel, e2c_vec[2], e2c_vec[0]);   // FL & FR first (final), FC third
+        FFSWAP(struct elem_to_channel, e2c_vec[2], e2c_vec[1]);   // FC second (final), FLc & FRc third
+        FFSWAP(struct elem_to_channel, e2c_vec[6], e2c_vec[2]);   // LFE1 third (final), FLc & FRc seventh
+        FFSWAP(struct elem_to_channel, e2c_vec[4], e2c_vec[3]);   // BL & BR fourth (final), SiL & SiR fifth
+        FFSWAP(struct elem_to_channel, e2c_vec[6], e2c_vec[4]);   // FLc & FRc fifth (final), SiL & SiR seventh
+        FFSWAP(struct elem_to_channel, e2c_vec[7], e2c_vec[6]);   // LFE2 seventh (final), SiL & SiR eight (final)
+        FFSWAP(struct elem_to_channel, e2c_vec[9], e2c_vec[8]);   // TpFL & TpFR ninth (final), TFC tenth (final)
+        FFSWAP(struct elem_to_channel, e2c_vec[11], e2c_vec[10]); // TC eleventh (final), TpSiL & TpSiR twelth
+        FFSWAP(struct elem_to_channel, e2c_vec[12], e2c_vec[11]); // TpBL & TpBR twelth (final), TpSiL & TpSiR thirteenth (final)
+    } else {
+        // For everything else, utilize the AV channel position define as a
+        // stable sort.
+        do {
+            int next_n = 0;
+            for (i = 1; i < n; i++)
+                if (e2c_vec[i - 1].av_position > e2c_vec[i].av_position) {
+                    FFSWAP(struct elem_to_channel, e2c_vec[i - 1], e2c_vec[i]);
+                    next_n = i;
+                }
+            n = next_n;
+        } while (n > 0);
+
+    }
+        channel_config > 13) {
+    case 13:
+        if (ac->tags_mapped > 3 && ((type == TYPE_CPE && elem_id < 8) ||
+                                    (type == TYPE_SCE && elem_id < 6) ||
+                                    (type == TYPE_LFE && elem_id < 2))) {
+            ac->tags_mapped++;
+            return ac->tag_che_map[type][elem_id] = ac->che[type][elem_id];
+        }","    // Must choose a stable sort
+    do {
+        int next_n = 0;
+        for (i = 1; i < n; i++)
+            if (e2c_vec[i - 1].av_position > e2c_vec[i].av_position) {
+                FFSWAP(struct elem_to_channel, e2c_vec[i - 1], e2c_vec[i]);
+                next_n = i;
+            }
+        n = next_n;
+    } while (n > 0);
+        channel_config > 12) {",9c0beaf0d3bb72f6e83b3b155a598a9ec28c8468,CVE-2020-24995,9c0beaf0d3bb72f6e83b3b155a598a9ec28c8468,https://github.com/FFmpeg/FFmpeg,CPE_GIT_REPOBASED,88,COMPLETED," VAR (VAR == 16 && VAR == 8) { VAR[VAR] = (VAR VAR) { .VAR = VAR, .VAR = VAR[VAR][0], .VAR = VAR[VAR][1], .VAR = VAR[VAR][2] }; VAR++; VAR += VAR(VAR, VAR, VAR, VAR, VAR, VAR); VAR += VAR(VAR, VAR, VAR, VAR, VAR, VAR); VAR[VAR] = (VAR VAR) { .VAR = VAR, .VAR = VAR[VAR][0], .VAR = VAR[VAR][1], .VAR = VAR[VAR][2] }; VAR++; VAR += VAR(VAR, VAR, VAR, VAR, VAR, VAR); VAR[VAR] = (VAR VAR) { .VAR = VAR, .VAR = VAR[VAR][0], .VAR = VAR[VAR][1], .VAR = VAR[VAR][2] }; VAR++; VAR[VAR] = (VAR VAR) { .VAR = VAR, .VAR = VAR[VAR][0], .VAR = VAR[VAR][1], .VAR = VAR[VAR][2] }; VAR++; VAR += VAR(VAR, VAR, VAR, VAR, VAR, VAR); } VAR (VAR == 16 && VAR == 16) {  VAR(VAR VAR, VAR[2], VAR[0]);  VAR(VAR VAR, VAR[2], VAR[1]);  VAR(VAR VAR, VAR[6], VAR[2]);  VAR(VAR VAR, VAR[4], VAR[3]);  VAR(VAR VAR, VAR[6], VAR[4]);  VAR(VAR VAR, VAR[7], VAR[6]);  VAR(VAR VAR, VAR[9], VAR[8]);  VAR(VAR VAR, VAR[11], VAR[10]);  VAR(VAR VAR, VAR[12], VAR[11]);  } VAR {   VAR { VAR VAR = 0; VAR (VAR = 1; VAR < VAR; VAR++) VAR (VAR[VAR - 1].VAR > VAR[VAR].VAR) { VAR(VAR VAR, VAR[VAR - 1], VAR[VAR]); VAR = VAR; } VAR = VAR; } VAR (VAR > 0); } VAR > 13) { VAR 13: VAR (VAR->VAR > 3 && ((VAR == VAR && VAR < 8) || (VAR == VAR && VAR < 6) || (VAR == VAR && VAR < 2))) { VAR->VAR++; VAR VAR->VAR[VAR][VAR] = VAR->VAR[VAR][VAR]; }  VAR { VAR VAR = 0; VAR (VAR = 1; VAR < VAR; VAR++) VAR (VAR[VAR - 1].VAR > VAR[VAR].VAR) { VAR(VAR VAR, VAR[VAR - 1], VAR[VAR]); VAR = VAR; } VAR = VAR; } VAR (VAR > 0); VAR > 12) {",1,14
+FFmpeg_f173cdfe669556aa92857adafe60cbe5f2aa1210,libavformat/mxfdec.c,"    if(segment->nb_index_entries && length < 11)
+        return AVERROR_INVALIDDATA;
+        if(avio_feof(pb))
+            return AVERROR_INVALIDDATA;",,f173cdfe669556aa92857adafe60cbe5f2aa1210,CVE-2017-14170,f173cdfe669556aa92857adafe60cbe5f2aa1210,https://github.com/FFmpeg/FFmpeg,NVD_DIRECT_COMMIT,1337,COMPLETED,VAR(VAR->VAR && VAR < 11) VAR VAR; VAR(VAR(VAR)) VAR VAR; ,0,14
+gpac_3d17f9524b48e8564bba50055c3502e660c41a64,src/media_tools/isom_tools.c,"typedef struct{
+	u8 layer_id_plus_one;
+	u8 min_temporal_id;
+	u8 max_temporal_id;
+} LInfo;
+
+	u32 temporal_id_sample, max_temporal_id_sample;
+	LInfo layers[64];
+	//purge all linf sample groups
+	gf_isom_remove_sample_group(file, track, GF_4CC('l','i','n','f'));
+			sti[layer_id].layers[layer_id].layer_id_plus_one = layer_id+1;
+			sti[layer_id].temporal_id_sample = temporal_id;
+
+			if (!sti[layer_id].layers[layer_id].min_temporal_id || (sti[layer_id].layers[layer_id].min_temporal_id > temporal_id)) {
+				sti[layer_id].layers[layer_id].min_temporal_id = temporal_id;
+			}
+			if (!sti[layer_id].layers[layer_id].max_temporal_id || (sti[layer_id].layers[layer_id].max_temporal_id < temporal_id)) {
+				sti[layer_id].layers[layer_id].max_temporal_id = temporal_id;
+
+			if (!sti[layer_id].max_temporal_id_sample || (sti[layer_id].max_temporal_id_sample < temporal_id)) {
+				sti[layer_id].max_temporal_id_sample = temporal_id;
+				//purge all linf sample groups
+				gf_isom_remove_sample_group(file, sti[j].track_num, GF_4CC('l','i','n','f'));
+					u8 trefidx, tid;
+					gf_bs_write_int(xbs, sti[k].max_temporal_id_sample, 3);
+
+					tid = sti[k].temporal_id_sample;
+					sti[j].layers[k].layer_id_plus_one = sti[k].layer_id+1;
+					if (!sti[j].layers[k].min_temporal_id || (sti[j].layers[k].min_temporal_id > tid)) {
+						sti[j].layers[k].min_temporal_id = tid;
+					}
+					if (!sti[j].layers[k].max_temporal_id || (sti[j].layers[k].max_temporal_id < tid)) {
+						sti[j].layers[k].max_temporal_id = tid;
+					}
+
+			sti[j].max_temporal_id_sample = 0;
+			sti[j].temporal_id_sample = 0;
+		GF_BitStream *bs;
+		u32 count, data_size;
+		char *data=NULL;
+		//set linf group
+		bs = gf_bs_new(NULL, 0, GF_BITSTREAM_WRITE);
+		gf_bs_write_int(bs, 0, 2);
+		count = 0;
+		for (k=0; k<=max_layer_id; k++) {
+			if (sti[j].layers[k].layer_id_plus_one) count++;
+		}
+		gf_bs_write_int(bs, count, 6);
+
+		for (k=0; k<=max_layer_id; k++) {
+			if (! sti[j].layers[k].layer_id_plus_one) continue;
+			gf_bs_write_int(bs, 0, 4);
+			gf_bs_write_int(bs, sti[j].layers[k].layer_id_plus_one - 1, 6);
+			gf_bs_write_int(bs, sti[j].layers[k].min_temporal_id, 3);
+			gf_bs_write_int(bs, sti[j].layers[k].max_temporal_id, 3);
+			gf_bs_write_int(bs, 0, 1);
+			//track carries the NALUs
+			if (k==j) {
+				gf_bs_write_int(bs, 0xFF, 7);
+			}
+			//otherwise referenced through extractors, not present natively
+			else {
+				gf_bs_write_int(bs, 0, 7);
+			}
+		}
+		gf_bs_get_content(bs, &data, &data_size);
+		gf_bs_del(bs);
+		gf_isom_add_sample_group_info(file, sti[j].track_num, GF_4CC( 'l', 'i', 'n', 'f'), data, data_size, GF_TRUE, &count);
+		gf_free(data);
+	u32 nb_nalus_in_sample;
+static void hevc_add_trif(GF_ISOFile *file, u32 track, u32 id, Bool full_picture, u32 independent, Bool filtering_disable, u32 tx, u32 ty, u32 tw, u32 th, Bool is_default)
+{
+	char *data[11];
+	u32 di, data_size=7;
+	GF_BitStream *bs;
+	//write TRIF sample group description
+	bs = gf_bs_new(data, 11, GF_BITSTREAM_WRITE);
+	gf_bs_write_u16(bs, id);	//groupID
+	gf_bs_write_int(bs, 1, 1); //tile Region flag always true for us
+	gf_bs_write_int(bs, independent, 2); //independentIDC: set to 1 (motion-constrained tiles but not all tiles RAP)
+	gf_bs_write_int(bs, full_picture, 1);//full picture: false since we don't do L-HEVC tiles
+	gf_bs_write_int(bs, filtering_disable, 1); //filtering disabled: set to 1 (always true on our bitstreams for now) - Check xPS to be sure ...
+	gf_bs_write_int(bs, 0, 1);//has dependency list: false since we don't do L-HEVC tiles
+	gf_bs_write_int(bs, 0, 2); //reserved
+	if (!full_picture) {
+		gf_bs_write_u16(bs, tx);
+		gf_bs_write_u16(bs, ty);
+		data_size+=4;
+	}
+	gf_bs_write_u16(bs, tw);
+	gf_bs_write_u16(bs, th);
+	gf_bs_del(bs);
+
+	gf_isom_add_sample_group_info(file, track, GF_4CC('t','r','i','f'), data, data_size, is_default, &di);
+}
+
+GF_Err gf_media_split_hevc_tiles(GF_ISOFile *file, Bool signal_only)
+	u32 i, j, cur_tile, count, stype, track, nb_tiles, di, nalu_size_length, tx, ty, tw, th;
+	s32 pps_idx=-1, sps_idx=-1, ret;
+	Bool filter_disabled=GF_TRUE;
+				sps_idx = gf_media_hevc_read_sps(sl->data, sl->size, &hevc);
+				gf_media_hevc_read_vps(sl->data, sl->size, &hevc);
+	if (sps_idx==-1) return GF_BAD_PARAM;
+
+	if (hevc.pps[pps_idx].loop_filter_across_tiles_enabled_flag)
+		filter_disabled=GF_FALSE;
+
+	if (! hevc.pps[pps_idx].tiles_enabled_flag) {
+		hevc_add_trif(file, track, gf_isom_get_track_id(file, track), GF_TRUE, 1, filter_disabled, 0, 0, hevc.sps[pps_idx].width, hevc.sps[pps_idx].width, GF_TRUE);
+
+		GF_LOG(GF_LOG_WARNING, GF_LOG_AUTHOR, (""[HEVC Tiles] Tiles not enabled, cannot signal them\n""));
+		return GF_OK;
+	}
+
+	nb_tiles = hevc.pps[pps_idx].num_tile_columns * hevc.pps[pps_idx].num_tile_rows;
+	tiles = gf_malloc(sizeof(HEVCTileImport) * nb_tiles);
+	memset(tiles, 0, sizeof(HEVCTileImport) * nb_tiles);
+	for (i=0; i<nb_tiles; i++) {
+		if (! signal_only) {
+			//first clone tracks
+			e = gf_isom_clone_track(file, track, file, GF_FALSE, &tiles[i].track );
+			if (e) goto err_exit;
+			tiles[i].track_id = gf_isom_get_track_id(file, tiles[i].track);
+			gf_isom_hevc_set_tile_config(file, tiles[i].track, 1, NULL, GF_FALSE);
+			// setup track references from tile track to base
+			gf_isom_set_track_reference(file, tiles[i].track, GF_ISOM_REF_TBAS, gf_isom_get_track_id(file, track) );
+		} else {
+			tiles[i].track_id = gf_isom_get_track_id(file, track) + i+1;
+		}
+	}
+
+		u32 size, nb_nalus=0;
+		GF_BitStream *bs=NULL;
+		if (!signal_only) {
+			bs = gf_bs_new(NULL, 0, GF_BITSTREAM_WRITE);
+			sample->data = NULL;
+			sample->dataLength = 0;
+
+			for (j=0; j<nb_tiles; j++) {
+				tiles[j].data_offset = 0;
+				tiles[j].sample_data = gf_bs_new(NULL, 0, GF_BITSTREAM_WRITE);
+			}
+		} else {
+			for (j=0; j<nb_tiles; j++) {
+				tiles[j].nb_nalus_in_sample = 0;
+			}
+			bs = gf_bs_new(NULL, 0, GF_BITSTREAM_WRITE);
+			//write start of nalm group
+			gf_bs_write_u8(bs, 0);//flags
+			gf_bs_write_u8(bs, 0);//entry_count - will be set at the end
+
+				if (cur_tile>=nb_tiles) {
+					GF_LOG(GF_LOG_ERROR, GF_LOG_AUTHOR, (""[HEVC Tiles] Tile index %d is greater than number of tiles %d in PPS\n"", cur_tile, nb_tiles));
+
+				tiles[cur_tile].tx = tx;
+				tiles[cur_tile].ty = ty;
+				tiles[cur_tile].tw = tw;
+				tiles[cur_tile].th = th;
+
+				if (signal_only) {
+					tiles[cur_tile].nb_nalus_in_sample++;
+					gf_bs_write_u16(bs, tiles[cur_tile].track_id);
+					nb_nalus++;
+				} else {
+					gf_bs_write_data(tiles[cur_tile].sample_data, (char *) data, nalu_size + nalu_size_length);
+					if (! gf_isom_has_track_reference(file, track, GF_ISOM_REF_SABT, tiles[cur_tile].track_id)) {
+						gf_isom_set_track_reference(file, track, GF_ISOM_REF_SABT, tiles[cur_tile].track_id);
+					}
+					tiles[cur_tile].data_offset += nalu_size + nalu_size_length;
+				if (! signal_only) {
+					gf_bs_write_data(bs, (char *) data, nalu_size + nalu_size_length);
+				} else {
+					gf_bs_write_u16(bs, 0);
+					nb_nalus++;
+				}
+
+		if (! signal_only) {
+			gf_free(sample->data);
+			gf_bs_get_content(bs, &sample->data, &sample->dataLength);
+			gf_bs_del(bs);
+			e = gf_isom_update_sample(file, track, i+1, sample, 1);
+
+			for (j=0; j<nb_tiles; j++) {
+				sample->dataLength = 0;
+				gf_bs_get_content(tiles[j].sample_data, &sample->data, &sample->dataLength);
+				if (!sample->data)
+					continue;
+
+				e = gf_isom_add_sample(file, tiles[j].track, 1, sample);
+				if (e) goto err_exit;
+				tiles[j].sample_count ++;
+
+				gf_bs_del(tiles[j].sample_data);
+				tiles[j].sample_data = NULL;
+				gf_free(sample->data);
+				sample->data = NULL;
+
+				e = gf_isom_copy_sample_info(file, tiles[j].track, file, track, i+1);
+				if (e) goto err_exit;
+			}
+		} else {
+			char *data=NULL;
+			u32 size=0;
+			u32 sdesc;
+			gf_bs_get_content(bs, &data, &size);
+			gf_bs_del(bs);
+			data[1] = nb_nalus;
+			e = gf_isom_add_sample_group_info(file, track, GF_4CC('n','a','l','m'), data, size, 0, &sdesc);
+			if (e) {
+				GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[ISOBMF] Error defining NALM group description entry\n"" ));
+			} else {
+				e = gf_isom_add_sample_info(file, track, i+1, GF_4CC('n','a','l','m'), sdesc, GF_4CC('t','r','i','f'));
+				if (e) {
+					GF_LOG(GF_LOG_ERROR, GF_LOG_CONTAINER, (""[ISOBMF] Error associating NALM group description to sample\n"" ));
+				}
+			}
+			gf_free(data);
+	for (i=0; i<nb_tiles; i++) {
+		if (! signal_only) {
+			tiles[i].track = gf_isom_get_track_by_id(file, tiles[i].track_id);
+			if (!tiles[i].sample_count) {
+				gf_isom_remove_track(file, tiles[i].track);
+				continue;
+			}
+			hevc_add_trif(file, tiles[i].track, tiles[i].track_id, GF_FALSE, 1, filter_disabled, tiles[i].tx, tiles[i].ty, tiles[i].tw, tiles[i].th, GF_TRUE);
+			gf_isom_set_visual_info(file, tiles[i].track, 1, tiles[i].tw, tiles[i].th);
+			gf_isom_get_track_layout_info(file, track, &width, &height, &translation_x, &translation_y, &layer);
+			gf_isom_set_track_layout_info(file, tiles[i].track, width<<16, height<<16, translation_x, translation_y, layer);
+		} else {
+			hevc_add_trif(file, track, tiles[i].track_id, GF_FALSE, 1, filter_disabled, tiles[i].tx, tiles[i].ty, tiles[i].tw, tiles[i].th, GF_FALSE);
+		}","	u32 min_temporal_id, max_temporal_id;
+			if (!sti[layer_id].min_temporal_id || (sti[layer_id].min_temporal_id > temporal_id)) {
+				sti[layer_id].min_temporal_id = temporal_id;
+			if (!sti[layer_id].max_temporal_id || (sti[layer_id].max_temporal_id < temporal_id)) {
+				sti[layer_id].max_temporal_id = temporal_id;
+					u8 trefidx;
+					gf_bs_write_int(xbs, sti[k].max_temporal_id, 3);
+			sti[j].max_temporal_id = 0;
+GF_Err gf_media_split_hevc_tiles(GF_ISOFile *file)
+	u32 i, j, cur_tile, count, stype, track, nb_tracks, di, nalu_size_length, tx, ty, tw, th;
+	s32 pps_idx=-1, ret;
+				pps_idx = gf_media_hevc_read_sps(sl->data, sl->size, &hevc);
+				pps_idx = gf_media_hevc_read_vps(sl->data, sl->size, &hevc);
+	if (! hevc.pps[pps_idx].tiles_enabled_flag) return GF_OK;
+	nb_tracks = hevc.pps[pps_idx].num_tile_columns * hevc.pps[pps_idx].num_tile_rows;
+	tiles = gf_malloc(sizeof(HEVCTileImport) * nb_tracks);
+	memset(tiles, 0, sizeof(HEVCTileImport) * nb_tracks);
+	//first clone tracks
+	for (i=0; i<nb_tracks; i++) {
+		e = gf_isom_clone_track(file, track, file, GF_FALSE, &tiles[i].track );
+		if (e) goto err_exit;
+		tiles[i].track_id = gf_isom_get_track_id(file, tiles[i].track);
+		gf_isom_hevc_set_tile_config(file, tiles[i].track, 1, NULL, GF_FALSE);
+	}
+	//then setup track references (done in two pass otherwise we would clone the tref box ...)
+	for (i=0; i<nb_tracks; i++) {
+		gf_isom_set_track_reference(file, tiles[i].track, GF_ISOM_REF_TBAS, gf_isom_get_track_id(file, track) );
+	}
+		u32 size;
+		GF_BitStream *bs = gf_bs_new(NULL, 0, GF_BITSTREAM_WRITE);
+		sample->data = NULL;
+		sample->dataLength = 0;
+
+		for (j=0; j<nb_tracks; j++) {
+			tiles[j].data_offset = 0;
+			tiles[j].sample_data = gf_bs_new(NULL, 0, GF_BITSTREAM_WRITE);
+			tiles[j].data_offset = 0;
+				if (cur_tile>=nb_tracks) {
+					GF_LOG(GF_LOG_ERROR, GF_LOG_AUTHOR, (""[HEVC Tiles] Tile index %d is greater than number of tiles %d in PPS\n"", cur_tile, nb_tracks));
+				} else {
+					gf_bs_write_data(tiles[cur_tile].sample_data, (char *) data, nalu_size + nalu_size_length);
+					tiles[cur_tile].tx = tx;
+					tiles[cur_tile].ty = ty;
+					tiles[cur_tile].tw = tw;
+					tiles[cur_tile].th = th;
+				if (! gf_isom_has_track_reference(file, track, GF_ISOM_REF_SABT, tiles[cur_tile].track_id)) {
+					gf_isom_set_track_reference(file, track, GF_ISOM_REF_SABT, tiles[cur_tile].track_id);
+				tiles[cur_tile].data_offset += nalu_size + nalu_size_length;
+				gf_bs_write_data(bs, (char *) data, nalu_size + nalu_size_length);
+		gf_free(sample->data);
+		gf_bs_get_content(bs, &sample->data, &sample->dataLength);
+		gf_bs_del(bs);
+
+		e = gf_isom_update_sample(file, track, i+1, sample, 1);
+		if (e) goto err_exit;
+
+		gf_free(sample->data);
+		sample->data = NULL;
+
+		for (j=0; j<nb_tracks; j++) {
+			sample->dataLength = 0;
+			gf_bs_get_content(tiles[j].sample_data, &sample->data, &sample->dataLength);
+			if (!sample->data)
+				continue;
+			e = gf_isom_add_sample(file, tiles[j].track, 1, sample);
+			tiles[j].sample_count ++;
+			gf_bs_del(tiles[j].sample_data);
+			tiles[j].sample_data = NULL;
+			e = gf_isom_copy_sample_info(file, tiles[j].track, file, track, i+1);
+	for (i=0; i<nb_tracks; i++) {
+		char data[11];
+		tiles[i].track = gf_isom_get_track_by_id(file, tiles[i].track_id);
+		if (!tiles[i].sample_count) {
+			gf_isom_remove_track(file, tiles[i].track);
+			continue;
+		}
+		//write TRIF sample group description
+		bs = gf_bs_new(data, 11, GF_BITSTREAM_WRITE);
+		gf_bs_write_u16(bs, tiles[i].track);	//groupID
+		gf_bs_write_int(bs, 1, 1); //tile Region flag always true for us
+		gf_bs_write_int(bs, 1, 2); //independentIDC: set to 1 (motion-constrained tiles but not all tiles RAP)
+		gf_bs_write_int(bs, 0, 1);//full picture: false since we don't do L-HEVC tiles
+		gf_bs_write_int(bs, 1, 1); //filtering disabled: set to 1 (always true on our bitstreams for now) - Check xPS to be sure ...
+		gf_bs_write_int(bs, 0, 1);//has dependency list: false since we don't do L-HEVC tiles
+		gf_bs_write_int(bs, 0, 2); //reserved
+
+		gf_bs_write_u16(bs, tiles[i].tx);
+		gf_bs_write_u16(bs, tiles[i].ty);
+		gf_bs_write_u16(bs, tiles[i].tw);
+		gf_bs_write_u16(bs, tiles[i].th);
+		gf_bs_del(bs);
+		gf_isom_add_sample_group_info(file, tiles[i].track, GF_4CC('t','r','i','f'), data, 11, 1, &di);
+		gf_isom_set_visual_info(file, tiles[i].track, 1, tiles[i].tw, tiles[i].th);
+		gf_isom_get_track_layout_info(file, track, &width, &height, &translation_x, &translation_y, &layer);
+		gf_isom_set_track_layout_info(file, tiles[i].track, width<<16, height<<16, translation_x, translation_y, layer);",3d17f9524b48e8564bba50055c3502e660c41a64,CVE-2018-1000100,3d17f9524b48e8564bba50055c3502e660c41a64,https://github.com/gpac/gpac,NVD_GIT_REPOBASED,76,COMPLETED,"VAR VAR{ VAR VAR; VAR VAR; VAR VAR; } VAR; VAR VAR, VAR; VAR VAR[64];  VAR(VAR, VAR, VAR('VAR','VAR','VAR','VAR')); VAR[VAR].VAR[VAR].VAR = VAR+1; VAR[VAR].VAR = VAR; VAR (!VAR[VAR].VAR[VAR].VAR || (VAR[VAR].VAR[VAR].VAR > VAR)) { VAR[VAR].VAR[VAR].VAR = VAR; } VAR (!VAR[VAR].VAR[VAR].VAR || (VAR[VAR].VAR[VAR].VAR < VAR)) { VAR[VAR].VAR[VAR].VAR = VAR; VAR (!VAR[VAR].VAR || (VAR[VAR].VAR < VAR)) { VAR[VAR].VAR = VAR;  VAR(VAR, VAR[VAR].VAR, VAR('VAR','VAR','VAR','VAR')); VAR VAR, VAR; VAR(VAR, VAR[VAR].VAR, 3); VAR = VAR[VAR].VAR; VAR[VAR].VAR[VAR].VAR = VAR[VAR].VAR+1; VAR (!VAR[VAR].VAR[VAR].VAR || (VAR[VAR].VAR[VAR].VAR > VAR)) { VAR[VAR].VAR[VAR].VAR = VAR; } VAR (!VAR[VAR].VAR[VAR].VAR || (VAR[VAR].VAR[VAR].VAR < VAR)) { VAR[VAR].VAR[VAR].VAR = VAR; } VAR[VAR].VAR = 0; VAR[VAR].VAR = 0; VAR *VAR; VAR VAR, VAR; VAR *VAR=VAR;  VAR = VAR(VAR, 0, VAR); VAR(VAR, 0, 2); VAR = 0; VAR (VAR=0; VAR<=VAR; VAR++) { VAR (VAR[VAR].VAR[VAR].VAR) VAR++; } VAR(VAR, VAR, 6); VAR (VAR=0; VAR<=VAR; VAR++) { VAR (! VAR[VAR].VAR[VAR].VAR) VAR; VAR(VAR, 0, 4); VAR(VAR, VAR[VAR].VAR[VAR].VAR - 1, 6); VAR(VAR, VAR[VAR].VAR[VAR].VAR, 3); VAR(VAR, VAR[VAR].VAR[VAR].VAR, 3); VAR(VAR, 0, 1);  VAR (VAR==VAR) { VAR(VAR, 0xFF, 7); }  VAR { VAR(VAR, 0, 7); } } VAR(VAR, &VAR, &VAR); VAR(VAR); VAR(VAR, VAR[VAR].VAR, VAR( 'VAR', 'VAR', 'VAR', 'VAR'), VAR, VAR, VAR, &VAR); VAR(VAR); VAR VAR; VAR VAR VAR(VAR *VAR, VAR VAR, VAR VAR, VAR VAR, VAR VAR, VAR VAR, VAR VAR, VAR VAR, VAR VAR, VAR VAR, VAR VAR) { VAR *VAR[11]; VAR VAR, VAR=7; VAR *VAR;  VAR = VAR(VAR, 11, VAR); VAR(VAR, VAR);  VAR(VAR, 1, 1);  VAR(VAR, VAR, 2);  VAR(VAR, VAR, 1); VAR(VAR, VAR, 1);  VAR(VAR, 0, 1); VAR(VAR, 0, 2);  VAR (!VAR) { VAR(VAR, VAR); VAR(VAR, VAR); VAR+=4; } VAR(VAR, VAR); VAR(VAR, VAR); VAR(VAR); VAR(VAR, VAR, VAR('VAR','VAR','VAR','VAR'), VAR, VAR, VAR, &VAR); } VAR VAR(VAR *VAR, VAR VAR) VAR VAR, VAR, VAR, VAR, VAR, VAR, VAR, VAR, VAR, VAR, VAR, VAR, VAR; VAR VAR=-1, VAR=-1, VAR; VAR VAR=VAR; VAR = VAR(VAR->VAR, VAR->VAR, &VAR); VAR(VAR->VAR, VAR->VAR, &VAR); VAR (VAR==-1) VAR VAR; VAR (VAR.VAR[VAR].VAR) VAR=VAR; VAR (! VAR.VAR[VAR].VAR) { VAR(VAR, VAR, VAR(VAR, VAR), VAR, 1, VAR, 0, 0, VAR.VAR[VAR].VAR, VAR.VAR[VAR].VAR, VAR); VAR(VAR, VAR, (""[VAR VAR] VAR VAR VAR, VAR VAR VAR\VAR"")); VAR VAR; } VAR = VAR.VAR[VAR].VAR * VAR.VAR[VAR].VAR; VAR = VAR(VAR(VAR) * VAR); VAR(VAR, 0, VAR(VAR) * VAR); VAR (VAR=0; VAR<VAR; VAR++) { VAR (! VAR) {  VAR = VAR(VAR, VAR, VAR, VAR, &VAR[VAR].VAR ); VAR (VAR) VAR VAR; VAR[VAR].VAR = VAR(VAR, VAR[VAR].VAR); VAR(VAR, VAR[VAR].VAR, 1, VAR, VAR);  VAR(VAR, VAR[VAR].VAR, VAR, VAR(VAR, VAR) ); } VAR { VAR[VAR].VAR = VAR(VAR, VAR) + VAR+1; } } VAR VAR, VAR=0; VAR *VAR=VAR; VAR (!VAR) { VAR = VAR(VAR, 0, VAR); VAR->VAR = VAR; VAR->VAR = 0; VAR (VAR=0; VAR<VAR; VAR++) { VAR[VAR].VAR = 0; VAR[VAR].VAR = VAR(VAR, 0, VAR); } } VAR { VAR (VAR=0; VAR<VAR; VAR++) { VAR[VAR].VAR = 0; } VAR = VAR(VAR, 0, VAR);  VAR(VAR, 0); VAR(VAR, 0); VAR (VAR>=VAR) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR VAR VAR VAR %VAR VAR VAR\VAR"", VAR, VAR)); VAR[VAR].VAR = VAR; VAR[VAR].VAR = VAR; VAR[VAR].VAR = VAR; VAR[VAR].VAR = VAR; VAR (VAR) { VAR[VAR].VAR++; VAR(VAR, VAR[VAR].VAR); VAR++; } VAR { VAR(VAR[VAR].VAR, (VAR *) VAR, VAR + VAR); VAR (! VAR(VAR, VAR, VAR, VAR[VAR].VAR)) { VAR(VAR, VAR, VAR, VAR[VAR].VAR); } VAR[VAR].VAR += VAR + VAR; VAR (! VAR) { VAR(VAR, (VAR *) VAR, VAR + VAR); } VAR { VAR(VAR, 0); VAR++; } VAR (! VAR) { VAR(VAR->VAR); VAR(VAR, &VAR->VAR, &VAR->VAR); VAR(VAR); VAR = VAR(VAR, VAR, VAR+1, VAR, 1); VAR (VAR=0; VAR<VAR; VAR++) { VAR->VAR = 0; VAR(VAR[VAR].VAR, &VAR->VAR, &VAR->VAR); VAR (!VAR->VAR) VAR; VAR = VAR(VAR, VAR[VAR].VAR, 1, VAR); VAR (VAR) VAR VAR; VAR[VAR].VAR ++; VAR(VAR[VAR].VAR); VAR[VAR].VAR = VAR; VAR(VAR->VAR); VAR->VAR = VAR; VAR = VAR(VAR, VAR[VAR].VAR, VAR, VAR, VAR+1); VAR (VAR) VAR VAR; } } VAR { VAR *VAR=VAR; VAR VAR=0; VAR VAR; VAR(VAR, &VAR, &VAR); VAR(VAR); VAR[1] = VAR; VAR = VAR(VAR, VAR, VAR('VAR','VAR','VAR','VAR'), VAR, VAR, 0, &VAR); VAR (VAR) { VAR(VAR, VAR, (""[VAR] VAR VAR VAR VAR VAR VAR\VAR"" )); } VAR { VAR = VAR(VAR, VAR, VAR+1, VAR('VAR','VAR','VAR','VAR'), VAR, VAR('VAR','VAR','VAR','VAR')); VAR (VAR) { VAR(VAR, VAR, (""[VAR] VAR VAR VAR VAR VAR VAR VAR\VAR"" )); } } VAR(VAR); VAR (VAR=0; VAR<VAR; VAR++) { VAR (! VAR) { VAR[VAR].VAR = VAR(VAR, VAR[VAR].VAR); VAR (!VAR[VAR].VAR) { VAR(VAR, VAR[VAR].VAR); VAR; } VAR(VAR, VAR[VAR].VAR, VAR[VAR].VAR, VAR, 1, VAR, VAR[VAR].VAR, VAR[VAR].VAR, VAR[VAR].VAR, VAR[VAR].VAR, VAR); VAR(VAR, VAR[VAR].VAR, 1, VAR[VAR].VAR, VAR[VAR].VAR); VAR(VAR, VAR, &VAR, &VAR, &VAR, &VAR, &VAR); VAR(VAR, VAR[VAR].VAR, VAR<<16, VAR<<16, VAR, VAR, VAR); } VAR { VAR(VAR, VAR, VAR[VAR].VAR, VAR, 1, VAR, VAR[VAR].VAR, VAR[VAR].VAR, VAR[VAR].VAR, VAR[VAR].VAR, VAR); } VAR VAR, VAR; VAR (!VAR[VAR].VAR || (VAR[VAR].VAR > VAR)) { VAR[VAR].VAR = VAR; VAR (!VAR[VAR].VAR || (VAR[VAR].VAR < VAR)) { VAR[VAR].VAR = VAR; VAR VAR; VAR(VAR, VAR[VAR].VAR, 3); VAR[VAR].VAR = 0; VAR VAR(VAR *VAR) VAR VAR, VAR, VAR, VAR, VAR, VAR, VAR, VAR, VAR, VAR, VAR, VAR, VAR; VAR VAR=-1, VAR; VAR = VAR(VAR->VAR, VAR->VAR, &VAR); VAR = VAR(VAR->VAR, VAR->VAR, &VAR); VAR (! VAR.VAR[VAR].VAR) VAR VAR; VAR = VAR.VAR[VAR].VAR * VAR.VAR[VAR].VAR; VAR = VAR(VAR(VAR) * VAR); VAR(VAR, 0, VAR(VAR) * VAR);  VAR (VAR=0; VAR<VAR; VAR++) { VAR = VAR(VAR, VAR, VAR, VAR, &VAR[VAR].VAR ); VAR (VAR) VAR VAR; VAR[VAR].VAR = VAR(VAR, VAR[VAR].VAR); VAR(VAR, VAR[VAR].VAR, 1, VAR, VAR); }  VAR (VAR=0; VAR<VAR; VAR++) { VAR(VAR, VAR[VAR].VAR, VAR, VAR(VAR, VAR) ); } VAR VAR; VAR *VAR = VAR(VAR, 0, VAR); VAR->VAR = VAR; VAR->VAR = 0; VAR (VAR=0; VAR<VAR; VAR++) { VAR[VAR].VAR = 0; VAR[VAR].VAR = VAR(VAR, 0, VAR); VAR[VAR].VAR = 0; VAR (VAR>=VAR) { VAR(VAR, VAR, (""[VAR VAR] VAR VAR %VAR VAR VAR VAR VAR VAR VAR %VAR VAR VAR\VAR"", VAR, VAR)); } VAR { VAR(VAR[VAR].VAR, (VAR *) VAR, VAR + VAR); VAR[VAR].VAR = VAR; VAR[VAR].VAR = VAR; VAR[VAR].VAR = VAR; VAR[VAR].VAR = VAR; VAR (! VAR(VAR, VAR, VAR, VAR[VAR].VAR)) { VAR(VAR, VAR, VAR, VAR[VAR].VAR); VAR[VAR].VAR += VAR + VAR; VAR(VAR, (VAR *) VAR, VAR + VAR); VAR(VAR->VAR); VAR(VAR, &VAR->VAR, &VAR->VAR); VAR(VAR); VAR = VAR(VAR, VAR, VAR+1, VAR, 1); VAR (VAR) VAR VAR; VAR(VAR->VAR); VAR->VAR = VAR; VAR (VAR=0; VAR<VAR; VAR++) { VAR->VAR = 0; VAR(VAR[VAR].VAR, &VAR->VAR, &VAR->VAR); VAR (!VAR->VAR) VAR; VAR = VAR(VAR, VAR[VAR].VAR, 1, VAR); VAR[VAR].VAR ++; VAR(VAR[VAR].VAR); VAR[VAR].VAR = VAR; VAR = VAR(VAR, VAR[VAR].VAR, VAR, VAR, VAR+1); VAR (VAR=0; VAR<VAR; VAR++) { VAR VAR[11]; VAR[VAR].VAR = VAR(VAR, VAR[VAR].VAR); VAR (!VAR[VAR].VAR) { VAR(VAR, VAR[VAR].VAR); VAR; }  VAR = VAR(VAR, 11, VAR); VAR(VAR, VAR[VAR].VAR);  VAR(VAR, 1, 1);  VAR(VAR, 1, 2);  VAR(VAR, 0, 1); VAR(VAR, 1, 1);  VAR(VAR, 0, 1); VAR(VAR, 0, 2);  VAR(VAR, VAR[VAR].VAR); VAR(VAR, VAR[VAR].VAR); VAR(VAR, VAR[VAR].VAR); VAR(VAR, VAR[VAR].VAR); VAR(VAR); VAR(VAR, VAR[VAR].VAR, VAR('VAR','VAR','VAR','VAR'), VAR, 11, 1, &VAR); VAR(VAR, VAR[VAR].VAR, 1, VAR[VAR].VAR, VAR[VAR].VAR); VAR(VAR, VAR, &VAR, &VAR, &VAR, &VAR, &VAR); VAR(VAR, VAR[VAR].VAR, VAR<<16, VAR<<16, VAR, VAR, VAR);",1,14
+jackson-databind_2235894210c75f624a3d0cd60bfb0434a20a18bf,src/main/java/com/fasterxml/jackson/databind/deser/BeanDeserializerFactory.java,"import com.fasterxml.jackson.databind.jsontype.impl.SubTypeValidator;
+        _validateSubType(ctxt, type, beanDesc);
+     * @since 2.8.11
+    protected void _validateSubType(DeserializationContext ctxt, JavaType type,
+        SubTypeValidator.instance().validateSubType(ctxt, type);","    /**
+     * Set of well-known ""nasty classes"", deserialization of which is considered dangerous
+     * and should (and is) prevented by default.
+     */
+    protected final static Set<String> DEFAULT_NO_DESER_CLASS_NAMES;
+    static {
+        Set<String> s = new HashSet<String>();
+        // Courtesy of [https://github.com/kantega/notsoserial]:
+        // (and wrt [databind#1599])
+        s.add(""org.apache.commons.collections.functors.InvokerTransformer"");
+        s.add(""org.apache.commons.collections.functors.InstantiateTransformer"");
+        s.add(""org.apache.commons.collections4.functors.InvokerTransformer"");
+        s.add(""org.apache.commons.collections4.functors.InstantiateTransformer"");
+        s.add(""org.codehaus.groovy.runtime.ConvertedClosure"");
+        s.add(""org.codehaus.groovy.runtime.MethodClosure"");
+        s.add(""org.springframework.beans.factory.ObjectFactory"");
+        s.add(""com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl"");
+        s.add(""org.apache.xalan.xsltc.trax.TemplatesImpl"");
+        // [databind#1680]: may or may not be problem, take no chance
+        s.add(""com.sun.rowset.JdbcRowSetImpl"");
+        // [databind#1737]; JDK provided
+        s.add(""java.util.logging.FileHandler"");
+        s.add(""java.rmi.server.UnicastRemoteObject"");
+        // [databind#1737]; 3rd party
+        s.add(""org.springframework.aop.support.AbstractBeanFactoryPointcutAdvisor"");
+        s.add(""org.springframework.beans.factory.config.PropertyPathFactoryBean"");
+        s.add(""com.mchange.v2.c3p0.JndiRefForwardingDataSource"");
+        s.add(""com.mchange.v2.c3p0.WrapperConnectionPoolDataSource"");
+        // [databind#1855]: more 3rd party
+        s.add(""org.apache.tomcat.dbcp.dbcp2.BasicDataSource"");
+        s.add(""com.sun.org.apache.bcel.internal.util.ClassLoader"");
+        DEFAULT_NO_DESER_CLASS_NAMES = Collections.unmodifiableSet(s);
+    }
+
+    /**
+     * Set of class names of types that are never to be deserialized.
+     */
+    protected Set<String> _cfgIllegalClassNames = DEFAULT_NO_DESER_CLASS_NAMES;
+        checkIllegalTypes(ctxt, type, beanDesc);
+     * @since 2.8.9
+    protected void checkIllegalTypes(DeserializationContext ctxt, JavaType type,
+        // There are certain nasty classes that could cause problems, mostly
+        // via default typing -- catch them here.
+        String full = type.getRawClass().getName();
+
+        if (_cfgIllegalClassNames.contains(full)) {
+            throw JsonMappingException.from(ctxt,
+                    String.format(""Illegal type (%s) to deserialize: prevented for security reasons"", full));
+        }",2235894210c75f624a3d0cd60bfb0434a20a18bf,CVE-2017-17485,2235894210c75f624a3d0cd60bfb0434a20a18bf,https://github.com/FasterXML/jackson-databind,GHSD_GIT_REPOBASED,114,COMPLETED,"VAR VAR.VAR.VAR.VAR.VAR.VAR.VAR; VAR(VAR, VAR, VAR); * @VAR 2.8.11 VAR VAR VAR(VAR VAR, VAR VAR, VAR.VAR().VAR(VAR, VAR); /** * VAR VAR VAR-VAR ""VAR VAR"", VAR VAR VAR VAR VAR VAR * VAR VAR (VAR VAR) VAR VAR VAR. */ VAR VAR VAR VAR<VAR> VAR; VAR { VAR<VAR> VAR = VAR VAR<VAR>();   VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR"");  VAR.VAR(""VAR.VAR.VAR.VAR"");  VAR.VAR(""VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR"");  VAR.VAR(""VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR"");  VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR.VAR.VAR""); VAR = VAR.VAR(VAR); } /** * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. */ VAR VAR<VAR> VAR = VAR; VAR(VAR, VAR, VAR); * @VAR 2.8.9 VAR VAR VAR(VAR VAR, VAR VAR,   VAR VAR = VAR.VAR().VAR(); VAR (VAR.VAR(VAR)) { VAR VAR.VAR(VAR, VAR.VAR(""VAR VAR (%VAR) VAR VAR: VAR VAR VAR VAR"", VAR)); }",0,14
+jackson-databind_2235894210c75f624a3d0cd60bfb0434a20a18bf,src/main/java/com/fasterxml/jackson/databind/jsontype/impl/SubTypeValidator.java,"package com.fasterxml.jackson.databind.jsontype.impl;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
+/**
+ * Helper class used to encapsulate rules that determine subtypes that
+ * are invalid to use, even with default typing, mostly due to security
+ * concerns.
+ * Used by <code>BeanDeserializerFacotry</code>
+ *
+ * @since 2.8.11
+ */
+public class SubTypeValidator
+{
+    protected final static String PREFIX_STRING = ""org.springframework."";
+    /**
+     * Set of well-known ""nasty classes"", deserialization of which is considered dangerous
+     * and should (and is) prevented by default.
+     */
+    protected final static Set<String> DEFAULT_NO_DESER_CLASS_NAMES;
+    static {
+        Set<String> s = new HashSet<String>();
+        // Courtesy of [https://github.com/kantega/notsoserial]:
+        // (and wrt [databind#1599])
+        s.add(""org.apache.commons.collections.functors.InvokerTransformer"");
+        s.add(""org.apache.commons.collections.functors.InstantiateTransformer"");
+        s.add(""org.apache.commons.collections4.functors.InvokerTransformer"");
+        s.add(""org.apache.commons.collections4.functors.InstantiateTransformer"");
+        s.add(""org.codehaus.groovy.runtime.ConvertedClosure"");
+        s.add(""org.codehaus.groovy.runtime.MethodClosure"");
+        s.add(""org.springframework.beans.factory.ObjectFactory"");
+        s.add(""com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl"");
+        s.add(""org.apache.xalan.xsltc.trax.TemplatesImpl"");
+        // [databind#1680]: may or may not be problem, take no chance
+        s.add(""com.sun.rowset.JdbcRowSetImpl"");
+        // [databind#1737]; JDK provided
+        s.add(""java.util.logging.FileHandler"");
+        s.add(""java.rmi.server.UnicastRemoteObject"");
+        // [databind#1737]; 3rd party
+//s.add(""org.springframework.aop.support.AbstractBeanFactoryPointcutAdvisor""); // deprecated by [databind#1855]
+        s.add(""org.springframework.beans.factory.config.PropertyPathFactoryBean"");
+        s.add(""com.mchange.v2.c3p0.JndiRefForwardingDataSource"");
+        s.add(""com.mchange.v2.c3p0.WrapperConnectionPoolDataSource"");
+        // [databind#1855]: more 3rd party
+        s.add(""org.apache.tomcat.dbcp.dbcp2.BasicDataSource"");
+        s.add(""com.sun.org.apache.bcel.internal.util.ClassLoader"");
+        DEFAULT_NO_DESER_CLASS_NAMES = Collections.unmodifiableSet(s);
+    }
+
+    /**
+     * Set of class names of types that are never to be deserialized.
+     */
+    protected Set<String> _cfgIllegalClassNames = DEFAULT_NO_DESER_CLASS_NAMES;
+
+    private final static SubTypeValidator instance = new SubTypeValidator();
+
+    protected SubTypeValidator() { }
+
+    public static SubTypeValidator instance() { return instance; }
+
+    public void validateSubType(DeserializationContext ctxt, JavaType type) throws JsonMappingException
+    {
+        // There are certain nasty classes that could cause problems, mostly
+        // via default typing -- catch them here.
+        final Class<?> raw = type.getRawClass();
+        String full = raw.getName();
+
+        do {
+            if (_cfgIllegalClassNames.contains(full)) {
+                break;
+            }
+
+            // 18-Dec-2017, tatu: As per [databind#1855], need bit more sophisticated handling
+            //    for some Spring framework types
+            if (full.startsWith(PREFIX_STRING)) {
+                for (Class<?> cls = raw; cls != Object.class; cls = cls.getSuperclass()) {
+                    String name = cls.getSimpleName();
+                    // looking for ""AbstractBeanFactoryPointcutAdvisor"" but no point to allow any is there?
+                    if (""AbstractPointcutAdvisor"".equals(name)
+                            // ditto  for ""FileSystemXmlApplicationContext"": block all ApplicationContexts
+                            || ""AbstractApplicationContext.equals"".equals(name)) {
+                        break;
+                    }
+                }
+            }
+            return;
+        } while (false);
+
+        throw JsonMappingException.from(ctxt,
+                String.format(""Illegal type (%s) to deserialize: prevented for security reasons"", full));
+    }
+}",,2235894210c75f624a3d0cd60bfb0434a20a18bf,CVE-2017-17485,2235894210c75f624a3d0cd60bfb0434a20a18bf,https://github.com/FasterXML/jackson-databind,GHSD_GIT_REPOBASED,114,COMPLETED,"VAR VAR.VAR.VAR.VAR.VAR.VAR; VAR VAR.VAR.VAR; VAR VAR.VAR.VAR; VAR VAR.VAR.VAR; VAR VAR.VAR.VAR.VAR.VAR; VAR VAR.VAR.VAR.VAR.VAR; VAR VAR.VAR.VAR.VAR.VAR; /** * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR, VAR VAR VAR VAR, VAR VAR VAR VAR * VAR. * VAR VAR <VAR>VAR</VAR> * * @VAR 2.8.11 */ VAR VAR VAR { VAR VAR VAR VAR VAR = ""VAR.VAR.""; /** * VAR VAR VAR-VAR ""VAR VAR"", VAR VAR VAR VAR VAR VAR * VAR VAR (VAR VAR) VAR VAR VAR. */ VAR VAR VAR VAR<VAR> VAR; VAR { VAR<VAR> VAR = VAR VAR<VAR>();   VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR"");  VAR.VAR(""VAR.VAR.VAR.VAR"");  VAR.VAR(""VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR"");   VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR"");  VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR""); VAR.VAR(""VAR.VAR.VAR.VAR.VAR.VAR.VAR.VAR""); VAR = VAR.VAR(VAR); } /** * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. */ VAR VAR<VAR> VAR = VAR; VAR VAR VAR VAR VAR = VAR VAR(); VAR VAR() { } VAR VAR VAR VAR() { VAR VAR; } VAR VAR VAR(VAR VAR, VAR VAR) VAR VAR {   VAR VAR<?> VAR = VAR.VAR(); VAR VAR = VAR.VAR(); VAR { VAR (VAR.VAR(VAR)) { VAR; }   VAR (VAR.VAR(VAR)) { VAR (VAR<?> VAR = VAR; VAR != VAR.VAR; VAR = VAR.VAR()) { VAR VAR = VAR.VAR();  VAR (""VAR"".VAR(VAR)  || ""VAR.VAR"".VAR(VAR)) { VAR; } } } VAR; } VAR (VAR); VAR VAR.VAR(VAR, VAR.VAR(""VAR VAR (%VAR) VAR VAR: VAR VAR VAR VAR"", VAR)); } } ",0,14
+linux_4180bf1b655a791a0a6ef93a2ffffc762722c782,Documentation/virtual/kvm/cpuid.txt,"KVM_FEATURE_PV_SEND_IPI            ||    11 || guest checks this feature bit
+                                   ||       || before using paravirtualized
+                                   ||       || send IPIs.
+------------------------------------------------------------------------------",,4180bf1b655a791a0a6ef93a2ffffc762722c782,CVE-2018-19406,4180bf1b655a791a0a6ef93a2ffffc762722c782,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,88,COMPLETED,VAR || 11 || VAR VAR VAR VAR VAR || || VAR VAR VAR || || VAR VAR. ------------------------------------------------------------------------------ ,0,14
+linux_6352a29305373ae6196491e6d4669f301e26492e,fs/ecryptfs/keystore.c,"	if (unlikely((*tag_11_contents_size) > max_contents_bytes)) {
+		printk(KERN_ERR ""Literal data section in tag 11 packet exceeds ""
+		       ""expected size\n"");
+		rc = -EINVAL;
+		goto out;
+	}",,6352a29305373ae6196491e6d4669f301e26492e,CVE-2009-2407,6352a29305373ae6196491e6d4669f301e26492e,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,80,COMPLETED,"VAR (VAR((*VAR) > VAR)) { VAR(VAR ""VAR VAR VAR VAR VAR 11 VAR VAR "" ""VAR VAR\VAR""); VAR = -VAR; VAR VAR; } ",0,14
+linux_6352a29305373ae6196491e6d4669f301e26492e,fs/ecryptfs/keystore.c,"	if (unlikely((*tag_11_contents_size) > max_contents_bytes)) {
+		printk(KERN_ERR ""Literal data section in tag 11 packet exceeds ""
+		       ""expected size\n"");
+		rc = -EINVAL;
+		goto out;
+	}",,6352a29305373ae6196491e6d4669f301e26492e,CVE-2009-2406,6352a29305373ae6196491e6d4669f301e26492e,https://github.com/torvalds/linux,CPE_DIRECT_COMMIT,88,COMPLETED,"VAR (VAR((*VAR) > VAR)) { VAR(VAR ""VAR VAR VAR VAR VAR 11 VAR VAR "" ""VAR VAR\VAR""); VAR = -VAR; VAR VAR; } ",0,14
+linux_6e5714eaf77d79ae1c8b47e3e040ff5411b717ec,drivers/char/random.c,"static u32 random_int_secret[MD5_MESSAGE_BYTES / 4] ____cacheline_aligned;
+static int __init random_int_secret_init(void)
+	get_random_bytes(random_int_secret, sizeof(random_int_secret));
+late_initcall(random_int_secret_init);
+DEFINE_PER_CPU(__u32 [MD5_DIGEST_WORDS], get_random_int_hash);
+	unsigned int ret;
+	md5_transform(hash, random_int_secret);
+	ret = hash[0];","/********************************************************************
+ *
+ * Random functions for networking
+ *
+ ********************************************************************/
+
+/*
+ * TCP initial sequence number picking.  This uses the random number
+ * generator to pick an initial secret value.  This value is hashed
+ * along with the TCP endpoint information to provide a unique
+ * starting point for each pair of TCP endpoints.  This defeats
+ * attacks which rely on guessing the initial TCP sequence number.
+ * This algorithm was suggested by Steve Bellovin.
+ *
+ * Using a very strong hash was taking an appreciable amount of the total
+ * TCP connection establishment time, so this is a weaker hash,
+ * compensated for by changing the secret periodically.
+ */
+
+/* F, G and H are basic MD4 functions: selection, majority, parity */
+#define F(x, y, z) ((z) ^ ((x) & ((y) ^ (z))))
+#define G(x, y, z) (((x) & (y)) + (((x) ^ (y)) & (z)))
+#define H(x, y, z) ((x) ^ (y) ^ (z))
+
+/*
+ * The generic round function.  The application is so specific that
+ * we don't bother protecting all the arguments with parens, as is generally
+ * good macro practice, in favor of extra legibility.
+ * Rotation is separate from addition to prevent recomputation
+ */
+#define ROUND(f, a, b, c, d, x, s)	\
+	(a += f(b, c, d) + x, a = (a << s) | (a >> (32 - s)))
+#define K1 0
+#define K2 013240474631UL
+#define K3 015666365641UL
+
+#if defined(CONFIG_IPV6) || defined(CONFIG_IPV6_MODULE)
+
+static __u32 twothirdsMD4Transform(__u32 const buf[4], __u32 const in[12])
+{
+	__u32 a = buf[0], b = buf[1], c = buf[2], d = buf[3];
+
+	/* Round 1 */
+	ROUND(F, a, b, c, d, in[ 0] + K1,  3);
+	ROUND(F, d, a, b, c, in[ 1] + K1,  7);
+	ROUND(F, c, d, a, b, in[ 2] + K1, 11);
+	ROUND(F, b, c, d, a, in[ 3] + K1, 19);
+	ROUND(F, a, b, c, d, in[ 4] + K1,  3);
+	ROUND(F, d, a, b, c, in[ 5] + K1,  7);
+	ROUND(F, c, d, a, b, in[ 6] + K1, 11);
+	ROUND(F, b, c, d, a, in[ 7] + K1, 19);
+	ROUND(F, a, b, c, d, in[ 8] + K1,  3);
+	ROUND(F, d, a, b, c, in[ 9] + K1,  7);
+	ROUND(F, c, d, a, b, in[10] + K1, 11);
+	ROUND(F, b, c, d, a, in[11] + K1, 19);
+
+	/* Round 2 */
+	ROUND(G, a, b, c, d, in[ 1] + K2,  3);
+	ROUND(G, d, a, b, c, in[ 3] + K2,  5);
+	ROUND(G, c, d, a, b, in[ 5] + K2,  9);
+	ROUND(G, b, c, d, a, in[ 7] + K2, 13);
+	ROUND(G, a, b, c, d, in[ 9] + K2,  3);
+	ROUND(G, d, a, b, c, in[11] + K2,  5);
+	ROUND(G, c, d, a, b, in[ 0] + K2,  9);
+	ROUND(G, b, c, d, a, in[ 2] + K2, 13);
+	ROUND(G, a, b, c, d, in[ 4] + K2,  3);
+	ROUND(G, d, a, b, c, in[ 6] + K2,  5);
+	ROUND(G, c, d, a, b, in[ 8] + K2,  9);
+	ROUND(G, b, c, d, a, in[10] + K2, 13);
+
+	/* Round 3 */
+	ROUND(H, a, b, c, d, in[ 3] + K3,  3);
+	ROUND(H, d, a, b, c, in[ 7] + K3,  9);
+	ROUND(H, c, d, a, b, in[11] + K3, 11);
+	ROUND(H, b, c, d, a, in[ 2] + K3, 15);
+	ROUND(H, a, b, c, d, in[ 6] + K3,  3);
+	ROUND(H, d, a, b, c, in[10] + K3,  9);
+	ROUND(H, c, d, a, b, in[ 1] + K3, 11);
+	ROUND(H, b, c, d, a, in[ 5] + K3, 15);
+	ROUND(H, a, b, c, d, in[ 9] + K3,  3);
+	ROUND(H, d, a, b, c, in[ 0] + K3,  9);
+	ROUND(H, c, d, a, b, in[ 4] + K3, 11);
+	ROUND(H, b, c, d, a, in[ 8] + K3, 15);
+
+	return buf[1] + b; /* ""most hashed"" word */
+	/* Alternative: return sum of all words? */
+}
+#endif
+
+#undef ROUND
+#undef F
+#undef G
+#undef H
+#undef K1
+#undef K2
+#undef K3
+
+/* This should not be decreased so low that ISNs wrap too fast. */
+#define REKEY_INTERVAL (300 * HZ)
+/*
+ * Bit layout of the tcp sequence numbers (before adding current time):
+ * bit 24-31: increased after every key exchange
+ * bit 0-23: hash(source,dest)
+ *
+ * The implementation is similar to the algorithm described
+ * in the Appendix of RFC 1185, except that
+ * - it uses a 1 MHz clock instead of a 250 kHz clock
+ * - it performs a rekey every 5 minutes, which is equivalent
+ * 	to a (source,dest) tulple dependent forward jump of the
+ * 	clock by 0..2^(HASH_BITS+1)
+ *
+ * Thus the average ISN wraparound time is 68 minutes instead of
+ * 4.55 hours.
+ *
+ * SMP cleanup and lock avoidance with poor man's RCU.
+ * 			Manfred Spraul <manfred@colorfullife.com>
+ *
+ */
+#define COUNT_BITS 8
+#define COUNT_MASK ((1 << COUNT_BITS) - 1)
+#define HASH_BITS 24
+#define HASH_MASK ((1 << HASH_BITS) - 1)
+static struct keydata {
+	__u32 count; /* already shifted to the final position */
+	__u32 secret[12];
+} ____cacheline_aligned ip_keydata[2];
+
+static unsigned int ip_cnt;
+
+static void rekey_seq_generator(struct work_struct *work);
+
+static DECLARE_DELAYED_WORK(rekey_work, rekey_seq_generator);
+
+/*
+ * Lock avoidance:
+ * The ISN generation runs lockless - it's just a hash over random data.
+ * State changes happen every 5 minutes when the random key is replaced.
+ * Synchronization is performed by having two copies of the hash function
+ * state and rekey_seq_generator always updates the inactive copy.
+ * The copy is then activated by updating ip_cnt.
+ * The implementation breaks down if someone blocks the thread
+ * that processes SYN requests for more than 5 minutes. Should never
+ * happen, and even if that happens only a not perfectly compliant
+ * ISN is generated, nothing fatal.
+ */
+static void rekey_seq_generator(struct work_struct *work)
+	struct keydata *keyptr = &ip_keydata[1 ^ (ip_cnt & 1)];
+
+	get_random_bytes(keyptr->secret, sizeof(keyptr->secret));
+	keyptr->count = (ip_cnt & COUNT_MASK) << HASH_BITS;
+	smp_wmb();
+	ip_cnt++;
+	schedule_delayed_work(&rekey_work,
+			      round_jiffies_relative(REKEY_INTERVAL));
+}
+
+static inline struct keydata *get_keyptr(void)
+{
+	struct keydata *keyptr = &ip_keydata[ip_cnt & 1];
+
+	smp_rmb();
+
+	return keyptr;
+}
+
+static __init int seqgen_init(void)
+{
+	rekey_seq_generator(NULL);
+late_initcall(seqgen_init);
+
+#if defined(CONFIG_IPV6) || defined(CONFIG_IPV6_MODULE)
+__u32 secure_tcpv6_sequence_number(__be32 *saddr, __be32 *daddr,
+				   __be16 sport, __be16 dport)
+{
+	__u32 seq;
+	__u32 hash[12];
+	struct keydata *keyptr = get_keyptr();
+
+	/* The procedure is the same as for IPv4, but addresses are longer.
+	 * Thus we must use twothirdsMD4Transform.
+	 */
+
+	memcpy(hash, saddr, 16);
+	hash[4] = ((__force u16)sport << 16) + (__force u16)dport;
+	memcpy(&hash[5], keyptr->secret, sizeof(__u32) * 7);
+
+	seq = twothirdsMD4Transform((const __u32 *)daddr, hash) & HASH_MASK;
+	seq += keyptr->count;
+
+	seq += ktime_to_ns(ktime_get_real());
+
+	return seq;
+}
+EXPORT_SYMBOL(secure_tcpv6_sequence_number);
+#endif
+
+/*  The code below is shamelessly stolen from secure_tcp_sequence_number().
+ *  All blames to Andrey V. Savochkin <saw@msu.ru>.
+ */
+__u32 secure_ip_id(__be32 daddr)
+{
+	struct keydata *keyptr;
+	__u32 hash[4];
+
+	keyptr = get_keyptr();
+
+	/*
+	 *  Pick a unique starting offset for each IP destination.
+	 *  The dest ip address is placed in the starting vector,
+	 *  which is then hashed with random data.
+	 */
+	hash[0] = (__force __u32)daddr;
+	hash[1] = keyptr->secret[9];
+	hash[2] = keyptr->secret[10];
+	hash[3] = keyptr->secret[11];
+
+	return half_md4_transform(hash, keyptr->secret);
+}
+
+__u32 secure_ipv6_id(const __be32 daddr[4])
+{
+	const struct keydata *keyptr;
+	__u32 hash[4];
+
+	keyptr = get_keyptr();
+
+	hash[0] = (__force __u32)daddr[0];
+	hash[1] = (__force __u32)daddr[1];
+	hash[2] = (__force __u32)daddr[2];
+	hash[3] = (__force __u32)daddr[3];
+
+	return half_md4_transform(hash, keyptr->secret);
+}
+
+#ifdef CONFIG_INET
+
+__u32 secure_tcp_sequence_number(__be32 saddr, __be32 daddr,
+				 __be16 sport, __be16 dport)
+{
+	__u32 seq;
+	__u32 hash[4];
+	struct keydata *keyptr = get_keyptr();
+
+	/*
+	 *  Pick a unique starting offset for each TCP connection endpoints
+	 *  (saddr, daddr, sport, dport).
+	 *  Note that the words are placed into the starting vector, which is
+	 *  then mixed with a partial MD4 over random data.
+	 */
+	hash[0] = (__force u32)saddr;
+	hash[1] = (__force u32)daddr;
+	hash[2] = ((__force u16)sport << 16) + (__force u16)dport;
+	hash[3] = keyptr->secret[11];
+
+	seq = half_md4_transform(hash, keyptr->secret) & HASH_MASK;
+	seq += keyptr->count;
+	/*
+	 *	As close as possible to RFC 793, which
+	 *	suggests using a 250 kHz clock.
+	 *	Further reading shows this assumes 2 Mb/s networks.
+	 *	For 10 Mb/s Ethernet, a 1 MHz clock is appropriate.
+	 *	For 10 Gb/s Ethernet, a 1 GHz clock should be ok, but
+	 *	we also need to limit the resolution so that the u32 seq
+	 *	overlaps less than one time per MSL (2 minutes).
+	 *	Choosing a clock of 64 ns period is OK. (period of 274 s)
+	 */
+	seq += ktime_to_ns(ktime_get_real()) >> 6;
+
+	return seq;
+}
+
+/* Generate secure starting point for ephemeral IPV4 transport port search */
+u32 secure_ipv4_port_ephemeral(__be32 saddr, __be32 daddr, __be16 dport)
+{
+	struct keydata *keyptr = get_keyptr();
+	u32 hash[4];
+
+	/*
+	 *  Pick a unique starting offset for each ephemeral port search
+	 *  (saddr, daddr, dport) and 48bits of random data.
+	 */
+	hash[0] = (__force u32)saddr;
+	hash[1] = (__force u32)daddr;
+	hash[2] = (__force u32)dport ^ keyptr->secret[10];
+	hash[3] = keyptr->secret[11];
+
+	return half_md4_transform(hash, keyptr->secret);
+}
+EXPORT_SYMBOL_GPL(secure_ipv4_port_ephemeral);
+
+#if defined(CONFIG_IPV6) || defined(CONFIG_IPV6_MODULE)
+u32 secure_ipv6_port_ephemeral(const __be32 *saddr, const __be32 *daddr,
+			       __be16 dport)
+{
+	struct keydata *keyptr = get_keyptr();
+	u32 hash[12];
+
+	memcpy(hash, saddr, 16);
+	hash[4] = (__force u32)dport;
+	memcpy(&hash[5], keyptr->secret, sizeof(__u32) * 7);
+
+	return twothirdsMD4Transform((const __u32 *)daddr, hash);
+}
+#endif
+
+#if defined(CONFIG_IP_DCCP) || defined(CONFIG_IP_DCCP_MODULE)
+/* Similar to secure_tcp_sequence_number but generate a 48 bit value
+ * bit's 32-47 increase every key exchange
+ *       0-31  hash(source, dest)
+ */
+u64 secure_dccp_sequence_number(__be32 saddr, __be32 daddr,
+				__be16 sport, __be16 dport)
+{
+	u64 seq;
+	__u32 hash[4];
+	struct keydata *keyptr = get_keyptr();
+
+	hash[0] = (__force u32)saddr;
+	hash[1] = (__force u32)daddr;
+	hash[2] = ((__force u16)sport << 16) + (__force u16)dport;
+	hash[3] = keyptr->secret[11];
+
+	seq = half_md4_transform(hash, keyptr->secret);
+	seq |= ((u64)keyptr->count) << (32 - HASH_BITS);
+
+	seq += ktime_to_ns(ktime_get_real());
+	seq &= (1ull << 48) - 1;
+
+	return seq;
+}
+EXPORT_SYMBOL(secure_dccp_sequence_number);
+#endif
+
+#endif /* CONFIG_INET */
+
+DEFINE_PER_CPU(__u32 [4], get_random_int_hash);
+	struct keydata *keyptr;
+	int ret;
+	keyptr = get_keyptr();
+
+	ret = half_md4_transform(hash, keyptr->secret);",6e5714eaf77d79ae1c8b47e3e040ff5411b717ec,CVE-2011-3188,6e5714eaf77d79ae1c8b47e3e040ff5411b717ec,https://github.com/torvalds/linux,NVD_DIRECT_COMMIT,1337,COMPLETED,"VAR VAR VAR[VAR / 4] VAR; VAR VAR VAR VAR(VAR) VAR(VAR, VAR(VAR)); VAR(VAR); VAR(VAR [VAR], VAR); VAR VAR VAR; VAR(VAR, VAR); VAR = VAR[0]; /******************************************************************** * * VAR VAR VAR VAR * ********************************************************************/ /* * VAR VAR VAR VAR VAR. VAR VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR VAR. VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR VAR VAR. VAR VAR * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR. * VAR VAR VAR VAR VAR VAR VAR. * * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR, VAR VAR VAR VAR VAR VAR, * VAR VAR VAR VAR VAR VAR VAR. */     /* * VAR VAR VAR VAR. VAR VAR VAR VAR VAR VAR * VAR VAR'VAR VAR VAR VAR VAR VAR VAR VAR, VAR VAR VAR * VAR VAR VAR, VAR VAR VAR VAR VAR. * VAR VAR VAR VAR VAR VAR VAR VAR */  (VAR += VAR(VAR, VAR, VAR) + VAR, VAR = (VAR << VAR) | (VAR >> (32 - VAR)))     VAR VAR VAR(VAR VAR VAR[4], VAR VAR VAR[12]) { VAR VAR = VAR[0], VAR = VAR[1], VAR = VAR[2], VAR = VAR[3];  VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 0] + VAR, 3); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 1] + VAR, 7); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 2] + VAR, 11); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 3] + VAR, 19); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 4] + VAR, 3); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 5] + VAR, 7); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 6] + VAR, 11); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 7] + VAR, 19); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 8] + VAR, 3); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 9] + VAR, 7); VAR(VAR, VAR, VAR, VAR, VAR, VAR[10] + VAR, 11); VAR(VAR, VAR, VAR, VAR, VAR, VAR[11] + VAR, 19);  VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 1] + VAR, 3); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 3] + VAR, 5); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 5] + VAR, 9); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 7] + VAR, 13); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 9] + VAR, 3); VAR(VAR, VAR, VAR, VAR, VAR, VAR[11] + VAR, 5); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 0] + VAR, 9); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 2] + VAR, 13); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 4] + VAR, 3); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 6] + VAR, 5); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 8] + VAR, 9); VAR(VAR, VAR, VAR, VAR, VAR, VAR[10] + VAR, 13);  VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 3] + VAR, 3); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 7] + VAR, 9); VAR(VAR, VAR, VAR, VAR, VAR, VAR[11] + VAR, 11); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 2] + VAR, 15); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 6] + VAR, 3); VAR(VAR, VAR, VAR, VAR, VAR, VAR[10] + VAR, 9); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 1] + VAR, 11); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 5] + VAR, 15); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 9] + VAR, 3); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 0] + VAR, 9); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 4] + VAR, 11); VAR(VAR, VAR, VAR, VAR, VAR, VAR[ 8] + VAR, 15); VAR VAR[1] + VAR;   }           /* * VAR VAR VAR VAR VAR VAR VAR (VAR VAR VAR VAR): * VAR 24-31: VAR VAR VAR VAR VAR * VAR 0-23: VAR(VAR,VAR) * * VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR VAR 1185, VAR VAR * - VAR VAR VAR 1 VAR VAR VAR VAR VAR 250 VAR VAR * - VAR VAR VAR VAR VAR 5 VAR, VAR VAR VAR * VAR VAR (VAR,VAR) VAR VAR VAR VAR VAR VAR * VAR VAR 0..2^(VAR+1) * * VAR VAR VAR VAR VAR VAR VAR 68 VAR VAR VAR * 4.55 VAR. * * VAR VAR VAR VAR VAR VAR VAR VAR'VAR VAR. * VAR VAR <VAR@VAR.VAR> * */     VAR VAR VAR { VAR VAR;  VAR VAR[12]; } VAR VAR[2]; VAR VAR VAR VAR; VAR VAR VAR(VAR VAR *VAR); VAR VAR(VAR, VAR); /* * VAR VAR: * VAR VAR VAR VAR VAR - VAR'VAR VAR VAR VAR VAR VAR VAR. * VAR VAR VAR VAR 5 VAR VAR VAR VAR VAR VAR VAR. * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR VAR VAR. * VAR VAR VAR VAR VAR VAR VAR VAR. * VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR VAR 5 VAR. VAR VAR * VAR, VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR, VAR VAR. */ VAR VAR VAR(VAR VAR *VAR) VAR VAR *VAR = &VAR[1 ^ (VAR & 1)]; VAR(VAR->VAR, VAR(VAR->VAR)); VAR->VAR = (VAR & VAR) << VAR; VAR(); VAR++; VAR(&VAR, VAR(VAR)); } VAR VAR VAR VAR *VAR(VAR) { VAR VAR *VAR = &VAR[VAR & 1]; VAR(); VAR VAR; } VAR VAR VAR VAR(VAR) { VAR(VAR); VAR(VAR);  VAR VAR(VAR *VAR, VAR *VAR, VAR VAR, VAR VAR) { VAR VAR; VAR VAR[12]; VAR VAR *VAR = VAR(); /* VAR VAR VAR VAR VAR VAR VAR VAR, VAR VAR VAR VAR. * VAR VAR VAR VAR VAR. */ VAR(VAR, VAR, 16); VAR[4] = ((VAR VAR)VAR << 16) + (VAR VAR)VAR; VAR(&VAR[5], VAR->VAR, VAR(VAR) * 7); VAR = VAR((VAR VAR *)VAR, VAR) & VAR; VAR += VAR->VAR; VAR += VAR(VAR()); VAR VAR; } VAR(VAR);  /* VAR VAR VAR VAR VAR VAR VAR VAR(). * VAR VAR VAR VAR VAR. VAR <VAR@VAR.VAR>. */ VAR VAR(VAR VAR) { VAR VAR *VAR; VAR VAR[4]; VAR = VAR(); /* * VAR VAR VAR VAR VAR VAR VAR VAR VAR. * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR, * VAR VAR VAR VAR VAR VAR VAR. */ VAR[0] = (VAR VAR)VAR; VAR[1] = VAR->VAR[9]; VAR[2] = VAR->VAR[10]; VAR[3] = VAR->VAR[11]; VAR VAR(VAR, VAR->VAR); } VAR VAR(VAR VAR VAR[4]) { VAR VAR VAR *VAR; VAR VAR[4]; VAR = VAR(); VAR[0] = (VAR VAR)VAR[0]; VAR[1] = (VAR VAR)VAR[1]; VAR[2] = (VAR VAR)VAR[2]; VAR[3] = (VAR VAR)VAR[3]; VAR VAR(VAR, VAR->VAR); }  VAR VAR(VAR VAR, VAR VAR, VAR VAR, VAR VAR) { VAR VAR; VAR VAR[4]; VAR VAR *VAR = VAR(); /* * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * (VAR, VAR, VAR, VAR). * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR, VAR VAR * VAR VAR VAR VAR VAR VAR VAR VAR VAR. */ VAR[0] = (VAR VAR)VAR; VAR[1] = (VAR VAR)VAR; VAR[2] = ((VAR VAR)VAR << 16) + (VAR VAR)VAR; VAR[3] = VAR->VAR[11]; VAR = VAR(VAR, VAR->VAR) & VAR; VAR += VAR->VAR; /* * VAR VAR VAR VAR VAR VAR 793, VAR * VAR VAR VAR 250 VAR VAR. * VAR VAR VAR VAR VAR 2 VAR/VAR VAR. * VAR 10 VAR/VAR VAR, VAR 1 VAR VAR VAR VAR. * VAR 10 VAR/VAR VAR, VAR 1 VAR VAR VAR VAR VAR, VAR * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR VAR (2 VAR). * VAR VAR VAR VAR 64 VAR VAR VAR VAR. (VAR VAR 274 VAR) */ VAR += VAR(VAR()) >> 6; VAR VAR; }  VAR VAR(VAR VAR, VAR VAR, VAR VAR) { VAR VAR *VAR = VAR(); VAR VAR[4]; /* * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * (VAR, VAR, VAR) VAR 48bits VAR VAR VAR. */ VAR[0] = (VAR VAR)VAR; VAR[1] = (VAR VAR)VAR; VAR[2] = (VAR VAR)VAR ^ VAR->VAR[10]; VAR[3] = VAR->VAR[11]; VAR VAR(VAR, VAR->VAR); } VAR(VAR);  VAR VAR(VAR VAR *VAR, VAR VAR *VAR, VAR VAR) { VAR VAR *VAR = VAR(); VAR VAR[12]; VAR(VAR, VAR, 16); VAR[4] = (VAR VAR)VAR; VAR(&VAR[5], VAR->VAR, VAR(VAR) * 7); VAR VAR((VAR VAR *)VAR, VAR); }   /* VAR VAR VAR VAR VAR VAR 48 VAR VAR * VAR'VAR 32-47 VAR VAR VAR VAR * 0-31 VAR(VAR, VAR) */ VAR VAR(VAR VAR, VAR VAR, VAR VAR, VAR VAR) { VAR VAR; VAR VAR[4]; VAR VAR *VAR = VAR(); VAR[0] = (VAR VAR)VAR; VAR[1] = (VAR VAR)VAR; VAR[2] = ((VAR VAR)VAR << 16) + (VAR VAR)VAR; VAR[3] = VAR->VAR[11]; VAR = VAR(VAR, VAR->VAR); VAR |= ((VAR)VAR->VAR) << (32 - VAR); VAR += VAR(VAR()); VAR &= (1ull << 48) - 1; VAR VAR; } VAR(VAR);   VAR(VAR [4], VAR); VAR VAR *VAR; VAR VAR; VAR = VAR(); VAR = VAR(VAR, VAR->VAR);",12,14
+moodle_c73f6d03e5037729097bb9f5f5a55be15f3cab18,liflowplayer/flowplayer.audio-3.2.11.swf.php,"<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * Flowplayer audio swf handling.
+ *
+ * @package core
+ * @copyright  Petr Skoda <petr.skoda@totaralms.com>
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+define('NO_DEBUG_DISPLAY', true);
+define('NO_MOODLE_COOKIES', true);
+define('NO_UPGRADE_CHECK', true);
+
+require('../../config.php');
+require('../../lib/flowplayer/lib.php');
+
+flowplayer_send_flash_content('flowplayer.audio-3.2.11.swf');",,c73f6d03e5037729097bb9f5f5a55be15f3cab18,CVE-2015-5337,c73f6d03e5037729097bb9f5f5a55be15f3cab18,https://github.com/moodle/moodle,GHSD_DIRECT_COMMIT,1337,COMPLETED,"<?VAR               /** * VAR VAR VAR VAR. * * @VAR VAR * @VAR VAR VAR <VAR.VAR@VAR.VAR> * @VAR VAR: */ VAR('VAR', VAR); VAR('VAR', VAR); VAR('VAR', VAR); VAR('../../VAR.VAR'); VAR('../../VAR/VAR/VAR.VAR'); VAR('VAR.VAR-3.2.11.VAR'); ",0,14
+openssl_280b1f1ad12131defcd986676a8fc9717aaa601b,ssl/s23_srvr.c,"			 * so we simply reject such connections to avoid
+			 * protocol version downgrade attacks. */
+			if (p[9] > SSL3_VERSION_MAJOR)
+		/* An SSLv3/TLSv1 backwards-compatible CLIENT-HELLO in an SSLv2
+		 * header is sent directly on the wire, not wrapped as a TLS
+		 * record. It's format is:
+		 * Byte  Content
+		 * 0-1   msg_length
+		 * 2     msg_type
+		 * 3-4   version
+		 * 5-6   cipher_spec_length
+		 * 7-8   session_id_length
+		 * 9-10  challenge_length
+		 * ...   ...
+		 */
+		if (n < 9)
+			{
+			SSLerr(SSL_F_SSL23_GET_CLIENT_HELLO,SSL_R_RECORD_LENGTH_MISMATCH);
+			goto err;
+			}
+		/* We previously read 11 bytes, so if j > 0, we must have
+		 * j == n+2 == s->packet_length. We have at least 11 valid
+		 * packet bytes. */","			 * so we simply assume TLS 1.0 to avoid protocol version downgrade
+			 * attacks. */
+#if 0
+#else
+				v[1] = TLS1_VERSION_MINOR;
+#endif
+			else if (p[9] > SSL3_VERSION_MAJOR)",280b1f1ad12131defcd986676a8fc9717aaa601b,CVE-2014-3511,280b1f1ad12131defcd986676a8fc9717aaa601b,https://github.com/openssl/openssl,CPE_GIT_REPOBASED,150,COMPLETED,"* VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR. */ VAR (VAR[9] > VAR) /* VAR VAR/VAR VAR-VAR VAR-VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR VAR, VAR VAR VAR VAR VAR * VAR. VAR'VAR VAR VAR: * VAR VAR * 0-1 VAR * 2 VAR * 3-4 VAR * 5-6 VAR * 7-8 VAR * 9-10 VAR * ... ... */ VAR (VAR < 9) { VAR(VAR,VAR); VAR VAR; } /* VAR VAR VAR 11 VAR, VAR VAR VAR > 0, VAR VAR VAR * VAR == VAR+2 == VAR->VAR. VAR VAR VAR VAR 11 VAR * VAR VAR. */ * VAR VAR VAR VAR VAR 1.0 VAR VAR VAR VAR VAR * VAR. */   VAR[1] = VAR;  VAR VAR (VAR[9] > VAR)",0,14
+tuleap_f140d26eb5bba49bfdb898c4ae3d6587097d7197,plugins/tracker/dinstall.sql,"DROP TABLE IF EXISTS plugin_tracker_recently_visited;
+CREATE TABLE plugin_tracker_recently_visited (
+    user_id INT(11) NOT NULL,
+    artifact_id INT(11) NOT NULL,
+    created_on INT(11) UNSIGNED NOT NULL,
+    PRIMARY KEY(user_id, artifact_id)
+) ENGINE=InnoDB;
+",,f140d26eb5bba49bfdb898c4ae3d6587097d7197,CVE-2017-7411,f140d26eb5bba49bfdb898c4ae3d6587097d7197,https://github.com/Enalean/tuleap,CPE_GIT_REPOBASED,74,COMPLETED,"VAR VAR VAR VAR VAR; VAR VAR VAR ( VAR VAR(11) VAR VAR, VAR VAR(11) VAR VAR, VAR VAR(11) VAR VAR VAR, VAR VAR(VAR, VAR) ) VAR=VAR; ",0,14
+tuleap_f140d26eb5bba49bfdb898c4ae3d6587097d7197,plugins/tracker/dmysql/updates/2017/201704041400_add_recently_visited_table.php,"<?php
+/**
+ * Copyright (c) Enalean, 2017. All Rights Reserved.
+ *
+ * This file is a part of Tuleap.
+ *
+ * Tuleap is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * Tuleap is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Tuleap. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+class b201704041400_add_recently_visited_table extends ForgeUpgrade_Bucket
+{
+    public function description()
+    {
+        return 'Add table to store the the recently visited artifacts';
+    }
+
+    public function preUp()
+    {
+        $this->db = $this->getApi('ForgeUpgrade_Bucket_Db');
+    }
+
+    public function up()
+    {
+        $sql = 'CREATE TABLE plugin_tracker_recently_visited (
+                  user_id INT(11) NOT NULL,
+                  artifact_id INT(11) NOT NULL,
+                  created_on INT(11) UNSIGNED NOT NULL,
+                  PRIMARY KEY(user_id, artifact_id)
+                ) ENGINE=InnoDB';
+
+        $this->db->createTable('plugin_tracker_recently_visited', $sql);
+    }
+
+    public function postUp()
+    {
+        if (! $this->db->tableNameExists('plugin_tracker_recently_visited')) {
+            throw new ForgeUpgrade_Bucket_Exception_UpgradeNotComplete('plugin_tracker_recently_visited table is missing');
+        }
+    }
+}",,f140d26eb5bba49bfdb898c4ae3d6587097d7197,CVE-2017-7411,f140d26eb5bba49bfdb898c4ae3d6587097d7197,https://github.com/Enalean/tuleap,CPE_GIT_REPOBASED,74,COMPLETED,"<?VAR /** * VAR (VAR) VAR, 2017. VAR VAR VAR. * * VAR VAR VAR VAR VAR VAR VAR. * * VAR VAR VAR VAR; VAR VAR VAR VAR VAR/VAR VAR * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR; VAR VAR 2 VAR VAR VAR, VAR * (VAR VAR VAR) VAR VAR VAR. * * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR, * VAR VAR VAR VAR; VAR VAR VAR VAR VAR VAR * VAR VAR VAR VAR VAR VAR VAR. VAR VAR * VAR VAR VAR VAR VAR VAR VAR. * * VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR VAR * VAR VAR VAR. VAR VAR, VAR <VAR: */ VAR VAR VAR VAR { VAR VAR VAR() { VAR 'VAR VAR VAR VAR VAR VAR VAR VAR VAR'; } VAR VAR VAR() { $VAR->VAR = $VAR->VAR('VAR'); } VAR VAR VAR() { $VAR = 'VAR VAR VAR ( VAR VAR(11) VAR VAR, VAR VAR(11) VAR VAR, VAR VAR(11) VAR VAR VAR, VAR VAR(VAR, VAR) ) VAR=VAR'; $VAR->VAR->VAR('VAR', $VAR); } VAR VAR VAR() { VAR (! $VAR->VAR->VAR('VAR')) { VAR VAR VAR('VAR VAR VAR VAR'); } } } ",0,14

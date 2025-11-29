@@ -1,0 +1,10 @@
+numpy
+pandas
+dotenv
+requests
+nltk
+scikit-learn
+matplotlib
+seaborn
+pandas
+umap
