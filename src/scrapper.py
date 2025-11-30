@@ -31,7 +31,7 @@ PAGE_SIZE = 100
 MAX_PAGES = 10
 ALLOW_DUPLICATE_WORDS = False
 MIN_GITHUB_STARS = int(os.getenv("MIN_GITHUB_STARS", 200))
-BASE_QUERY = "http.createServer fs read file path req.url"
+BASE_QUERY = "request '.get($'"
 
 def gh_url_to_raw(url):
     return re.sub('blob/[a-fA-F0-9]+', 'HEAD', url) \
@@ -133,6 +133,7 @@ def find_repos(lang, last_query, keyword_index, keywords):
     # Clean hack, items will be filled with results
     print(f"Current query: {last_query}")
     search_code(last_query, lang, 1, items)
+    # This is either not properly updating the items list or I did something horribly wrong
     if len(items) == 0:
         logging.info("Nothing...")
         return []
@@ -147,6 +148,7 @@ def find_repos(lang, last_query, keyword_index, keywords):
                 keyword_index += 1
                 continue
             break
+          
         find_repos(
             lang,
             f"{last_query} {keywords[keyword_index][0]}",
@@ -186,7 +188,7 @@ def get_next_query():
 
 
 def save_state():
-    with open("./state.json", "w") as f:
+    with open("../states.json", "w") as f:
         f.write(
             json.dumps(
                 {
@@ -199,10 +201,10 @@ def save_state():
 
 
 def read_state():
-    if not os.path.isfile("./state.json"):
+    if not os.path.isfile("../states.json"):
         return
     global REPOS, REPO_DETAILS, TRIED_WORDS
-    with open("./state.json", "r") as f:
+    with open("../states.json", "r") as f:
         r = json.loads(f.read())
         REPOS = r["REPOS"]
         REPO_DETAILS = r["REPO_DETAILS"]
@@ -214,7 +216,7 @@ def download_file(url, path):
     response = requests.get(url, headers=HEADERS)
     if response.status_code == 200:
         try:
-            with open(f"./downloads/{path}", "wb") as f:
+            with open(f"../downloads/{path}", "wb") as f:
                 f.write(response.content)
             logging.info(f"Successfully downloaded file {path}")
         except Exception as error:
@@ -243,45 +245,49 @@ def main_wip():
     # Read previous state if error encountered
     read_state()
     LANGS = [
-        ("javascript", "js")
+        ("javascript", "js"),
+        ("typescript", "ts")
     ]
 
     next_query = BASE_QUERY
 
     for lang, extension in LANGS:
-        # Compute TF-IDF for all previously downloaded repos
-        keywords = compute_tfidf("../downloads", extension)
-        keywords = keywords[::-1]
-        # Grab keywords with a score above .4
-        keywords = list(filter(lambda x: x[1] >= 0.401, keywords))
-        print(keywords)
-        print(len(keywords))
+        if len(os.listdir('../downloads')) > 0:
+            # Compute TF-IDF for all previously downloaded repos
+            keywords = compute_tfidf("../downloads", extension)
+            keywords = keywords[::-1]
+            # Grab keywords with a score above .4
+            keywords = list(filter(lambda x: x[1] >= 0.401, keywords))
+            print(keywords)
+            print(len(keywords))
 
-        # Iterate through all new keywords
-        for i, keyword in enumerate(keywords):
-            print(keyword, i)
-            try:
-                # Actually update the next query and use it instead of it being a useless var
-                next_query = f'{BASE_QUERY} {keywords[i][0]}'
-                print(f"Next query: `{next_query}`")
-                items = find_repos(lang, next_query, i, keywords)
-                found = {}
-                
-                # Put the found repos in a dict
-                for item in items:
-                    found[item["repository"]["full_name"]] = item
-                
-                # Keep track of repos and download them
-                for r in found:
-                    if r not in REPOS:
-                        REPOS.append(r)
-                        REPO_DETAILS[r] = found[r]
-                        pass_to_db(r)
-                        
-                print(f"Count of found repositories: {len(REPOS)}")
-                save_state()
-            except Exception as e:
-                print(e)
+            # Iterate through all new keywords
+            for i, keyword in enumerate(keywords):
+                print(keyword, i)
+                try:
+                    # Actually update the next query and use it instead of it being a useless var
+                    next_query = f'{BASE_QUERY} {keywords[i][0]}'
+                    print(f"Next query: `{next_query}`")
+                    items = find_repos(lang, next_query, i, keywords)
+                    found = {}
+                    
+                    # Put the found repos in a dict
+                    for item in items:
+                        found[item["repository"]["full_name"]] = item
+                    
+                    # Keep track of repos and download them
+                    for r in found:
+                        if r not in REPOS:
+                            REPOS.append(r)
+                            REPO_DETAILS[r] = found[r]
+                            pass_to_db(r)
+                            
+                    print(f"Count of found repositories: {len(REPOS)}")
+                    save_state()
+                except Exception as e:
+                    print(e)
+        else:
+            print('You need at least one file/repository in the downloads folder to start')
 
 
 if __name__ == "__main__":

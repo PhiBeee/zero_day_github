@@ -2,3 +2,5 @@ __pycache__/
 .env
 *.pdf
 *.ipynb
+test.py
+downloads

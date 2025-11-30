@@ -1,0 +1,89 @@
+rules:
+  ###########################################################################
+  # 1. JSP Unescaped Parameter in HTML (from ActiveMQ queues.jsp cluster)
+  ###########################################################################
+  - id: jsp-unescaped-param-in-html
+    message: "Possible XSS: JSP prints request parameter directly without <c:out> escaping"
+    severity: WARNING
+    languages: [generic]
+    pattern-regex: '\$\{param\.[A-Za-z0-9_]+\}'
+    paths:
+      include:
+        - "*.jsp"
+
+
+  ###########################################################################
+  # 2. PHP unsafe file_exists() calls using user-controlled input
+  #    Matches pre-fix behavior in the TCPDF cluster
+  ###########################################################################
+  - id: php-file-exists-user-input
+    message: "Possible insecure file_exists() call on user-controlled input (stream wrapper exploitation / phar://)"
+    severity: WARNING
+    languages: [php]
+    pattern-either:
+      - pattern: file_exists($_GET[$KEY])
+      - pattern: file_exists($_POST[$KEY])
+      - pattern: file_exists($_REQUEST[$KEY])
+      - pattern: file_exists($_COOKIE[$KEY])
+      - pattern: '@file_exists($_GET[$KEY])'
+      - pattern: '@file_exists($_POST[$KEY])'
+      - pattern: '@file_exists($_REQUEST[$KEY])'
+      - pattern: '@file_exists($_COOKIE[$KEY])'
+
+
+  ###########################################################################
+  # 3. PHP projects using TCPDF: warn when bare file_exists() is used
+  #    (cluster from tcpdf_static.php introducing TCPDF_STATIC::file_exists)
+  ###########################################################################
+  - id: php-file-exists-without-tcpdf-wrapper
+    message: "Use TCPDF_STATIC::file_exists() instead of raw file_exists() to avoid unsafe stream wrappers"
+    severity: INFO
+    languages: [php]
+    pattern: file_exists($FILENAME)
+    pattern-not: TCPDF_STATIC::file_exists($FILENAME)
+    paths:
+      include:
+        - "*tcpdf*"
+        - "include/*.php"
+
+
+  ###########################################################################
+  # 4. Node.js raw variable interpolation inside SQL-like template strings
+  #    (derived from the admin.js cluster — escape → escaped replacement)
+  ###########################################################################
+  - id: node-raw-id-sql-interpolation
+    message: "Possible SQL injection: variable interpolated directly in SQL-like template"
+    severity: WARNING
+    languages: [javascript, typescript]
+    pattern-either:
+      - pattern: Workspace.get(`id = ${$ID}`)
+      - pattern: Workspace.get("id = " + $ID)
+      - pattern: WorkspaceChats.whereWithData(`id >= ${$VAL}`, ...)
+      - pattern: WorkspaceChats.whereWithData("id >= " + $VAL, ...)
+
+
+  ###########################################################################
+  # 5. Node.js generic SQL template interpolation
+  #    Catches unsafe ${...} inside backtick SQL-style strings
+  ###########################################################################
+  - id: node-sql-template-unescaped
+    message: "Possible SQL injection: unescaped variable inside SQL-like template string"
+    severity: WARNING
+    languages: [javascript, typescript]
+    patterns:
+      - pattern: $QUERYFUNC(`$SQL ${$VAR}`)
+      - pattern-not: $QUERYFUNC(`$SQL ${escape($VAR)}`)
+
+
+  ###########################################################################
+  # 6. C unsafe buffer usage: reading string length into sz, writing into buf
+  #    without verifying remaining length (libscp cluster)
+  ###########################################################################
+  - id: c-in_uint8a-into-fixed-buffer-no-size-check
+    message: "Potential buffer overflow: in_uint8a() into fixed-size buffer without checking bounds"
+    severity: WARNING
+    languages: [c]
+    pattern: |
+      in_uint8($STREAM, $LEN);
+      $BUF[$LEN] = '\0';
+      in_uint8a($STREAM, $BUF, $LEN);
